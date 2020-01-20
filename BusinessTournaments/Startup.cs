@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessTournaments.Models;
 using BusinessTournaments.Models.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ namespace BusinessTournaments
             services.ConfigureApplicationCookie(c => c.LoginPath = "/login");
 
             services.AddControllersWithViews();
+
+            services.AddTransient<AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
