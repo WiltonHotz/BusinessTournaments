@@ -4,4 +4,73 @@
 }
 
 <h1>Index</h1>
+<h3>Company Id: @Model</h3>
 
+<div class="container-fluid indexGrid">
+    <div class="highscore wrapper roundCorners">
+        <div class="lessOpacity">
+            Players
+            <table>
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="selected wrapper roundCorners">
+        <div class="lessOpacity">
+            Selected Players
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody id="selected">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ongoingTournaments wrapper roundCorners">
+        <div class="lessOpacity">
+            Ongoing Tournaments
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Tournament Name</th>
+                        <th style="text-align: right;">Last Modified</th>
+                    </tr>
+                </thead>
+                <tbody id="ongoing">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="completedTournaments wrapper roundCorners">
+        <div class="lessOpacity">
+            Completed Tournaments
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tournament Name</th>
+                        <th style="text-align: right" ;>Last Modified</th>
+                    </tr>
+                </thead>
+                <tbody id="completed">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/index.js"></script>
+}
