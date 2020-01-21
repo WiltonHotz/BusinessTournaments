@@ -56,3 +56,21 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
 function ReturnDateFormat(date) {
     return date.substring(0, 10) + " " + date.substring(11, 16)
 }
+
+function addPlayer() {
+
+    console.log($("#playerName").data('value'))
+
+    $.ajax({
+        url: 'AddPlayer',
+        type: 'POST',
+        data: { playerName: $("#playerName").data('value') },
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data.success);
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}

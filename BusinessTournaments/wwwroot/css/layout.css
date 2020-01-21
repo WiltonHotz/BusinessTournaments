@@ -12,6 +12,12 @@ h3 {
 .roundCorners {
     border-radius: 5px;
 }
+.upperRoundCorners {
+    border-radius: 5px 5px 0px 0px;
+}
+.lowerRoundCorners {
+    border-radius: 0px 0px 5px 5px;
+}
 
 .lessOpacity {
     color: white;
@@ -45,12 +51,23 @@ h3 {
     color: #a3b096;
     opacity: 0.8;
 }
+.addPlayer {
+    grid-area: ad;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
 
 .indexGrid {
     display: grid;
     grid-template-columns: 40% 20% 40%;
     grid-template-rows: auto;
-    grid-template-areas: "hi se ot" "hi se ot" "hi se ct" "hi se ct";
+    grid-template-areas:
+        "hi se ot"
+        "hi se ot"
+        "hi se ct"
+        "hi se ct"
+        "ad se ct";
     grid-gap: 0px 10px;
 }
 
@@ -62,4 +79,8 @@ table {
 
 td:last-child {
     text-align: right;
+}
+
+#alignCenter {
+    align-self: center;
 }

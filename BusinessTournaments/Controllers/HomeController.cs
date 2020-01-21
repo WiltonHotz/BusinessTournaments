@@ -34,5 +34,12 @@ namespace BusinessTournaments.Controllers
 
             return Json(viewModel);
         }
+        [Route("AddPlayer")]
+        public IActionResult AddPlayer(string playerName)
+        {
+            var hej = playerName;
+
+            return View();
+        }
     }
 }
