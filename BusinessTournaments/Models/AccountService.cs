@@ -31,5 +31,12 @@ namespace BusinessTournaments.Models
 
             return result;
         }
+
+        internal async Task<SignInResult> TryLoginCompanyAsync(AccountLoginVM vm)
+        {
+            var result = await signInManager.PasswordSignInAsync(vm.CompanyName,vm.Password, true, false);
+
+            return result;
+        }
     }
 }

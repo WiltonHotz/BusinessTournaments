@@ -24,16 +24,33 @@ namespace BusinessTournaments.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return Content("Hello Business TOurmant!");
+            return View();
         }
 
         [Route("login")]
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login(AccountLoginVM vm)
+        public async Task<IActionResult> Login(AccountLoginVM vm)
         {
-            return RedirectToAction(nameof(Index), "Home");
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var result = await service.TryLoginCompanyAsync(vm);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Invalid input");
+                return View();
+            } 
+            else
+            {
+                return RedirectToAction(nameof(Index), "Home");
+            }  
+
         }
+
+        
 
         [Route("register")]
         [AllowAnonymous]
@@ -55,7 +72,7 @@ namespace BusinessTournaments.Controllers
 
             var result = await service.TryCreateCompanyAsync(vm);
 
-            return RedirectToAction(nameof(Index), "Home");
+            return RedirectToAction(nameof(Login));
         }
     }
 }
