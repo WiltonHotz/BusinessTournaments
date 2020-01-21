@@ -13,10 +13,12 @@ namespace BusinessTournaments.Controllers
     public class HomeController : Controller
     {
         private readonly HomeService service;
+        private readonly AccountService accountService;
 
-        public HomeController(HomeService service)
+        public HomeController(HomeService service, AccountService accountService)
         {
             this.service = service;
+            this.accountService = accountService;
         }
 
         [Route("")]
@@ -28,7 +30,7 @@ namespace BusinessTournaments.Controllers
         [Route("GetIndexVM")]
         public async Task<IActionResult> GetIndexVM()
         {
-            IndexVM viewModel = await service.GetIndexVMAsync();
+            IndexVM viewModel = await service.GetIndexVMAsync(accountService.GetUserId());
 
             return Json(viewModel);
         }

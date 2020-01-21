@@ -1,4 +1,7 @@
-﻿using BusinessTournaments.Models.ViewModels;
+﻿using BusinessTournaments.Models.Entities;
+using BusinessTournaments.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +12,15 @@ namespace BusinessTournaments.Models
 {
     public class HomeService
     {
-        private readonly BusinessTournamentsDbContext context;
-        public HomeService(BusinessTournamentsDbContext context)
+        private readonly BusinessTournamentsDBContext context;
+        public HomeService(BusinessTournamentsDBContext context)
         {
             this.context = context;
         }
-        internal async Task<IndexVM> GetIndexVMAsync()
+        internal async Task<IndexVM> GetIndexVMAsync(string userId)
         {
             var players = await context.Players
-                .Where(c => c.CompanyId == 1)
+                .Where(c => c.CompanyId == userId)
                 .Select(p => new PlayerVM
                 {
                     PlayerId = p.Id,
@@ -26,7 +29,7 @@ namespace BusinessTournaments.Models
                 }).ToListAsync();
 
             var tournaments = await context.Tournaments
-                .Where(c => c.CompanyId == 1)
+                .Where(c => c.CompanyId == userId)
                 .Select(t => new TournamentVM
                 {
                     TournamentId = t.Id,
