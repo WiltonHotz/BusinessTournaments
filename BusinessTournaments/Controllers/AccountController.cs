@@ -74,7 +74,8 @@ namespace BusinessTournaments.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", result.Errors.First().ToString());
+                ModelState.AddModelError(nameof(AccountRegisterVM.UserName), result.Errors.First().Description);
+                ModelState.AddModelError(string.Empty, result.Errors.First().Description);
                 return View();
             }
 
