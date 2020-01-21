@@ -74,7 +74,7 @@ namespace BusinessTournaments.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Invalid input");
+                ModelState.AddModelError("", result.Errors.First().ToString());
                 return View();
             }
 
