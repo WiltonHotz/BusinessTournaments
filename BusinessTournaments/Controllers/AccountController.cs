@@ -69,8 +69,14 @@ namespace BusinessTournaments.Controllers
             {
                 return View(vm);
             }
-
+            
             var result = await service.TryCreateCompanyAsync(vm);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Invalid input");
+                return View();
+            }
 
             return RedirectToAction(nameof(Login));
         }
