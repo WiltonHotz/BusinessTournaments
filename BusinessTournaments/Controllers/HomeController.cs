@@ -35,11 +35,11 @@ namespace BusinessTournaments.Controllers
             return Json(viewModel);
         }
         [Route("AddPlayer")]
-        public IActionResult AddPlayer(string playerName)
+        public async Task<IActionResult> AddPlayer([FromBody]string playerName)
         {
-            var hej = playerName;
-
-            return View();
+            var userId = accountService.GetUserId();
+            PlayerVM newPlayer = await service.CreatePlayerAsync(playerName, userId);
+            return Ok();
         }
     }
 }

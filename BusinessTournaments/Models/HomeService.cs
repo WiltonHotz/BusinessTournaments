@@ -45,5 +45,22 @@ namespace BusinessTournaments.Models
                 CompletedTournaments = tournaments.Where(t => t.IsCompleted == true)
             };
         }
+
+        internal async Task<PlayerVM> CreatePlayerAsync(string playerName, string userId)
+        {
+            var newPlayer = await context.Players.AddAsync(new Players
+            {
+                Name = playerName,
+                CompanyId = userId,
+                Score = 0
+            });
+            await context.SaveChangesAsync();
+            return new PlayerVM
+            {
+                PlayerName = newPlayer.Entity.Name,
+                PlayerId = newPlayer.Entity.Id,
+                Score = newPlayer.Entity.Score
+            };
+        }
     }
 }

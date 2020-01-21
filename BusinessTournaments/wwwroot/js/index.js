@@ -59,13 +59,13 @@ function ReturnDateFormat(date) {
 
 function addPlayer() {
 
-    console.log($("#playerName").data('value'))
+    var name = $("#playerName").val()
 
     $.ajax({
         url: 'AddPlayer',
         type: 'POST',
-        data: { playerName: $("#playerName").data('value') },
-        contentType: 'application/json; charset=utf-8',
+        contentType: 'application/json',
+        data: JSON.stringify(name),
         success: function (data) {
             console.log(data.success);
         },
