@@ -25,7 +25,7 @@ function PopulatePlayersOnLoad(leaderboard) {
             .append(`<tr id='l${leaderboard[i].playerId}'>
                         <td>${leaderboard[i].score}</td>
                         <td>${leaderboard[i].playerName}</td>
-                        <td>Button</td>
+                        <td class="btn btn-danger btn-sm" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}','${leaderboard[i].score}')">Add player</td>
                         </tr>`);
     }
 }
@@ -67,10 +67,25 @@ function addPlayer() {
         contentType: 'application/json',
         data: JSON.stringify(name),
         success: function (data) {
-            console.log(data.success);
+            
         },
         error: function () {
             console.log("error");
         }
     });
+}
+
+function selectPlayer(playerId,playerName,score) {
+    $("#selected")
+        .append(`<tr id='selected${playerId}'>
+
+                        <td onclick="removePlayer('${playerId}') "class="btn btn-success btn-sm">Remove</td>
+                       
+                        <td>${playerName}</td>
+                       
+                        </tr>`);
+}
+
+function removePlayer(playerId) {
+    document.getElementById('selected' + playerId).innerHTML = "";
 }

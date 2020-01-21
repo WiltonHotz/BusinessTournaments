@@ -39,7 +39,7 @@ namespace BusinessTournaments.Controllers
         {
             var userId = accountService.GetUserId();
             PlayerVM newPlayer = await service.CreatePlayerAsync(playerName, userId);
-            return Ok();
+            return Json(newPlayer);
         }
     }
 }
