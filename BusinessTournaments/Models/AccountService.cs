@@ -1,5 +1,6 @@
 ﻿using BusinessTournaments.Models.Identity;
 using BusinessTournaments.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,16 @@ namespace BusinessTournaments.Models
     {
         private readonly UserManager<CompanyUser> userManager;
         private readonly SignInManager<CompanyUser> signInManager;
+        private readonly IHttpContextAccessor accessor;
 
         public AccountService(
             UserManager<CompanyUser> userManager,
-            SignInManager<CompanyUser> signInManager)
+            SignInManager<CompanyUser> signInManager,
+            IHttpContextAccessor accessor)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.accessor = accessor;
         }
 
         internal async Task<IdentityResult> TryCreateCompanyAsync(AccountRegisterVM vm)
@@ -38,5 +42,6 @@ namespace BusinessTournaments.Models
 
             return result;
         }
+        internal string GetUserId() => userManager.GetUserId(accessor.HttpContext.User);
     }
 }
