@@ -40,6 +40,8 @@ namespace BusinessTournaments
             services.AddControllersWithViews();
 
             services.AddTransient<AccountService>();
+            services.AddTransient<HomeService>();
+            services.AddTransient<BracketsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
