@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessTournaments.Models;
+using BusinessTournaments.Models.Entities;
 using BusinessTournaments.Models.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace BusinessTournaments
         {
             var connString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<CompanyContext>(c => c.UseSqlServer(connString));
+            services.AddDbContext<BusinessTournamentsDBContext>(c => c.UseSqlServer(connString));
 
             services.AddIdentity<CompanyUser, IdentityRole>()
                 .AddEntityFrameworkStores<CompanyContext>()
