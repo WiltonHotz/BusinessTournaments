@@ -1,1 +1,6 @@
-﻿
+﻿Våra färger:
+CADBCF den ljusaste
+1AB056 grön
+237A4F annan grön
+239165 tredje grön
+313131 bakgrund
