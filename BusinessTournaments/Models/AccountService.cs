@@ -1,4 +1,5 @@
 ﻿using BusinessTournaments.Models.Identity;
+using BusinessTournaments.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,16 @@ namespace BusinessTournaments.Models
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+        }
+
+        internal async Task<IdentityResult> TryCreateCompanyAsync(AccountRegisterVM vm)
+        {
+            var result = await userManager.CreateAsync(new CompanyUser
+            {
+                UserName = vm.UserName
+            }, vm.Password);
+
+            return result;
         }
     }
 }

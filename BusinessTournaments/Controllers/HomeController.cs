@@ -15,9 +15,11 @@ namespace BusinessTournaments.Controllers
         {
             this.service = service;
         }
+
+        [Route("")]
         public IActionResult Index()
         {
-            return View();
+            return Content("Hej hej hej");
         }
     }
 }
