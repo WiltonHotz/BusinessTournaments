@@ -19,7 +19,7 @@ namespace BusinessTournaments.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return Content("Hej hej hej");
+            return View();
         }
     }
 }
