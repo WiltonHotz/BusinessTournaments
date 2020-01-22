@@ -85,5 +85,14 @@ namespace BusinessTournaments.Controllers
                 return BadRequest();
             }
         }
+
+        [Route("GetOngoingTournament/{id}")]
+        public async Task<IActionResult> GetOngoingTournament(string id)
+        {
+            var userId = accountService.GetUserId();
+            var result = await service.GetOngoingTournament(id, userId);
+
+            return Json(result);
+        }
     }
 }
