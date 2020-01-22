@@ -181,6 +181,41 @@ td:last-child {
     color: white;
 }
 
+.octicon-arrow-left {
+    color: red;
+}
+
+.octicon-arrow-left:hover {
+    color: lightcoral;
+}
+
+.octicon-arrow-left:active {
+    color: white;
+}
+
+.octicon-x {
+    color: red;
+}
+
+.octicon-x {
+    color: lightcoral;
+}
+
+.octicon-x {
+    color: white;
+}
+
+.octicon-x {
+    color: red;
+}
+
+.octicon-x:hover {
+    color: lightcoral;
+}
+
+.octicon-x:active {
+    color: white;
+}
 svg {
     fill: currentColor;
 }

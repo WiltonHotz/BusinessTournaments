@@ -44,9 +44,10 @@ function PopulatePlayersOnLoad(leaderboard) {
 function PopulateOngoingTournamentsOnLoad(tournaments) {
     console.log(tournaments)
     for (var i = 0; i < tournaments.length; i++) {
+        let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="deleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
             .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
-                        <td>DelBtn</td>
+                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
