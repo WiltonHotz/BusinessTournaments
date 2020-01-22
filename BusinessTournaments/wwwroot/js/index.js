@@ -42,7 +42,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
     console.log(tournaments)
     for (var i = 0; i < tournaments.length; i++) {
         $("#ongoing")
-            .append(`<tr id='ot${tournaments[i].tournamentId}'>
+            .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
                         <td>DelBtn</td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
@@ -131,6 +131,19 @@ function startTournament() {
         },
         error: function () {
             console.log("error");
+        }
+    });
+}
+
+function showOngoingTournament(tournamentId, tournamentName) {
+
+    var url = "GetOngoingTournament";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+           
         }
     });
 }
