@@ -105,6 +105,9 @@ h1 {
 .inputWide {
     width: 100%;
 }
+.ninetyWide {
+    width: 90% !important;
+}
 
 .indexGrid {
     display: grid;
