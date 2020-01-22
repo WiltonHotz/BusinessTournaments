@@ -1,4 +1,12 @@
-﻿document.addEventListener("DOMContentLoaded", function (event) {
+﻿let newTournamentInfo = {
+    playerIds: [],
+    tournamentName: '',
+    tournamentId: ''
+}
+let tournamentNameInput = document.getElementById("tournamentNameInput");
+
+
+document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
 });
 
@@ -75,7 +83,10 @@ function addPlayer() {
     });
 }
 
-function selectPlayer(playerId,playerName,score) {
+function selectPlayer(playerId, playerName, score) {
+
+    newTournamentInfo.playerIds.push(playerId); // Add Player id to array
+
     $("#selected")
         .append(`<tr id='selected${playerId}'>
 
@@ -87,5 +98,17 @@ function selectPlayer(playerId,playerName,score) {
 }
 
 function removePlayer(playerId) {
-    document.getElementById('selected' + playerId).innerHTML = "";
+
+    newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
+
+    document.getElementById('selected' + playerId).remove();
+
+}
+
+function createTournament() {
+
+    newTournamentInfo.tournamentName = tournamentNameInput.value;
+    console.log(newTournamentInfo);
+
+    let jsonStr = JSON.stringify(newTournamentInfo)
 }
