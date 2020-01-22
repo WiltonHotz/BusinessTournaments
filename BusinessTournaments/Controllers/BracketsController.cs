@@ -29,7 +29,7 @@ namespace BusinessTournaments.Controllers
             return Content(id);
         }
 
-        [Route("Brackets/{id}")]
+        [Route("GetBracketVM/{id}")]
         public async Task<IActionResult> GetBracketVM()
         {
             BracketVM viewModel = await service.GetBracketVMAsync(accountService.GetUserId());
