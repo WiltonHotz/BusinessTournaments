@@ -35,6 +35,7 @@ function PopulatePlayersOnLoad(leaderboard) {
             .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}'>
                         <td>${leaderboard[i].score}</td>
                         <td>${leaderboard[i].playerName}</td>
+                        <td><span class="editIcon" id="editPlayer${i}" onclick="editPlayer(${leaderboard[i].playerName})"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
@@ -96,7 +97,7 @@ function addPlayers() {
             console.log(result)
             let names = "";
             for (var i = 0; i < result.length; i++) {
-               
+
                 names += result[i].playerName + "\n";
             }
             alert(`Bad names:\n${names}[ALREADY IN THE DATABASE]`)
@@ -120,8 +121,7 @@ function addAddPlayerField(btn) {
 
 function selectPlayer(playerId, playerName, score) {
 
-    if (!newTournamentInfo.playerIds.some(x => x == playerId))
-    {
+    if (!newTournamentInfo.playerIds.some(x => x == playerId)) {
         newTournamentInfo.playerIds.push(playerId); // Add Player id to array
 
         $("#selected")
@@ -179,7 +179,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
         type: "GET",
         success: function (response) {
             console.log(response)
-           
+
         }
     });
 }
