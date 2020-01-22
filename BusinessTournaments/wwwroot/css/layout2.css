@@ -163,6 +163,7 @@ td:last-child {
 
 .octicon-arrow-right:hover {
     color: lightgreen;
+    cursor: pointer;
 }
 
 .octicon-arrow-right:active {
@@ -175,6 +176,7 @@ td:last-child {
 
 .octicon-arrow-left:hover {
     color: lightcoral;
+    cursor: pointer;
 }
 
 .octicon-arrow-left:active {
@@ -197,20 +199,9 @@ td:last-child {
     color: red;
 }
 
-.octicon-x {
-    color: lightcoral;
-}
-
-.octicon-x {
-    color: white;
-}
-
-.octicon-x {
-    color: red;
-}
-
 .octicon-x:hover {
     color: lightcoral;
+    cursor: pointer;
 }
 
 .octicon-x:active {

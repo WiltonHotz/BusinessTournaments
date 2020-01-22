@@ -4,6 +4,7 @@
     tournamentId: ''
 }
 let tournamentNameInput = document.getElementById("tournamentNameInput");
+let canAddMorePlayers = true;
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -84,6 +85,7 @@ function confirmEditPlayer() {
         txt = "You pressed Cancel!";
     }
 }
+
 function confirmDeletePlayer() {
     $("#editPlayerId").val();
     console.log("after delete pressed " + $("#editPlayerId").val())
@@ -144,22 +146,25 @@ function addAddPlayerField(btn) {
     document.getElementById(`${id}`).style.visibility = "hidden";
 }
 
-function selectPlayer(playerId, playerName, score) {
+function selectPlayer(playerId, playerName) {
 
-    if (!startTournamentInfo.playerIds.some(x => x == playerId)) {
-        startTournamentInfo.playerIds.push(playerId); // Add Player id to array
+    if (canAddMorePlayers) {
 
-        $("#selected")
-            .append(`<tr id='selected${playerId}'>
+        if (!startTournamentInfo.playerIds.some(x => x == playerId)) {
+            startTournamentInfo.playerIds.push(playerId); // Add Player id to array
+
+            $("#selected")
+                .append(`<tr id='selected${playerId}'>
                        <td class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${playerName}</td>
                        
                         </tr>`);
 
-        var selectedPlayerHtml = document.getElementById('l' + playerId);
-        var selectArrow = document.getElementById(`sBtn${playerId}`);
-        selectArrow.remove();
-        selectedPlayerHtml.style.backgroundColor = "black"
+            var selectedPlayerHtml = document.getElementById('l' + playerId);
+            var selectArrow = document.getElementById(`sBtn${playerId}`);
+            selectArrow.remove();
+            selectedPlayerHtml.style.backgroundColor = "black"
+        }
     }
 }
 
@@ -173,6 +178,7 @@ function removeSelectedPlayer(playerId, playerName) {
     selectedPlayerHtml.style.backgroundColor = "#239165";
     document.getElementById(`selectarrowtd${playerId}`).innerHTML = `<span class="select-button" id="sBtn${playerId}" onclick="selectPlayer('${playerId}','${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 }
+
 function deleteTournament(tournamentId) {
 
     $.ajax({
@@ -223,6 +229,8 @@ function showOngoingTournament(tournamentId, tournamentName) {
             console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
+            makeSelectArrowsGray();
+            canAddMorePlayers = false;
         }
     });
 }
@@ -255,4 +263,14 @@ function clearSelected() {
     startTournamentInfo.playerIds = [];
     startTournamentInfo.tournamentId = "";
     startTournamentInfo.tournamentName = ""
+}
+
+function makeSelectArrowsGray() {
+    var arrows = document.getElementsByClassName("octicon-arrow-right");
+
+    for (var i = 0; i < arrows.length; i++) {
+        arrows[i].style.color = "gray";
+        arrows[i].style.cursor = "default";
+
+    }
 }
