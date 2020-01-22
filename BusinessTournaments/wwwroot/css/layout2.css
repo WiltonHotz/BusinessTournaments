@@ -97,7 +97,7 @@ h1 {
 
 .break {
     grid-area: br;
-    background-color: #239165;
+    background-color: #313131;
     color: #c3a7bd;
     opacity: 0.8;
 }
@@ -110,8 +110,12 @@ h1 {
     display: grid;
     grid-template-columns: 35% 30% 35%;
     grid-template-rows: auto;
-    grid-template-areas: "hi se ot" "hi se ot" "hi se ct" "br tn ct" "ad at ct";
-    grid-gap: 0px 10px;
+    grid-template-areas:
+        "hi se ot"
+        "hi se ct"
+        ". tn ct"
+        "ad at ct";
+    grid-gap: 1px 10px;
 }
 
 table {
