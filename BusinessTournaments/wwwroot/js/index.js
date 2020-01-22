@@ -48,7 +48,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
                         <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
-                        <td onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${tournaments[i].tournamentName}</td>
+                        <td onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
     }
