@@ -2,6 +2,7 @@
 using BusinessTournaments.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,21 +51,53 @@ namespace BusinessTournaments.Models
             };
         }
 
-        internal async Task<PlayerVM> CreatePlayerAsync(string playerName, string userId)
+        internal async Task<(List<PlayerVM>, bool)> CreatePlayersAsync(List<string> playerNames, string userId)
         {
-            var newPlayer = await context.Players.AddAsync(new Players
+            var allPlayerNames = await context.Players
+                .Where(p => p.CompanyId == userId)
+                .Select(p => p.Name)
+                .ToListAsync();
+
+            var badPlayerNames = allPlayerNames.Intersect(playerNames).ToArray();
+            var badPlayers = new List<PlayerVM>();
+            if (badPlayerNames.Length > 0)
             {
-                Name = playerName,
-                CompanyId = userId,
-                Score = 0
-            });
+                foreach (var name in badPlayerNames)
+                {
+                    badPlayers.Add(
+                        new PlayerVM
+                        {
+                            PlayerName = name
+                        });
+                }
+                return (badPlayers, false);
+            }
+
+            var newPlayers = new List<EntityEntry<Players>>();
+            foreach (var playerName in playerNames)
+            {
+                if (playerName != "")
+                {
+                    var newPlayer = await context.Players.AddAsync(new Players
+                    {
+                        Name = playerName,
+                        CompanyId = userId,
+                        Score = 0
+                    });
+                    newPlayers.Add(newPlayer);
+                }
+            }
+
             await context.SaveChangesAsync();
-            return new PlayerVM
+
+            var newToLeaderboard = newPlayers.Select(p => new PlayerVM
             {
-                PlayerName = newPlayer.Entity.Name,
-                PlayerId = newPlayer.Entity.Id,
-                Score = newPlayer.Entity.Score
-            };
+                PlayerName = p.Entity.Name,
+                PlayerId = p.Entity.Id,
+                Score = p.Entity.Score
+            }).ToList();
+
+            return (newToLeaderboard, true);
         }
 
         internal async Task<int> CreateTournamentAsync(StartTournament startTournament, string userId)

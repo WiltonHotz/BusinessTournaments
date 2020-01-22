@@ -67,25 +67,58 @@ function ReturnDateFormat(date) {
     return date.substring(0, 10) + " " + date.substring(11, 16)
 }
 
-function addPlayer() {
+function addPlayers() {
 
-    var name = $("#playerName").val()
+    var inpIds = [];
+    var names = [];
+    var c = document.querySelectorAll("#modalPlayerNames > div");
+    console.log(c);
+    for (var i = 0; i < c.length; i++) {
+        inpIds[i] = `pninp${i}`
+        names[i] = $(`#${inpIds[i]}`).val()
+    }
+    console.log(inpIds)
+    console.log(names)
 
     $.ajax({
-        url: 'AddPlayer',
+        url: 'AddPlayers',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(name),
+        data: JSON.stringify(names),
         success: function (data) {
-            
+            console.log(data)
+            PopulatePlayersOnLoad(data);
         },
-        error: function () {
+        error: function (data) {
             console.log("error");
+            console.log(data)
+            var result = data.responseJSON
+            console.log(result)
+            let names = "";
+            for (var i = 0; i < result.length; i++) {
+               
+                names += result[i].playerName + "\n";
+            }
+            alert(`${names} was already in the database`)
         }
     });
 }
 
-function selectPlayer(playerId, playerName) {
+function addAddPlayerField(btn) {
+    let id = btn.id;
+    let numId = id.substring(5);
+    let newId = parseInt(numId) + 1;
+
+    $("#modalPlayerNames")
+        .append(`<div id="pndiv${newId}">
+                    <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
+                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
+                </div>`);
+
+    document.getElementById(`${id}`).style.visibility = "hidden";
+}
+
+function selectPlayer(playerId, playerName, score) {
 
     if (!newTournamentInfo.playerIds.some(x => x == playerId))
     {
