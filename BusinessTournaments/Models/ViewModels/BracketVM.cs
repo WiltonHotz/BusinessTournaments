@@ -8,6 +8,6 @@ namespace BusinessTournaments.Models.ViewModels
 {
     public class BracketVM
     {
-        
+        public List<Bracket> Brackets { get; set; }
     }
 }
