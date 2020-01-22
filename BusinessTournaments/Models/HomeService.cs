@@ -16,6 +16,7 @@ namespace BusinessTournaments.Models
     {
         private readonly BusinessTournamentsDBContext context;
         private readonly BracketsService bracketsService;
+        //private static List<Tournaments> tournamentslist = new List<Tournaments>();
 
         public HomeService(BusinessTournamentsDBContext context, BracketsService bracketsService)
         {
@@ -128,5 +129,41 @@ namespace BusinessTournaments.Models
 
             return newTournament.Entity.Id;
         }
+
+        internal async Task<bool> DeleteTournamentById(int id, string userId)
+        {
+            var tournament = await context.Tournaments
+                .Where(c => c.CompanyId == userId && c.Id == id).SingleOrDefaultAsync();
+
+            var t2p = await context.T2p
+                .Where(t => t.TournamentId == id)
+                .ToListAsync();
+
+            if(t2p != null)
+            {
+                foreach (var t in t2p)
+                {
+                    context.T2p.Remove(t);
+                }
+
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                return false;
+            }
+                
+            if(tournament != null)
+            {
+                context.Tournaments.Remove(tournament);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //public Tournaments GetTournamentById(int id) => tournamentslist.Where(t => t.Id == id).Single();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessTournaments.Models;
+using BusinessTournaments.Models.Entities;
 using BusinessTournaments.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,20 @@ namespace BusinessTournaments.Controllers
             }
             
             return Json(tournamentId);
+        }
+
+        [Route("deleteTournament/{tournamentId}")]
+        public async Task<IActionResult> DeleteTournament(int tournamentId)
+        {
+            var userId = accountService.GetUserId();
+            if(await service.DeleteTournamentById(tournamentId, userId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
