@@ -42,7 +42,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
     console.log(tournaments)
     for (var i = 0; i < tournaments.length; i++) {
         $("#ongoing")
-            .append(`<tr id='ot${tournaments[i].tournamentId}'>
+            .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
                         <td>DelBtn</td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
@@ -118,23 +118,31 @@ function addAddPlayerField(btn) {
 
 function selectPlayer(playerId, playerName, score) {
 
-    newTournamentInfo.playerIds.push(playerId); // Add Player id to array
+    if (!newTournamentInfo.playerIds.some(x => x == playerId))
+    {
+        newTournamentInfo.playerIds.push(playerId); // Add Player id to array
 
-    $("#selected")
-        .append(`<tr id='selected${playerId}'>
+        $("#selected")
+            .append(`<tr id='selected${playerId}'>
 
                         <td onclick="removePlayer('${playerId}') "class="btn btn-success btn-sm">Remove</td>
                        
                         <td>${playerName}</td>
                        
                         </tr>`);
+        var selectedPlayerHtml = document.getElementById('l' + playerId);
+        selectedPlayerHtml.style.backgroundColor = "black"
+    }
 }
 
 function removePlayer(playerId) {
 
     newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
 
+
     document.getElementById('selected' + playerId).remove();
+    var selectedPlayerHtml = document.getElementById('l' + playerId);
+    selectedPlayerHtml.style.backgroundColor = "#239165"
 
 }
 
@@ -156,6 +164,19 @@ function startTournament() {
         },
         error: function () {
             console.log("error");
+        }
+    });
+}
+
+function showOngoingTournament(tournamentId, tournamentName) {
+
+    var url = "GetOngoingTournament";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+           
         }
     });
 }

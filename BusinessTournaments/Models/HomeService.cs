@@ -8,15 +8,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BusinessTournaments.Models
 {
     public class HomeService
     {
         private readonly BusinessTournamentsDBContext context;
-        public HomeService(BusinessTournamentsDBContext context)
+        private readonly BracketsService bracketsService;
+
+        public HomeService(BusinessTournamentsDBContext context, BracketsService bracketsService)
         {
             this.context = context;
+            this.bracketsService = bracketsService;
         }
         internal async Task<IndexVM> GetIndexVMAsync(string userId)
         {
@@ -96,38 +100,33 @@ namespace BusinessTournaments.Models
             return (newToLeaderboard, true);
         }
 
-        internal async Task<TournamentVM> CreateTournamentAsync(StartTournament startTournament, string userId)
+        internal async Task<int> CreateTournamentAsync(StartTournament startTournament, string userId)
         {
+            var jsonString = JsonConvert.SerializeObject(bracketsService.PopulateBracketsRandomly(startTournament.PlayerIds));
+
+            //Add new tournament to database
             var newTournament = await context.Tournaments.AddAsync(new Tournaments
             {
                 TournamentName = startTournament.TournamentName,
                 CompanyId = userId,
-
+                BracketsJsonString = jsonString,
+                Created = DateTime.Now,
             });
             await context.SaveChangesAsync();
-            return new TournamentVM
+
+            // Add players to T2P table
+            for (int i = 0; i < startTournament.PlayerIds.Count; i++)
             {
-                TournamentName = newTournament.Entity.TournamentName,
-                TournamentId = newTournament.Entity.Id
-
+                await context.T2p.AddAsync(new T2p
+                {
+                    PlayerId = int.Parse(startTournament.PlayerIds[i]),
+                    TournamentId = newTournament.Entity.Id,
+                });
             };
+
+            await context.SaveChangesAsync();
+
+            return newTournament.Entity.Id;
         }
-
-        //internal async Task<TournamentVM> ResumeTournamentAsync(StartTournament startTournament, string userId)
-        //{
-        //    var resumeTournament = await context.Tournaments.Where()(new Tournaments
-        //    {
-        //        TournamentName = startTournament.TournamentName,
-        //        CompanyId = userId,
-        //        Id = int.Parse(startTournament.TournamentId)
-
-        //    });
-        //    await context.SaveChangesAsync();
-        //    return new TournamentVM
-        //    {
-        //        TournamentName = resumeTournament.Entity.TournamentName,
-        //        TournamentId = resumeTournament.Entity.Id
-        //    };
-        //}
     }
 }

@@ -3,8 +3,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-<h3>Company Id: @Model</h3>
+
+<h3>Company  @User.Identity.Name</h3>
 
 <div class="container-fluid indexGrid">
     <div class="highscore wrapper upperRoundCorners">
@@ -37,7 +37,8 @@
                 </tbody>
             </table>
             <input type="text" id="tournamentNameInput" />
-            <button onclick="startTournament()">CREATE TOURNAMENT</button>
+            
+            <button id="startTournament" class="btn btn-primary" onclick="startTournament()">CREATE TOURNAMENT</button>
         </div>
     </div>
     <div class="ongoingTournaments wrapper roundCorners">

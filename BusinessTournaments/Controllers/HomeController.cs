@@ -55,12 +55,12 @@ namespace BusinessTournaments.Controllers
         {
             var userId = accountService.GetUserId();
             string tournamentId;
-            TournamentVM newTournament;
+            int newTournament;
 
             if (startTournament.TournamentId == "")
             {
                 newTournament = await service.CreateTournamentAsync(startTournament, userId);
-                tournamentId = newTournament.TournamentId.ToString();
+                tournamentId = newTournament.ToString();
             }
             else
             {
