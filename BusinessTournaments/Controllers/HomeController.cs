@@ -35,13 +35,19 @@ namespace BusinessTournaments.Controllers
 
             return Json(viewModel);
         }
-
-        [Route("AddPlayer")]
-        public async Task<IActionResult> AddPlayer([FromBody]string playerName)
+        [Route("AddPlayers")]
+        public async Task<IActionResult> AddPlayers([FromBody]List<string> playerNames)
         {
             var userId = accountService.GetUserId();
-            PlayerVM newPlayer = await service.CreatePlayerAsync(playerName, userId);
-            return Json(newPlayer);
+            (IEnumerable<PlayerVM> addToLeaderboard, bool isOK)  = await service.CreatePlayersAsync(playerNames, userId);
+            if(isOK)
+            {
+                return Ok(addToLeaderboard);
+            }
+            else
+            {
+                return BadRequest(addToLeaderboard);
+            }
         }
 
         [Route("CreateTournament")]
