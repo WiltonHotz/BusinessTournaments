@@ -135,7 +135,7 @@ h1 {
 }
 
 .editIcon:hover {
-    color: red;
+    color: yellow;
     cursor: pointer;
 }
 
