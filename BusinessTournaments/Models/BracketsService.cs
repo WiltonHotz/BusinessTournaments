@@ -8,6 +8,9 @@ namespace BusinessTournaments.Models
 {
     public class BracketsService
     {
-        
+        internal void GetBracketVM(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

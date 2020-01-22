@@ -6,6 +6,7 @@ using BusinessTournaments.Models;
 using BusinessTournaments.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace BusinessTournaments.Controllers
 {
@@ -43,20 +44,23 @@ namespace BusinessTournaments.Controllers
         }
 
         [Route("CreateTournament")]
-        public async Task<IActionResult> CreateTournament([FromBody]StartTournament startTournament)
+        public IActionResult CreateTournament([FromBody]StartTournament startTournament)
         {
-            var userId = accountService.GetUserId();
-            TournamentVM newTournament;
-            if (startTournament.TournamentId == "")
-            {
-            newTournament = await service.CreateTournamentAsync(startTournament, userId); 
-            }
-            else
-            {
-             newTournament = await service.ResumeTournamentAsync(startTournament, userId);
-            }
+            //var userId = accountService.GetUserId();
+            //TournamentVM newTournament;
+            //if (startTournament.TournamentId == "")
+            //{
+            //newTournament = await service.CreateTournamentAsync(startTournament, userId); 
+            //}
+            //else
+            //{
+            // //newTournament = await service.ResumeTournamentAsync(startTournament, userId);
+            //}
+            string tournamentId = "22";
+            //TempData["TournamentId"];
+            return RedirectToAction("BracketIndex", "Brackets");
 
-            return RedirectToAction(nameof(Index), "Brackets");
+            //return RedirectToAction(nameof(Index), new RouteValueDictionary(new { controller = "Brackets", action = "Index", id = tournamentId }));
         }
     }
 }

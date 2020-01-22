@@ -80,21 +80,21 @@ namespace BusinessTournaments.Models
             };
         }
 
-        internal async Task<TournamentVM> ResumeTournamentAsync(StartTournament startTournament, string userId)
-        {
-            var resumeTournament = await context.Tournaments.AddAsync(new Tournaments
-            {
-                TournamentName = startTournament.TournamentName,
-                CompanyId = userId,
-                Id = int.Parse(startTournament.TournamentId)
+        //internal async Task<TournamentVM> ResumeTournamentAsync(StartTournament startTournament, string userId)
+        //{
+        //    var resumeTournament = await context.Tournaments.Where()(new Tournaments
+        //    {
+        //        TournamentName = startTournament.TournamentName,
+        //        CompanyId = userId,
+        //        Id = int.Parse(startTournament.TournamentId)
 
-            });
-            await context.SaveChangesAsync();
-            return new TournamentVM
-            {
-                TournamentName = resumeTournament.Entity.TournamentName,
-                TournamentId = resumeTournament.Entity.Id
-            };
-        }
+        //    });
+        //    await context.SaveChangesAsync();
+        //    return new TournamentVM
+        //    {
+        //        TournamentName = resumeTournament.Entity.TournamentName,
+        //        TournamentId = resumeTournament.Entity.Id
+        //    };
+        //}
     }
 }

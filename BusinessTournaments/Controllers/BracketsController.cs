@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessTournaments.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessTournaments.Controllers
 {
+    [Authorize]
     public class BracketsController : Controller
     {
         private readonly BracketsService service;
@@ -15,8 +17,12 @@ namespace BusinessTournaments.Controllers
         {
             this.service = service;
         }
-        public IActionResult Index()
+
+        
+        [Route("Brackets")]
+        public IActionResult BracketIndex()
         {
+            //service.GetBracketVM(id);
             return View();
         }
     }
