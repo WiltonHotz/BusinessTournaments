@@ -198,7 +198,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
         success: function (players) {
             console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
-            //fillTourNameInputWithOngoingTourName(tournamentName);
+            fillTourNameInputWithOngoingTourName(tournamentName);
         }
     });
 }
@@ -215,10 +215,15 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
                        <td class="remove-button" style="width: 20px"></td>
                         <td>${players[i].playerName}</td>
-                       
                         </tr>`);
-
     }
+}
+
+function fillTourNameInputWithOngoingTourName(tournamentName) {
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+    tournamentNameInput.value = tournamentName;
+    tournamentNameInput.disabled = true;
 }
 
 function clearSelected() {
