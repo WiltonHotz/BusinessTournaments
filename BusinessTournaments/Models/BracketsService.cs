@@ -66,7 +66,7 @@ namespace BusinessTournaments.Models
             var tournament = await context.Tournaments.Where(c => c.CompanyId == userId).SingleOrDefaultAsync(x => x.Id == int.Parse(tournamentId));
             var bracketstring = tournament.BracketsJsonString;
             List<Bracket> bracketArray = JsonConvert.DeserializeObject<List<Bracket>>(bracketstring);
-            BracketVM viewModel = new BracketVM { Brackets = bracketArray };
+            BracketVM viewModel = new BracketVM { Brackets = bracketArray, TournamentId = tournament.Id, TournamentName = tournament.TournamentName };
             return viewModel;
         }
 

@@ -1,10 +1,38 @@
-﻿
+﻿@model BracketIdVM
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@Model.BracketId</h1>
 
 @section scripts {
     <script src="~/js/bracket.js"></script>
+    <script type="text/javascript">
+
+    var bracketId = @Html.Raw((this.Model.BracketId));
+        
+
+   document.addEventListener("DOMContentLoaded", function () {
+    getTournamentBracketJSON(bracketId)
+   
+    });
+
+
+function getTournamentBracketJSON(bracketId) {
+
+    var url = "GetBracketVM/" + bracketId;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+             window.location.href = `/brackets/GetBracketVM/${bracketId}`
+
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}
+    </script>
 }
