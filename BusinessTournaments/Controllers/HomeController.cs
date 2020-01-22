@@ -36,6 +36,7 @@ namespace BusinessTournaments.Controllers
 
             return Json(viewModel);
         }
+
         [Route("AddPlayers")]
         public async Task<IActionResult> AddPlayers([FromBody]List<string> playerNames)
         {

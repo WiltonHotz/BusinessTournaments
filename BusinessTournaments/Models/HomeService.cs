@@ -101,6 +101,29 @@ namespace BusinessTournaments.Models
             return (newToLeaderboard, true);
         }
 
+        internal async Task<List<PlayerVM>> GetOngoingTournament(string tournamentId, string userId)
+        {
+            var playerIds = await context.T2p.Where(t => t.TournamentId == int.Parse(tournamentId)).Select(t => t.PlayerId).ToArrayAsync();
+
+            //var players = await context.Players
+            //    .Join(playerIds, p => p.Id, i => i, (p, i) => new PlayerVM { PlayerId = i, PlayerName = p.Name }).ToListAsync();
+
+            //var players = await context.Players
+            //    .Join(playerIds, p => p.Id, i => i, (p, i) => new PlayerVM { PlayerId = i, PlayerName = p.Name }).ToListAsync();
+
+            var players = new List<PlayerVM>();
+
+            for (int i = 0; i < playerIds.Length; i++)
+            {
+                players.Add(new PlayerVM
+                {
+                    PlayerId = playerIds[i],
+                    PlayerName = await context.Players.Where(p => p.Id == playerIds[i]).Select(p => p.Name).SingleAsync(),
+                });
+            }
+            return players;
+        }
+
         internal async Task<int> CreateTournamentAsync(StartTournament startTournament, string userId)
         {
             var jsonString = JsonConvert.SerializeObject(bracketsService.PopulateBracketsRandomly(startTournament.PlayerIds));

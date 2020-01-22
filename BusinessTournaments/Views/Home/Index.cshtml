@@ -51,7 +51,7 @@
                 <input type="button" id="startTournament" class="btn btn-success btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" />
             </div>
             <div class="lessOpacity twentyWide" style="float: right;">
-                <input type="button" id="startTournament" class="btn btn-danger btn-block" value="CLEAR" />
+                <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" />
             </div>
         </div>
     </div>
@@ -130,11 +130,12 @@
             </div>
             <div class="modal-body" id="modalEditPlayer">
 
-                    <input type="text" id="editPlayerName" placeholder="Enter new player name here..." value="" />
-                    <input type="button" class="btn btn-default hidden" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                <input type="text" id="editPlayerName" placeholder="New name here..." />
+                <input type="hidden" id="editPlayerId" />
 
             </div>
-            <input type="button" value="Add Player" onclick="addPlayers()" />
+            <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
+            <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
