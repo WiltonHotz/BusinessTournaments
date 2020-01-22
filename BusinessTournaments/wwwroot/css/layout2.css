@@ -127,3 +127,35 @@ td:last-child {
 #alignCenter {
     align-self: center;
 }
+
+.select-button {
+    color: green;
+}
+
+.octicon-arrow-right {
+    color: green;
+}
+
+.octicon-arrow-right:hover {
+    color: lightgreen;
+}
+
+.octicon-arrow-right:active {
+    color: white;
+}
+
+.octicon-arrow-left {
+    color: red;
+}
+
+.octicon-arrow-left:hover {
+    color: lightcoral;
+}
+
+.octicon-arrow-left:active {
+    color: white;
+}
+
+svg {
+    fill: currentColor;
+}
