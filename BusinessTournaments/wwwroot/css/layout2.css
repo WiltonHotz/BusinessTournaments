@@ -74,16 +74,43 @@ h1 {
 
 .addPlayer {
     grid-area: ad;
-    background-color: #1AB056;
+    background-color: #239165;
     color: #CADBCF;
     opacity: 0.8;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.addTournament {
+    grid-area: at;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+.addTournamentName {
+    grid-area: tn;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+
+.break {
+    grid-area: br;
+    background-color: #239165;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+
+.inputWide {
+    width: 100%;
 }
 
 .indexGrid {
     display: grid;
-    grid-template-columns: 40% 20% 40%;
+    grid-template-columns: 35% 30% 35%;
     grid-template-rows: auto;
-    grid-template-areas: "hi se ot" "hi se ot" "hi se ct" "hi se ct" "ad se ct";
+    grid-template-areas: "hi se ot" "hi se ot" "hi se ct" "br tn ct" "ad at ct";
     grid-gap: 0px 10px;
 }
 

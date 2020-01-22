@@ -97,7 +97,7 @@ function addPlayers() {
                
                 names += result[i].playerName + "\n";
             }
-            alert(`${names} was already in the database`)
+            alert(`Bad names:\n${names}[ALREADY IN THE DATABASE]`)
         }
     });
 }
