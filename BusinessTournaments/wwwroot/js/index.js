@@ -127,7 +127,7 @@ function selectPlayer(playerId, playerName, score) {
 
         $("#selected")
             .append(`<tr id='selected${playerId}'>
-                       <td class="remove-button" id="rBtn${playerId}" onclick="removePlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
+                       <td class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${playerName}</td>
                        
                         </tr>`);
@@ -139,7 +139,7 @@ function selectPlayer(playerId, playerName, score) {
     }
 }
 
-function removePlayer(playerId, playerName) {
+function removeSelectedPlayer(playerId, playerName) {
 
     startTournamentInfo.playerIds.splice(startTournamentInfo.playerIds.indexOf(playerId), 1);
 
@@ -219,4 +219,11 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
                         </tr>`);
 
     }
+}
+
+function clearSelected() {
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
+    startTournamentInfo.tournamentId = "";
+    startTournamentInfo.tournamentName = ""
 }
