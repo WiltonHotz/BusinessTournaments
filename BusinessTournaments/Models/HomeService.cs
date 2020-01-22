@@ -95,22 +95,5 @@ namespace BusinessTournaments.Models
 
             return newTournament.Entity.Id;
         }
-
-        //internal async Task<TournamentVM> ResumeTournamentAsync(StartTournament startTournament, string userId)
-        //{
-        //    var resumeTournament = await context.Tournaments.Where()(new Tournaments
-        //    {
-        //        TournamentName = startTournament.TournamentName,
-        //        CompanyId = userId,
-        //        Id = int.Parse(startTournament.TournamentId)
-
-        //    });
-        //    await context.SaveChangesAsync();
-        //    return new TournamentVM
-        //    {
-        //        TournamentName = resumeTournament.Entity.TournamentName,
-        //        TournamentId = resumeTournament.Entity.Id
-        //    };
-        //}
     }
 }
