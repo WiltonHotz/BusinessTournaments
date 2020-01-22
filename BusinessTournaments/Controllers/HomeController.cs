@@ -41,5 +41,22 @@ namespace BusinessTournaments.Controllers
             PlayerVM newPlayer = await service.CreatePlayerAsync(playerName, userId);
             return Json(newPlayer);
         }
+
+        [Route("CreateTournament")]
+        public async Task<IActionResult> CreateTournament([FromBody]StartTournament startTournament)
+        {
+            var userId = accountService.GetUserId();
+            TournamentVM newTournament;
+            if (startTournament.TournamentId == "")
+            {
+            newTournament = await service.CreateTournamentAsync(startTournament, userId); 
+            }
+            else
+            {
+             newTournament = await service.ResumeTournamentAsync(startTournament, userId);
+            }
+
+            return RedirectToAction(nameof(Index), "Brackets");
+        }
     }
 }

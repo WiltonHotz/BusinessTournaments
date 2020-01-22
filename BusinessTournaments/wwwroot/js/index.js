@@ -111,4 +111,17 @@ function createTournament() {
     console.log(newTournamentInfo);
 
     let jsonStr = JSON.stringify(newTournamentInfo)
+
+    $.ajax({
+        url: 'CreateTournament',
+        type: 'POST',
+        contentType: 'application/json',
+        data: jsonStr,
+        success: function (data) {
+            console.log(data)
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
 }
