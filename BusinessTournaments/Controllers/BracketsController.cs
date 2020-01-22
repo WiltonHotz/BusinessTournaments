@@ -16,9 +16,10 @@ namespace BusinessTournaments.Controllers
         private readonly AccountService accountService;
 
 
-        public BracketsController(BracketsService service)
+        public BracketsController(BracketsService service, AccountService accountService)
         {
             this.service = service;
+            this.accountService = accountService;
         }
 
         
@@ -26,13 +27,13 @@ namespace BusinessTournaments.Controllers
         public IActionResult Index(string id)
         {
             //service.GetBracketVM(id);
-            return Content(id);
+            return View();
         }
 
-        [Route("GetBracketVM/{id}")]
-        public async Task<IActionResult> GetBracketVM()
+        [Route("getbracketvm/{id}")]
+        public async Task<IActionResult> GetBracketVM(string id)
         {
-            BracketVM viewModel = await service.GetBracketVMAsync(accountService.GetUserId());
+            var viewModel = await service.GetBracketVMAsync(id,accountService.GetUserId());
 
             return Json(viewModel);
         }
