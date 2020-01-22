@@ -62,5 +62,39 @@ namespace BusinessTournaments.Models
                 Score = newPlayer.Entity.Score
             };
         }
+
+        internal async Task<TournamentVM> CreateTournamentAsync(StartTournament startTournament, string userId)
+        {
+            var newTournament = await context.Tournaments.AddAsync(new Tournaments
+            {
+                TournamentName = startTournament.TournamentName,
+                CompanyId = userId,
+                
+            });
+            await context.SaveChangesAsync();
+            return new TournamentVM
+            {
+                TournamentName = newTournament.Entity.TournamentName,
+                TournamentId = newTournament.Entity.Id
+                
+            };
+        }
+
+        internal async Task<TournamentVM> ResumeTournamentAsync(StartTournament startTournament, string userId)
+        {
+            var resumeTournament = await context.Tournaments.AddAsync(new Tournaments
+            {
+                TournamentName = startTournament.TournamentName,
+                CompanyId = userId,
+                Id = int.Parse(startTournament.TournamentId)
+
+            });
+            await context.SaveChangesAsync();
+            return new TournamentVM
+            {
+                TournamentName = resumeTournament.Entity.TournamentName,
+                TournamentId = resumeTournament.Entity.Id
+            };
+        }
     }
 }
