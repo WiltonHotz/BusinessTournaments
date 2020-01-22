@@ -44,23 +44,23 @@ namespace BusinessTournaments.Controllers
         }
 
         [Route("CreateTournament")]
-        public IActionResult CreateTournament([FromBody]StartTournament startTournament)
+        public async Task<IActionResult> StartTournament([FromBody]StartTournament startTournament)
         {
-            //var userId = accountService.GetUserId();
-            //TournamentVM newTournament;
-            //if (startTournament.TournamentId == "")
-            //{
-            //newTournament = await service.CreateTournamentAsync(startTournament, userId); 
-            //}
-            //else
-            //{
-            // //newTournament = await service.ResumeTournamentAsync(startTournament, userId);
-            //}
-            string tournamentId = "22";
-            //TempData["TournamentId"];
-            return RedirectToAction("BracketIndex", "Brackets");
+            var userId = accountService.GetUserId();
+            string tournamentId;
+            TournamentVM newTournament;
 
-            //return RedirectToAction(nameof(Index), new RouteValueDictionary(new { controller = "Brackets", action = "Index", id = tournamentId }));
+            if (startTournament.TournamentId == "")
+            {
+                newTournament = await service.CreateTournamentAsync(startTournament, userId);
+                tournamentId = newTournament.TournamentId.ToString();
+            }
+            else
+            {
+                tournamentId = startTournament.TournamentId;
+            }
+            
+            return Json(tournamentId);
         }
     }
 }

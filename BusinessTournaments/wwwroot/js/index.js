@@ -105,7 +105,7 @@ function removePlayer(playerId) {
 
 }
 
-function createTournament() {
+function startTournament() {
 
     newTournamentInfo.tournamentName = tournamentNameInput.value;
     console.log(newTournamentInfo);
@@ -119,6 +119,7 @@ function createTournament() {
         data: jsonStr,
         success: function (data) {
             console.log(data)
+            window.location.href = `/brackets/${data}`
         },
         error: function () {
             console.log("error");

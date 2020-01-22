@@ -19,11 +19,11 @@ namespace BusinessTournaments.Controllers
         }
 
         
-        [Route("Brackets")]
-        public IActionResult BracketIndex()
+        [Route("brackets/{id}")]
+        public IActionResult Index(string id)
         {
             //service.GetBracketVM(id);
-            return View();
+            return Content(id);
         }
     }
 }

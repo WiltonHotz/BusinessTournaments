@@ -12,8 +12,7 @@ namespace BusinessTournaments.Models.Entities
 
         public int Id { get; set; }
         public string TournamentName { get; set; }
-        public string BracketIdstring { get; set; }
-        public string PlayerIdstring { get; set; }
+        public string BracketsJsonString { get; set; }
         public DateTime Created { get; set; }
         public DateTime? LastModified { get; set; }
         public string CompanyId { get; set; }

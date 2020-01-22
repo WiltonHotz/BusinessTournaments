@@ -20,6 +20,14 @@ namespace BusinessTournaments.Models.Entities
         public virtual DbSet<T2p> T2p { get; set; }
         public virtual DbSet<Tournaments> Tournaments { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BusinessTournamentsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -82,15 +90,14 @@ namespace BusinessTournaments.Models.Entities
                     .WithMany(p => p.T2p)
                     .HasForeignKey(d => d.TournamentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__T2P__TournamentI__3F466844");
+                    .HasConstraintName("FK__T2P__TournamentI__49C3F6B7");
             });
 
             modelBuilder.Entity<Tournaments>(entity =>
             {
-                entity.Property(e => e.BracketIdstring)
+                entity.Property(e => e.BracketsJsonString)
                     .IsRequired()
-                    .HasColumnName("BracketIDString")
-                    .HasMaxLength(100);
+                    .HasMaxLength(1000);
 
                 entity.Property(e => e.CompanyId)
                     .IsRequired()
@@ -102,11 +109,6 @@ namespace BusinessTournaments.Models.Entities
                     .HasColumnName("Last Modified")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.PlayerIdstring)
-                    .IsRequired()
-                    .HasColumnName("PlayerIDString")
-                    .HasMaxLength(200);
-
                 entity.Property(e => e.TournamentName)
                     .IsRequired()
                     .HasColumnName("Tournament Name")
@@ -116,7 +118,7 @@ namespace BusinessTournaments.Models.Entities
                     .WithMany(p => p.Tournaments)
                     .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Tournamen__Compa__403A8C7D");
+                    .HasConstraintName("FK__Tournamen__Compa__4AB81AF0");
             });
 
             OnModelCreatingPartial(modelBuilder);
