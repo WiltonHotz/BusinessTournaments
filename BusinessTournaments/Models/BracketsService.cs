@@ -1,4 +1,7 @@
-﻿using BusinessTournaments.Models.ViewModels;
+﻿using BusinessTournaments.Models.Entities;
+using BusinessTournaments.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,12 @@ namespace BusinessTournaments.Models
 {
     public class BracketsService
     {
+        public BracketsService(BusinessTournamentsDBContext context)
+        {
+            this.context = context;
+        }
         Random random;
+        private readonly BusinessTournamentsDBContext context;
 
         internal List<Bracket> PopulateBracketsRandomly(List<string> playerIds)
         {
@@ -53,9 +61,13 @@ namespace BusinessTournaments.Models
             return brackets;
         }
 
-        internal Task<BracketVM> GetBracketVMAsync(string v)
+        internal async Task<BracketVM> GetBracketVMAsync(string tournamentId, string userId)
         {
-            throw new NotImplementedException();
+            var tournament = await context.Tournaments.Where(c => c.CompanyId == userId).SingleOrDefaultAsync(x => x.Id == int.Parse(tournamentId));
+            var bracketstring = tournament.BracketsJsonString;
+            List<Bracket> bracketArray = JsonConvert.DeserializeObject<List<Bracket>>(bracketstring);
+            BracketVM viewModel = new BracketVM { Brackets = bracketArray };
+            return viewModel;
         }
 
         private int GetNumberOfBrackets(int numOfPlayers)

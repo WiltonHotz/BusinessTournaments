@@ -1,17 +1,20 @@
 ﻿
 document.addEventListener("DOMContentLoaded", function (event) {
-    getTournamentBracketJSON()
+    getTournamentBracketJSON(id)
 });
 
-function getTournamentBracketJSON() {
+function getTournamentBracketJSON(id) {
 
-    var url = "GetTournamentBracket";
+    var url = "brackets/GetBracketVM/"+id;
     $.ajax({
         url: url,
         type: "GET",
         success: function (response) {
             console.log(response)
             
+        },
+        error: function () {
+            console.log("error");
         }
     });
 }
