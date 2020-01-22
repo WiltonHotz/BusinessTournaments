@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessTournaments.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,11 @@ namespace BusinessTournaments.Models
             }
 
             return brackets;
+        }
+
+        internal Task<BracketVM> GetBracketVMAsync(string v)
+        {
+            throw new NotImplementedException();
         }
 
         private int GetNumberOfBrackets(int numOfPlayers)
