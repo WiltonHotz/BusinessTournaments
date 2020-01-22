@@ -85,23 +85,31 @@ function addPlayer() {
 
 function selectPlayer(playerId, playerName, score) {
 
-    newTournamentInfo.playerIds.push(playerId); // Add Player id to array
+    if (!newTournamentInfo.playerIds.some(x => x == playerId))
+    {
+        newTournamentInfo.playerIds.push(playerId); // Add Player id to array
 
-    $("#selected")
-        .append(`<tr id='selected${playerId}'>
+        $("#selected")
+            .append(`<tr id='selected${playerId}'>
 
                         <td onclick="removePlayer('${playerId}') "class="btn btn-success btn-sm">Remove</td>
                        
                         <td>${playerName}</td>
                        
                         </tr>`);
+        var selectedPlayerHtml = document.getElementById('l' + playerId);
+        selectedPlayerHtml.style.backgroundColor = "black"
+    }
 }
 
 function removePlayer(playerId) {
 
     newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
 
+
     document.getElementById('selected' + playerId).remove();
+    var selectedPlayerHtml = document.getElementById('l' + playerId);
+    selectedPlayerHtml.style.backgroundColor = "#239165"
 
 }
 
