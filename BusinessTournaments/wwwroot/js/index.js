@@ -1,4 +1,4 @@
-﻿let newTournamentInfo = {
+﻿let startTournamentInfo = {
     playerIds: [],
     tournamentName: '',
     tournamentId: ''
@@ -43,9 +43,9 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="deleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
-            .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
+            .append(`<tr id='ot${tournaments[i].tournamentId}'>
                         <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
-                        <td>${tournaments[i].tournamentName}</td>
+                        <td onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
     }
@@ -146,12 +146,12 @@ function addAddPlayerField(btn) {
 
 function selectPlayer(playerId, playerName, score) {
 
-    if (!newTournamentInfo.playerIds.some(x => x == playerId)) {
-        newTournamentInfo.playerIds.push(playerId); // Add Player id to array
+    if (!startTournamentInfo.playerIds.some(x => x == playerId)) {
+        startTournamentInfo.playerIds.push(playerId); // Add Player id to array
 
         $("#selected")
             .append(`<tr id='selected${playerId}'>
-                       <td class="remove-button" id="rBtn${playerId}" onclick="removePlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
+                       <td class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${playerName}</td>
                        
                         </tr>`);
@@ -163,9 +163,9 @@ function selectPlayer(playerId, playerName, score) {
     }
 }
 
-function removePlayer(playerId, playerName) {
+function removeSelectedPlayer(playerId, playerName) {
 
-    newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
+    startTournamentInfo.playerIds.splice(startTournamentInfo.playerIds.indexOf(playerId), 1);
 
 
     document.getElementById('selected' + playerId).remove();
@@ -173,13 +173,27 @@ function removePlayer(playerId, playerName) {
     selectedPlayerHtml.style.backgroundColor = "#239165";
     document.getElementById(`selectarrowtd${playerId}`).innerHTML = `<span class="select-button" id="sBtn${playerId}" onclick="selectPlayer('${playerId}','${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 }
+function deleteTournament(tournamentId) {
+
+    $.ajax({
+        url: `deleteTournament/${tournamentId}`,
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data)
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}
 
 function startTournament() {
 
-    newTournamentInfo.tournamentName = tournamentNameInput.value;
-    console.log(newTournamentInfo);
+    startTournamentInfo.tournamentName = tournamentNameInput.value;
+    console.log(startTournamentInfo);
 
-    let jsonStr = JSON.stringify(newTournamentInfo)
+    let jsonStr = JSON.stringify(startTournamentInfo)
 
     $.ajax({
         url: 'CreateTournament',
@@ -198,13 +212,47 @@ function startTournament() {
 
 function showOngoingTournament(tournamentId, tournamentName) {
 
-    var url = "GetOngoingTournament";
+    console.log(tournamentId)
+    console.log(tournamentName)
+
+    var url = `GetOngoingTournament/${tournamentId}`;
     $.ajax({
         url: url,
         type: "GET",
-        success: function (response) {
-            console.log(response)
-
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersInOngoingTour(players, tournamentId);
+            fillTourNameInputWithOngoingTourName(tournamentName);
         }
     });
+}
+
+function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
+
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
+    startTournamentInfo.tournamentId = tournamentId;
+
+    for (var i = 0; i < players.length; i++) {
+
+        $("#selected")
+            .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
+                       <td class="remove-button" style="width: 20px"></td>
+                        <td>${players[i].playerName}</td>
+                        </tr>`);
+    }
+}
+
+function fillTourNameInputWithOngoingTourName(tournamentName) {
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+    tournamentNameInput.value = tournamentName;
+    tournamentNameInput.disabled = true;
+}
+
+function clearSelected() {
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
+    startTournamentInfo.tournamentId = "";
+    startTournamentInfo.tournamentName = ""
 }

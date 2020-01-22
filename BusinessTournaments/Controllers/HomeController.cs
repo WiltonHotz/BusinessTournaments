@@ -35,6 +35,7 @@ namespace BusinessTournaments.Controllers
 
             return Json(viewModel);
         }
+
         [Route("AddPlayers")]
         public async Task<IActionResult> AddPlayers([FromBody]List<string> playerNames)
         {
@@ -68,6 +69,15 @@ namespace BusinessTournaments.Controllers
             }
             
             return Json(tournamentId);
+        }
+
+        [Route("GetOngoingTournament/{id}")]
+        public async Task<IActionResult> GetOngoingTournament(string id)
+        {
+            var userId = accountService.GetUserId();
+            var result = await service.GetOngoingTournament(id, userId);
+
+            return Json(result);
         }
     }
 }
