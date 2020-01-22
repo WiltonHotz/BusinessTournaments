@@ -45,9 +45,9 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="deleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
-            .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
+            .append(`<tr id='ot${tournaments[i].tournamentId}'>
                         <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
-                        <td>${tournaments[i].tournamentName}</td>
+                        <td onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
     }
@@ -148,6 +148,20 @@ function removePlayer(playerId, playerName) {
     var selectedPlayerHtml = document.getElementById('l' + playerId);
     selectedPlayerHtml.style.backgroundColor = "#239165";
     document.getElementById(`selectarrowtd${playerId}`).innerHTML = `<span class="select-button" id="sBtn${playerId}" onclick="selectPlayer('${playerId}','${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
+}
+function deleteTournament(tournamentId) {
+
+    $.ajax({
+        url: `deleteTournament/${tournamentId}`,
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data)
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
 }
 
 function startTournament() {
