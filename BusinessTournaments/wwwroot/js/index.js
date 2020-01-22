@@ -29,11 +29,13 @@ function PopulatePlayersOnLoad(leaderboard) {
     console.log(leaderboard)
 
     for (var i = 0; i < leaderboard.length; i++) {
+        let arrow = `<span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
+
         $("#leaderboard")
             .append(`<tr id='l${leaderboard[i].playerId}'>
                         <td>${leaderboard[i].score}</td>
                         <td>${leaderboard[i].playerName}</td>
-                        <td class="btn btn-danger btn-sm" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}','${leaderboard[i].score}')">Add player</td>
+                        <td id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
 }
@@ -83,7 +85,7 @@ function addPlayer() {
     });
 }
 
-function selectPlayer(playerId, playerName, score) {
+function selectPlayer(playerId, playerName) {
 
     if (!newTournamentInfo.playerIds.some(x => x == playerId))
     {
@@ -91,26 +93,27 @@ function selectPlayer(playerId, playerName, score) {
 
         $("#selected")
             .append(`<tr id='selected${playerId}'>
-
-                        <td onclick="removePlayer('${playerId}') "class="btn btn-success btn-sm">Remove</td>
-                       
+                       <td class="remove-button" id="rBtn${playerId}" onclick="removePlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${playerName}</td>
                        
                         </tr>`);
+
         var selectedPlayerHtml = document.getElementById('l' + playerId);
+        var selectArrow = document.getElementById(`sBtn${playerId}`);
+        selectArrow.remove();
         selectedPlayerHtml.style.backgroundColor = "black"
     }
 }
 
-function removePlayer(playerId) {
+function removePlayer(playerId, playerName) {
 
     newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
 
 
     document.getElementById('selected' + playerId).remove();
     var selectedPlayerHtml = document.getElementById('l' + playerId);
-    selectedPlayerHtml.style.backgroundColor = "#239165"
-
+    selectedPlayerHtml.style.backgroundColor = "#239165";
+    document.getElementById(`selectarrowtd${playerId}`).innerHTML = `<span class="select-button" id="sBtn${playerId}" onclick="selectPlayer('${playerId}','${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 }
 
 function startTournament() {
