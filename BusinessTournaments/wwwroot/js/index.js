@@ -165,19 +165,39 @@ function selectPlayer(playerId, playerName) {
             var selectArrow = document.getElementById(`sBtn${playerId}`);
             selectArrow.style.visibility = "hidden";
             selectedPlayerHtml.style.backgroundColor = "black"
+
+            // Activate buttons
+            if (startTournamentInfo.playerIds.length == 1) {
+                $('#clearSelectedBtn').prop("class", "btn btn-danger btn-block");
+                $('#clearSelectedBtn').prop("disabled", false);
+            }
+            if (startTournamentInfo.playerIds.length == 4) {
+                $('#startTournament').prop("class", "btn btn-success btn-block");
+                $('#startTournament').prop("disabled", false);
+            }
         }
     }
 }
 
 function removeSelectedPlayer(playerId, playerName) {
 
+    // Remove player from array
     startTournamentInfo.playerIds.splice(startTournamentInfo.playerIds.indexOf(playerId), 1);
 
-
+    // HTML resetting
     document.getElementById('selected' + playerId).remove();
     var selectedPlayerHtml = document.getElementById('l' + playerId);
     selectedPlayerHtml.style.backgroundColor = "#239165";
     document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
+
+    // Disable create button if less than 4
+    if (startTournamentInfo.playerIds.length == 3) {
+        $('#startTournament').prop("class", "btn btn-secondary btn-block");
+        $('#startTournament').prop("disabled", true);
+    }
+    if (startTournamentInfo.playerIds.length == 0) {
+        $('#clearSelectedBtn').prop("disabled", true);
+    }
 }
 
 function deleteTournament(tournamentId) {
@@ -231,6 +251,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
             makeSelectArrowsGray();
+            changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
         }
     });
@@ -266,6 +287,15 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     tournamentNameInput.disabled = true;
 }
 
+function changeStartTournamentButtonToResumeAndActivate() {
+
+    $('#startTournament').prop("value", "RESUME TOURNAMENT")
+    $('#startTournament').prop("class", "btn btn-success btn-block");
+    $('#startTournament').prop("disabled", false);
+
+    $('#clearSelectedBtn').prop("disabled", false);
+}
+
 function clearSelected() {
     document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
 
@@ -285,16 +315,24 @@ function clearSelected() {
 
     }
 
+    // Change background to normal
     var leaderboardRows = document.getElementsByClassName("leaderboard-row");
-
     for (var i = 0; i < leaderboardRows.length; i++) {
         leaderboardRows[i].style.backgroundColor = "#239165"
     }
 
+    // Show all arrows
     var selectButtons = document.getElementsByClassName("select-button");
     for (var i = 0; i < selectButtons.length; i++) {
         selectButtons[i].style.visibility = "visible"
     }
+
+    // Disable buttons and change text
+    $('#startTournament').prop("value", "CREATE TOURNAMENT")
+    $('#startTournament').prop("class", "btn btn-secondary btn-block");
+    $('#startTournament').prop("disabled", true);
+
+    $('#clearSelectedBtn').prop("disabled", true);
 }
 
 function makeSelectArrowsGray() {
