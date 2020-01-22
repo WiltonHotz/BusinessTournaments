@@ -32,10 +32,10 @@ function PopulatePlayersOnLoad(leaderboard) {
         let arrow = `<span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 
         $("#leaderboard")
-            .append(`<tr id='l${leaderboard[i].playerId}'>
+            .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}'>
                         <td>${leaderboard[i].score}</td>
                         <td>${leaderboard[i].playerName}</td>
-                        <td id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
+                        <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
 }
@@ -99,7 +99,7 @@ function addPlayers() {
                
                 names += result[i].playerName + "\n";
             }
-            alert(`${names} was already in the database`)
+            alert(`Bad names:\n${names}[ALREADY IN THE DATABASE]`)
         }
     });
 }

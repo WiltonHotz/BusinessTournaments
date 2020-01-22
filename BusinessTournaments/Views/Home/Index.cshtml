@@ -23,7 +23,7 @@
             </table>
         </div>
     </div>
-    <div class="selected wrapper roundCorners">
+    <div class="selected wrapper upperRoundCorners">
         <div class="lessOpacity">
             Selected Players
             <table>
@@ -36,9 +36,16 @@
                 <tbody id="selected">
                 </tbody>
             </table>
-            <input type="text" id="tournamentNameInput" />
-            
-            <button id="startTournament" class="btn btn-primary" onclick="startTournament()">CREATE TOURNAMENT</button>
+        </div>
+    </div>
+    <div class="addTournamentName">
+        <div class="lessOpacity">
+            <input type="text" class="inputWide" placeholder="Enter tournament name..." id="tournamentNameInput" />
+        </div>
+    </div>
+    <div class="addTournament lowerRoundCorners">
+        <div class="lessOpacity">
+            <input type="button" id="startTournament" class="btn btn-primary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" />
         </div>
     </div>
     <div class="ongoingTournaments wrapper roundCorners">
@@ -73,8 +80,12 @@
         </div>
     </div>
     <div class="addPlayer lowerRoundCorners">
-        <div class="lessOpacity" id="alignCenter">
-            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#addPlayerModal">Add New Player</button>
+        <div class="lessOpacity">
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPlayerModal">Add New Player</button>
+        </div>
+    </div>
+    <div class="break">
+        <div class="lessOpacity">
         </div>
     </div>
 </div>

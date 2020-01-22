@@ -58,6 +58,13 @@ h3 {
     opacity: 0.8;
 }
 
+.addTournament {
+    grid-area: ad;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+
 .indexGrid {
     display: grid;
     grid-template-columns: 40% 20% 40%;
@@ -67,7 +74,7 @@ h3 {
         "hi se ot"
         "hi se ct"
         "hi se ct"
-        "ad se ct";
+        "ad at ct";
     grid-gap: 0px 10px;
 }
 
@@ -83,4 +90,8 @@ td:last-child {
 
 #alignCenter {
     align-self: center;
+}
+
+.wideAsF {
+    width: 100%;
 }
