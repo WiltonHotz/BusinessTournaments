@@ -31,7 +31,7 @@ function PopulatePlayersOnLoad(leaderboard) {
         let arrow = `<span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 
         $("#leaderboard")
-            .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}'>
+            .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}' class="leaderboard-row">
                         <td>${leaderboard[i].score}</td>
                         <td>${leaderboard[i].playerName}</td>
                         <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('${leaderboard[i].playerName}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
@@ -156,13 +156,14 @@ function selectPlayer(playerId, playerName) {
             $("#selected")
                 .append(`<tr id='selected${playerId}'>
                        <td class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
-                        <td>${playerName}</td>
+                        <td style="text-align: left;">${playerName}</td>
                        
                         </tr>`);
 
+            // Change background color and hide green arrow
             var selectedPlayerHtml = document.getElementById('l' + playerId);
             var selectArrow = document.getElementById(`sBtn${playerId}`);
-            selectArrow.remove();
+            selectArrow.style.visibility = "hidden";
             selectedPlayerHtml.style.backgroundColor = "black"
         }
     }
@@ -176,7 +177,7 @@ function removeSelectedPlayer(playerId, playerName) {
     document.getElementById('selected' + playerId).remove();
     var selectedPlayerHtml = document.getElementById('l' + playerId);
     selectedPlayerHtml.style.backgroundColor = "#239165";
-    document.getElementById(`selectarrowtd${playerId}`).innerHTML = `<span class="select-button" id="sBtn${playerId}" onclick="selectPlayer('${playerId}','${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
+    document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
 }
 
 function deleteTournament(tournamentId) {
@@ -248,7 +249,14 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
                        <td class="remove-button" style="width: 20px"></td>
                         <td>${players[i].playerName}</td>
                         </tr>`);
+
+        // Mark players in Leaderboard selected
+        var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
+        selectedPlayerHtml.style.backgroundColor = "black"
     }
+
+
+
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -260,9 +268,33 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
 
 function clearSelected() {
     document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+
+    // Rensa infon för att starta turnering
     startTournamentInfo.playerIds = [];
     startTournamentInfo.tournamentId = "";
     startTournamentInfo.tournamentName = ""
+
+    canAddMorePlayers = true;
+
+    // Reset arrows to green
+    var arrows = document.getElementsByClassName("octicon-arrow-right");
+
+    for (var i = 0; i < arrows.length; i++) {
+        arrows[i].style.color = "";
+        arrows[i].style.cursor = "pointer";
+
+    }
+
+    var leaderboardRows = document.getElementsByClassName("leaderboard-row");
+
+    for (var i = 0; i < leaderboardRows.length; i++) {
+        leaderboardRows[i].style.backgroundColor = "#239165"
+    }
+
+    var selectButtons = document.getElementsByClassName("select-button");
+    for (var i = 0; i < selectButtons.length; i++) {
+        selectButtons[i].style.visibility = "visible"
+    }
 }
 
 function makeSelectArrowsGray() {
