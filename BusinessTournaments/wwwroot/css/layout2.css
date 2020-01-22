@@ -108,6 +108,19 @@ h1 {
 .ninetyWide {
     width: 90% !important;
 }
+.eightyWide {
+    width: 80% !important;
+    padding: 0px;
+    margin: 0px;
+}
+.twentyWide {
+    width: 20% !important;
+    padding: 0px;
+    margin: 0px;
+}
+.inline {
+    display: inline;
+}
 
 .indexGrid {
     display: grid;
@@ -119,6 +132,11 @@ h1 {
         ". tn ct"
         "ad at ct";
     grid-gap: 1px 10px;
+}
+
+.editIcon:hover {
+    color: yellow;
+    cursor: pointer;
 }
 
 table {
