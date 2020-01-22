@@ -1,4 +1,4 @@
-﻿let newTournamentInfo = {
+﻿let startTournamentInfo = {
     playerIds: [],
     tournamentName: '',
     tournamentId: ''
@@ -44,7 +44,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
     console.log(tournaments)
     for (var i = 0; i < tournaments.length; i++) {
         $("#ongoing")
-            .append(`<tr onclick="showOngoingTournament('ot${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
+            .append(`<tr onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')" id='ot${tournaments[i].tournamentId}'>
                         <td>DelBtn</td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
@@ -96,7 +96,7 @@ function addPlayers() {
             console.log(result)
             let names = "";
             for (var i = 0; i < result.length; i++) {
-               
+
                 names += result[i].playerName + "\n";
             }
             alert(`Bad names:\n${names}[ALREADY IN THE DATABASE]`)
@@ -120,9 +120,8 @@ function addAddPlayerField(btn) {
 
 function selectPlayer(playerId, playerName, score) {
 
-    if (!newTournamentInfo.playerIds.some(x => x == playerId))
-    {
-        newTournamentInfo.playerIds.push(playerId); // Add Player id to array
+    if (!startTournamentInfo.playerIds.some(x => x == playerId)) {
+        startTournamentInfo.playerIds.push(playerId); // Add Player id to array
 
         $("#selected")
             .append(`<tr id='selected${playerId}'>
@@ -140,7 +139,7 @@ function selectPlayer(playerId, playerName, score) {
 
 function removePlayer(playerId, playerName) {
 
-    newTournamentInfo.playerIds.splice(newTournamentInfo.playerIds.indexOf(playerId), 1);
+    startTournamentInfo.playerIds.splice(startTournamentInfo.playerIds.indexOf(playerId), 1);
 
 
     document.getElementById('selected' + playerId).remove();
@@ -151,10 +150,10 @@ function removePlayer(playerId, playerName) {
 
 function startTournament() {
 
-    newTournamentInfo.tournamentName = tournamentNameInput.value;
-    console.log(newTournamentInfo);
+    startTournamentInfo.tournamentName = tournamentNameInput.value;
+    console.log(startTournamentInfo);
 
-    let jsonStr = JSON.stringify(newTournamentInfo)
+    let jsonStr = JSON.stringify(startTournamentInfo)
 
     $.ajax({
         url: 'CreateTournament',
@@ -173,13 +172,35 @@ function startTournament() {
 
 function showOngoingTournament(tournamentId, tournamentName) {
 
-    var url = "GetOngoingTournament";
+    console.log(tournamentId)
+    console.log(tournamentName)
+
+    var url = `GetOngoingTournament/${tournamentId}`;
     $.ajax({
         url: url,
         type: "GET",
-        success: function (response) {
-            console.log(response)
-           
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersInOngoingTour(players, tournamentId);
+            //fillTourNameInputWithOngoingTourName(tournamentName);
         }
     });
+}
+
+function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
+
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
+    startTournamentInfo.tournamentId = tournamentId;
+
+    for (var i = 0; i < players.length; i++) {
+
+        $("#selected")
+            .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
+                       <td class="remove-button" style="width: 20px"></td>
+                        <td>${players[i].playerName}</td>
+                       
+                        </tr>`);
+
+    }
 }
