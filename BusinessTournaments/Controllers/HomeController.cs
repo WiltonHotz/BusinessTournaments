@@ -78,7 +78,7 @@ namespace BusinessTournaments.Controllers
             var userId = accountService.GetUserId();
             if(await service.DeleteTournamentById(tournamentId, userId))
             {
-                return Ok();
+                return Ok(tournamentId);
             }
             else
             {

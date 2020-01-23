@@ -208,11 +208,17 @@ function deleteTournament(tournamentId) {
         contentType: 'application/json',
         success: function (data) {
             console.log(data)
+            deleteSelectedTournament(data);
         },
         error: function () {
             console.log("error");
         }
     });
+}
+
+function deleteSelectedTournament(tournamentId) {
+
+    document.getElementById('ot' + tournamentId).remove();
 }
 
 function startTournament() {
