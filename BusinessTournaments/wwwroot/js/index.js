@@ -46,9 +46,9 @@ function PopulatePlayersOnLoad(leaderboard) {
 
         $("#leaderboard")
             .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}' class="leaderboard-row">
+                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td>${leaderboard[i].score}</td>
                         <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
-                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
@@ -62,7 +62,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
                         <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
-                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
+                        <td style="width: 20px;" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
                         </tr>`);
     }
 }
@@ -80,7 +80,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
 }
 
 function ReturnDateFormat(date) {
-    return date.substring(0, 10) + " " + date.substring(11, 16)
+    return date.substring(0, 10);
 }
 
 function editPlayer(playerNameId, playerId) {

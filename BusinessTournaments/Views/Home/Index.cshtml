@@ -3,142 +3,246 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="wrapper">
+    <div class="grid-container">
+        <div class="CompanyName roundCorners wrapper">
 
-<div class="container-fluid ninetyWide">
-    <h3>Company  @User.Identity.Name</h3>
-</div>
-<div class="container-fluid indexGrid ninetyWide">
-    <div class="highscore wrapper roundCorners">
-        <div class="lessOpacity">
-            Players
-            <table>
-                <thead>
-                    <tr>
-                        <th>Score</th>
-                        <th>Name</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard">
-                </tbody>
-            </table>
+            <h3>Company  @User.Identity.Name</h3>
+
         </div>
-    </div>
-    <div class="selected wrapper roundCorners">
-        <div class="lessOpacity">
-            Selected Players
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody id="selected">
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="addTournamentName roundCorners">
-        <div class="roundCorners">
-            <input type="text" class="inputWide roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfValidInput(this)" />
-        </div>
-    </div>
-    <div class="addTournament roundCorners">
-        <div class="inline">
-            <div class="lessOpacity eightyWide" style="float: left;">
-                <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" disabled />
+        <div class="Leaderboard roundCorners wrapper">
+
+            <div class="lessOpacity"  data-simplebar>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="10%" class="lessOpacity">Edit</th>
+                            <th width="20%">Score</th>
+                            <th width="20%">Player Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard">
+                    </tbody>
+                </table>
             </div>
-            <div class="lessOpacity twentyWide" style="float: right;">
-                <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
+
+        </div>
+        <div class="Selected roundCorners wrapper">
+
+            <div class="lessOpacity">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Selected Player Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selected">
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-    <div class="ongoingTournaments wrapper roundCorners">
-        <div class="lessOpacity">
-            Ongoing Tournaments
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Tournament Name</th>
-                        <th>Datum</th>
-                        <th>Delete</th>
 
-                    </tr>
-                </thead>
-                <tbody id="ongoing">
-                </tbody>
-            </table>
         </div>
-    </div>
-    <div class="completedTournaments wrapper roundCorners">
-        <div class="lessOpacity">
-            Completed Tournaments
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tournament Name</th>
-                        <th style="text-align: right" ;>Datum</th>
-                    </tr>
-                </thead>
-                <tbody id="completed">
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="addPlayer roundCorners">
-        <div >
-            <button type="button" class="btn btn-success btn-block" id="addPlayerModalBtn">Add New Player</button>
-        </div>
-    </div>
-    <div class="break roundCorners">
-        <div class="lessOpacity">
-        </div>
-    </div>
-</div>
+        <div class="TournamentName roundCorners">
 
-<div id="addPlayerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add New Player</h4>
+            <div class="roundCorners">
+                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfValidInput(this)" />
             </div>
-            <div class="modal-body" id="modalPlayerNames">
 
-            </div>
-            <input type="button" value="Add Player" onclick="addPlayers()" />
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
         </div>
+        <div class="StartTournament roundCorners">
 
+            <div class="inline">
+                <div class="lessOpacity eightyWide" style="float: left;">
+                    <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" disabled />
+                </div>
+                <div class="lessOpacity twentyWide" style="float: right;">
+                    <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
+                </div>
+            </div>
+
+        </div>
+        <div class="AddPlayers roundCorners">
+
+            <div>
+                <button type="button" class="btn btn-success btn-block" id="addPlayerModalBtn">Add New Player</button>
+            </div>
+
+        </div>
+        <div class="Completed roundCorners">
+
+            <div class="lessOpacity">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><b style="color: red;">Completed Tournaments</b></th>
+                            <th style="text-align: right" ;>Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody id="completed">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="Ongoing roundCorners wrapper">
+
+            <div class="lessOpacity">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><b style="color: blue;">Ongoing Tournaments</b></th>
+                            <th>Datum</th>
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="ongoing">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
 </div>
 
-<div id="editPlayerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Player</h4>
-            </div>
-            <div class="modal-body" id="modalEditPlayer">
-
-                <input type="text" id="editPlayerName" placeholder="New name here..." />
-
-            </div>
-            <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
-            <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
-            <div class="modal-footer">
-                <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+@*<div class="container-fluid ninetyWide">
+        <h3>Company  @User.Identity.Name</h3>
+    </div>
+    <div class="container-fluid indexGrid ninetyWide">
+        <div class="highscore wrapper roundCorners" style="height: inherit;">
+            <div class="lessOpacity">
+                Players
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Score</th>
+                            <th>Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard">
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="selected wrapper roundCorners">
+            <div class="lessOpacity">
+                Selected Players
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selected">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="addTournamentName roundCorners">
+            <div class="roundCorners">
+                <input type="text" class="inputWide roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfValidInput(this)" />
+            </div>
+        </div>
+        <div class="addTournament roundCorners">
+            <div class="inline">
+                <div class="lessOpacity eightyWide" style="float: left;">
+                    <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" disabled />
+                </div>
+                <div class="lessOpacity twentyWide" style="float: right;">
+                    <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
+                </div>
+            </div>
+        </div>
+        <div class="ongoingTournaments wrapper roundCorners">
+            <div class="lessOpacity">
+                Ongoing Tournaments
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tournament Name</th>
+                            <th>Datum</th>
+                            <th>Delete</th>
 
+                        </tr>
+                    </thead>
+                    <tbody id="ongoing">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="completedTournaments wrapper roundCorners">
+            <div class="lessOpacity">
+                Completed Tournaments
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tournament Name</th>
+                            <th style="text-align: right" ;>Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody id="completed">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="addPlayer roundCorners">
+            <div >
+                <button type="button" class="btn btn-success btn-block" id="addPlayerModalBtn">Add New Player</button>
+            </div>
+        </div>
+        <div class="break roundCorners">
+            <div class="lessOpacity">
+            </div>
+        </div>
+    </div>*@
+
+    <div id="addPlayerModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New Player</h4>
+                </div>
+                <div class="modal-body" id="modalPlayerNames">
+
+                </div>
+                <input type="button" value="Add Player" onclick="addPlayers()" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+
+    <div id="editPlayerModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Player</h4>
+                </div>
+                <div class="modal-body" id="modalEditPlayer">
+
+                    <input type="text" id="editPlayerName" placeholder="New name here..." />
+
+                </div>
+                <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
+                <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
+                <div class="modal-footer">
+                    <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 @section scripts {
     <script src="~/js/index.js"></script>

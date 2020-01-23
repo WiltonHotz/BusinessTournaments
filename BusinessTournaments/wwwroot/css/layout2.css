@@ -23,8 +23,7 @@ h1 {
 }
 
 .wrapper {
-    padding-left: 6px;
-    padding-right: 6px;
+    padding: 6px;
 }
 
 .roundCorners {
@@ -104,6 +103,7 @@ h1 {
 
 .inputWide {
     width: 100%;
+
 }
 .ninetyWide {
     width: 90% !important;
@@ -126,12 +126,9 @@ h1 {
     display: grid;
     grid-template-columns: 35% 30% 35%;
     grid-template-rows: auto;
-    grid-template-areas:
-        "hi se ot"
-        "hi se ct"
-        ". tn ct"
-        "ad at ct";
+    grid-template-areas: "hi se ot" "hi se ct" ". tn ct" "ad at ct";
     grid-gap: 1px 10px;
+    height: 100vh;
 }
 
 .editIcon:hover {
@@ -207,4 +204,89 @@ td:last-child {
 }
 svg {
     fill: currentColor;
+}
+
+.grid-container {
+    height: 95vh;
+    width: 95vw;
+    position: relative;
+    margin-top: 2.5vh;
+    margin-left: 2.5vw;
+}
+
+    .grid-container * {
+        border: none;
+        position: relative;
+
+    }
+
+        .grid-container *:after {
+            /*content: attr(class);*/
+            position: absolute;
+
+        }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr;
+    grid-template-areas: "CompanyName CompanyName CompanyName" "Leaderboard Selected Ongoing" "Leaderboard Selected Completed" "Leaderboard TournamentName Completed" "AddPlayers StartTournament Completed";
+    grid-gap: 1px 10px;
+}
+
+.CompanyName {
+    grid-area: CompanyName;
+}
+
+.Leaderboard {
+    grid-area: Leaderboard;
+    background-color: #239165;
+    color: #CADBCF;
+    opacity: 0.8;
+    overflow: auto;
+}
+
+.Selected {
+    grid-area: Selected;
+    background-color: #239165;
+    color: #CADBCF;
+    opacity: 0.8;
+    overflow: auto;
+}
+
+.TournamentName {
+    grid-area: TournamentName;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+
+.StartTournament {
+    grid-area: StartTournament;
+    background-color: #725375;
+    color: #c3a7bd;
+    opacity: 0.8;
+}
+
+.AddPlayers {
+    grid-area: AddPlayers;
+    background-color: #239165;
+    color: #CADBCF;
+    opacity: 0.8;
+}
+
+.Completed {
+    grid-area: Completed;
+    background-color: #239165;
+    color: #CADBCF;
+    opacity: 0.8;
+    overflow: auto;
+}
+
+.Ongoing {
+    grid-area: Ongoing;
+    background-color: #239165;
+    color: #CADBCF;
+    opacity: 0.8;
+    overflow: auto;
 }
