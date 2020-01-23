@@ -136,6 +136,7 @@ function initiateAddPlayerModal() {
         .append(`<div id="pndiv0">
                     <input type="text" id="pninp0" placeholder="Enter player name here..." />
                     <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                    <span style="color: red; text-align: left;" id="badpninp0"></span>
                 </div>`);
 
     focusField('pninp0')
@@ -197,12 +198,23 @@ function addPlayers() {
             console.log(data)
             var result = data.responseJSON
             console.log(result)
-            let names = "";
+            let badNames = "";
             for (var i = 0; i < result.length; i++) {
-
-                names += result[i].playerName + "\n";
+                
+                badNames += result[i].playerName + "\n";
             }
-            alert(`Bad names:\n${names}[ALREADY IN THE DATABASE]`)
+
+            //Show "Name already in list" text.
+            for (var i = 0; i < names.length; i++) {
+
+                if (result.some(x => x.playerName == names[i])) {
+                    $(`#badpninp${i}`).html('Name is already in list')
+                } else {
+                    $(`#badpninp${i}`).html('')
+                }           
+            }
+
+            //alert(`Bad names:\n${badNames}[ALREADY IN THE DATABASE]`)
         }
     });
 }
@@ -230,6 +242,8 @@ function addAddPlayerField(btn) {
         .append(`<div id="pndiv${newId}">
                     <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
                     <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
+                    <span style="color: red; text-align: left;" id='badpninp${newId}'></span>
+
                 </div>`);
     focusField(`pninp${newId}`)
     addAddPlayerFieldEnterButtonEventListener(`pninp${newId}`)
