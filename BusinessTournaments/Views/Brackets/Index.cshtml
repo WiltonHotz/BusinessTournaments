@@ -20,13 +20,13 @@
 
 function getTournamentBracketJSON(bracketId) {
 
-    var url = "GetBracketVM/" + bracketId;
+    var url = "b/" + bracketId;
     $.ajax({
         url: url,
         type: "GET",
         success: function (response) {
             console.log(response)
-             window.location.href = `/brackets/GetBracketVM/${bracketId}`
+             window.location.href = `/brackets/b/${bracketId}`
 
         },
         error: function () {

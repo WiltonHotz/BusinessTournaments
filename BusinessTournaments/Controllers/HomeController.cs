@@ -68,7 +68,6 @@ namespace BusinessTournaments.Controllers
             {
                 tournamentId = startTournament.TournamentId;
             }
-            
             return Json(tournamentId);
         }
 
@@ -78,7 +77,7 @@ namespace BusinessTournaments.Controllers
             var userId = accountService.GetUserId();
             if(await service.DeleteTournamentById(tournamentId, userId))
             {
-                return Ok();
+                return Ok(tournamentId);
             }
             else
             {
