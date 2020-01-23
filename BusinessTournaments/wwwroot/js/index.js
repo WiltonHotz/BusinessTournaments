@@ -45,9 +45,10 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
         let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="deleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
-                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
-                        <td onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${tournaments[i].tournamentName}</td>
+                        <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
+                        <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
+                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
                         </tr>`);
     }
 }
