@@ -51,9 +51,8 @@ namespace BusinessTournaments.Models
                 startPopulateIndex = (8 - playerIds.Count) * 2;
 
             int j = 0;
-            for (int i = startPopulateIndex; i < playerIds.Count; i++)
+            for (int i = startPopulateIndex; i < playerIds.Count + startPopulateIndex; i++)
             {
-
                 brackets[i].PlayerId = int.Parse(playerIds[randomizedIndex[j]]);
                 j++;
             }
