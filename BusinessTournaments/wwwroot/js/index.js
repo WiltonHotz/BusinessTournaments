@@ -239,8 +239,7 @@ function startTournament() {
 
 function showOngoingTournament(tournamentId, tournamentName) {
 
-    console.log(tournamentId)
-    console.log(tournamentName)
+    clearSelected();
 
     var url = `GetOngoingTournament/${tournamentId}`;
     $.ajax({
@@ -250,7 +249,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
-            makeSelectArrowsGray();
+            hideAllArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
         }
@@ -306,13 +305,13 @@ function clearSelected() {
 
     canAddMorePlayers = true;
 
-    // Reset arrows to green
+    // Reset arrows to green and make all visible
     var arrows = document.getElementsByClassName("octicon-arrow-right");
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
-
+        arrows[i].style.visibility = "visible";
     }
 
     // Change background to normal
@@ -333,14 +332,17 @@ function clearSelected() {
     $('#startTournament').prop("disabled", true);
 
     $('#clearSelectedBtn').prop("disabled", true);
+
+    // Clear tour name input and enable
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+    tournamentNameInput.value = "";
+    tournamentNameInput.disabled = false;
 }
 
-function makeSelectArrowsGray() {
+function hideAllArrows() {
     var arrows = document.getElementsByClassName("octicon-arrow-right");
 
     for (var i = 0; i < arrows.length; i++) {
-        arrows[i].style.color = "gray";
-        arrows[i].style.cursor = "default";
-
+        arrows[i].style.visibility = "hidden";
     }
 }
