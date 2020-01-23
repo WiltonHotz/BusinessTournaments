@@ -68,7 +68,6 @@ namespace BusinessTournaments.Controllers
             {
                 tournamentId = startTournament.TournamentId;
             }
-            
             return Json(tournamentId);
         }
 
