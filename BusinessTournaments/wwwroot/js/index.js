@@ -426,7 +426,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         $("#selected")
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
                        <td class="remove-button" style="width: 20px"></td>
-                        <td>${players[i].playerName}</td>
+                        <td style="text-align: left;">${players[i].playerName}</td>
                         </tr>`);
 
         // Mark players in Leaderboard selected
