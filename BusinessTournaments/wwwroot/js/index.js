@@ -42,7 +42,7 @@ function PopulatePlayersOnLoad(leaderboard) {
 
 function PopulateOngoingTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
-        let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="deleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
+        let deleteButton = `<span class="select-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="confirmDeleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
                         <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
@@ -58,6 +58,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
+                        <td class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
@@ -233,6 +234,19 @@ function deleteTournament(tournamentId) {
     });
 }
 
+function confirmDeleteTournament(tournamentId) {
+    var txt;
+    var r = confirm(`Are you sure you want to delete this tournament?`);
+    if (r == true) {
+        txt = "You pressed OK!";
+
+        deleteTournament(tournamentId);
+
+    } else {
+        txt = "You pressed Cancel!";
+    }
+}
+
 function deleteSelectedTournament(tournamentId) {
 
     document.getElementById('ot' + tournamentId).remove();
@@ -261,6 +275,25 @@ function startTournament() {
     
     tournamentNameInput.value = "";
 
+}
+
+function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
+
+    clearSelected();
+
+    var url = `GetOngoingTournament/${tournamentId}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersFromCompletedTournament(players);
+            
+          //  hideAllArrows();
+            
+            canAddMorePlayers = true;
+        }
+    });
 }
 
 function showOngoingTournament(tournamentId, tournamentName) {
@@ -300,9 +333,16 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
         selectedPlayerHtml.style.backgroundColor = "black"
     }
+}
+function populateSelectedWithPlayersFromCompletedTournament(players) {
 
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
 
+    for (i = 0; i < players.length; i++) {
 
+        selectPlayer(players[i].playerId, players[i].playerName)
+    }
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -365,6 +405,9 @@ function clearSelected() {
     tournamentNameInput.disabled = false;
     tournamentNameInput.style.backgroundColor = "white";
 }
+
+
+
 
 function hideAllArrows() {
     var arrows = document.getElementsByClassName("octicon-arrow-right");
