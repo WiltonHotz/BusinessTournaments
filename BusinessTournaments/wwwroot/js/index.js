@@ -161,20 +161,34 @@ function selectPlayer(playerId, playerName) {
                         </tr>`);
 
             // Change background color and hide green arrow
-            var selectedPlayerHtml = document.getElementById('l' + playerId);
-            var selectArrow = document.getElementById(`sBtn${playerId}`);
+            let selectedPlayerHtml = document.getElementById('l' + playerId);
+            let selectArrow = document.getElementById(`sBtn${playerId}`);
+            let tournamentNameInput = document.getElementById("tournamentNameInput");
             selectArrow.style.visibility = "hidden";
             selectedPlayerHtml.style.backgroundColor = "black"
 
-            // Activate buttons
+            // Activate CLEAR button
             if (startTournamentInfo.playerIds.length == 1) {
                 $('#clearSelectedBtn').prop("class", "btn btn-danger btn-block");
                 $('#clearSelectedBtn').prop("disabled", false);
             }
-            if (startTournamentInfo.playerIds.length == 4) {
+
+            // Set focus on tour name input
+            if (startTournamentInfo.playerIds.length >= 4) {
+                tournamentNameInput.focus();
+
+                if (tournamentNameInput.value.length > 1)
+                    tournamentNameInput.style.backgroundColor = "lightgreen";
+                else
+                    tournamentNameInput.style.backgroundColor = "#ffff8e";
+            }
+
+            // Activate CREATE TOURNAMENT button
+            if (startTournamentInfo.playerIds.length >= 4 && tournamentNameInput.value.length > 1) {
                 $('#startTournament').prop("class", "btn btn-success btn-block");
                 $('#startTournament').prop("disabled", false);
             }
+
         }
     }
 }
@@ -186,7 +200,8 @@ function removeSelectedPlayer(playerId, playerName) {
 
     // HTML resetting
     document.getElementById('selected' + playerId).remove();
-    var selectedPlayerHtml = document.getElementById('l' + playerId);
+    let selectedPlayerHtml = document.getElementById('l' + playerId);
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
     selectedPlayerHtml.style.backgroundColor = "#239165";
     document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
 
@@ -194,6 +209,7 @@ function removeSelectedPlayer(playerId, playerName) {
     if (startTournamentInfo.playerIds.length == 3) {
         $('#startTournament').prop("class", "btn btn-secondary btn-block");
         $('#startTournament').prop("disabled", true);
+        tournamentNameInput.style.backgroundColor = "white";
     }
     if (startTournamentInfo.playerIds.length == 0) {
         $('#clearSelectedBtn').prop("disabled", true);
@@ -346,6 +362,7 @@ function clearSelected() {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = "";
     tournamentNameInput.disabled = false;
+    tournamentNameInput.style.backgroundColor = "white";
 }
 
 function hideAllArrows() {
@@ -353,5 +370,32 @@ function hideAllArrows() {
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.visibility = "hidden";
+    }
+}
+
+function checkIfValidInput(input) {
+
+    console.log(input.value)
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+
+    if (input.value.length > 1 && startTournamentInfo.playerIds.length >= 4) {
+        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("disabled", false);
+        //$('#tournamentNameInput').css("background-color", "lightgreen");
+        tournamentNameInput.style.backgroundColor = "lightgreen";
+    }
+    else if (input.value.length < 2) {
+        $('#startTournament').prop("class", "btn btn-secondary btn-block");
+        $('#startTournament').prop("disabled", true);
+        //$('#tournamentNameInput').css("background-color", "#ffff8e");
+        tournamentNameInput.style.backgroundColor = "#ffff8e"
+    }
+
+    if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
+        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("disabled", false);
+        //$('#tournamentNameInput').css("background-color", "lightgreen");
+        tournamentNameInput.style.backgroundColor = "white";
     }
 }
