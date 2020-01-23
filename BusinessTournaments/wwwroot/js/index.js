@@ -199,24 +199,34 @@ function addPlayers() {
             var result = data.responseJSON
             console.log(result)
             let badNames = "";
-            for (var i = 0; i < result.length; i++) {
-                
-                badNames += result[i].playerName + "\n";
+            if (result != null) {
+                for (var i = 0; i < result.length; i++) {
+
+                    badNames += result[i].playerName + "\n";
+                }
+                //Show "Name already in list" text.
+                for (var i = 0; i < names.length; i++) {
+
+                    if (result.some(x => x.playerName == names[i])) {
+                        $(`#badpninp${i}`).html('Name is already in list')
+                    } else {
+                        $(`#badpninp${i}`).html('')
+                    }
+                }
             }
+            var r = hasDuplicates(names);
+            if (r) {
+                $(`#badpninp${0}`).html('Please give unique names')
 
-            //Show "Name already in list" text.
-            for (var i = 0; i < names.length; i++) {
-
-                if (result.some(x => x.playerName == names[i])) {
-                    $(`#badpninp${i}`).html('Name is already in list')
-                } else {
-                    $(`#badpninp${i}`).html('')
-                }           
             }
 
             //alert(`Bad names:\n${badNames}[ALREADY IN THE DATABASE]`)
         }
     });
+}
+
+function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
 }
 
 function addAddPlayerFieldEnterButtonEventListener(id) {
