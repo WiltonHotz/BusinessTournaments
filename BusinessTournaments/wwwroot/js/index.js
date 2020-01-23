@@ -199,26 +199,42 @@ function addPlayers() {
             var result = data.responseJSON
             console.log(result)
             let badNames = "";
-            if (result != null) {
-                for (var i = 0; i < result.length; i++) {
+            var r = hasDuplicates(names);
+            var duplicates = find_duplicate_in_array(names);
 
-                    badNames += result[i].playerName + "\n";
-                }
+            if (result != null) {
+                //for (var i = 0; i < result.length; i++) {
+
+                //    badNames += result[i].playerName + "\n";
+                //}
                 //Show "Name already in list" text.
                 for (var i = 0; i < names.length; i++) {
 
                     if (result.some(x => x.playerName == names[i])) {
                         $(`#badpninp${i}`).html('Name is already in list')
                     } else {
-                        $(`#badpninp${i}`).html('')
+                        if (r) {
+                            if (duplicates.some(x => x == names[i])) {
+                                $(`#badpninp${i}`).html('Please give unique names')
+                            } else {
+                                $(`#badpninp${i}`).html('')
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (r) {
+                    for (var i = 0; i < names.length; i++) {
+                        if (duplicates.some(x => x == names[i])) {
+                            $(`#badpninp${i}`).html('Please give unique names')
+                        } else {
+                            $(`#badpninp${i}`).html('')
+                        }
                     }
                 }
             }
-            var r = hasDuplicates(names);
-            if (r) {
-                $(`#badpninp${0}`).html('Please give unique names')
 
-            }
+              //  $(`#badpninp${0}`).html('Please give unique names')
 
             //alert(`Bad names:\n${badNames}[ALREADY IN THE DATABASE]`)
         }
@@ -227,6 +243,26 @@ function addPlayers() {
 
 function hasDuplicates(array) {
     return (new Set(array)).size !== array.length;
+}
+
+function find_duplicate_in_array(arra1) {
+    var object = {};
+    var result = [];
+
+    arra1.forEach(function (item) {
+        if (!object[item])
+            object[item] = 0;
+        object[item] += 1;
+    })
+
+    for (var prop in object) {
+        if (object[prop] >= 2) {
+            result.push(prop);
+        }
+    }
+
+    return result;
+
 }
 
 function addAddPlayerFieldEnterButtonEventListener(id) {
