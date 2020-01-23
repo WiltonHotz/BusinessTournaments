@@ -58,6 +58,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
+                        <td class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         </tr>`);
@@ -263,6 +264,25 @@ function startTournament() {
 
 }
 
+function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
+
+    clearSelected();
+
+    var url = `GetOngoingTournament/${tournamentId}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersFromCompletedTournament(players);
+            
+          //  hideAllArrows();
+            
+            canAddMorePlayers = true;
+        }
+    });
+}
+
 function showOngoingTournament(tournamentId, tournamentName) {
 
     clearSelected();
@@ -300,9 +320,16 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
         selectedPlayerHtml.style.backgroundColor = "black"
     }
+}
+function populateSelectedWithPlayersFromCompletedTournament(players) {
 
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
 
+    for (i = 0; i < players.length; i++) {
 
+        selectPlayer(players[i].playerId, players[i].playerName)
+    }
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -365,6 +392,9 @@ function clearSelected() {
     tournamentNameInput.disabled = false;
     tournamentNameInput.style.backgroundColor = "white";
 }
+
+
+
 
 function hideAllArrows() {
     var arrows = document.getElementsByClassName("octicon-arrow-right");
