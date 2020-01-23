@@ -86,6 +86,33 @@ namespace BusinessTournaments.Controllers
             }
         }
 
+        [Route("editPlayer/{playerId}/{newName}")]
+        public async Task<IActionResult> EditPlayer(int playerId, string newName)
+        {
+            var userId = accountService.GetUserId();
+            if (await service.EditPlayerById(playerId, newName, userId))
+            {
+                return Ok(newName);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [Route("deletePlayer/{playerId}")]
+        public async Task<IActionResult> DeletePlayer(int playerId)
+        {
+            var userId = accountService.GetUserId();
+            if (await service.DeletePlayerById(playerId, userId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         [Route("GetOngoingTournament/{id}")]
         public async Task<IActionResult> GetOngoingTournament(string id)
         {

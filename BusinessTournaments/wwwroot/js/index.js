@@ -5,6 +5,20 @@
 }
 let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
+let playerIdToEdit;
+
+$(document).ready(function () {
+    $("#addPlayerModalBtn").click(function () {
+        $("#addPlayerModal").modal("show");
+    });
+    $("#addPlayerModal").on('shown.bs.modal', function () {
+        initiateAddPlayerModal()
+        addAddPlayerFieldEnterButtonEventListener('pninp0')
+    });
+    $("#addPlayerModal").on("hidden.bs.modal", function () {
+        $("#modalPlayerNames").html("");
+    });
+});
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -33,8 +47,8 @@ function PopulatePlayersOnLoad(leaderboard) {
         $("#leaderboard")
             .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}' class="leaderboard-row">
                         <td>${leaderboard[i].score}</td>
-                        <td>${leaderboard[i].playerName}</td>
-                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('${leaderboard[i].playerName}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
+                        <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
+                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
@@ -67,34 +81,84 @@ function ReturnDateFormat(date) {
     return date.substring(0, 10) + " " + date.substring(11, 16)
 }
 
-function editPlayer(playerName, playerId) {
-    console.log(playerName)
+function editPlayer(playerNameId, playerId) {
+    var playerName = $(`#${playerNameId}`).html()
+    focusField(`editPlayerName`)
     $("#editPlayerName").val(playerName);
-    console.log(editPlayerId)
-    $("#editPlayerId").val(playerId);
+    playerIdToEdit = playerId;
+}
+
+function focusField(field) {
+    document.getElementById(field).focus(); 
 }
 
 function confirmEditPlayer() {
-    $("#editPlayerId").val();
-
-    var txt;
+    var newName = $("#editPlayerName").val();
     var r = confirm(`Are you sure you want to change name to\n${$("#editPlayerName").val()}`);
     if (r == true) {
-        txt = "You pressed OK!";
+
+            $.ajax({
+                url: `editPlayer/${playerIdToEdit}/${newName}`,
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data)
+                    var c = document.querySelectorAll("#leaderboard > div");
+                    console.log(c)
+                    $(`#lname${playerIdToEdit}`).html(data)
+
+                    $('#editPlayerModal').modal('hide');
+
+                    playerIdToEdit = 0;
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+
     } else {
-        txt = "You pressed Cancel!";
+
     }
 }
 
+function initiateAddPlayerModal() {
+
+    $("#modalPlayerNames")
+        .append(`<div id="pndiv0">
+                    <input type="text" id="pninp0" placeholder="Enter player name here..." />
+                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                </div>`);
+
+    focusField('pninp0')
+}
+
 function confirmDeletePlayer() {
-    $("#editPlayerId").val();
-    console.log("after delete pressed " + $("#editPlayerId").val())
-    var txt;
+
     var r = confirm(`Are you sure you want to delete player\n${$("#editPlayerName").val()}`);
     if (r == true) {
-        txt = "You pressed OK!";
+
+        $.ajax({
+            url: `deletePlayer/${playerIdToEdit}`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+                var c = document.querySelectorAll("#leaderboard > div");
+                console.log(c)
+                $(`#l${playerIdToEdit}`).remove();
+
+                $('#editPlayerModal').modal('hide');
+
+                playerIdToEdit = 0;
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+
+
     } else {
-        txt = "You pressed Cancel!";
+
     }
 }
 
@@ -116,6 +180,8 @@ function addPlayers() {
         success: function (data) {
             console.log(data)
             PopulatePlayersOnLoad(data);
+            $('#addPlayerModal').modal('hide');
+            $("#modalPlayerNames").html("");
         },
         error: function (data) {
             console.log("error");
@@ -132,6 +198,20 @@ function addPlayers() {
     });
 }
 
+function addAddPlayerFieldEnterButtonEventListener(id) {
+
+    let numId = id.substring(5);
+    let btnId = `pnbtn${numId}`
+
+    var input = document.getElementById(`${id}`);
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById(`${btnId}`).click();
+        }
+    });
+}
+
 function addAddPlayerField(btn) {
     let id = btn.id;
     let numId = id.substring(5);
@@ -142,6 +222,8 @@ function addAddPlayerField(btn) {
                     <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
                     <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
                 </div>`);
+    focusField(`pninp${newId}`)
+    addAddPlayerFieldEnterButtonEventListener(`pninp${newId}`)
 
     document.getElementById(`${id}`).style.visibility = "hidden";
 }

@@ -101,6 +101,51 @@ namespace BusinessTournaments.Models
             return (newToLeaderboard, true);
         }
 
+        internal async Task<bool> DeletePlayerById(int playerId, string userId)
+        {
+            var players = await context.Players
+            .Where(p => p.CompanyId == userId)
+            .ToListAsync();
+
+            var player = players.Where(p => p.Id == playerId).SingleOrDefault();
+
+            if (player != null)
+            {
+                var t2p = await context.T2p
+                    .Where(p => p.PlayerId == playerId)
+                    .ToListAsync();
+
+                if (t2p.Count() != 0)
+                {
+                    foreach (var p in t2p)
+                    {
+                        context.T2p.Remove(p);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                context.Players.Remove(player);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else { return false; }
+        }
+
+        internal async Task<bool> EditPlayerById(int playerId, string newName, string userId)
+        {
+            var player = await context.Players
+                .Where(p => p.Id == playerId && p.CompanyId == userId)
+                .SingleOrDefaultAsync();
+            if (player != null)
+            {
+                player.Name = newName;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else { return false; }
+        }
+
         internal async Task<List<PlayerVM>> GetOngoingTournament(string tournamentId, string userId)
         {
             var playerIds = await context.T2p.Where(t => t.TournamentId == int.Parse(tournamentId)).Select(t => t.PlayerId).ToArrayAsync();
@@ -162,7 +207,7 @@ namespace BusinessTournaments.Models
                 .Where(t => t.TournamentId == id)
                 .ToListAsync();
 
-            if(t2p != null)
+            if (t2p.Count() != 0)
             {
                 foreach (var t in t2p)
                 {
@@ -175,8 +220,8 @@ namespace BusinessTournaments.Models
             {
                 return false;
             }
-                
-            if(tournament != null)
+
+            if (tournament != null)
             {
                 context.Tournaments.Remove(tournament);
                 await context.SaveChangesAsync();
@@ -187,6 +232,5 @@ namespace BusinessTournaments.Models
                 return false;
             }
         }
-        //public Tournaments GetTournamentById(int id) => tournamentslist.Where(t => t.Id == id).Single();
     }
 }
