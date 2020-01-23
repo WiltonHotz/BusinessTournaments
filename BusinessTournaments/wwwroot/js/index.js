@@ -273,6 +273,10 @@ function selectPlayer(playerId, playerName) {
                 $('#startTournament').prop("disabled", false);
             }
 
+            if (startTournamentInfo.playerIds.length >= 8) {
+                hideAddPlayerArrows();
+            }
+
         }
     }
 }
@@ -297,6 +301,11 @@ function removeSelectedPlayer(playerId, playerName) {
     }
     if (startTournamentInfo.playerIds.length == 0) {
         $('#clearSelectedBtn').prop("disabled", true);
+    }
+
+    //show arrows
+    if (startTournamentInfo.playerIds.length <= 8) {
+        showAddPlayerArrows();
     }
 }
 
@@ -390,7 +399,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
-            hideAllArrows();
+            hideAddPlayerArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
         }
@@ -487,15 +496,30 @@ function clearSelected() {
     tournamentNameInput.style.backgroundColor = "white";
 }
 
-
-
-
-function hideAllArrows() {
+function hideAddPlayerArrows() {
     var arrows = document.getElementsByClassName("select-button");
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.visibility = "hidden";
     }
+}
+
+function showAddPlayerArrows() {
+
+    // arrowid on players in leaderboard
+    var arrowsInLeaderBoard = document.getElementsByClassName("select-button");
+    
+    // arrowid on selected players
+    var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
+
+    for (i = 0; i < arrowsInLeaderBoard.length; i++) {
+        console.log(arrowsInLeaderBoard[i].id)
+        //check if the player from leaderboard is in selectedPlayers:
+        if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
+            var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
+            arrow.style.visibility = "visible";
+        }
+    }  
 }
 
 function checkIfValidInput(input) {
