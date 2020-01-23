@@ -46,9 +46,9 @@ function PopulatePlayersOnLoad(leaderboard) {
 
         $("#leaderboard")
             .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}' class="leaderboard-row">
+                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td>${leaderboard[i].score}</td>
                         <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
-                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
@@ -62,9 +62,16 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
                         <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
-                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
+                        <td style="width: 20px" >${deleteButton}</td>
                         </tr>`);
     }
+}
+
+function HideDeleteButton(tournamentId) {
+
+    document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
+
+    console.log(`deleteBtn${tournamentId}`)
 }
 
 function PopulateCompletedTournamentsOnLoad(tournaments) {
@@ -80,7 +87,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
 }
 
 function ReturnDateFormat(date) {
-    return date.substring(0, 10) + " " + date.substring(11, 16)
+    return date.substring(0, 10);
 }
 
 function editPlayer(playerNameId, playerId) {
@@ -91,7 +98,7 @@ function editPlayer(playerNameId, playerId) {
 }
 
 function focusField(field) {
-    document.getElementById(field).focus(); 
+    document.getElementById(field).focus();
 }
 
 function confirmEditPlayer() {
@@ -99,24 +106,24 @@ function confirmEditPlayer() {
     var r = confirm(`Are you sure you want to change name to\n${$("#editPlayerName").val()}`);
     if (r == true) {
 
-            $.ajax({
-                url: `editPlayer/${playerIdToEdit}/${newName}`,
-                type: 'POST',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log(data)
-                    var c = document.querySelectorAll("#leaderboard > div");
-                    console.log(c)
-                    $(`#lname${playerIdToEdit}`).html(data)
+        $.ajax({
+            url: `editPlayer/${playerIdToEdit}/${newName}`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+                var c = document.querySelectorAll("#leaderboard > div");
+                console.log(c)
+                $(`#lname${playerIdToEdit}`).html(data)
 
-                    $('#editPlayerModal').modal('hide');
+                $('#editPlayerModal').modal('hide');
 
-                    playerIdToEdit = 0;
-                },
-                error: function () {
-                    console.log("error");
-                }
-            });
+                playerIdToEdit = 0;
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
 
     } else {
 
@@ -273,6 +280,10 @@ function selectPlayer(playerId, playerName) {
                 $('#startTournament').prop("disabled", false);
             }
 
+            if (startTournamentInfo.playerIds.length >= 8) {
+                hideAddPlayerArrows();
+            }
+
         }
     }
 }
@@ -297,6 +308,11 @@ function removeSelectedPlayer(playerId, playerName) {
     }
     if (startTournamentInfo.playerIds.length == 0) {
         $('#clearSelectedBtn').prop("disabled", true);
+    }
+
+    //show arrows
+    if (startTournamentInfo.playerIds.length <= 8) {
+        showAddPlayerArrows();
     }
 }
 
@@ -354,12 +370,12 @@ function startTournament() {
             console.log("error");
         }
     });
-    
+
     tournamentNameInput.value = "";
 
 }
 
-function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
+function selectPlayersFromCompletedTournament(tournamentId) {
 
     clearSelected();
 
@@ -370,9 +386,9 @@ function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
         success: function (players) {
             console.log(players)
             populateSelectedWithPlayersFromCompletedTournament(players);
-            
-          //  hideAllArrows();
-            
+
+            //  hideAllArrows();
+
             canAddMorePlayers = true;
         }
     });
@@ -390,9 +406,11 @@ function showOngoingTournament(tournamentId, tournamentName) {
             console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
-            hideAllArrows();
+            hideAddPlayerArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
+            HideDeleteButton(tournamentId);
+
         }
     });
 }
@@ -408,13 +426,15 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         $("#selected")
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
                        <td class="remove-button" style="width: 20px"></td>
-                        <td>${players[i].playerName}</td>
+                        <td style="text-align: left;">${players[i].playerName}</td>
                         </tr>`);
 
         // Mark players in Leaderboard selected
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
         selectedPlayerHtml.style.backgroundColor = "black"
     }
+
+
 }
 
 function populateSelectedWithPlayersFromCompletedTournament(players) {
@@ -423,7 +443,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
 
     for (i = 0; i < players.length; i++) {
 
-        selectPlayer(players[i].playerId, players[i].playerName)
+        selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
 }
 
@@ -432,6 +452,7 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = tournamentName;
     tournamentNameInput.disabled = true;
+
 }
 
 function changeStartTournamentButtonToResumeAndActivate() {
@@ -473,6 +494,12 @@ function clearSelected() {
         selectButtons[i].style.visibility = "visible"
     }
 
+    // Show all deletebuttons
+
+    var deleteButtons = document.getElementsByClassName("delete-button");
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].style.visibility = "visible"
+    }
     // Disable buttons and change text
     $('#startTournament').prop("value", "CREATE TOURNAMENT")
     $('#startTournament').prop("class", "btn btn-secondary btn-block");
@@ -487,15 +514,30 @@ function clearSelected() {
     tournamentNameInput.style.backgroundColor = "white";
 }
 
-
-
-
-function hideAllArrows() {
+function hideAddPlayerArrows() {
     var arrows = document.getElementsByClassName("select-button");
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.visibility = "hidden";
     }
+}
+
+function showAddPlayerArrows() {
+
+    // arrowid on players in leaderboard
+    var arrowsInLeaderBoard = document.getElementsByClassName("select-button");
+    
+    // arrowid on selected players
+    var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
+
+    for (i = 0; i < arrowsInLeaderBoard.length; i++) {
+        console.log(arrowsInLeaderBoard[i].id)
+        //check if the player from leaderboard is in selectedPlayers:
+        if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
+            var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
+            arrow.style.visibility = "visible";
+        }
+    }  
 }
 
 function checkIfValidInput(input) {
