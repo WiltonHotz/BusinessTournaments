@@ -10,5 +10,6 @@ namespace BusinessTournaments.Models
     {
         public int BracketId { get; set; }
         public int PlayerId { get; set; }
+        public string PlayerName { get; set; }
     }
 }

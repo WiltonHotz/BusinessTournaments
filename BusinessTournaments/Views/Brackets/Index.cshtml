@@ -3,36 +3,89 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>@Model.BracketId</h1>
+<div class="bracket-container">
+    <div class="bracket-level" id="quarters">
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b7"></div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b8"></div>
+            </div>
+        </div>
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b9"></div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b10"></div>
+            </div>
+        </div>
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b11"></div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b12"></div>
+            </div>
+        </div>
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b13"> </div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b14"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bracket-level" id="semis">
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b3"></div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b4"></div>
+            </div>
+        </div>
+        <div class="bracket-matchup">
+            <div class="bracket-team winner">
+                <div class="bracket-name" id="b5"></div>
+            </div>
+            <div class="bracket-team loser">
+                <div class="bracket-name" id="b6"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bracket-level" id="final">
+        <div class="bracket-matchup">
+            <div class="bracket-team" id="b1">
+                <div class="bracket-name"></div>
+            </div>
+            <div class="bracket-team" id="b2">
+                <div class="bracket-name"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bracket-level" id="winner">
+        <div class="bracket-matchup">
+            <div class="bracket-team">
+                <div class="bracket-name" id="b0">VINNAREN</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script src="~/js/bracket.js"></script>
     <script type="text/javascript">
 
     var bracketId = @Html.Raw((this.Model.BracketId));
-        
+
 
    document.addEventListener("DOMContentLoaded", function () {
     getTournamentBracketJSON(bracketId)
-   
+
     });
 
-
-function getTournamentBracketJSON(bracketId) {
-
-    var url = "b/" + bracketId;
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (response) {
-            console.log(response)
-             window.location.href = `/brackets/b/${bracketId}`
-
-        },
-        error: function () {
-            console.log("error");
-        }
-    });
-}
     </script>
 }
