@@ -258,6 +258,9 @@ function startTournament() {
             console.log("error");
         }
     });
+    
+    tournamentNameInput.value = "";
+
 }
 
 function showOngoingTournament(tournamentId, tournamentName) {
