@@ -416,10 +416,10 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         selectedPlayerHtml.style.backgroundColor = "black"
     }
 }
+
 function populateSelectedWithPlayersFromCompletedTournament(players) {
 
-    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
-    startTournamentInfo.playerIds = [];
+    clearSelected();
 
     for (i = 0; i < players.length; i++) {
 
@@ -453,13 +453,12 @@ function clearSelected() {
 
     canAddMorePlayers = true;
 
-    // Reset arrows to green and make all visible
+    // Reset arrows to green
     var arrows = document.getElementsByClassName("octicon-arrow-right");
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
-        arrows[i].style.visibility = "visible";
     }
 
     // Change background to normal
@@ -492,7 +491,7 @@ function clearSelected() {
 
 
 function hideAllArrows() {
-    var arrows = document.getElementsByClassName("octicon-arrow-right");
+    var arrows = document.getElementsByClassName("select-button");
 
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].style.visibility = "hidden";
