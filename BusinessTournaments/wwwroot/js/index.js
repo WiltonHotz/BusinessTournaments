@@ -359,7 +359,7 @@ function startTournament() {
 
 }
 
-function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
+function selectPlayersFromCompletedTournament(tournamentId) {
 
     clearSelected();
 
@@ -423,7 +423,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
 
     for (i = 0; i < players.length; i++) {
 
-        selectPlayer(players[i].playerId, players[i].playerName)
+        selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
 }
 
