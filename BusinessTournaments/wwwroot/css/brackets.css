@@ -40,7 +40,7 @@ html, body {
   width: 200%;
 }*/
 
-.bracket-matchup {
+.bracket-match {
     width: 90%;
     margin: auto;
     max-height: 50px;
@@ -50,22 +50,47 @@ html, body {
     justify-content: space-between;
 }
 
-.bracket-team {
-    height: 45%;
+.bracket {
+    height: 100%;
     width: 100%;
-    background-color: #F5F5F5;
+    background-color: #e6e05a;
     box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     display: flex;
     flex-direction: row;
     transition: all ease .5s;
-    margin-bottom: 7%;
-    margin-top: 7%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    min-height: 70%;
+    cursor: pointer;
+}
+
+    .bracket.winner {
+        background-color: #96e581;
+        font-weight: bold;
+    }
+
+    .bracket.loser {
+        background-color: #D07030;
+    }
+
+.bracket-empty {
+    height: 100%;
+    width: 100%;
+    background-color: #808080;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+    display: flex;
+    flex-direction: row;
+    transition: all ease .5s;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    min-height: 70%;
+    cursor: default;
 }
 
 .bracket-name {
     font-family: 'Open Sans', sans-serif;
-    width: 75%;
-    font-size: .75em;
+    width: 100%;
+    font-size: 1em;
     padding: .2em;
     line-height: 1.5em;
     overflow: hidden;
@@ -73,6 +98,7 @@ html, body {
     white-space: nowrap;
     color: #2B2B2B;
     text-align: center;
+    display: block;
 }
 
 .bracket-score {
@@ -86,10 +112,7 @@ html, body {
     text-align: center;
 }
 
-.winner > .bracket-name, .winner > .bracket-score {
-    font-weight: bold;
-    color: #D07030;
-}
+
 
 /*.bracket-team:hover{
   background-color: #E8E8E8;
