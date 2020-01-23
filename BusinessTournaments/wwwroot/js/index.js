@@ -62,9 +62,16 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
                         <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
                         <td>${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
-                        <td style="width: 20px" id="deleteBtn${tournaments[i].tournamentId}">${deleteButton}</td>
+                        <td style="width: 20px" >${deleteButton}</td>
                         </tr>`);
     }
+}
+
+function HideDeleteButton(tournamentId) {
+
+    document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
+
+    console.log(`deleteBtn${tournamentId}`)
 }
 
 function PopulateCompletedTournamentsOnLoad(tournaments) {
@@ -91,7 +98,7 @@ function editPlayer(playerNameId, playerId) {
 }
 
 function focusField(field) {
-    document.getElementById(field).focus(); 
+    document.getElementById(field).focus();
 }
 
 function confirmEditPlayer() {
@@ -99,24 +106,24 @@ function confirmEditPlayer() {
     var r = confirm(`Are you sure you want to change name to\n${$("#editPlayerName").val()}`);
     if (r == true) {
 
-            $.ajax({
-                url: `editPlayer/${playerIdToEdit}/${newName}`,
-                type: 'POST',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log(data)
-                    var c = document.querySelectorAll("#leaderboard > div");
-                    console.log(c)
-                    $(`#lname${playerIdToEdit}`).html(data)
+        $.ajax({
+            url: `editPlayer/${playerIdToEdit}/${newName}`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+                var c = document.querySelectorAll("#leaderboard > div");
+                console.log(c)
+                $(`#lname${playerIdToEdit}`).html(data)
 
-                    $('#editPlayerModal').modal('hide');
+                $('#editPlayerModal').modal('hide');
 
-                    playerIdToEdit = 0;
-                },
-                error: function () {
-                    console.log("error");
-                }
-            });
+                playerIdToEdit = 0;
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
 
     } else {
 
@@ -354,7 +361,7 @@ function startTournament() {
             console.log("error");
         }
     });
-    
+
     tournamentNameInput.value = "";
 
 }
@@ -370,9 +377,9 @@ function selectPlayersFromCompletedTournament(tournamentId, tournamentName) {
         success: function (players) {
             console.log(players)
             populateSelectedWithPlayersFromCompletedTournament(players);
-            
-          //  hideAllArrows();
-            
+
+            //  hideAllArrows();
+
             canAddMorePlayers = true;
         }
     });
@@ -393,6 +400,8 @@ function showOngoingTournament(tournamentId, tournamentName) {
             hideAllArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
+            HideDeleteButton(tournamentId);
+
         }
     });
 }
@@ -415,6 +424,8 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
         selectedPlayerHtml.style.backgroundColor = "black"
     }
+
+
 }
 
 function populateSelectedWithPlayersFromCompletedTournament(players) {
@@ -432,6 +443,7 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = tournamentName;
     tournamentNameInput.disabled = true;
+
 }
 
 function changeStartTournamentButtonToResumeAndActivate() {
@@ -473,6 +485,12 @@ function clearSelected() {
         selectButtons[i].style.visibility = "visible"
     }
 
+    // Show all deletebuttons
+
+    var deleteButtons = document.getElementsByClassName("delete-button");
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].style.visibility = "visible"
+    }
     // Disable buttons and change text
     $('#startTournament').prop("value", "CREATE TOURNAMENT")
     $('#startTournament').prop("class", "btn btn-secondary btn-block");
