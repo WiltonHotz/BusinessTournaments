@@ -183,17 +183,15 @@ td:last-child {
     color: white;
 }
 
-.octicon-arrow-left {
-    color: red;
+.octicon-arrow-left.ongoing {
+    color: blue;
 }
 
-.octicon-arrow-left:hover {
-    color: lightcoral;
-}
+    .octicon-arrow-left.ongoing:hover {
+        color: #8c8cff;
+    }
 
-.octicon-arrow-left:active {
-    color: white;
-}
+
 
 .octicon-x {
     color: red;

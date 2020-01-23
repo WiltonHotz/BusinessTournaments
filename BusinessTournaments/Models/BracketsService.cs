@@ -19,7 +19,7 @@ namespace BusinessTournaments.Models
         Random random;
         private readonly BusinessTournamentsDBContext context;
 
-        internal List<Bracket> PopulateBracketsRandomly(List<string> playerIds)
+        internal async Task<List<Bracket>> CreateBrackets(List<string> playerIds)
         {
             List<Bracket> brackets = new List<Bracket>();
             int numOfBrackets = GetNumberOfBrackets(playerIds.Count);
@@ -45,15 +45,28 @@ namespace BusinessTournaments.Models
             }
 
             // Now your players are randomized and you populate brackets
-            int startPopulateIndex = 0;
+            var output = await PopulateBracketsWithPlayers(numOfBrackets, playerIds, randomizedIndex, brackets);
 
-            if (numOfBrackets == 15)
-                startPopulateIndex = (8 - playerIds.Count) * 2;
+            return output;
+        }
+
+        private async Task<List<Bracket>> PopulateBracketsWithPlayers(int numOfBrackets, List<string> playerIds, int[] randomizedIndex, List<Bracket> brackets)
+        {
+
+            int startPopulateIndex = 6;
+
+            if (numOfBrackets == 15) //id 0-14. 0 is winner. 5 players should populate 8,7 -  6,5,4,(3) - 2,1, 0
+                startPopulateIndex = 14 - (8 - playerIds.Count) * 2; // 6 players should populate 10,9,8,7 - 6,5(4),(3), 2,1 - 0
+
+            var players = await context.Players.Where(p => playerIds.Contains(p.Id.ToString())).ToListAsync();
 
             int j = 0;
-            for (int i = startPopulateIndex; i < playerIds.Count + startPopulateIndex; i++)
+            for (int i = startPopulateIndex; i >= playerIds.Count - 1; i--)
             {
-                brackets[i].PlayerId = int.Parse(playerIds[randomizedIndex[j]]);
+                var randomId = int.Parse(playerIds[randomizedIndex[j]]);
+
+                brackets[i].PlayerId = randomId;
+                brackets[i].PlayerName = players.Where(p => p.Id == randomId).Select(p => p.Name).SingleOrDefault();
                 j++;
             }
 
