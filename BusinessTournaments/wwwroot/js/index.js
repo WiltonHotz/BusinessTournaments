@@ -56,7 +56,7 @@ $(document).ready(function () {
 //#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
-    setTheme('redTheme');
+    setTheme('default');
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>
     el.addEventListener("scroll", tableFixHead)
