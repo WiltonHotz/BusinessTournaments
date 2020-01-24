@@ -424,6 +424,8 @@ function selectPlayer(playerId, playerName) {
             if (startTournamentInfo.playerIds.length >= 16) {
                 hideSelectPlayerArrows();
             }
+             $(`#playerCounter`).html(`Selected Player Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${startTournamentInfo.playerIds.length}/16`)
+
 
         }
     }
@@ -455,6 +457,10 @@ function removeSelectedPlayer(playerId) {
     if (startTournamentInfo.playerIds.length <= 16) {
         showSelectPlayerArrows();
     }
+    $(`#playerCounter`).html(`Selected Player Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${startTournamentInfo.playerIds.length}/16`)
+
+
+
 }
 
 //#endregion
@@ -703,6 +709,24 @@ function clearSelected() {
     tournamentNameInput.style.backgroundColor = "white";
 }
 
+//#endregion
+
+//Making Burgers
+
+$(document).ready(function () {
+    $('#nav-icon').click(function () {
+        $(this).toggleClass('open');
+    });
+});
+
+function burgerStuff() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
 //#endregion
 
 //#region themes
