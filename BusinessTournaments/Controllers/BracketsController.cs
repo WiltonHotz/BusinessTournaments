@@ -37,5 +37,16 @@ namespace BusinessTournaments.Controllers
 
             return Json(viewModel);
         }
+
+        [Route("brackets/updatetournamentbracket")]
+        public async Task<IActionResult> UpdateTournament([FromBody]BracketVM ongoingBracket)
+        {
+            //Get user(company)id
+            var userId = accountService.GetUserId();
+            
+            await service.UpdateTournamentAsync(ongoingBracket, userId);
+
+            return Ok();
+        }
     }
 }
