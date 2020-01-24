@@ -79,6 +79,11 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
             $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
+            if (bracketsInfo.brackets[i].bracketState === 'winner') {
+                $(bracketId).prop("class", winnerBracketClasses)
+            } else if (bracketsInfo.brackets[i].bracketState === 'loser') {
+                $(bracketId).prop("class", loserBracketClasses)
+            }
         }
         else {
             $(bracketId).html(emptyBracketHtml);
@@ -450,8 +455,8 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
     isWaitingForResponse = true;
 
     // Update json object
-    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId);
-
+    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracketId);
+    console.log(opponentBracketId)
     // Save changes on DB
     let success = saveChangesToDB(newBracketsJson);
 
@@ -510,9 +515,9 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
     isWaitingForResponse = false;
 }
 
-function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
+function setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracketId) {
 
-    let bracketState;
+    
 
     // Get player name and ID
     let playerName = $(`#${fromBracketId}`).find('.player-name').text();
@@ -527,11 +532,20 @@ function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
     var newBracketsJson = Object.assign({}, currentBracketsJson);
 
     // Find targetBracket index
-    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+    var targetBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Find fromBracket index
+    var fromBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == fromBracketId.substring(1));
+
+    var opponentBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == opponentBracketId.substring(1));
 
     // Assign new values to targetBracket
-    newBracketsJson.brackets[index].playerName = playerName;
-    newBracketsJson.brackets[index].playerId = parseInt(playerId);
+    newBracketsJson.brackets[targetBracketIndex].playerName = playerName;
+    newBracketsJson.brackets[targetBracketIndex].playerId = parseInt(playerId);
+
+    // Set state(class) on brackets
+    newBracketsJson.brackets[fromBracketIndex].bracketState = 'winner';
+    newBracketsJson.brackets[opponentBracketIndex].bracketState = 'loser';
 
     return newBracketsJson;
 
@@ -548,6 +562,7 @@ function removeWinnerInBracketsJson(targetBracketId) {
     // Assign new values to targetBracket
     newBracketsJson.brackets[index].playerName = null;
     newBracketsJson.brackets[index].playerId = 0;
+    newBracketsJson.brackets[index].bracketState = '';
 
     return newBracketsJson;
 }
