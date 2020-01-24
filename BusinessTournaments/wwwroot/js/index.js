@@ -463,9 +463,11 @@ function updateSelectedPlayerCounter(players) {
 
     // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
     if (players == null) {
-
-        $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
-
+        if (startTournamentInfo.playerIds.length > 0) {
+            $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+        } else {
+            $(`#playerCounter`).html(``)
+        }
     } else {
         $(`#playerCounter`).html(`${players.length}`)
 
