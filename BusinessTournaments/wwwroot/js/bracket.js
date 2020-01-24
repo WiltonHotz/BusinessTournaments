@@ -355,35 +355,43 @@ function clickBracketAction(bracketId) {
                 }
                 break;
             case 'b6':
-                if (!checkIfBracketIsEmpty('b5')) {
-                    if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b5'))
-                        setPlayerInBracketAsWinner('b6', 'b2', 'b5');
-                    else
-                        removePlayerInBracketAsWinner('b6', 'b2', 'b5');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b5')) {
+                        if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b5'))
+                            setPlayerInBracketAsWinner('b6', 'b2', 'b5');
+                        else
+                            removePlayerInBracketAsWinner('b6', 'b2', 'b5');
+                    }
                 }
                 break;
             case 'b5':
-                if (!checkIfBracketIsEmpty('b6')) {
-                    if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b6'))
-                        setPlayerInBracketAsWinner('b5', 'b2', 'b6');
-                    else
-                        removePlayerInBracketAsWinner('b5', 'b2', 'b6');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b6')) {
+                        if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b6'))
+                            setPlayerInBracketAsWinner('b5', 'b2', 'b6');
+                        else
+                            removePlayerInBracketAsWinner('b5', 'b2', 'b6');
+                    }
                 }
                 break;
             case 'b4':
-                if (!checkIfBracketIsEmpty('b3')) {
-                    if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b3'))
-                        setPlayerInBracketAsWinner('b4', 'b1', 'b3');
-                    else
-                        removePlayerInBracketAsWinner('b4', 'b1', 'b3');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b3')) {
+                        if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b3'))
+                            setPlayerInBracketAsWinner('b4', 'b1', 'b3');
+                        else
+                            removePlayerInBracketAsWinner('b4', 'b1', 'b3');
+                    }
                 }
                 break;
             case 'b3':
-                if (!checkIfBracketIsEmpty('b4')) {
-                    if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b4'))
-                        setPlayerInBracketAsWinner('b3', 'b1', 'b4');
-                    else
-                        removePlayerInBracketAsWinner('b3', 'b1', 'b4');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b4')) {
+                        if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b4'))
+                            setPlayerInBracketAsWinner('b3', 'b1', 'b4');
+                        else
+                            removePlayerInBracketAsWinner('b3', 'b1', 'b4');
+                    }
                 }
                 break;
             case 'b2':
@@ -458,6 +466,9 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
         // Copy name to next bracket
         document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
 
+        // Make locked bracket-levels darker
+        checkIfBracketLevelsAreLocked();
+
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
     }
@@ -487,6 +498,9 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+
+        // Make locked bracket-levels darker
+        checkIfBracketLevelsAreLocked();
 
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
@@ -539,9 +553,7 @@ function removeWinnerInBracketsJson(targetBracketId) {
 }
 
 function saveChangesToDB(newBracketsJson) {
-    // TODO
-    console.log(newBracketsJson);
-   // newBracketsJson.tournamentId = `${newBracketsJson.tournamentId}`
+
     let output = true;
     let jsonStr = JSON.stringify(newBracketsJson)
 
@@ -551,7 +563,7 @@ function saveChangesToDB(newBracketsJson) {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
-            console.log(data)
+            //console.log(data)
     
         },
         error: function () {
@@ -562,6 +574,40 @@ function saveChangesToDB(newBracketsJson) {
     return output;
 }
 
-function checkIfAllQuartersPlayed() {
-    //$('')
+function checkIfBracketLevelsAreLocked() {
+
+    let quartersLeftWinnersAndLosers = document.getElementById('quarters-left').querySelectorAll('.winner, .loser');
+    let quartersRightWinnersAndLosers = document.getElementById('quarters-right').querySelectorAll('.winner, .loser');
+    let semisLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
+    let semisRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
+    let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+
+    if (quartersLeftWinnersAndLosers.length === 4)
+        document.getElementById('eights-left').style.opacity = "0.3";
+    else
+        document.getElementById('eights-left').style.opacity = "1";
+
+    if (quartersRightWinnersAndLosers.length === 4)
+        document.getElementById('eights-right').style.opacity = "0.3";
+    else
+        document.getElementById('eights-right').style.opacity = "1";
+
+    if (semisLeftWinnersAndLosers.length === 2)
+        document.getElementById('quarters-left').style.opacity = "0.3";
+    else
+        document.getElementById('quarters-left').style.opacity = "1";
+
+    if (semisRightWinnersAndLosers.length === 2)
+        document.getElementById('quarters-right').style.opacity = "0.3";
+    else
+        document.getElementById('quarters-right').style.opacity = "1";
+
+    if (finalWinnerAndLoser.length === 2) {
+        document.getElementById('semis-left').style.opacity = "0.3";
+        document.getElementById('semis-right').style.opacity = "0.3";
+    }
+    else {
+        document.getElementById('semis-left').style.opacity = "1";
+        document.getElementById('semis-right').style.opacity = "1";
+    }
 }
