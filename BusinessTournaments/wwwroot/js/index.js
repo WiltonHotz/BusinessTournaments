@@ -117,7 +117,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
-                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
+                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-completed ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         <td style="width: 20px; padding-right: 20px;"></td>
                         </tr>`);

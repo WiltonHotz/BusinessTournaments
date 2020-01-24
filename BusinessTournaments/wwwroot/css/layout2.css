@@ -107,17 +107,34 @@ td:last-child {
     cursor: pointer;
 }
 
+.octicon-completed:hover {
+    color: #FE512C;
+    cursor: pointer;
+}
+
 .octicon-arrow-left:active {
     color: white;
 }
 
-.octicon-arrow-left.ongoing {
-    color: blue;
+    .octicon-arrow-left.ongoing {
+        color: #FEFEAE;
+    }
+
+        .octicon-arrow-left.ongoing:hover {
+            color: #FFFF6D;
+        }
+
+    .octicon-completed:active {
+        color: white;
+    }
+
+.octicon-completed.ongoing {
+    color: #FE512C;
 }
 
-.octicon-arrow-left.ongoing:hover {
-    color: #8c8cff;
-}
+    .octicon-completed.ongoing:hover {
+        color: #E4221C;
+    }
 
 .octicon-x {
     color: red;
