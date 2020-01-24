@@ -211,3 +211,8 @@ svg {
     overflow: auto;
 }
 
+.GradientGreen {
+    background-color: #114a33;
+    background-image: linear-gradient(#114a33, #176647)
+}
+
