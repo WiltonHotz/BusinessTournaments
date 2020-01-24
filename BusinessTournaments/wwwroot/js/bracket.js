@@ -7,6 +7,10 @@ let populatedBracketClasses = "bracket rounded";
 let winnerBracketClasses = "bracket winner rounded";
 let loserBracketClasses = "bracket loser rounded";
 
+const unique = (value, index, self) => {
+    return self.indexOf(value) === index;
+}
+
 function getTournamentBracketJSON(bracketId) {
 
     var url = "b/" + bracketId;
@@ -18,11 +22,11 @@ function getTournamentBracketJSON(bracketId) {
             currentBracketsJson = response;
 
             // Check how many players
-            var numOfPlayers = response.brackets.filter(b => b.playerId != 0).length;  //<<CHANGE TO UNIQUE PLAYERS
+            let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
+            let numOfPlayers = players.filter(unique).length;
 
+            // Get brackets partial view
             getBracketsPartialView(response, numOfPlayers);
-
-
 
         },
         error: function () {
@@ -46,7 +50,7 @@ function getBracketsPartialView(bracketsInfo, numOfPlayers) {
         url: url,
         type: "GET",
         success: function (response) {
-            console.log(response)
+            
             $(".bracket-container").html(response);
 
             // Populate brackets with names (and classes if empty)
