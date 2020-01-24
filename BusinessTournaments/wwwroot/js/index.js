@@ -14,7 +14,7 @@ let playerIdToEdit;
 //#region color variables
 
 //let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
-let tableContentColor = ".GradientGreen";
+let tableContentColor = ".Gradient";
 let leaderBoardClasses = "leaderboardContent";
 let selectedClasses = "selectedClasses";
 let ongoingClasses = "ongoingClasses";
@@ -56,6 +56,7 @@ $(document).ready(function () {
 //#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
+    setTheme('redTheme');
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>
     el.addEventListener("scroll", tableFixHead)
@@ -103,13 +104,6 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
                         <td style="width: 20px; padding-right: 20px;">${deleteButton}</td>
                         </tr>`);
     }
-}
-
-function HideDeleteButton(tournamentId) {
-
-    document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
-
-    console.log(`deleteBtn${tournamentId}`)
 }
 
 function PopulateCompletedTournamentsOnLoad(tournaments) {
@@ -199,22 +193,22 @@ function addPlayers() {
         },
         error: function (data) {
             console.log("error");
-         
+
             var result = data.responseJSON
 
             var duplicates = find_duplicate_in_array(names);
 
             if (result != null) {
-                
+
                 for (var i = 0; i < names.length; i++) {
 
                     if (result.some(x => x.playerName == names[i])) {
                         $(`#badpninp${i}`).html('Name is already in list')
-                    } else if (duplicates.length > 0){
-                        
-                            if (duplicates.some(x => x == names[i])) {
-                                $(`#badpninp${i}`).html('Please entere unique names')
-                        } 
+                    } else if (duplicates.length > 0) {
+
+                        if (duplicates.some(x => x == names[i])) {
+                            $(`#badpninp${i}`).html('Please entere unique names')
+                        }
                         if (names[i].length > 30) {
                             $(`#badpninp${i}`).html('Max 30 characters!')
                         }
@@ -224,12 +218,12 @@ function addPlayers() {
                     } else {
                         $(`#badpninp${i}`).html('')
                     }
-                    
+
                 }
             }
             else {
                 for (var i = 0; i < names.length; i++) {
-                   
+
                     if (duplicates.some(x => x == names[i])) {
                         $(`#badpninp${i}`).html('Please give unique names')
                     }
@@ -237,7 +231,7 @@ function addPlayers() {
                         $(`#badpninp${i}`).html('Max 30 characters!')
                     }
                     else {
-                            $(`#badpninp${i}`).html('')
+                        $(`#badpninp${i}`).html('')
                     }
                 }
             }
@@ -612,6 +606,13 @@ function deleteSelectedTournament(tournamentId) {
     document.getElementById('ot' + tournamentId).remove();
 }
 
+function HideDeleteButton(tournamentId) {
+
+    document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
+
+    console.log(`deleteBtn${tournamentId}`)
+}
+
 //#endregion
 
 //#region start tournament button
@@ -700,6 +701,18 @@ function clearSelected() {
     tournamentNameInput.value = "";
     tournamentNameInput.disabled = false;
     tournamentNameInput.style.backgroundColor = "white";
+}
+
+//#endregion
+
+//#region themes
+
+function setTheme(theme) {
+    console.log(theme)
+    if (theme != "default") {
+        $("div").addClass(theme);
+        $("body").addClass(theme);
+    }
 }
 
 //#endregion
