@@ -36,6 +36,7 @@ table {
         top: 0;
         z-index: 2;
         background-color: #239165;
+        padding: 5px;
     }
 
 .wrapper {
@@ -209,5 +210,10 @@ svg {
     color: #CADBCF;
     opacity: 1;
     overflow: auto;
+}
+
+.GradientGreen {
+    background-color: #114a33;
+    background-image: linear-gradient(#114a33, #176647)
 }
 

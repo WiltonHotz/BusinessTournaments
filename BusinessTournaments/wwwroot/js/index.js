@@ -1,4 +1,6 @@
-﻿let startTournamentInfo = {
+﻿// Variables for methods---------------------------
+
+let startTournamentInfo = {
     playerIds: [],
     tournamentName: '',
     tournamentId: ''
@@ -7,10 +9,10 @@ let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
 
-//var $th = $('.tableFixHead').find('thead th')
-//$('.tableFixHead').on('scroll', function () {
-//    $th.css('transform', 'translateY(' + this.scrollTop + 'px)');
-//});
+
+
+//-------------------------------------------------------------
+
 
 function tableFixHead(e) {
     const el = e.target,
