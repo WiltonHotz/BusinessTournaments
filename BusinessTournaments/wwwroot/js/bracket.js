@@ -93,68 +93,125 @@ function clickBracketAction(bracketId) {
     if (!$(`#${bracketId}`).hasClass('empty') && !isWaitingForResponse) {
 
         switch (bracketId) {
+            case 'b30':
+            case 'b29':
+            case 'b28':
+            case 'b27':
+            case 'b26':
+            case 'b25':
+            case 'b24':
+            case 'b23':
+            case 'b22':
+            case 'b21':
+            case 'b20':
+            case 'b19':
+            case 'b18':
+            case 'b17':
+            case 'b16':
+                if (checkIfBracketIsEmpty('b3')) {
+                    if (!checkIfBracketIsEmpty('b15')) {
+
+                        if (checkIfBracketIsEmpty('b7') || checkIfTargetBracketHasOpponent('b7', 'b15'))
+                            setPlayerInBracketAsWinner('b16', 'b7', 'b15');
+                        else
+                            removePlayerInBracketAsWinner('b15', 'b7', 'b16');
+                    }
+                }
+                break;
+            case 'b15':
+                if (checkIfBracketIsEmpty('b3')) {
+                    if (!checkIfBracketIsEmpty('b16')) {
+
+                        if (checkIfBracketIsEmpty('b7') || checkIfTargetBracketHasOpponent('b7', 'b16'))
+                            setPlayerInBracketAsWinner('b15', 'b7', 'b16');
+                        else
+                            removePlayerInBracketAsWinner('b16', 'b7', 'b15');
+                    }
+                }
+                break;
             case 'b14':
                 if (checkIfBracketIsEmpty('b2')) {
-                    if (checkIfBracketIsEmpty('b6') || checkIfTargetBracketHasOpponent('b6', 'b13'))
-                        setPlayerInBracketAsWinner('b14', 'b6', 'b13');
-                    else
-                        removePlayerInBracketAsWinner('b14', 'b6', 'b13');
+                    if (!checkIfBracketIsEmpty('b13')) {
+
+                        if (checkIfBracketIsEmpty('b6') || checkIfTargetBracketHasOpponent('b6', 'b13'))
+                            setPlayerInBracketAsWinner('b14', 'b6', 'b13');
+                        else
+                            removePlayerInBracketAsWinner('b14', 'b6', 'b13');
+                    }
                 }
                 break;
             case 'b13':
                 if (checkIfBracketIsEmpty('b2')) {
-                    if (checkIfBracketIsEmpty('b6') || checkIfTargetBracketHasOpponent('b6', 'b14'))
-                        setPlayerInBracketAsWinner('b13', 'b6', 'b14');
-                    else
-                        removePlayerInBracketAsWinner('b13', 'b6', 'b14');
+                    if (!checkIfBracketIsEmpty('b14')) {
+
+                        if (checkIfBracketIsEmpty('b6') || checkIfTargetBracketHasOpponent('b6', 'b14'))
+                            setPlayerInBracketAsWinner('b13', 'b6', 'b14');
+                        else
+                            removePlayerInBracketAsWinner('b13', 'b6', 'b14');
+                    }
                 }
                 break;
             case 'b12':
                 if (checkIfBracketIsEmpty('b2')) {
-                    if (checkIfBracketIsEmpty('b5') || checkIfTargetBracketHasOpponent('b5', 'b11'))
-                        setPlayerInBracketAsWinner('b12', 'b5', 'b11');
-                    else
-                        removePlayerInBracketAsWinner('b12', 'b5', 'b11');
+                    if (!checkIfBracketIsEmpty('b11')) {
+
+                        if (checkIfBracketIsEmpty('b5') || checkIfTargetBracketHasOpponent('b5', 'b11'))
+                            setPlayerInBracketAsWinner('b12', 'b5', 'b11');
+                        else
+                            removePlayerInBracketAsWinner('b12', 'b5', 'b11');
+                    }
                 }
                 break;
             case 'b11':
                 if (checkIfBracketIsEmpty('b2')) {
-                    if (checkIfBracketIsEmpty('b5') || checkIfTargetBracketHasOpponent('b5', 'b12'))
-                        setPlayerInBracketAsWinner('b11', 'b5', 'b12');
-                    else
-                        removePlayerInBracketAsWinner('b11', 'b5', 'b12');
+                    if (!checkIfBracketIsEmpty('b12')) {
+
+                        if (checkIfBracketIsEmpty('b5') || checkIfTargetBracketHasOpponent('b5', 'b12'))
+                            setPlayerInBracketAsWinner('b11', 'b5', 'b12');
+                        else
+                            removePlayerInBracketAsWinner('b11', 'b5', 'b12');
+                    }
                 }
                 break;
             case 'b10':
                 if (checkIfBracketIsEmpty('b1')) {
-                    if (checkIfBracketIsEmpty('b4') || checkIfTargetBracketHasOpponent('b4', 'b9'))
-                        setPlayerInBracketAsWinner('b10', 'b4', 'b9');
-                    else
-                        removePlayerInBracketAsWinner('b10', 'b4', 'b9');
+                    if (!checkIfBracketIsEmpty('b9')) {
+                        if (checkIfBracketIsEmpty('b4') || checkIfTargetBracketHasOpponent('b4', 'b9'))
+                            setPlayerInBracketAsWinner('b10', 'b4', 'b9');
+                        else
+                            removePlayerInBracketAsWinner('b10', 'b4', 'b9');
+                    }
                 }
                 break;
             case 'b9':
                 if (checkIfBracketIsEmpty('b1')) {
-                    if (checkIfBracketIsEmpty('b4') || checkIfTargetBracketHasOpponent('b4', 'b10'))
-                        setPlayerInBracketAsWinner('b9', 'b4', 'b10');
-                    else
-                        removePlayerInBracketAsWinner('b9', 'b4', 'b10');
+                    if (!checkIfBracketIsEmpty('b10')) {
+
+                        if (checkIfBracketIsEmpty('b4') || checkIfTargetBracketHasOpponent('b4', 'b10'))
+                            setPlayerInBracketAsWinner('b9', 'b4', 'b10');
+                        else
+                            removePlayerInBracketAsWinner('b9', 'b4', 'b10');
+                    }
                 }
                 break;
             case 'b8':
                 if (checkIfBracketIsEmpty('b1')) {
-                    if (checkIfBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b7'))
-                        setPlayerInBracketAsWinner('b8', 'b3', 'b7');
-                    else
-                        removePlayerInBracketAsWinner('b8', 'b3', 'b7');
+                    if (!checkIfBracketIsEmpty('b7')) {
+                        if (checkIfBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b7'))
+                            setPlayerInBracketAsWinner('b8', 'b3', 'b7');
+                        else
+                            removePlayerInBracketAsWinner('b8', 'b3', 'b7');
+                    }
                 }
                 break;
             case 'b7':
                 if (checkIfBracketIsEmpty('b1')) {
-                    if (checkIfBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b8'))
-                        setPlayerInBracketAsWinner('b7', 'b3', 'b8');
-                    else
-                        removePlayerInBracketAsWinner('b7', 'b3', 'b8');
+                    if (!checkIfBracketIsEmpty('b8')) {
+                        if (checkIfBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b8'))
+                            setPlayerInBracketAsWinner('b7', 'b3', 'b8');
+                        else
+                            removePlayerInBracketAsWinner('b7', 'b3', 'b8');
+                    }
                 }
                 break;
             case 'b6':
@@ -301,9 +358,16 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
 function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
 
+    let bracketState;
+
     // Get player name and ID
     let playerName = $(`#${fromBracketId}`).find('.player-name').text();
     let playerId = $(`#${fromBracketId}`).find('.player-id').text();
+
+    // OBS OBS OBS OBS OBS OBS OBS OBSO OBS!!!!!
+    if ($(fromBracketId).hasClass('winner'))
+        bracketState = 'winner';
+
 
     // Make a copy of currentBracketsJson
     var newBracketsJson = Object.assign({}, currentBracketsJson);
