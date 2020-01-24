@@ -25,6 +25,7 @@ h1 {
 table {
     border-collapse: collapse;
     width: 100%;
+    padding: 5px;
 }
 .tableFixHead {
     overflow-y: auto;

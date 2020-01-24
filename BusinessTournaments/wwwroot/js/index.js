@@ -1,4 +1,4 @@
-﻿// Variables for methods---------------------------
+﻿//#region object variables
 
 let startTournamentInfo = {
     playerIds: [],
@@ -9,11 +9,26 @@ let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
 
+//#endregion
 
+//#region color variables
 
-//-------------------------------------------------------------
+//let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
+let tableContentClasses = "tableContent";
+let leaderBoardClasses = "leaderboardContent";
+let selectedClasses = "selectedClasses";
+let ongoingClasses = "ongoingClasses";
+let completedClasses = "completedClasses";
 
+// Change classes (colors and other things css)
 
+//$(`#${fromBracketId}`).prop("class", winnerBracketClasses);
+//$(`#${targetBracketId}`).prop("class", populatedBracketClasses);
+//$(`#${opponentBracketId}`).prop("class", loserBracketClasses);
+
+//#endregion
+
+//#region scrolling
 function tableFixHead(e) {
     const el = e.target,
         sT = el.scrollTop;
@@ -21,7 +36,9 @@ function tableFixHead(e) {
         th.style.transform = `translateY(${sT}px)`
     );
 }
+//#endregion
 
+//#region Modals
 $(document).ready(function () {
     $("#addPlayerModalBtn").click(function () {
         $("#addPlayerModal").modal("show");
@@ -33,15 +50,19 @@ $(document).ready(function () {
     $("#addPlayerModal").on("hidden.bs.modal", function () {
         $("#modalPlayerNames").html("");
     });
-    document.querySelectorAll(".tableFixHead").forEach(el =>
-        el.addEventListener("scroll", tableFixHead)
-    );
 });
+//#endregion
 
-
+//#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
 });
+document.querySelectorAll(".tableFixHead").forEach(el =>
+    el.addEventListener("scroll", tableFixHead)
+);
+//#endregion
+
+//#region Populate Grid
 
 function getIndexVMJSON() {
 
@@ -77,10 +98,9 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
         let deleteButton = `<span class="delete-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="confirmDeleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
-                        <td class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
-                        <td>${tournaments[i].tournamentName}</td>
+                        <td width="60% class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
-                        <td style="width: 20px" >${deleteButton}</td>
+                        <td style="width: 20px; padding-right: 20px;">${deleteButton}</td>
                         </tr>`);
     }
 }
@@ -97,15 +117,37 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
-                        <td class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
-                        <td>${tournaments[i].tournamentName}</td>
+                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
+                        <td style="width: 20px; padding-right: 20px;"></td>
                         </tr>`);
     }
 }
 
+//#endregion
+
+//#region tiny little helpers
 function ReturnDateFormat(date) {
     return date.substring(0, 10);
+}
+
+function focusField(field) {
+    document.getElementById(field).focus();
+}
+//#endregion
+
+//#region add player modal
+
+function initiateAddPlayerModal() {
+
+    $("#modalPlayerNames")
+        .append(`<div id="pndiv0">
+                    <input type="text" id="pninp0" placeholder="Enter player name here..." />
+                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                    <span style="color: red; text-align: left;" id="badpninp0"></span>
+                </div>`);
+
+    focusField('pninp0')
 }
 
 function editPlayer(playerNameId, playerId) {
@@ -113,10 +155,6 @@ function editPlayer(playerNameId, playerId) {
     focusField(`editPlayerName`)
     $("#editPlayerName").val(playerName);
     playerIdToEdit = playerId;
-}
-
-function focusField(field) {
-    document.getElementById(field).focus();
 }
 
 function confirmEditPlayer() {
@@ -148,17 +186,7 @@ function confirmEditPlayer() {
     }
 }
 
-function initiateAddPlayerModal() {
 
-    $("#modalPlayerNames")
-        .append(`<div id="pndiv0">
-                    <input type="text" id="pninp0" placeholder="Enter player name here..." />
-                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
-                    <span style="color: red; text-align: left;" id="badpninp0"></span>
-                </div>`);
-
-    focusField('pninp0')
-}
 
 function confirmDeletePlayer() {
 
@@ -213,52 +241,53 @@ function addPlayers() {
         },
         error: function (data) {
             console.log("error");
-            console.log(data)
+         
             var result = data.responseJSON
-            console.log(result)
-            let badNames = "";
-            var r = hasDuplicates(names);
+
             var duplicates = find_duplicate_in_array(names);
 
             if (result != null) {
-                //for (var i = 0; i < result.length; i++) {
-
-                //    badNames += result[i].playerName + "\n";
-                //}
-                //Show "Name already in list" text.
+                
                 for (var i = 0; i < names.length; i++) {
 
                     if (result.some(x => x.playerName == names[i])) {
                         $(`#badpninp${i}`).html('Name is already in list')
-                    } else {
-                        if (r) {
+                    } else if (duplicates.length > 0){
+                        
                             if (duplicates.some(x => x == names[i])) {
-                                $(`#badpninp${i}`).html('Please give unique names')
-                            } else {
-                                $(`#badpninp${i}`).html('')
-                            }
+                                $(`#badpninp${i}`).html('Please entere unique names')
+                        } 
+                        if (names[i].length > 30) {
+                            $(`#badpninp${i}`).html('Max 30 characters!')
                         }
+                    } else if (names[i].length > 30) {
+                        $(`#badpninp${i}`).html('Max 30 characters!')
+
+                    } else {
+                        $(`#badpninp${i}`).html('')
                     }
-                }
-            } else {
-                if (r) {
-                    for (var i = 0; i < names.length; i++) {
-                        if (duplicates.some(x => x == names[i])) {
-                            $(`#badpninp${i}`).html('Please give unique names')
-                        } else {
-                            $(`#badpninp${i}`).html('')
-                        }
-                    }
+                    
                 }
             }
-              //  $(`#badpninp${0}`).html('Please give unique names')
-            //alert(`Bad names:\n${badNames}[ALREADY IN THE DATABASE]`)
+
+
+            else {
+                for (var i = 0; i < names.length; i++) {
+                   
+                    if (duplicates.some(x => x == names[i])) {
+                        $(`#badpninp${i}`).html('Please give unique names')
+                    }
+                    else if (names[i].length > 30) {
+                        $(`#badpninp${i}`).html('Max 30 characters!')
+                    }
+                    else {
+                            $(`#badpninp${i}`).html('')
+                    }
+           
+                }
+            }
         }
     });
-}
-
-function hasDuplicates(array) {
-    return (new Set(array)).size !== array.length;
 }
 
 function find_duplicate_in_array(array) {
@@ -312,6 +341,26 @@ function addAddPlayerField(btn) {
 
     document.getElementById(`${id}`).style.visibility = "hidden";
 }
+
+function find_duplicate_in_array(arra1) {
+    var object = {};
+    var result = [];
+
+    arra1.forEach(function (item) {
+        if (!object[item])
+            object[item] = 0;
+        object[item] += 1;
+    })
+
+    for (var prop in object) {
+        if (object[prop] >= 2) {
+            result.push(prop);
+        }
+    }
+    return result;
+}
+
+
 
 function selectPlayer(playerId, playerName) {
 
