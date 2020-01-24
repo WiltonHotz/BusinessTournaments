@@ -10,13 +10,13 @@
             <h3>Company  @User.Identity.Name</h3>
 
         </div>
-        <div class="Leaderboard GradientGreen roundCorners wrapper">
+        <div class="Leaderboard GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
                     <thead>
                         <tr>
-                            <th width="10%">Edit</th>
+                            <th width="10%"></th>
                             <th width="20%">Score</th>
                             <th width="40%">Player Name</th>
                             <th></th>
@@ -28,13 +28,12 @@
             </div>
 
         </div>
-        <div class="Selected GradientGreen roundCorners wrapper">
+        <div class="Selected GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Selected Player Name</th>
                         </tr>
                     </thead>
@@ -47,7 +46,7 @@
         <div class="TournamentName roundCorners">
 
             <div class="roundCorners">
-                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfValidInput(this)" />
+                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
             </div>
 
         </div>
@@ -70,7 +69,7 @@
             </div>
 
         </div>
-        <div class="Completed roundCorners GradientGreen wrapper">
+        <div class="Completed roundCorners GradientGreen">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
@@ -87,7 +86,7 @@
             </div>
 
         </div>
-        <div class="Ongoing GradientGreen roundCorners wrapper">
+        <div class="Ongoing GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
@@ -95,7 +94,7 @@
                         <tr>
                             <th><b style="color: blue;">Ongoing Tournaments</b></th>
                             <th widht="60%">Datum</th>
-                            <th>Delete</th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -107,6 +106,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <p class="copyright">© Business Tournaments 2020</p>
+</footer>
 
 @*<div class="container-fluid ninetyWide">
         <h3>Company  @User.Identity.Name</h3>
@@ -203,46 +205,46 @@
         </div>
     </div>*@
 
-    <div id="addPlayerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+<div id="addPlayerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add New Player</h4>
-                </div>
-                <div class="modal-body" id="modalPlayerNames">
-
-                </div>
-                <input type="button" value="Add Player" onclick="addPlayers()" />
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Player</h4>
             </div>
+            <div class="modal-body" id="modalPlayerNames">
 
-        </div>
-    </div>
-
-    <div id="editPlayerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Player</h4>
-                </div>
-                <div class="modal-body" id="modalEditPlayer">
-
-                    <input type="text" id="editPlayerName" placeholder="New name here..." />
-
-                </div>
-                <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
-                <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
-                <div class="modal-footer">
-                    <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
             </div>
-
+            <input type="button" value="Add Player" onclick="addPlayers()" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
     </div>
+</div>
+
+<div id="editPlayerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Player</h4>
+            </div>
+            <div class="modal-body" id="modalEditPlayer">
+
+                <input type="text" id="editPlayerName" placeholder="New name here..." />
+
+            </div>
+            <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
+            <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
+            <div class="modal-footer">
+                <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @section scripts {
     <script src="~/js/index.js"></script>

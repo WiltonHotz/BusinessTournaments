@@ -48,5 +48,14 @@ namespace BusinessTournaments.Controllers
 
             return Ok();
         }
+
+        [Route("getbracketspartialview/{numOfPlayers}")]
+        public async Task<IActionResult> GetBracketsPartialView(int numOfPlayers)
+        {
+            if (numOfPlayers < 8)
+                return PartialView("_16playersBrackets");
+            else
+                return PartialView("_8playersBrackets");
+        }
     }
 }

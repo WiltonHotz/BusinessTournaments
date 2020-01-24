@@ -1,9 +1,4 @@
-﻿@model BracketIdVM
-@{
-    ViewData["Title"] = "Index";
-}
-
-<div class="bracket-container">
+﻿
     <div class="bracket-level" id="quarters">
         <div class="bracket-match">
             <div class="bracket rounded" id="b7">
@@ -73,21 +68,3 @@
             </div>
         </div>
     </div>
-</div>
-<footer>
-    <p class="copyright">© Business Tournaments 2020</p>
-</footer>
-
-@section scripts {
-    <script src="~/js/bracket.js"></script>
-    <script type="text/javascript">
-
-    var bracketId = @Html.Raw((this.Model.BracketId));
-
-
-    $(document).ready(function() {
-         getTournamentBracketJSON(bracketId)
-    });
-
-    </script>
-}

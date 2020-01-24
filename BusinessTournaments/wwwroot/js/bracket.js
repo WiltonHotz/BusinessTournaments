@@ -17,11 +17,12 @@ function getTournamentBracketJSON(bracketId) {
             // Save brackets Json for later
             currentBracketsJson = response;
 
-            // Populate brackets with names (and classes if empty)
-            populateBrackets(response);
+            // Check how many players
+            var numOfPlayers = response.brackets.filter(b => b.playerId != 0).length;
 
-            // Make add click events on brackets with names
-            addClickListenersOnAllBrackets();
+            getBracketsPartialView(response, numOfPlayers);
+
+
 
         },
         error: function () {
@@ -37,10 +38,7 @@ function addClickListenersOnAllBrackets() {
     });
 }
 
-function populateBrackets(bracketsInfo) {
-
-    // Check how many players
-    var numOfPlayers = bracketsInfo.brackets.filter(b => b.playerId != 0).length;
+function populateBrackets(bracketsInfo, numOfPlayers) {
 
     // If four players, remove quarters div
     if (numOfPlayers === 4)
@@ -60,6 +58,29 @@ function populateBrackets(bracketsInfo) {
             $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
         }
     }
+}
+
+function getBracketsPartialView(bracketsInfo, numOfPlayers) {
+
+    var url = `/getbracketspartialview/${numOfPlayers}`;
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+            $(".bracket-container").html(response);
+
+            // Populate brackets with names (and classes if empty)
+            populateBrackets(bracketsInfo, numOfPlayers);
+
+            // Make add click events on brackets with names
+            addClickListenersOnAllBrackets();
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
 }
 
 function clickBracketAction(bracketId) {
