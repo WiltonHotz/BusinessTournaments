@@ -107,6 +107,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <p class="copyright">© Business Tournaments 2020</p>
+</footer>
 
 @*<div class="container-fluid ninetyWide">
         <h3>Company  @User.Identity.Name</h3>
@@ -203,46 +206,46 @@
         </div>
     </div>*@
 
-    <div id="addPlayerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+<div id="addPlayerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add New Player</h4>
-                </div>
-                <div class="modal-body" id="modalPlayerNames">
-
-                </div>
-                <input type="button" value="Add Player" onclick="addPlayers()" />
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Player</h4>
             </div>
+            <div class="modal-body" id="modalPlayerNames">
 
-        </div>
-    </div>
-
-    <div id="editPlayerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Player</h4>
-                </div>
-                <div class="modal-body" id="modalEditPlayer">
-
-                    <input type="text" id="editPlayerName" placeholder="New name here..." />
-
-                </div>
-                <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
-                <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
-                <div class="modal-footer">
-                    <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
             </div>
-
+            <input type="button" value="Add Player" onclick="addPlayers()" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
     </div>
+</div>
+
+<div id="editPlayerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Player</h4>
+            </div>
+            <div class="modal-body" id="modalEditPlayer">
+
+                <input type="text" id="editPlayerName" placeholder="New name here..." />
+
+            </div>
+            <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="confirmEditPlayer()" />
+            <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
+            <div class="modal-footer">
+                <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @section scripts {
     <script src="~/js/index.js"></script>
