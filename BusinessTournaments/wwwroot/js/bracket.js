@@ -1,4 +1,6 @@
 ﻿let currentBracketsJson;
+let isWaitingForResponse;
+
 let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
 let emptyBracketClasses = "bracket empty rounded";
 let populatedBracketClasses = "bracket rounded";
@@ -29,7 +31,7 @@ function getTournamentBracketJSON(bracketId) {
 }
 
 function addClickListenersOnAllBrackets() {
-    $(".bracket").click(function(e) {
+    $(".bracket").click(function (e) {
         e.preventDefault();
         clickBracketAction(this.id);
     });
@@ -56,7 +58,7 @@ function populateBrackets(bracketsInfo) {
 function clickBracketAction(bracketId) {
 
     // Om bracketen INTE har "empty" i class så kör vi switchen
-    if (!$(`#${bracketId}`).hasClass('empty')) {
+    if (!$(`#${bracketId}`).hasClass('empty') && !isWaitingForResponse) {
 
         switch (bracketId) {
             case 'b14':
@@ -117,7 +119,7 @@ function clickBracketAction(bracketId) {
 }
 
 function checkIfTargetBracketIsEmpty(bracketId) {
-    
+
     let bracket = document.getElementById(bracketId);
 
     if (bracket.innerHTML === emptyBracketHtml) {
@@ -143,24 +145,63 @@ function checkIfTargetBracketHasOpponent(targetBracketId, opponentBracketId) {
 
 function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBracketId) {
 
-    // Change classes (colors and other things css)
-    $(`#${fromBracketId}`).prop("class", winnerBracketClasses);
-    $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
-    $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
+    // Set to true to disable click on all brackets
+    isWaitingForResponse = true;
 
-    // Copy name to next bracket
-    document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
+    // Update json object
+    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+
+    // Save changes on DB
+    let success = saveChangesToDB();
+
+    // If DB returns success
+    if (success) {
+
+        // Change classes (colors and other things css)
+        $(`#${fromBracketId}`).prop("class", winnerBracketClasses);
+        $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
+        $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
+
+        // Copy name to next bracket
+        document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
+    }
+
+    // Set to false to be able to click again
+    isWaitingForResponse = false;
 }
 
 function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBracketId) {
 
-    // Change classes (colors and other things css)
-    $(`#${fromBracketId}`).prop("class", populatedBracketClasses);
-    $(`#${targetBracketId}`).prop("class", emptyBracketClasses);
-    $(`#${opponentBracketId}`).prop("class", populatedBracketClasses);
+    // Set to true to disable click on all brackets
+    isWaitingForResponse = true;
 
-    // Empty target bracket
-    document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+    // Update json object
+    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+
+    // Save changes on DB
+    let success = saveChangesToDB();
+
+    // If DB returns success
+    if (success) {
+
+        // Change classes (colors and other things css)
+        $(`#${fromBracketId}`).prop("class", populatedBracketClasses);
+        $(`#${targetBracketId}`).prop("class", emptyBracketClasses);
+        $(`#${opponentBracketId}`).prop("class", populatedBracketClasses);
+
+        // Empty target bracket
+        document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+    }
 }
 
+function saveChangesToDB(fromBracketId, targetBracketId) {
+    // TODO
+    console.log("saveCHangesToDB function");
+    return true;
+}
 
+function updateCurrentBracketsJson(fromBracketId, targetBracketId) {
+    // TODO
+    console.log("updateCurrentBracketsJson function");
+
+}
