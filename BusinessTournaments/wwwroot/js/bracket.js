@@ -562,3 +562,6 @@ function saveChangesToDB(newBracketsJson) {
     return output;
 }
 
+function checkIfAllQuartersPlayed() {
+    //$('')
+}
