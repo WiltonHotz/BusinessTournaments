@@ -241,46 +241,73 @@ function addPlayers() {
         },
         error: function (data) {
             console.log("error");
-            console.log(data)
+         
             var result = data.responseJSON
-            console.log(result)
-            let badNames = "";
-            var r = hasDuplicates(names);
+
             var duplicates = find_duplicate_in_array(names);
 
             if (result != null) {
-                //for (var i = 0; i < result.length; i++) {
-
-                //    badNames += result[i].playerName + "\n";
-                //}
-                //Show "Name already in list" text.
+                
                 for (var i = 0; i < names.length; i++) {
 
                     if (result.some(x => x.playerName == names[i])) {
                         $(`#badpninp${i}`).html('Name is already in list')
-                    } else {
-                        if (r) {
+                    } else if (duplicates.length > 0){
+                        
                             if (duplicates.some(x => x == names[i])) {
-                                $(`#badpninp${i}`).html('Please give unique names')
-                            } else {
-                                $(`#badpninp${i}`).html('')
-                            }
+                                $(`#badpninp${i}`).html('Please entere unique names')
+                        } 
+                        if (names[i].length > 30) {
+                            $(`#badpninp${i}`).html('Max 30 characters!')
                         }
+                    } else if (names[i].length > 30) {
+                        $(`#badpninp${i}`).html('Max 30 characters!')
+
+                    } else {
+                        $(`#badpninp${i}`).html('')
                     }
+                    
                 }
-            } else {
-                if (r) {
-                    for (var i = 0; i < names.length; i++) {
-                        if (duplicates.some(x => x == names[i])) {
-                            $(`#badpninp${i}`).html('Please give unique names')
-                        } else {
-                            $(`#badpninp${i}`).html('')
-                        }
+            }
+
+
+            else {
+                for (var i = 0; i < names.length; i++) {
+                   
+                    if (duplicates.some(x => x == names[i])) {
+                        $(`#badpninp${i}`).html('Please give unique names')
                     }
+                    else if (names[i].length > 30) {
+                        $(`#badpninp${i}`).html('Max 30 characters!')
+                    }
+                    else {
+                            $(`#badpninp${i}`).html('')
+                    }
+           
                 }
             }
         }
     });
+}
+
+function find_duplicate_in_array(array) {
+    var object = {};
+    var result = [];
+
+    array.forEach(function (item) {
+        if (!object[item])
+            object[item] = 0;
+        object[item] += 1;
+    })
+
+    for (var prop in object) {
+        if (object[prop] >= 2) {
+            result.push(prop);
+        }
+    }
+
+    return result;
+
 }
 
 function addAddPlayerFieldEnterButtonEventListener(id) {
