@@ -198,6 +198,8 @@ namespace BusinessTournaments.Models
             return newTournament.Entity.Id;
         }
 
+        
+
         internal async Task<bool> DeleteTournamentById(int id, string userId)
         {
             var tournament = await context.Tournaments

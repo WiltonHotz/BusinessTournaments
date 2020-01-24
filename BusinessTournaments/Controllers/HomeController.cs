@@ -71,6 +71,8 @@ namespace BusinessTournaments.Controllers
             return Json(tournamentId);
         }
 
+        
+
         [Route("deleteTournament/{tournamentId}")]
         public async Task<IActionResult> DeleteTournament(int tournamentId)
         {
