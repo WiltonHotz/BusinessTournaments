@@ -40,6 +40,10 @@ h1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.center {
+    text-align: center;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -193,8 +197,8 @@ svg {
 .grid-container {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1.5fr;
-    grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr;
-    grid-template-areas: "CompanyName CompanyName CompanyName" "Leaderboard Selected Ongoing" "Leaderboard Selected Completed" "Leaderboard TournamentName Completed" "AddPlayers StartTournament Completed";
+    grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr 1.5fr;
+    grid-template-areas: "Hamburger CompanyName EmptySpace" "Leaderboard Selected Ongoing" "Leaderboard Selected Completed" "Leaderboard TournamentName Completed" "AddPlayers StartTournament Completed" "Footer Footer Footer";
     grid-gap: 1px 10px;
 }
 
@@ -238,6 +242,18 @@ svg {
 .Ongoing {
     grid-area: Ongoing;
     overflow: auto;
+}
+
+.Footer {
+    grid-area: Footer;
+}
+
+.Hamburger {
+    grid-area: Hamburger;
+}
+
+.EmptySpace {
+    grid-area: EmptySpace;
 }
 
 .GradientGreen {
