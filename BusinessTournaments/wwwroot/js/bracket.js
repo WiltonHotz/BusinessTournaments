@@ -79,6 +79,11 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
             $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
+            if (bracketsInfo.brackets[i].bracketState === 'winner') {
+                $(bracketId).prop("class", winnerBracketClasses)
+            } else if (bracketsInfo.brackets[i].bracketState === 'loser') {
+                $(bracketId).prop("class", loserBracketClasses)
+            }
         }
         else {
             $(bracketId).html(emptyBracketHtml);
@@ -355,35 +360,43 @@ function clickBracketAction(bracketId) {
                 }
                 break;
             case 'b6':
-                if (!checkIfBracketIsEmpty('b5')) {
-                    if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b5'))
-                        setPlayerInBracketAsWinner('b6', 'b2', 'b5');
-                    else
-                        removePlayerInBracketAsWinner('b6', 'b2', 'b5');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b5')) {
+                        if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b5'))
+                            setPlayerInBracketAsWinner('b6', 'b2', 'b5');
+                        else
+                            removePlayerInBracketAsWinner('b6', 'b2', 'b5');
+                    }
                 }
                 break;
             case 'b5':
-                if (!checkIfBracketIsEmpty('b6')) {
-                    if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b6'))
-                        setPlayerInBracketAsWinner('b5', 'b2', 'b6');
-                    else
-                        removePlayerInBracketAsWinner('b5', 'b2', 'b6');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b6')) {
+                        if (checkIfBracketIsEmpty('b2') || checkIfTargetBracketHasOpponent('b2', 'b6'))
+                            setPlayerInBracketAsWinner('b5', 'b2', 'b6');
+                        else
+                            removePlayerInBracketAsWinner('b5', 'b2', 'b6');
+                    }
                 }
                 break;
             case 'b4':
-                if (!checkIfBracketIsEmpty('b3')) {
-                    if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b3'))
-                        setPlayerInBracketAsWinner('b4', 'b1', 'b3');
-                    else
-                        removePlayerInBracketAsWinner('b4', 'b1', 'b3');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b3')) {
+                        if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b3'))
+                            setPlayerInBracketAsWinner('b4', 'b1', 'b3');
+                        else
+                            removePlayerInBracketAsWinner('b4', 'b1', 'b3');
+                    }
                 }
                 break;
             case 'b3':
-                if (!checkIfBracketIsEmpty('b4')) {
-                    if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b4'))
-                        setPlayerInBracketAsWinner('b3', 'b1', 'b4');
-                    else
-                        removePlayerInBracketAsWinner('b3', 'b1', 'b4');
+                if (checkIfBracketIsEmpty('b0')) {
+                    if (!checkIfBracketIsEmpty('b4')) {
+                        if (checkIfBracketIsEmpty('b1') || checkIfTargetBracketHasOpponent('b1', 'b4'))
+                            setPlayerInBracketAsWinner('b3', 'b1', 'b4');
+                        else
+                            removePlayerInBracketAsWinner('b3', 'b1', 'b4');
+                    }
                 }
                 break;
             case 'b2':
@@ -442,8 +455,8 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
     isWaitingForResponse = true;
 
     // Update json object
-    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId);
-
+    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracketId);
+    console.log(opponentBracketId)
     // Save changes on DB
     let success = saveChangesToDB(newBracketsJson);
 
@@ -457,6 +470,9 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Copy name to next bracket
         document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
+
+        // Make locked bracket-levels darker
+        checkIfBracketLevelsAreLocked();
 
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
@@ -488,6 +504,9 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
 
+        // Make locked bracket-levels darker
+        checkIfBracketLevelsAreLocked();
+
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
     }
@@ -496,9 +515,9 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
     isWaitingForResponse = false;
 }
 
-function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
+function setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracketId) {
 
-    let bracketState;
+    
 
     // Get player name and ID
     let playerName = $(`#${fromBracketId}`).find('.player-name').text();
@@ -513,11 +532,20 @@ function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
     var newBracketsJson = Object.assign({}, currentBracketsJson);
 
     // Find targetBracket index
-    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+    var targetBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Find fromBracket index
+    var fromBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == fromBracketId.substring(1));
+
+    var opponentBracketIndex = newBracketsJson.brackets.findIndex(b => b.bracketId == opponentBracketId.substring(1));
 
     // Assign new values to targetBracket
-    newBracketsJson.brackets[index].playerName = playerName;
-    newBracketsJson.brackets[index].playerId = parseInt(playerId);
+    newBracketsJson.brackets[targetBracketIndex].playerName = playerName;
+    newBracketsJson.brackets[targetBracketIndex].playerId = parseInt(playerId);
+
+    // Set state(class) on brackets
+    newBracketsJson.brackets[fromBracketIndex].bracketState = 'winner';
+    newBracketsJson.brackets[opponentBracketIndex].bracketState = 'loser';
 
     return newBracketsJson;
 
@@ -534,14 +562,13 @@ function removeWinnerInBracketsJson(targetBracketId) {
     // Assign new values to targetBracket
     newBracketsJson.brackets[index].playerName = null;
     newBracketsJson.brackets[index].playerId = 0;
+    newBracketsJson.brackets[index].bracketState = '';
 
     return newBracketsJson;
 }
 
 function saveChangesToDB(newBracketsJson) {
-    // TODO
-    console.log(newBracketsJson);
-   // newBracketsJson.tournamentId = `${newBracketsJson.tournamentId}`
+
     let output = true;
     let jsonStr = JSON.stringify(newBracketsJson)
 
@@ -551,7 +578,7 @@ function saveChangesToDB(newBracketsJson) {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
-            console.log(data)
+            //console.log(data)
     
         },
         error: function () {
@@ -562,6 +589,72 @@ function saveChangesToDB(newBracketsJson) {
     return output;
 }
 
-function checkIfAllQuartersPlayed() {
-    //$('')
+function checkIfBracketLevelsAreLocked() {
+
+    if (currentBracketsJson.brackets.length === 7) {
+
+        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+
+        if (finalWinnerAndLoser.length === 2) {
+            document.getElementById('semis').style.opacity = "0.3";
+        }
+        else {
+            document.getElementById('semis').style.opacity = "1";
+        }
+    }
+    if (currentBracketsJson.brackets.length === 15) {
+        console.log('shu bre')
+
+        let semisWinnersAndLosers = document.getElementById('semis').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+
+        if (semisWinnersAndLosers.length === 4)
+            document.getElementById('quarters').style.opacity = "0.3";
+        else
+            document.getElementById('quarters').style.opacity = "1";
+
+        if (finalWinnerAndLoser.length === 2) {
+            document.getElementById('semis').style.opacity = "0.3";
+        }
+        else {
+            document.getElementById('semis').style.opacity = "1";
+        }
+    }
+    if (currentBracketsJson.brackets.length === 31) {
+
+        let quartersLeftWinnersAndLosers = document.getElementById('quarters-left').querySelectorAll('.winner, .loser');
+        let quartersRightWinnersAndLosers = document.getElementById('quarters-right').querySelectorAll('.winner, .loser');
+        let semisLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
+        let semisRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+
+        if (quartersLeftWinnersAndLosers.length === 4)
+            document.getElementById('eights-left').style.opacity = "0.3";
+        else
+            document.getElementById('eights-left').style.opacity = "1";
+
+        if (quartersRightWinnersAndLosers.length === 4)
+            document.getElementById('eights-right').style.opacity = "0.3";
+        else
+            document.getElementById('eights-right').style.opacity = "1";
+
+        if (semisLeftWinnersAndLosers.length === 2)
+            document.getElementById('quarters-left').style.opacity = "0.3";
+        else
+            document.getElementById('quarters-left').style.opacity = "1";
+
+        if (semisRightWinnersAndLosers.length === 2)
+            document.getElementById('quarters-right').style.opacity = "0.3";
+        else
+            document.getElementById('quarters-right').style.opacity = "1";
+
+        if (finalWinnerAndLoser.length === 2) {
+            document.getElementById('semis-left').style.opacity = "0.3";
+            document.getElementById('semis-right').style.opacity = "0.3";
+        }
+        else {
+            document.getElementById('semis-left').style.opacity = "1";
+            document.getElementById('semis-right').style.opacity = "1";
+        }
+    }
 }

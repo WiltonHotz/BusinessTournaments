@@ -171,7 +171,7 @@ namespace BusinessTournaments.Models
 
         internal async Task<int> CreateTournamentAsync(StartTournament startTournament, string userId)
         {
-            var jsonString = JsonConvert.SerializeObject(await bracketsService.CreateBrackets(startTournament.PlayerIds));
+            var jsonString = JsonConvert.SerializeObject(await bracketsService.CreateBrackets(startTournament.PlayerIds), Formatting.None);
 
             //Add new tournament to database
             var newTournament = await context.Tournaments.AddAsync(new Tournaments
