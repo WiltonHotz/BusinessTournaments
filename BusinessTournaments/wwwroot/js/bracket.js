@@ -220,10 +220,10 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
     isWaitingForResponse = true;
 
     // Update json object
-    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId);
 
     // Save changes on DB
-    let success = saveChangesToDB();
+    let success = saveChangesToDB(newBracketsJson);
 
     // If DB returns success
     if (success) {
@@ -247,10 +247,10 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
     isWaitingForResponse = true;
 
     // Update json object
-    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+    let newBracketsJson = removeWinnerInBracketsJson(targetBracketId);
 
     // Save changes on DB
-    let success = saveChangesToDB();
+    let success = saveChangesToDB(newBracketsJson);
 
     // If DB returns success
     if (success) {
@@ -262,20 +262,53 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+
+        // Set newBracketsJson to current
+        currentBracketsJson = newBracketsJson;
     }
 
     // Set to false to be able to click again
     isWaitingForResponse = false;
 }
 
-function saveChangesToDB(fromBracketId, targetBracketId) {
+function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
+
+    // Get player name and ID
+    let playerName = $(`#${fromBracketId}`).find('.player-name').text();
+    let playerId = $(`#${fromBracketId}`).find('.player-id').text();
+
+    // Make a copy of currentBracketsJson
+    var newBracketsJson = Object.assign({}, currentBracketsJson);
+
+    // Find targetBracket index
+    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Assign new values to targetBracket
+    newBracketsJson.brackets[index].playerName = playerName;
+    newBracketsJson.brackets[index].playerId = parseInt(playerId);
+
+    return newBracketsJson;
+
+}
+
+function removeWinnerInBracketsJson(targetBracketId) {
+
+    // Make a copy of currentBracketsJson
+    var newBracketsJson = Object.assign({}, currentBracketsJson);
+
+    // Find targetBracket index
+    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Assign new values to targetBracket
+    newBracketsJson.brackets[index].playerName = null;
+    newBracketsJson.brackets[index].playerId = 0;
+
+    return newBracketsJson;
+}
+
+function saveChangesToDB(newBracketsJson) {
     // TODO
-    console.log("saveCHangesToDB function");
+    console.log(newBracketsJson);
     return true;
 }
 
-function updateCurrentBracketsJson(fromBracketId, targetBracketId) {
-    // TODO
-    console.log("updateCurrentBracketsJson function");
-
-}
