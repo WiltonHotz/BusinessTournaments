@@ -22,6 +22,12 @@ h1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.tableFixHead {
+    overflow-y: auto;
+    height: 100px;
+    width: 100%;
+}
+
 .wrapper {
     padding: 6px;
 }
@@ -40,106 +46,12 @@ h1 {
 
 .lessOpacity {
     color: white;
-    opacity: 0.8
-}
-
-.highscore {
-    grid-area: hi;
-    background-color: #239165;
-    color: #CADBCF;
     opacity: 0.8;
-}
-
-.selected {
-    grid-area: se;
-    background-color: #239165;
-    color: #CADBCF;
-    opacity: 0.8;
-}
-
-.ongoingTournaments {
-    grid-area: ot;
-    background-color: #239165;
-    color: #CADBCF;
-    opacity: 0.8;
-}
-
-.completedTournaments {
-    grid-area: ct;
-    background-color: #239165;
-    color: #CADBCF;
-    opacity: 0.8;
-}
-
-.addPlayer {
-    grid-area: ad;
-    background-color: #239165;
-    color: #CADBCF;
-    opacity: 0.8;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.addTournament {
-    grid-area: at;
-    background-color: #725375;
-    color: #c3a7bd;
-    opacity: 0.8;
-}
-.addTournamentName {
-    grid-area: tn;
-    background-color: #725375;
-    color: #c3a7bd;
-    opacity: 0.8;
-}
-
-.break {
-    grid-area: br;
-    background-color: #313131;
-    color: #c3a7bd;
-    opacity: 0.8;
-}
-
-.inputWide {
-    width: 100%;
-
-}
-.ninetyWide {
-    width: 90% !important;
-}
-.eightyWide {
-    width: 80% !important;
-    padding: 0px;
-    margin: 0px;
-}
-.twentyWide {
-    width: 20% !important;
-    padding: 0px;
-    margin: 0px;
-}
-.inline {
-    display: inline;
-}
-
-.indexGrid {
-    display: grid;
-    grid-template-columns: 35% 30% 35%;
-    grid-template-rows: auto;
-    grid-template-areas: "hi se ot" "hi se ct" ". tn ct" "ad at ct";
-    grid-gap: 1px 10px;
-    height: 100vh;
 }
 
 .editIcon:hover {
     color: yellow;
     cursor: pointer;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
 }
 
 td:last-child {
@@ -242,7 +154,7 @@ svg {
     grid-area: Leaderboard;
     background-color: #239165;
     color: #CADBCF;
-    opacity: 0.8;
+    opacity: 1;
     overflow: auto;
 }
 
@@ -250,7 +162,7 @@ svg {
     grid-area: Selected;
     background-color: #239165;
     color: #CADBCF;
-    opacity: 0.8;
+    opacity: 1;
     overflow: auto;
 }
 
@@ -258,28 +170,28 @@ svg {
     grid-area: TournamentName;
     background-color: #725375;
     color: #c3a7bd;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .StartTournament {
     grid-area: StartTournament;
     background-color: #725375;
     color: #c3a7bd;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .AddPlayers {
     grid-area: AddPlayers;
     background-color: #239165;
     color: #CADBCF;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .Completed {
     grid-area: Completed;
     background-color: #239165;
     color: #CADBCF;
-    opacity: 0.8;
+    opacity: 1;
     overflow: auto;
 }
 
@@ -287,6 +199,7 @@ svg {
     grid-area: Ongoing;
     background-color: #239165;
     color: #CADBCF;
-    opacity: 0.8;
+    opacity: 1;
     overflow: auto;
 }
+

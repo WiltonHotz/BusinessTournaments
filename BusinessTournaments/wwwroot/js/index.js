@@ -7,6 +7,11 @@ let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
 
+var $th = $('.tableFixHead').find('thead th')
+$('.tableFixHead').on('scroll', function () {
+    $th.css('transform', 'translateY(' + this.scrollTop + 'px)');
+});
+
 $(document).ready(function () {
     $("#addPlayerModalBtn").click(function () {
         $("#addPlayerModal").modal("show");
