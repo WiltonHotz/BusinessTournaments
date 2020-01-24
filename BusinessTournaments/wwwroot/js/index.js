@@ -7,6 +7,19 @@ let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
 
+//var $th = $('.tableFixHead').find('thead th')
+//$('.tableFixHead').on('scroll', function () {
+//    $th.css('transform', 'translateY(' + this.scrollTop + 'px)');
+//});
+
+function tableFixHead(e) {
+    const el = e.target,
+        sT = el.scrollTop;
+    el.querySelectorAll("thead th").forEach(th =>
+        th.style.transform = `translateY(${sT}px)`
+    );
+}
+
 $(document).ready(function () {
     $("#addPlayerModalBtn").click(function () {
         $("#addPlayerModal").modal("show");
@@ -18,6 +31,9 @@ $(document).ready(function () {
     $("#addPlayerModal").on("hidden.bs.modal", function () {
         $("#modalPlayerNames").html("");
     });
+    document.querySelectorAll(".tableFixHead").forEach(el =>
+        el.addEventListener("scroll", tableFixHead)
+    );
 });
 
 
@@ -49,7 +65,7 @@ function PopulatePlayersOnLoad(leaderboard) {
                         <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td>${leaderboard[i].score}</td>
                         <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
-                        <td style="width: 20px" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
+                        <td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
                         </tr>`);
     }
 }
