@@ -651,6 +651,7 @@ function startTournament() {
         data: jsonStr,
         success: function (data) {
             console.log(data)
+            getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
         error: function () {
