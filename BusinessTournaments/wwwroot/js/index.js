@@ -459,6 +459,19 @@ function removeSelectedPlayer(playerId) {
     updateSelectedPlayerCounter()
 }
 
+function updateSelectedPlayerCounter(players) {
+
+    // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
+    if (players == null) {
+
+        $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+
+    } else {
+        $(`#playerCounter`).html(`${players.length}`)
+
+    }
+}
+
 //#endregion
 
 //#region selected (ongoing)
@@ -729,22 +742,12 @@ function burgerStuff() {
 }
 //#endregion
 
+
 //#region themes
 
-}
 
-function updateSelectedPlayerCounter(players) {
 
-    // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
-    if (players == null) {
 
-        $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
-
-    } else {
-        $(`#playerCounter`).html(`${players.length}`)
-
-    }
-}
 function setTheme(theme) {
     console.log(theme)
     if (theme != "default") {
