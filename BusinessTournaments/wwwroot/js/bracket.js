@@ -591,38 +591,58 @@ function saveChangesToDB(newBracketsJson) {
 
 function checkIfBracketLevelsAreLocked() {
 
-    let quartersLeftWinnersAndLosers = document.getElementById('quarters-left').querySelectorAll('.winner, .loser');
-    let quartersRightWinnersAndLosers = document.getElementById('quarters-right').querySelectorAll('.winner, .loser');
-    let semisLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
-    let semisRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
-    let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+    if (currentBracketsJson.brackets.length === 31) {
 
-    if (quartersLeftWinnersAndLosers.length === 4)
-        document.getElementById('eights-left').style.opacity = "0.3";
-    else
-        document.getElementById('eights-left').style.opacity = "1";
+        let quartersLeftWinnersAndLosers = document.getElementById('quarters-left').querySelectorAll('.winner, .loser');
+        let quartersRightWinnersAndLosers = document.getElementById('quarters-right').querySelectorAll('.winner, .loser');
+        let semisLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
+        let semisRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
 
-    if (quartersRightWinnersAndLosers.length === 4)
-        document.getElementById('eights-right').style.opacity = "0.3";
-    else
-        document.getElementById('eights-right').style.opacity = "1";
+        if (quartersLeftWinnersAndLosers.length === 4)
+            document.getElementById('eights-left').style.opacity = "0.3";
+        else
+            document.getElementById('eights-left').style.opacity = "1";
 
-    if (semisLeftWinnersAndLosers.length === 2)
-        document.getElementById('quarters-left').style.opacity = "0.3";
-    else
-        document.getElementById('quarters-left').style.opacity = "1";
+        if (quartersRightWinnersAndLosers.length === 4)
+            document.getElementById('eights-right').style.opacity = "0.3";
+        else
+            document.getElementById('eights-right').style.opacity = "1";
 
-    if (semisRightWinnersAndLosers.length === 2)
-        document.getElementById('quarters-right').style.opacity = "0.3";
-    else
-        document.getElementById('quarters-right').style.opacity = "1";
+        if (semisLeftWinnersAndLosers.length === 2)
+            document.getElementById('quarters-left').style.opacity = "0.3";
+        else
+            document.getElementById('quarters-left').style.opacity = "1";
 
-    if (finalWinnerAndLoser.length === 2) {
-        document.getElementById('semis-left').style.opacity = "0.3";
-        document.getElementById('semis-right').style.opacity = "0.3";
+        if (semisRightWinnersAndLosers.length === 2)
+            document.getElementById('quarters-right').style.opacity = "0.3";
+        else
+            document.getElementById('quarters-right').style.opacity = "1";
+
+        if (finalWinnerAndLoser.length === 2) {
+            document.getElementById('semis-left').style.opacity = "0.3";
+            document.getElementById('semis-right').style.opacity = "0.3";
+        }
+        else {
+            document.getElementById('semis-left').style.opacity = "1";
+            document.getElementById('semis-right').style.opacity = "1";
+        }
     }
-    else {
-        document.getElementById('semis-left').style.opacity = "1";
-        document.getElementById('semis-right').style.opacity = "1";
+    if (currentBracketsJson.brackets.length === 15) {
+
+        let semisWinnersAndLosers = document.getElementById('semis').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+
+        if (semisWinnersAndLosers.length === 4)
+            document.getElementById('quarters').style.opacity = "0.3";
+        else
+            document.getElementById('quarters').style.opacity = "1";
+
+        if (finalWinnerAndLoser.length === 2) {
+            document.getElementById('semis').style.opacity = "0.3";
+        }
+        else {
+            document.getElementById('semis').style.opacity = "1";
+        }
     }
 }
