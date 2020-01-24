@@ -94,19 +94,159 @@ function clickBracketAction(bracketId) {
 
         switch (bracketId) {
             case 'b30':
+                if (checkIfBracketIsEmpty('b6')) {
+                    if (!checkIfBracketIsEmpty('b29')) {
+
+                        if (checkIfBracketIsEmpty('b14') || checkIfTargetBracketHasOpponent('b14', 'b29'))
+                            setPlayerInBracketAsWinner('b30', 'b14', 'b29');
+                        else
+                            removePlayerInBracketAsWinner('b29', 'b14', 'b30');
+                    }
+                }
+                break;
             case 'b29':
+                if (checkIfBracketIsEmpty('b6')) {
+                    if (!checkIfBracketIsEmpty('b30')) {
+
+                        if (checkIfBracketIsEmpty('b14') || checkIfTargetBracketHasOpponent('b14', 'b30'))
+                            setPlayerInBracketAsWinner('b29', 'b14', 'b30');
+                        else
+                            removePlayerInBracketAsWinner('b30', 'b14', 'b29');
+                    }
+                }
+                break;
             case 'b28':
+                if (checkIfBracketIsEmpty('b6')) {
+                    if (!checkIfBracketIsEmpty('b27')) {
+
+                        if (checkIfBracketIsEmpty('b13') || checkIfTargetBracketHasOpponent('b13', 'b27'))
+                            setPlayerInBracketAsWinner('b28', 'b13', 'b27');
+                        else
+                            removePlayerInBracketAsWinner('b27', 'b13', 'b28');
+                    }
+                }
+                break;
             case 'b27':
+                if (checkIfBracketIsEmpty('b6')) {
+                    if (!checkIfBracketIsEmpty('b28')) {
+
+                        if (checkIfBracketIsEmpty('b13') || checkIfTargetBracketHasOpponent('b13', 'b28'))
+                            setPlayerInBracketAsWinner('b27', 'b13', 'b28');
+                        else
+                            removePlayerInBracketAsWinner('b28', 'b13', 'b27');
+                    }
+                }
+                break;
             case 'b26':
+                if (checkIfBracketIsEmpty('b5')) {
+                    if (!checkIfBracketIsEmpty('b25')) {
+
+                        if (checkIfBracketIsEmpty('b12') || checkIfTargetBracketHasOpponent('b12', 'b25'))
+                            setPlayerInBracketAsWinner('b26', 'b12', 'b25');
+                        else
+                            removePlayerInBracketAsWinner('b25', 'b12', 'b26');
+                    }
+                }
+                break;
             case 'b25':
+                if (checkIfBracketIsEmpty('b5')) {
+                    if (!checkIfBracketIsEmpty('b26')) {
+
+                        if (checkIfBracketIsEmpty('b12') || checkIfTargetBracketHasOpponent('b12', 'b26'))
+                            setPlayerInBracketAsWinner('b25', 'b12', 'b26');
+                        else
+                            removePlayerInBracketAsWinner('b26', 'b12', 'b25');
+                    }
+                }
+                break;
             case 'b24':
+                if (checkIfBracketIsEmpty('b5')) {
+                    if (!checkIfBracketIsEmpty('b23')) {
+
+                        if (checkIfBracketIsEmpty('b11') || checkIfTargetBracketHasOpponent('b11', 'b23'))
+                            setPlayerInBracketAsWinner('b24', 'b11', 'b23');
+                        else
+                            removePlayerInBracketAsWinner('b23', 'b11', 'b24');
+                    }
+                }
+                break;
             case 'b23':
+                if (checkIfBracketIsEmpty('b5')) {
+                    if (!checkIfBracketIsEmpty('b24')) {
+
+                        if (checkIfBracketIsEmpty('b11') || checkIfTargetBracketHasOpponent('b11', 'b24'))
+                            setPlayerInBracketAsWinner('b23', 'b11', 'b24');
+                        else
+                            removePlayerInBracketAsWinner('b24', 'b11', 'b23');
+                    }
+                }
+                break;
             case 'b22':
+                if (checkIfBracketIsEmpty('b4')) {
+                    if (!checkIfBracketIsEmpty('b21')) {
+
+                        if (checkIfBracketIsEmpty('b10') || checkIfTargetBracketHasOpponent('b10', 'b21'))
+                            setPlayerInBracketAsWinner('b22', 'b10', 'b21');
+                        else
+                            removePlayerInBracketAsWinner('b21', 'b10', 'b22');
+                    }
+                }
+                break;
             case 'b21':
+                if (checkIfBracketIsEmpty('b4')) {
+                    if (!checkIfBracketIsEmpty('b22')) {
+
+                        if (checkIfBracketIsEmpty('b10') || checkIfTargetBracketHasOpponent('b10', 'b22'))
+                            setPlayerInBracketAsWinner('b21', 'b10', 'b22');
+                        else
+                            removePlayerInBracketAsWinner('b22', 'b10', 'b21');
+                    }
+                }
+                break;
             case 'b20':
+                if (checkIfBracketIsEmpty('b4')) {
+                    if (!checkIfBracketIsEmpty('b19')) {
+
+                        if (checkIfBracketIsEmpty('b9') || checkIfTargetBracketHasOpponent('b9', 'b19'))
+                            setPlayerInBracketAsWinner('b20', 'b9', 'b19');
+                        else
+                            removePlayerInBracketAsWinner('b19', 'b9', 'b20');
+                    }
+                }
+                break;
             case 'b19':
+                if (checkIfBracketIsEmpty('b4')) {
+                    if (!checkIfBracketIsEmpty('b20')) {
+
+                        if (checkIfBracketIsEmpty('b9') || checkIfTargetBracketHasOpponent('b9', 'b20'))
+                            setPlayerInBracketAsWinner('b19', 'b9', 'b20');
+                        else
+                            removePlayerInBracketAsWinner('b20', 'b9', 'b19');
+                    }
+                }
+                break;
             case 'b18':
+                if (checkIfBracketIsEmpty('b3')) {
+                    if (!checkIfBracketIsEmpty('b17')) {
+
+                        if (checkIfBracketIsEmpty('b8') || checkIfTargetBracketHasOpponent('b8', 'b17'))
+                            setPlayerInBracketAsWinner('b18', 'b8', 'b17');
+                        else
+                            removePlayerInBracketAsWinner('b17', 'b8', 'b18');
+                    }
+                }
+                break;
             case 'b17':
+                if (checkIfBracketIsEmpty('b3')) {
+                    if (!checkIfBracketIsEmpty('b18')) {
+
+                        if (checkIfBracketIsEmpty('b8') || checkIfTargetBracketHasOpponent('b8', 'b18'))
+                            setPlayerInBracketAsWinner('b17', 'b8', 'b18');
+                        else
+                            removePlayerInBracketAsWinner('b18', 'b8', 'b17');
+                    }
+                }
+                break;
             case 'b16':
                 if (checkIfBracketIsEmpty('b3')) {
                     if (!checkIfBracketIsEmpty('b15')) {
