@@ -14,7 +14,7 @@ let playerIdToEdit;
 //#region color variables
 
 //let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
-let tableContentClasses = "tableContent";
+let tableContentColor = ".GradientGreen";
 let leaderBoardClasses = "leaderboardContent";
 let selectedClasses = "selectedClasses";
 let ongoingClasses = "ongoingClasses";
@@ -84,7 +84,7 @@ function PopulatePlayersOnLoad(leaderboard) {
         let arrow = `<span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 
         $("#leaderboard")
-            .append(`<tr style="height: 38px" id='l${leaderboard[i].playerId}' class="leaderboard-row">
+            .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
                         <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td>${leaderboard[i].score}</td>
                         <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
@@ -395,9 +395,7 @@ function selectPlayer(playerId, playerName) {
 
             $("#selected")
                 .append(`<tr id='selected${playerId}'>
-                       <td class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg></td>
-                        <td style="text-align: left;">${playerName}</td>
-                       
+                       <td style="text-align: left;" class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${playerName}</td>
                         </tr>`);
 
             // Change background color and hide green arrow
@@ -437,7 +435,7 @@ function selectPlayer(playerId, playerName) {
     }
 }
 
-function removeSelectedPlayer(playerId, playerName) {
+function removeSelectedPlayer(playerId) {
 
     // Remove player from array
     startTournamentInfo.playerIds.splice(startTournamentInfo.playerIds.indexOf(playerId), 1);
@@ -446,7 +444,7 @@ function removeSelectedPlayer(playerId, playerName) {
     document.getElementById('selected' + playerId).remove();
     let selectedPlayerHtml = document.getElementById('l' + playerId);
     let tournamentNameInput = document.getElementById("tournamentNameInput");
-    selectedPlayerHtml.style.backgroundColor = "#239165";
+    selectedPlayerHtml.style.backgroundColor = "inherit";
     document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
 
     // Disable create button if less than 4
@@ -499,8 +497,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
 
         $("#selected")
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
-                       <td class="remove-button" style="width: 20px"></td>
-                        <td style="text-align: left;">${players[i].playerName}</td>
+                       <td style="text-align: left;" class="remove-button" style="width: 20px">&nbsp&nbsp${players[i].playerName}</td>
                         </tr>`);
 
         // Mark players in Leaderboard selected
@@ -676,7 +673,7 @@ function clearSelected() {
     // Change background to normal
     var leaderboardRows = document.getElementsByClassName("leaderboard-row");
     for (var i = 0; i < leaderboardRows.length; i++) {
-        leaderboardRows[i].style.backgroundColor = "#239165"
+        leaderboardRows[i].style.backgroundColor = "inherit"
     }
 
     // Show all arrows
@@ -706,5 +703,3 @@ function clearSelected() {
 }
 
 //#endregion
-
-
