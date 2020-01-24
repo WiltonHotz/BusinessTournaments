@@ -73,17 +73,9 @@ html, body {
         background-color: #D07030;
     }
 
-.bracket-empty {
-    height: 100%;
-    width: 100%;
+.bracket.empty {
     background-color: #808080;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
-    display: flex;
-    flex-direction: row;
     transition: all ease .5s;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    min-height: 70%;
     cursor: default;
 }
 

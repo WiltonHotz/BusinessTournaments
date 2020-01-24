@@ -1,5 +1,9 @@
 ﻿let currentBracketsJson;
 let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
+let emptyBracketClasses = "bracket empty rounded";
+let populatedBracketClasses = "bracket rounded";
+let winnerBracketClasses = "bracket winner rounded";
+let loserBracketClasses = "bracket loser rounded";
 
 function getTournamentBracketJSON(bracketId) {
 
@@ -15,7 +19,7 @@ function getTournamentBracketJSON(bracketId) {
             populateBrackets(response);
 
             // Make add click events on brackets with names
-            addClickListenersOnPopulatedBrackets();
+            addClickListenersOnAllBrackets();
 
         },
         error: function () {
@@ -24,7 +28,7 @@ function getTournamentBracketJSON(bracketId) {
     });
 }
 
-function addClickListenersOnPopulatedBrackets() {
+function addClickListenersOnAllBrackets() {
     $(".bracket").click(function(e) {
         e.preventDefault();
         clickBracketAction(this.id);
@@ -44,68 +48,72 @@ function populateBrackets(bracketsInfo) {
         }
         else {
             $(bracketId).html(emptyBracketHtml);
-            $(bracketId).prop("class", "bracket-empty rounded") // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
+            $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
         }
     }
 }
 
 function clickBracketAction(bracketId) {
-    switch (bracketId) {
-        case 'b14':
-            console.log(bracketId);
-            break;
-        case 'b13':
-            console.log(bracketId);
-            break;
-        case 'b12':
-            console.log(bracketId);
-            break;
-        case 'b11':
-            console.log(bracketId);
-            break;
-        case 'b10':
-            console.log(bracketId);
-            break;
-        case 'b9':
-            console.log(bracketId);
-            break;
-        case 'b8':
-            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b7'))
-                setPlayerInBracketAsWinner('b8', 'b3', 'b7');
-            else
-                removePlayerInBracketAsWinner('b8', 'b3', 'b7');
-            break;
-        case 'b7':
-            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b8'))
-                setPlayerInBracketAsWinner('b7', 'b3', 'b8');
-            else
-                removePlayerInBracketAsWinner('b7', 'b3', 'b8');
-            break;
-        case 'b6':
-            console.log(bracketId);
-            break;
-        case 'b5':
-            console.log(bracketId);
-            break;
-        case 'b4':
-            console.log(bracketId);
-            break;
-        case 'b3':
-            console.log(bracketId);
-            break;
-        case 'b2':
-            console.log(bracketId);
-            break;
-        case 'b1':
-            console.log(bracketId);
-            break;
-        case 'b0':
-            console.log(bracketId);
-            break;
-        default:
+
+    // Om bracketen INTE har "empty" i class så kör vi switchen
+    if (!$(`#${bracketId}`).hasClass('empty')) {
+
+        switch (bracketId) {
+            case 'b14':
+                console.log(bracketId);
+                break;
+            case 'b13':
+                console.log(bracketId);
+                break;
+            case 'b12':
+                console.log(bracketId);
+                break;
+            case 'b11':
+                console.log(bracketId);
+                break;
+            case 'b10':
+                console.log(bracketId);
+                break;
+            case 'b9':
+                console.log(bracketId);
+                break;
+            case 'b8':
+                if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b7'))
+                    setPlayerInBracketAsWinner('b8', 'b3', 'b7');
+                else
+                    removePlayerInBracketAsWinner('b8', 'b3', 'b7');
+                break;
+            case 'b7':
+                if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b8'))
+                    setPlayerInBracketAsWinner('b7', 'b3', 'b8');
+                else
+                    removePlayerInBracketAsWinner('b7', 'b3', 'b8');
+                break;
+            case 'b6':
+                console.log(bracketId);
+                break;
+            case 'b5':
+                console.log(bracketId);
+                break;
+            case 'b4':
+                console.log(bracketId);
+                break;
+            case 'b3':
+                console.log(bracketId);
+                break;
+            case 'b2':
+                console.log(bracketId);
+                break;
+            case 'b1':
+                console.log(bracketId);
+                break;
+            case 'b0':
+                console.log(bracketId);
+                break;
+            default:
+        }
+
     }
-
-
 }
 
 function checkIfTargetBracketIsEmpty(bracketId) {
@@ -136,9 +144,9 @@ function checkIfTargetBracketHasOpponent(targetBracketId, opponentBracketId) {
 function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBracketId) {
 
     // Change classes (colors and other things css)
-    $(`#${fromBracketId}`).prop("class", "bracket winner rounded");
-    $(`#${targetBracketId}`).prop("class", "bracket rounded");
-    $(`#${opponentBracketId}`).prop("class", "bracket loser rounded");
+    $(`#${fromBracketId}`).prop("class", winnerBracketClasses);
+    $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
+    $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
 
     // Copy name to next bracket
     document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
@@ -147,11 +155,11 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBracketId) {
 
     // Change classes (colors and other things css)
-    $(`#${fromBracketId}`).prop("class", "bracket rounded");
-    $(`#${targetBracketId}`).prop("class", "bracket-empty rounded");
-    $(`#${opponentBracketId}`).prop("class", "bracket rounded");
+    $(`#${fromBracketId}`).prop("class", populatedBracketClasses);
+    $(`#${targetBracketId}`).prop("class", emptyBracketClasses);
+    $(`#${opponentBracketId}`).prop("class", populatedBracketClasses);
 
-    // Copy name to next bracket
+    // Empty target bracket
     document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
 }
 
