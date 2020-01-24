@@ -18,7 +18,7 @@ function getTournamentBracketJSON(bracketId) {
             currentBracketsJson = response;
 
             // Check how many players
-            var numOfPlayers = response.brackets.filter(b => b.playerId != 0).length;
+            var numOfPlayers = response.brackets.filter(b => b.playerId != 0).length;  //<<CHANGE TO UNIQUE PLAYERS
 
             getBracketsPartialView(response, numOfPlayers);
 
@@ -36,28 +36,6 @@ function addClickListenersOnAllBrackets() {
         e.preventDefault();
         clickBracketAction(this.id);
     });
-}
-
-function populateBrackets(bracketsInfo, numOfPlayers) {
-
-    // If four players, remove quarters div
-    if (numOfPlayers === 4)
-        document.getElementById("quarters").style.display = "none";
-
-    for (var i = 0; i < bracketsInfo.brackets.length; i++) {
-
-        // SPara bracketId lite mer läsbart i en variabel
-        let bracketId = `#b${bracketsInfo.brackets[i].bracketId}`;
-
-        // Skriv ut namnet om det finns något, annars tom <span>
-        if (bracketsInfo.brackets[i].playerName != null) {
-            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
-        }
-        else {
-            $(bracketId).html(emptyBracketHtml);
-            $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
-        }
-    }
 }
 
 function getBracketsPartialView(bracketsInfo, numOfPlayers) {
@@ -81,6 +59,28 @@ function getBracketsPartialView(bracketsInfo, numOfPlayers) {
             console.log("error");
         }
     });
+}
+
+function populateBrackets(bracketsInfo, numOfPlayers) {
+
+    // If four players, remove quarters div
+    if (numOfPlayers === 4)
+        document.getElementById("quarters").style.display = "none";
+
+    for (var i = 0; i < bracketsInfo.brackets.length; i++) {
+
+        // SPara bracketId lite mer läsbart i en variabel
+        let bracketId = `#b${bracketsInfo.brackets[i].bracketId}`;
+
+        // Skriv ut namnet om det finns något, annars tom <span>
+        if (bracketsInfo.brackets[i].playerName != null) {
+            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
+        }
+        else {
+            $(bracketId).html(emptyBracketHtml);
+            $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
+        }
+    }
 }
 
 function clickBracketAction(bracketId) {

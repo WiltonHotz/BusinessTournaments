@@ -57,6 +57,8 @@ namespace BusinessTournaments.Models
 
             if (numOfBrackets == 15) //id 0-14. 0 is winner. 5 players should populate 8,7 -  6,5,4,(3) - 2,1, 0
                 startPopulateIndex = 14 - (8 - playerIds.Count) * 2; // 6 players should populate 10,9,8,7 - 6,5(4),(3), 2,1 - 0
+            else if (numOfBrackets == 31)
+                startPopulateIndex = 30 - (16 - playerIds.Count) * 2;
 
             var players = await context.Players.Where(p => playerIds.Contains(p.Id.ToString())).ToListAsync();
 
@@ -88,6 +90,8 @@ namespace BusinessTournaments.Models
                 return 7;
             else if (numOfPlayers > 4 && numOfPlayers <= 8)
                 return 15;
+            else if (numOfPlayers > 8 && numOfPlayers <= 16)
+                return 31;
 
             return 0;
         }

@@ -427,7 +427,7 @@ function selectPlayer(playerId, playerName) {
                 $('#startTournament').prop("disabled", false);
             }
 
-            if (startTournamentInfo.playerIds.length >= 8) {
+            if (startTournamentInfo.playerIds.length >= 16) {
                 hideSelectPlayerArrows();
             }
 
@@ -458,7 +458,7 @@ function removeSelectedPlayer(playerId) {
     }
 
     //show arrows
-    if (startTournamentInfo.playerIds.length <= 8) {
+    if (startTournamentInfo.playerIds.length <= 16) {
         showSelectPlayerArrows();
     }
 }
