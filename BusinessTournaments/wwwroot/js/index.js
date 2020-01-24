@@ -703,3 +703,15 @@ function clearSelected() {
 }
 
 //#endregion
+
+//Making Burgers
+
+$(document).ready(function () {
+    $('#nav-icon').click(function () {
+        $(this).toggleClass('open');
+    });
+});
+
+function burgerStuff() {
+
+}
