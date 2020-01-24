@@ -152,7 +152,7 @@ svg {
 
 .Leaderboard {
     grid-area: Leaderboard;
-    background-color: #239165;
+    background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
     overflow: auto;
@@ -160,7 +160,7 @@ svg {
 
 .Selected {
     grid-area: Selected;
-    background-color: #239165;
+    background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
     overflow: auto;
@@ -168,28 +168,26 @@ svg {
 
 .TournamentName {
     grid-area: TournamentName;
-    background-color: #725375;
-    color: #c3a7bd;
+    background-color: #15593E;
     opacity: 1;
 }
 
 .StartTournament {
     grid-area: StartTournament;
-    background-color: #725375;
-    color: #c3a7bd;
+    background-color: #15593E;
     opacity: 1;
 }
 
 .AddPlayers {
     grid-area: AddPlayers;
-    background-color: #239165;
+    background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
 }
 
 .Completed {
     grid-area: Completed;
-    background-color: #239165;
+    background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
     overflow: auto;
@@ -197,7 +195,7 @@ svg {
 
 .Ongoing {
     grid-area: Ongoing;
-    background-color: #239165;
+    background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
     overflow: auto;
