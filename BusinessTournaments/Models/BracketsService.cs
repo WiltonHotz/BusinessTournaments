@@ -84,6 +84,25 @@ namespace BusinessTournaments.Models
             return viewModel;
         }
 
+        internal async Task<bool> UpdateTournamentAsync(BracketVM tournamentToUpdate, string userId)
+        {
+            var currentBracket = JsonConvert.SerializeObject(tournamentToUpdate.Brackets);
+
+            //Update Tournament inDB with current bracket.
+            var tournament = await context.Tournaments.Where(x => x.CompanyId == userId).SingleOrDefaultAsync(t => t.Id == tournamentToUpdate.TournamentId);
+
+            if (tournament != null)
+            {
+                tournament.BracketsJsonString = currentBracket;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private int GetNumberOfBrackets(int numOfPlayers)
         {
             if (numOfPlayers == 4)

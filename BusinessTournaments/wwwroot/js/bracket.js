@@ -256,6 +256,9 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Copy name to next bracket
         document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
+
+        // Set newBracketsJson to current
+        currentBracketsJson = newBracketsJson;
     }
 
     // Set to false to be able to click again
@@ -330,6 +333,24 @@ function removeWinnerInBracketsJson(targetBracketId) {
 function saveChangesToDB(newBracketsJson) {
     // TODO
     console.log(newBracketsJson);
-    return true;
+   // newBracketsJson.tournamentId = `${newBracketsJson.tournamentId}`
+    let output = true;
+    let jsonStr = JSON.stringify(newBracketsJson)
+
+    $.ajax({
+        url: 'updatetournamentbracket',
+        type: 'POST',
+        contentType: 'application/json',
+        data: jsonStr,
+        success: function (data) {
+            console.log(data)
+    
+        },
+        error: function () {
+            console.log("error");
+            output = false;
+        }
+    });
+    return output;
 }
 
