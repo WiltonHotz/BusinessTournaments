@@ -17,11 +17,12 @@ function getTournamentBracketJSON(bracketId) {
             // Save brackets Json for later
             currentBracketsJson = response;
 
-            // Populate brackets with names (and classes if empty)
-            populateBrackets(response);
+            // Check how many players
+            var numOfPlayers = response.brackets.filter(b => b.playerId != 0).length;
 
-            // Make add click events on brackets with names
-            addClickListenersOnAllBrackets();
+            getBracketsPartialView(response, numOfPlayers);
+
+
 
         },
         error: function () {
@@ -37,10 +38,7 @@ function addClickListenersOnAllBrackets() {
     });
 }
 
-function populateBrackets(bracketsInfo) {
-
-    // Check how many players
-    var numOfPlayers = bracketsInfo.brackets.filter(b => b.playerId != 0).length;
+function populateBrackets(bracketsInfo, numOfPlayers) {
 
     // If four players, remove quarters div
     if (numOfPlayers === 4)
@@ -60,6 +58,29 @@ function populateBrackets(bracketsInfo) {
             $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
         }
     }
+}
+
+function getBracketsPartialView(bracketsInfo, numOfPlayers) {
+
+    var url = `/getbracketspartialview/${numOfPlayers}`;
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+            $(".bracket-container").html(response);
+
+            // Populate brackets with names (and classes if empty)
+            populateBrackets(bracketsInfo, numOfPlayers);
+
+            // Make add click events on brackets with names
+            addClickListenersOnAllBrackets();
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
 }
 
 function clickBracketAction(bracketId) {
@@ -220,10 +241,10 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
     isWaitingForResponse = true;
 
     // Update json object
-    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+    let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId);
 
     // Save changes on DB
-    let success = saveChangesToDB();
+    let success = saveChangesToDB(newBracketsJson);
 
     // If DB returns success
     if (success) {
@@ -247,10 +268,10 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
     isWaitingForResponse = true;
 
     // Update json object
-    updateCurrentBracketsJson(fromBracketId, targetBracketId);
+    let newBracketsJson = removeWinnerInBracketsJson(targetBracketId);
 
     // Save changes on DB
-    let success = saveChangesToDB();
+    let success = saveChangesToDB(newBracketsJson);
 
     // If DB returns success
     if (success) {
@@ -262,20 +283,53 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+
+        // Set newBracketsJson to current
+        currentBracketsJson = newBracketsJson;
     }
 
     // Set to false to be able to click again
     isWaitingForResponse = false;
 }
 
-function saveChangesToDB(fromBracketId, targetBracketId) {
+function setWinnerInBracketsJson(fromBracketId, targetBracketId) {
+
+    // Get player name and ID
+    let playerName = $(`#${fromBracketId}`).find('.player-name').text();
+    let playerId = $(`#${fromBracketId}`).find('.player-id').text();
+
+    // Make a copy of currentBracketsJson
+    var newBracketsJson = Object.assign({}, currentBracketsJson);
+
+    // Find targetBracket index
+    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Assign new values to targetBracket
+    newBracketsJson.brackets[index].playerName = playerName;
+    newBracketsJson.brackets[index].playerId = parseInt(playerId);
+
+    return newBracketsJson;
+
+}
+
+function removeWinnerInBracketsJson(targetBracketId) {
+
+    // Make a copy of currentBracketsJson
+    var newBracketsJson = Object.assign({}, currentBracketsJson);
+
+    // Find targetBracket index
+    var index = newBracketsJson.brackets.findIndex(b => b.bracketId == targetBracketId.substring(1));
+
+    // Assign new values to targetBracket
+    newBracketsJson.brackets[index].playerName = null;
+    newBracketsJson.brackets[index].playerId = 0;
+
+    return newBracketsJson;
+}
+
+function saveChangesToDB(newBracketsJson) {
     // TODO
-    console.log("saveCHangesToDB function");
+    console.log(newBracketsJson);
     return true;
 }
 
-function updateCurrentBracketsJson(fromBracketId, targetBracketId) {
-    // TODO
-    console.log("updateCurrentBracketsJson function");
-
-}

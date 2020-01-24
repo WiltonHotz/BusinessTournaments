@@ -43,18 +43,26 @@ h1 {
 table {
     border-collapse: collapse;
     width: 100%;
+    padding: 5px;
 }
 .tableFixHead {
     overflow-y: auto;
     width: 100%;
     height: 100%;
 }
-    .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        background-color: #239165;
-        padding: 5px;
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #114a33;
+    background-image: linear-gradient(#114a33, #176647);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+    .tableFixHead tbody td {
+        padding-left: 5px;
     }
 
 .wrapper {
@@ -125,11 +133,9 @@ td:last-child {
     color: blue;
 }
 
-    .octicon-arrow-left.ongoing:hover {
-        color: #8c8cff;
-    }
-
-
+.octicon-arrow-left.ongoing:hover {
+    color: #8c8cff;
+}
 
 .octicon-x {
     color: red;
@@ -179,54 +185,41 @@ svg {
     grid-area: CompanyName;
 }
 
-.Leaderboard {
-    grid-area: Leaderboard;
+.tableColor {
     background-color: #15593E;
     color: #CADBCF;
     opacity: 1;
+}
+
+.Leaderboard {
+    grid-area: Leaderboard;
     overflow: auto;
 }
 
 .Selected {
     grid-area: Selected;
-    background-color: #15593E;
-    color: #CADBCF;
-    opacity: 1;
     overflow: auto;
 }
 
 .TournamentName {
     grid-area: TournamentName;
-    background-color: #15593E;
-    opacity: 1;
 }
 
 .StartTournament {
     grid-area: StartTournament;
-    background-color: #15593E;
-    opacity: 1;
 }
 
 .AddPlayers {
     grid-area: AddPlayers;
-    background-color: #15593E;
-    color: #CADBCF;
-    opacity: 1;
 }
 
 .Completed {
     grid-area: Completed;
-    background-color: #15593E;
-    color: #CADBCF;
-    opacity: 1;
     overflow: auto;
 }
 
 .Ongoing {
     grid-area: Ongoing;
-    background-color: #15593E;
-    color: #CADBCF;
-    opacity: 1;
     overflow: auto;
 }
 

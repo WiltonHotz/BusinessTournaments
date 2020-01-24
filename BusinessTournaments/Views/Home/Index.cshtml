@@ -10,13 +10,13 @@
             <h3>Company  @User.Identity.Name</h3>
 
         </div>
-        <div class="Leaderboard GradientGreen roundCorners wrapper">
+        <div class="Leaderboard GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
                     <thead>
                         <tr>
-                            <th width="10%">Edit</th>
+                            <th width="10%"></th>
                             <th width="20%">Score</th>
                             <th width="40%">Player Name</th>
                             <th></th>
@@ -28,13 +28,12 @@
             </div>
 
         </div>
-        <div class="Selected GradientGreen roundCorners wrapper">
+        <div class="Selected GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Selected Player Name</th>
                         </tr>
                     </thead>
@@ -47,7 +46,7 @@
         <div class="TournamentName roundCorners">
 
             <div class="roundCorners">
-                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfValidInput(this)" />
+                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
             </div>
 
         </div>
@@ -77,7 +76,8 @@
                     <thead>
                         <tr>
                             <th><b style="color: red;">Completed Tournaments</b></th>
-                            <th style="text-align: right" ;>Datum</th>
+                            <th widht="60%">Datum</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="completed">
@@ -86,16 +86,15 @@
             </div>
 
         </div>
-        <div class="Ongoing GradientGreen roundCorners wrapper">
+        <div class="Ongoing GradientGreen roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
                             <th><b style="color: blue;">Ongoing Tournaments</b></th>
-                            <th>Datum</th>
-                            <th>Delete</th>
+                            <th widht="60%">Datum</th>
+                            <th></th>
 
                         </tr>
                     </thead>
