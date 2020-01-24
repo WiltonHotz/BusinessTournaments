@@ -87,7 +87,7 @@ html, body {
     cursor: default;
 }
 
-.bracket-name {
+.player-name {
     font-family: 'Open Sans', sans-serif;
     width: 100%;
     font-size: 1em;
@@ -101,34 +101,6 @@ html, body {
     display: block;
 }
 
-.bracket-score {
-    font-family: 'Open Sans', sans-serif;
-    font-size: .75em;
-    padding: .2em;
-    line-height: 1.5em;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #2B2B2B;
-    text-align: center;
+.player-id {
+    display: none;
 }
-
-
-
-/*.bracket-team:hover{
-  background-color: #E8E8E8;
-  height: 100%;
-  transition: all ease .5s;
-}*/
-
-/*.bracket-team:hover>.bracket-name{
-  overflow: none;
-  text-overflow: clip;
-  white-space: normal;
-  line-height: 1em;
-  align-self: center;
-  width: 100%;
-}
-
-.bracket-team:hover>.bracket-score{
-  display: none;
-}*/

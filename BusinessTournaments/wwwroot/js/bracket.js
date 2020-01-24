@@ -1,13 +1,5 @@
 ﻿let currentBracketsJson;
-
-//$(document).ready(function () {
-
-//    $(".bracket-name").click(function (e) {
-//        e.preventDefault();
-//        console.log(this.id);
-//        clickBracketAction(this.id)
-//    });
-//});
+let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
 
 function getTournamentBracketJSON(bracketId) {
 
@@ -23,17 +15,19 @@ function getTournamentBracketJSON(bracketId) {
             populateBrackets(response);
 
             // Make add click events on brackets with names
-            $(".bracket").click(function (e) {
-                e.preventDefault();
-                //console.log(this.id)
-
-                clickBracketAction(this.id)
-            });
+            addClickListenersOnPopulatedBrackets();
 
         },
         error: function () {
             console.log("error");
         }
+    });
+}
+
+function addClickListenersOnPopulatedBrackets() {
+    $(".bracket").click(function(e) {
+        e.preventDefault();
+        clickBracketAction(this.id);
     });
 }
 
@@ -46,11 +40,11 @@ function populateBrackets(bracketsInfo) {
 
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
-            $(bracketId).html(`<span class="bracket-name">${bracketsInfo.brackets[i].playerName}</span>`)
+            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
         }
         else {
-            $(bracketId).html(`<span class="bracket-name"></span>`);
-            $(bracketId).prop("class", "bracket-empty rounded")
+            $(bracketId).html(emptyBracketHtml);
+            $(bracketId).prop("class", "bracket-empty rounded") // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
         }
     }
 }
@@ -76,13 +70,13 @@ function clickBracketAction(bracketId) {
             console.log(bracketId);
             break;
         case 'b8':
-            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetIsOpponent('b3', 'b7'))
+            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b7'))
                 setPlayerInBracketAsWinner('b8', 'b3', 'b7');
             else
                 removePlayerInBracketAsWinner('b8', 'b3', 'b7');
             break;
         case 'b7':
-            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetIsOpponent('b3', 'b8'))
+            if (checkIfTargetBracketIsEmpty('b3') || checkIfTargetBracketHasOpponent('b3', 'b8'))
                 setPlayerInBracketAsWinner('b7', 'b3', 'b8');
             else
                 removePlayerInBracketAsWinner('b7', 'b3', 'b8');
@@ -110,13 +104,15 @@ function clickBracketAction(bracketId) {
             break;
         default:
     }
+
+
 }
 
 function checkIfTargetBracketIsEmpty(bracketId) {
-    //console.log(bracketId)
+    
     let bracket = document.getElementById(bracketId);
 
-    if (bracket.innerHTML === `<span class="bracket-name"></span>`) {
+    if (bracket.innerHTML === emptyBracketHtml) {
         return true;
     }
     else {
@@ -124,7 +120,7 @@ function checkIfTargetBracketIsEmpty(bracketId) {
     }
 }
 
-function checkIfTargetIsOpponent(targetBracketId, opponentBracketId) {
+function checkIfTargetBracketHasOpponent(targetBracketId, opponentBracketId) {
 
     let target = document.getElementById(targetBracketId);
     let opponent = document.getElementById(opponentBracketId);
@@ -156,7 +152,7 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
     $(`#${opponentBracketId}`).prop("class", "bracket rounded");
 
     // Copy name to next bracket
-    document.getElementById(targetBracketId).innerHTML = `<span class="bracket-name"></span>`;
+    document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
 }
 
 
