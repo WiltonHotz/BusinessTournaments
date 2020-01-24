@@ -249,9 +249,7 @@ function addPlayers() {
                     }
                 }
             }
-
               //  $(`#badpninp${0}`).html('Please give unique names')
-
             //alert(`Bad names:\n${badNames}[ALREADY IN THE DATABASE]`)
         }
     });
@@ -261,11 +259,11 @@ function hasDuplicates(array) {
     return (new Set(array)).size !== array.length;
 }
 
-function find_duplicate_in_array(arra1) {
+function find_duplicate_in_array(array) {
     var object = {};
     var result = [];
 
-    arra1.forEach(function (item) {
+    array.forEach(function (item) {
         if (!object[item])
             object[item] = 0;
         object[item] += 1;
