@@ -38,7 +38,7 @@ function tableFixHead(e) {
 }
 //#endregion
 
-//#region Modals
+//#region modals
 $(document).ready(function () {
     $("#addPlayerModalBtn").click(function () {
         $("#addPlayerModal").modal("show");
@@ -62,7 +62,7 @@ document.querySelectorAll(".tableFixHead").forEach(el =>
 );
 //#endregion
 
-//#region Populate Grid
+//#region populate Grid
 
 function getIndexVMJSON() {
 
@@ -134,6 +134,32 @@ function ReturnDateFormat(date) {
 function focusField(field) {
     document.getElementById(field).focus();
 }
+
+function hideSelectPlayerArrows() {
+    var arrows = document.getElementsByClassName("select-button");
+
+    for (var i = 0; i < arrows.length; i++) {
+        arrows[i].style.visibility = "hidden";
+    }
+}
+
+function showSelectPlayerArrows() {
+
+    // arrowid on players in leaderboard
+    var arrowsInLeaderBoard = document.getElementsByClassName("select-button");
+
+    // arrowid on selected players
+    var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
+
+    for (i = 0; i < arrowsInLeaderBoard.length; i++) {
+        console.log(arrowsInLeaderBoard[i].id)
+        //check if the player from leaderboard is in selectedPlayers:
+        if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
+            var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
+            arrow.style.visibility = "visible";
+        }
+    }
+}
 //#endregion
 
 //#region add player modal
@@ -148,74 +174,6 @@ function initiateAddPlayerModal() {
                 </div>`);
 
     focusField('pninp0')
-}
-
-function editPlayer(playerNameId, playerId) {
-    var playerName = $(`#${playerNameId}`).html()
-    focusField(`editPlayerName`)
-    $("#editPlayerName").val(playerName);
-    playerIdToEdit = playerId;
-}
-
-function confirmEditPlayer() {
-    var newName = $("#editPlayerName").val();
-    var r = confirm(`Are you sure you want to change name to\n${$("#editPlayerName").val()}`);
-    if (r == true) {
-
-        $.ajax({
-            url: `editPlayer/${playerIdToEdit}/${newName}`,
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log(data)
-                var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
-                $(`#lname${playerIdToEdit}`).html(data)
-
-                $('#editPlayerModal').modal('hide');
-
-                playerIdToEdit = 0;
-            },
-            error: function () {
-                console.log("error");
-            }
-        });
-
-    } else {
-
-    }
-}
-
-
-
-function confirmDeletePlayer() {
-
-    var r = confirm(`Are you sure you want to delete player\n${$("#editPlayerName").val()}`);
-    if (r == true) {
-
-        $.ajax({
-            url: `deletePlayer/${playerIdToEdit}`,
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log(data)
-                var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
-                $(`#l${playerIdToEdit}`).remove();
-
-                $('#editPlayerModal').modal('hide');
-
-                playerIdToEdit = 0;
-            },
-            error: function () {
-                console.log("error");
-            }
-        });
-
-
-    } else {
-
-    }
 }
 
 function addPlayers() {
@@ -269,8 +227,6 @@ function addPlayers() {
                     
                 }
             }
-
-
             else {
                 for (var i = 0; i < names.length; i++) {
                    
@@ -283,7 +239,6 @@ function addPlayers() {
                     else {
                             $(`#badpninp${i}`).html('')
                     }
-           
                 }
             }
         }
@@ -305,9 +260,7 @@ function find_duplicate_in_array(array) {
             result.push(prop);
         }
     }
-
     return result;
-
 }
 
 function addAddPlayerFieldEnterButtonEventListener(id) {
@@ -359,8 +312,79 @@ function find_duplicate_in_array(arra1) {
     }
     return result;
 }
+//#endregion
+
+//#region edit / delete player modal
+
+function editPlayer(playerNameId, playerId) {
+    var playerName = $(`#${playerNameId}`).html()
+    focusField(`editPlayerName`)
+    $("#editPlayerName").val(playerName);
+    playerIdToEdit = playerId;
+}
+
+function confirmEditPlayer() {
+    var newName = $("#editPlayerName").val();
+    var r = confirm(`Are you sure you want to change name to\n${$("#editPlayerName").val()}`);
+    if (r == true) {
+
+        $.ajax({
+            url: `editPlayer/${playerIdToEdit}/${newName}`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+                var c = document.querySelectorAll("#leaderboard > div");
+                console.log(c)
+                $(`#lname${playerIdToEdit}`).html(data)
+
+                $('#editPlayerModal').modal('hide');
+
+                playerIdToEdit = 0;
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+
+    } else {
+
+    }
+}
+
+function confirmDeletePlayer() {
+
+    var r = confirm(`Are you sure you want to delete player\n${$("#editPlayerName").val()}`);
+    if (r == true) {
+
+        $.ajax({
+            url: `deletePlayer/${playerIdToEdit}`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+                var c = document.querySelectorAll("#leaderboard > div");
+                console.log(c)
+                $(`#l${playerIdToEdit}`).remove();
+
+                $('#editPlayerModal').modal('hide');
+
+                playerIdToEdit = 0;
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
 
 
+    } else {
+
+    }
+}
+
+//#endregion
+
+//#region selected (players)
 
 function selectPlayer(playerId, playerName) {
 
@@ -406,7 +430,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             if (startTournamentInfo.playerIds.length >= 8) {
-                hideAddPlayerArrows();
+                hideSelectPlayerArrows();
             }
 
         }
@@ -437,10 +461,126 @@ function removeSelectedPlayer(playerId, playerName) {
 
     //show arrows
     if (startTournamentInfo.playerIds.length <= 8) {
-        showAddPlayerArrows();
+        showSelectPlayerArrows();
     }
 }
 
+//#endregion
+
+//#region selected (ongoing)
+
+function showOngoingTournament(tournamentId, tournamentName) {
+
+    clearSelected();
+
+    var url = `GetOngoingTournament/${tournamentId}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersInOngoingTour(players, tournamentId);
+            fillTourNameInputWithOngoingTourName(tournamentName);
+            hideSelectPlayerArrows();
+            changeStartTournamentButtonToResumeAndActivate();
+            canAddMorePlayers = false;
+            HideDeleteButton(tournamentId);
+        }
+    });
+}
+
+function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
+
+    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
+    startTournamentInfo.playerIds = [];
+    startTournamentInfo.tournamentId = tournamentId;
+
+    for (var i = 0; i < players.length; i++) {
+
+        $("#selected")
+            .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
+                       <td class="remove-button" style="width: 20px"></td>
+                        <td style="text-align: left;">${players[i].playerName}</td>
+                        </tr>`);
+
+        // Mark players in Leaderboard selected
+        var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
+        selectedPlayerHtml.style.backgroundColor = "black"
+    }
+}
+
+function fillTourNameInputWithOngoingTourName(tournamentName) {
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+    tournamentNameInput.value = tournamentName;
+    tournamentNameInput.disabled = true;
+}
+
+//#endregion
+
+//#region selected (completed)
+
+function selectPlayersFromCompletedTournament(tournamentId) {
+
+    clearSelected();
+
+    var url = `GetOngoingTournament/${tournamentId}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (players) {
+            console.log(players)
+            populateSelectedWithPlayersFromCompletedTournament(players);
+
+            //  hideAllArrows();
+
+            canAddMorePlayers = true;
+        }
+    });
+}
+
+function populateSelectedWithPlayersFromCompletedTournament(players) {
+
+    clearSelected();
+
+    for (i = 0; i < players.length; i++) {
+
+        selectPlayer(`${players[i].playerId}`, players[i].playerName)
+    }
+}
+
+//#endregion
+
+//#region tournament name input field
+function checkIfTournamentNameIsValidInput(input) {
+
+    console.log(input.value)
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
+
+    if (input.value.length > 1 && startTournamentInfo.playerIds.length >= 4) {
+        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("disabled", false);
+        //$('#tournamentNameInput').css("background-color", "lightgreen");
+        tournamentNameInput.style.backgroundColor = "lightgreen";
+    }
+    else if (input.value.length < 2) {
+        $('#startTournament').prop("class", "btn btn-secondary btn-block");
+        $('#startTournament').prop("disabled", true);
+        //$('#tournamentNameInput').css("background-color", "#ffff8e");
+        tournamentNameInput.style.backgroundColor = "#ffff8e"
+    }
+
+    if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
+        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("disabled", false);
+        //$('#tournamentNameInput').css("background-color", "lightgreen");
+        tournamentNameInput.style.backgroundColor = "white";
+    }
+}
+//#endregion
+
+//#region ongoing tournaments
 function deleteTournament(tournamentId) {
 
     $.ajax({
@@ -475,6 +615,10 @@ function deleteSelectedTournament(tournamentId) {
     document.getElementById('ot' + tournamentId).remove();
 }
 
+//#endregion
+
+//#region start tournament button
+
 function startTournament() {
 
     startTournamentInfo.tournamentName = tournamentNameInput.value;
@@ -495,89 +639,7 @@ function startTournament() {
             console.log("error");
         }
     });
-
     tournamentNameInput.value = "";
-
-}
-
-function selectPlayersFromCompletedTournament(tournamentId) {
-
-    clearSelected();
-
-    var url = `GetOngoingTournament/${tournamentId}`;
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (players) {
-            console.log(players)
-            populateSelectedWithPlayersFromCompletedTournament(players);
-
-            //  hideAllArrows();
-
-            canAddMorePlayers = true;
-        }
-    });
-}
-
-function showOngoingTournament(tournamentId, tournamentName) {
-
-    clearSelected();
-
-    var url = `GetOngoingTournament/${tournamentId}`;
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (players) {
-            console.log(players)
-            populateSelectedWithPlayersInOngoingTour(players, tournamentId);
-            fillTourNameInputWithOngoingTourName(tournamentName);
-            hideAddPlayerArrows();
-            changeStartTournamentButtonToResumeAndActivate();
-            canAddMorePlayers = false;
-            HideDeleteButton(tournamentId);
-
-        }
-    });
-}
-
-function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
-
-    document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
-    startTournamentInfo.playerIds = [];
-    startTournamentInfo.tournamentId = tournamentId;
-
-    for (var i = 0; i < players.length; i++) {
-
-        $("#selected")
-            .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
-                       <td class="remove-button" style="width: 20px"></td>
-                        <td style="text-align: left;">${players[i].playerName}</td>
-                        </tr>`);
-
-        // Mark players in Leaderboard selected
-        var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
-        selectedPlayerHtml.style.backgroundColor = "black"
-    }
-
-
-}
-
-function populateSelectedWithPlayersFromCompletedTournament(players) {
-
-    clearSelected();
-
-    for (i = 0; i < players.length; i++) {
-
-        selectPlayer(`${players[i].playerId}`, players[i].playerName)
-    }
-}
-
-function fillTourNameInputWithOngoingTourName(tournamentName) {
-
-    let tournamentNameInput = document.getElementById("tournamentNameInput");
-    tournamentNameInput.value = tournamentName;
-    tournamentNameInput.disabled = true;
-
 }
 
 function changeStartTournamentButtonToResumeAndActivate() {
@@ -588,6 +650,10 @@ function changeStartTournamentButtonToResumeAndActivate() {
 
     $('#clearSelectedBtn').prop("disabled", false);
 }
+
+//#endregion
+
+//#region clear button
 
 function clearSelected() {
     document.getElementById("selected").innerHTML = ""; // Rensa selected-diven
@@ -639,55 +705,6 @@ function clearSelected() {
     tournamentNameInput.style.backgroundColor = "white";
 }
 
-function hideAddPlayerArrows() {
-    var arrows = document.getElementsByClassName("select-button");
+//#endregion
 
-    for (var i = 0; i < arrows.length; i++) {
-        arrows[i].style.visibility = "hidden";
-    }
-}
 
-function showAddPlayerArrows() {
-
-    // arrowid on players in leaderboard
-    var arrowsInLeaderBoard = document.getElementsByClassName("select-button");
-    
-    // arrowid on selected players
-    var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
-
-    for (i = 0; i < arrowsInLeaderBoard.length; i++) {
-        console.log(arrowsInLeaderBoard[i].id)
-        //check if the player from leaderboard is in selectedPlayers:
-        if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
-            var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
-            arrow.style.visibility = "visible";
-        }
-    }  
-}
-
-function checkIfValidInput(input) {
-
-    console.log(input.value)
-
-    let tournamentNameInput = document.getElementById("tournamentNameInput");
-
-    if (input.value.length > 1 && startTournamentInfo.playerIds.length >= 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
-        $('#startTournament').prop("disabled", false);
-        //$('#tournamentNameInput').css("background-color", "lightgreen");
-        tournamentNameInput.style.backgroundColor = "lightgreen";
-    }
-    else if (input.value.length < 2) {
-        $('#startTournament').prop("class", "btn btn-secondary btn-block");
-        $('#startTournament').prop("disabled", true);
-        //$('#tournamentNameInput').css("background-color", "#ffff8e");
-        tournamentNameInput.style.backgroundColor = "#ffff8e"
-    }
-
-    if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
-        $('#startTournament').prop("disabled", false);
-        //$('#tournamentNameInput').css("background-color", "lightgreen");
-        tournamentNameInput.style.backgroundColor = "white";
-    }
-}
