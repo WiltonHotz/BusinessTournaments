@@ -397,7 +397,7 @@ function selectPlayer(playerId, playerName) {
             let selectArrow = document.getElementById(`sBtn${playerId}`);
             let tournamentNameInput = document.getElementById("tournamentNameInput");
             selectArrow.style.visibility = "hidden";
-            selectedPlayerHtml.style.backgroundColor = "black"
+            selectedPlayerHtml.style.opacity = "0.2";
 
             // Activate CLEAR button
             if (startTournamentInfo.playerIds.length == 1) {
@@ -424,9 +424,8 @@ function selectPlayer(playerId, playerName) {
             if (startTournamentInfo.playerIds.length >= 16) {
                 hideSelectPlayerArrows();
             }
-             $(`#playerCounter`).html(`Selected Player Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${startTournamentInfo.playerIds.length}/16`)
 
-
+            updateSelectedPlayerCounter()
         }
     }
 }
@@ -440,7 +439,7 @@ function removeSelectedPlayer(playerId) {
     document.getElementById('selected' + playerId).remove();
     let selectedPlayerHtml = document.getElementById('l' + playerId);
     let tournamentNameInput = document.getElementById("tournamentNameInput");
-    selectedPlayerHtml.style.backgroundColor = "inherit";
+    selectedPlayerHtml.style.opacity = "1";
     document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
 
     // Disable create button if less than 4
@@ -457,10 +456,22 @@ function removeSelectedPlayer(playerId) {
     if (startTournamentInfo.playerIds.length <= 16) {
         showSelectPlayerArrows();
     }
-    $(`#playerCounter`).html(`Selected Player Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${startTournamentInfo.playerIds.length}/16`)
+    updateSelectedPlayerCounter()
+}
 
+function updateSelectedPlayerCounter(players) {
 
+    // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
+    if (players == null) {
+        if (startTournamentInfo.playerIds.length > 0) {
+            $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+        } else {
+            $(`#playerCounter`).html(``)
+        }
+    } else {
+        $(`#playerCounter`).html(`${players.length}`)
 
+    }
 }
 
 //#endregion
@@ -483,6 +494,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
             HideDeleteButton(tournamentId);
+            
         }
     });
 }
@@ -499,11 +511,12 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
                        <td style="text-align: left;" class="remove-button" style="width: 20px">&nbsp&nbsp${players[i].playerName}</td>
                         </tr>`);
-
+        
         // Mark players in Leaderboard selected
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
-        selectedPlayerHtml.style.backgroundColor = "black"
+        selectedPlayerHtml.style.opacity = "0.2"
     }
+    updateSelectedPlayerCounter(players)
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -544,6 +557,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
 
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
+    updateSelectedPlayerCounter()
 }
 
 //#endregion
@@ -637,6 +651,7 @@ function startTournament() {
         data: jsonStr,
         success: function (data) {
             console.log(data)
+            getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
         error: function () {
@@ -666,6 +681,7 @@ function clearSelected() {
     startTournamentInfo.playerIds = [];
     startTournamentInfo.tournamentId = "";
     startTournamentInfo.tournamentName = ""
+    updateSelectedPlayerCounter()
 
     canAddMorePlayers = true;
 
@@ -680,7 +696,7 @@ function clearSelected() {
     // Change background to normal
     var leaderboardRows = document.getElementsByClassName("leaderboard-row");
     for (var i = 0; i < leaderboardRows.length; i++) {
-        leaderboardRows[i].style.backgroundColor = "inherit"
+        leaderboardRows[i].style.opacity = "1"
     }
 
     // Show all arrows
@@ -729,7 +745,11 @@ function burgerStuff() {
 }
 //#endregion
 
+
 //#region themes
+
+
+
 
 function setTheme(theme) {
     console.log(theme)
