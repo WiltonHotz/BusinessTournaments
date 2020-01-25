@@ -89,6 +89,8 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
             $(bracketId).html(emptyBracketHtml);
             $(bracketId).prop("class", emptyBracketClasses) // Byter class till "bracket-empty" ist för "bracket" och får därmed inget click-event
         }
+
+        checkIfBracketLevelsAreLocked();
     }
 }
 
@@ -603,15 +605,28 @@ function checkIfBracketLevelsAreLocked() {
         }
     }
     if (currentBracketsJson.brackets.length === 15) {
-        console.log('shu bre')
 
-        let semisWinnersAndLosers = document.getElementById('semis').querySelectorAll('.winner, .loser');
+        let semiUpperWinnersAndLosers = document.getElementById('semis').querySelector('.upper').querySelectorAll('.winner, .loser');
+        let semiLowerWinnersAndLosers = document.getElementById('semis').querySelector('.lower').querySelectorAll('.winner, .loser');
         let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
 
-        if (semisWinnersAndLosers.length === 4)
-            document.getElementById('quarters').style.opacity = "0.3";
-        else
-            document.getElementById('quarters').style.opacity = "1";
+        if (semiUpperWinnersAndLosers.length === 2) {
+            let upper = document.getElementById('quarters').querySelectorAll('.upper');
+            for (var i = 0; i < upper.length; i++) { upper[i].style.opacity = "0.3"; }
+        }
+        else {
+            let upper = document.getElementById('quarters').querySelectorAll('.upper');
+            for (var i = 0; i < upper.length; i++) { upper[i].style.opacity = "1"; }
+        }
+
+        if (semiLowerWinnersAndLosers.length === 2) {
+            let lower = document.getElementById('quarters').querySelectorAll('.lower');
+            for (var i = 0; i < lower.length; i++) { lower[i].style.opacity = "0.3"; }
+        }
+        else {
+            let lower = document.getElementById('quarters').querySelectorAll('.lower');
+            for (var i = 0; i < lower.length; i++) { lower[i].style.opacity = "1"; }
+        }
 
         if (finalWinnerAndLoser.length === 2) {
             document.getElementById('semis').style.opacity = "0.3";
@@ -620,34 +635,72 @@ function checkIfBracketLevelsAreLocked() {
             document.getElementById('semis').style.opacity = "1";
         }
     }
+
     if (currentBracketsJson.brackets.length === 31) {
 
-        let quartersLeftWinnersAndLosers = document.getElementById('quarters-left').querySelectorAll('.winner, .loser');
-        let quartersRightWinnersAndLosers = document.getElementById('quarters-right').querySelectorAll('.winner, .loser');
-        let semisLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
-        let semisRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
+        let emptyEightsLeft = document.getElementById('eights-left').querySelectorAll('.empty');
+        let emptyEightsRight = document.getElementById('eights-right').querySelectorAll('.empty');
+        let quartersUpperLeftWinnersAndLosers = document.getElementById('quarters-left').querySelector('.upper').querySelectorAll('.winner, .loser');
+        let quartersLowerLeftWinnersAndLosers = document.getElementById('quarters-left').querySelector('.lower').querySelectorAll('.winner, .loser');
+        let quartersUpperRightWinnersAndLosers = document.getElementById('quarters-right').querySelector('.upper').querySelectorAll('.winner, .loser');
+        let quartersLowerRightWinnersAndLosers = document.getElementById('quarters-right').querySelector('.lower').querySelectorAll('.winner, .loser');
+        let semiLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
+        let semiRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
         let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
 
-        if (quartersLeftWinnersAndLosers.length === 4)
-            document.getElementById('eights-left').style.opacity = "0.3";
-        else
-            document.getElementById('eights-left').style.opacity = "1";
+        // Upper left eights
+        if (quartersUpperLeftWinnersAndLosers.length === 2) {
+            let brackets = document.getElementById('eights-left').querySelectorAll('.upper');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "0.3"; }
+        }
+        else {
+            let brackets = document.getElementById('eights-left').querySelectorAll('.upper');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "1"; }
+        }
 
-        if (quartersRightWinnersAndLosers.length === 4)
-            document.getElementById('eights-right').style.opacity = "0.3";
-        else
-            document.getElementById('eights-right').style.opacity = "1";
+        // Lower left eights
+        if (quartersLowerLeftWinnersAndLosers.length === 2) {
+            let brackets = document.getElementById('eights-left').querySelectorAll('.lower');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "0.3"; }
+        }
+        else {
+            let brackets = document.getElementById('eights-left').querySelectorAll('.lower');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "1"; }
+        }
 
-        if (semisLeftWinnersAndLosers.length === 2)
+        // Upper right eights
+        if (quartersUpperRightWinnersAndLosers.length === 2) {
+            let brackets = document.getElementById('eights-right').querySelectorAll('.upper');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "0.3"; }
+        }
+        else {
+            let brackets = document.getElementById('eights-right').querySelectorAll('.upper');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "1"; }
+        }
+
+        // Lower right eights
+        if (quartersLowerRightWinnersAndLosers.length === 2) {
+            let brackets = document.getElementById('eights-right').querySelectorAll('.lower');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "0.3"; }
+        }
+        else {
+            let brackets = document.getElementById('eights-right').querySelectorAll('.lower');
+            for (var i = 0; i < brackets.length; i++) { brackets[i].style.opacity = "1"; }
+        }
+
+        // Left quarters
+        if (semiLeftWinnersAndLosers.length === 2) 
             document.getElementById('quarters-left').style.opacity = "0.3";
-        else
+        else 
             document.getElementById('quarters-left').style.opacity = "1";
 
-        if (semisRightWinnersAndLosers.length === 2)
+        // Right quarters
+        if (semiRightWinnersAndLosers.length === 2)
             document.getElementById('quarters-right').style.opacity = "0.3";
         else
             document.getElementById('quarters-right').style.opacity = "1";
 
+        // Right & left semis
         if (finalWinnerAndLoser.length === 2) {
             document.getElementById('semis-left').style.opacity = "0.3";
             document.getElementById('semis-right').style.opacity = "0.3";

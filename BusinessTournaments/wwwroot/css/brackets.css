@@ -36,10 +36,6 @@ html, body {
     transition: all ease .5s;
 }
 
-/*.bracket-level:hover{
-  width: 200%;
-}*/
-
 .bracket-match {
     width: 90%;
     margin: auto;
@@ -70,13 +66,21 @@ html, body {
     }
 
     .bracket.loser {
-        background-color: #D07030;
+        background-color: #9c5526;
     }
 
 .bracket.empty {
     background-color: #808080;
     transition: all ease .5s;
     cursor: default;
+}
+
+.upper {
+    transition: all ease .5s;
+}
+
+.lower {
+    transition: all ease .5s;
 }
 
 .player-name {
@@ -95,4 +99,14 @@ html, body {
 
 .player-id {
     display: none;
+}
+
+#eights-left .empty {
+    /*background-color: #434343;*/ 
+    visibility: hidden;
+}
+
+#eights-right .empty {
+    /*background-color: #434343;*/
+    visibility: hidden;
 }
