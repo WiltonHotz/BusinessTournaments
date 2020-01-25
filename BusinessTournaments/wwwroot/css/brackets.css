@@ -61,7 +61,7 @@ html, body {
     display: flex;
     flex-direction: row;
     transition: all ease .5s;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     margin-top: 5%;
     min-height: 70%;
     cursor: pointer;
@@ -70,6 +70,7 @@ html, body {
     .bracket.winner {
         background-color: #96e581;
         font-weight: bold;
+        box-shadow: 0 0 10px 3px #96e581 ;
     }
 
     .bracket.loser {
