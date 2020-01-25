@@ -110,11 +110,13 @@ html, body {
 }
 
 #eights-left .empty {
-    /*background-color: #434343;*/ 
     visibility: hidden;
 }
 
 #eights-right .empty {
-    /*background-color: #434343;*/
+    visibility: hidden;
+}
+
+#quarters .empty {
     visibility: hidden;
 }
