@@ -5,6 +5,7 @@ let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"
 let emptyBracketClasses = "bracket empty rounded";
 let populatedBracketClasses = "bracket rounded";
 let winnerBracketClasses = "bracket winner rounded";
+let totalWinnerBracketClasses = "bracket totalwinner rounded";
 let loserBracketClasses = "bracket loser rounded";
 
 const unique = (value, index, self) => {
@@ -145,8 +146,12 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Change classes (colors and other things css)
         $(`#${fromBracketId}`).prop("class", winnerBracketClasses);
-        $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
         $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
+        if (targetBracketId != 'b0')
+            $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
+        else
+            $(`#${targetBracketId}`).prop("class", totalWinnerBracketClasses);
+
 
         // Copy name to next bracket
         document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
