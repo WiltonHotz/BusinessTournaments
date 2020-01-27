@@ -53,14 +53,17 @@ table {
         top: 0;
         z-index: 2;
         background-color: var(--tableFixHead-bgc);
-        background-image: var(--tableFixHead-gradient);
+        /*background-image: var(--tableFixHead-gradient);*/
         padding-bottom: 5px;
         padding-top: 5px;
         padding-left: 5px;
+        font-family: var(--tableFixHead-ff);
+        border-bottom: solid 1px gray;
     }
 
     .tableFixHead tbody td {
         padding-left: 5px;
+        font-family: var(--tableFixHead-ff);
     }
 
 .wrapper {
@@ -213,6 +216,7 @@ svg {
 
 .TournamentName {
     grid-area: TournamentName;
+    line-height: 40px;
 }
 
 .StartTournament {
