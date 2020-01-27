@@ -6,6 +6,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--body-bgc) !important;
+    background-image: var(--body-bg-img);
+    background-size: cover;
 }
 
 h1, h2, h3, p {
@@ -45,6 +47,7 @@ table {
     .tableFixHead tbody td {
         padding-left: 5px;
         font-family: var(--tableFixHead-ff);
+        border-bottom: solid 1px #2e2e2e
     }
 
 .wrapper {
@@ -178,7 +181,7 @@ svg {
     grid-template-columns: 1.5fr 0.7fr 0.3fr 1.5fr;
     grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr 1.5fr;
     grid-template-areas: "Hamburger CompanyName CompanyName EmptySpace" "Leaderboard Selected Selected Ongoing" "Leaderboard Selected Selected Completed" "Leaderboard TournamentName TournamentName Completed" "AddPlayers StartTournament ClearTournament Completed" "Footer Footer Footer Footer";
-    grid-gap: 10px 10px;
+    grid-gap: 15px 15px;
 }
 
 .CompanyName {
@@ -236,7 +239,25 @@ svg {
 
 .Gradient {
     background-color: var(--gradient-bgc);
-    background-image: var(--gradient-gradient);
+    /*background-image: var(--gradient-gradient);*/
+}
+
+.scoretd {
+    text-align: center;
+}
+
+.scoreth {
+    text-align: center;
+}
+
+#addPlayerModalBtn {
+    background-color: var(--add-new-player-button);
+    color: #d3d3d3;
+}
+
+#addPlayerModalBtn:hover {
+    background-color: var(--add-new-player-button-hover);
+    color: #d3d3d3;
 }
 
 /*SidebarStuff*/
