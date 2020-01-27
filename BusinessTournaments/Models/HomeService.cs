@@ -32,7 +32,9 @@ namespace BusinessTournaments.Models
                     PlayerId = p.Id,
                     PlayerName = p.Name,
                     Score = p.Score
-                }).ToListAsync();
+                })
+                .OrderByDescending(p => p.Score)
+                .ToListAsync();
 
             var tournaments = await context.Tournaments
                 .Where(c => c.CompanyId == userId)
