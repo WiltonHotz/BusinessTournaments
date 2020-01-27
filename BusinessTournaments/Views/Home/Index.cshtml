@@ -4,30 +4,20 @@
 }
 @section styles {
     <link href="~/css/index.css" rel="stylesheet" />
-
 }
 
 <div class="wrapper">
     <div class="grid-container">
         <div class="Hamburger">
-
-            <div id="nav-icon" onclick="burgerStuff()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="divspan" onclick="openNav()">
+                &#9776;
             </div>
+            <h3 style="padding-left: 1%; display: inline;">@User.Identity.Name.ToUpper()</h3>
 
         </div>
-        <div class="CompanyName roundCorners wrapper">
 
-            <h3 class="center">@User.Identity.Name.ToUpper()</h3>
+        @*<div class="EmptySpace roundCorners wrapper">*@
 
-        </div>
-        <div class="EmptySpace roundCorners wrapper">
-
-
-
-        </div>
 
         <!-- [LEADERBOARD] -->
         <div class="Leaderboard Gradient roundCorners">
@@ -37,7 +27,7 @@
                     <thead>
                         <tr>
                             <th width="20px"></th>
-                            <th id="scoreBtn" class="scoreth" onclick ="sortByScore()">SCORE</th>
+                            <th id="scoreBtn" class="scoreth" onclick="sortByScore()">SCORE</th>
                             <th id="playerNameBtn" class="nameth" onclick="sortByName()">PLAYER NAME</th>
                             <th></th>
                         </tr>
@@ -100,6 +90,7 @@
             </div>
 
         </div>
+
 
         <!-- [COMPLETED TOURNAMENTS] -->
         <div class="Completed roundCorners Gradient">
@@ -192,6 +183,16 @@
         </div>
 
     </div>
+</div>
+
+
+<!-- [SIDEBAR]-->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Help</a>
+    <a href="#">Settings</a>
+    <a href="#">Logout</a>
 </div>
 
 @section scripts {
