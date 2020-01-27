@@ -8,6 +8,9 @@ let startTournamentInfo = {
 let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
+let sortedByNamesDesc = true;
+let sortedByScoreDesc = false;
+
 
 //#endregion
 
@@ -56,7 +59,7 @@ $(document).ready(function () {
 //#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
-    setTheme('default');
+    setTheme('samuelsTheme');
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>
     el.addEventListener("scroll", tableFixHead)
@@ -87,8 +90,8 @@ function PopulatePlayersOnLoad(leaderboard) {
         $("#leaderboard")
             .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
                         <td><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
-                        <td>${leaderboard[i].score}</td>
-                        <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
+                        <td class="scoretd">${leaderboard[i].score}</td>
+                        <td class="nametd" id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
                         ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>`}
                         </tr>`);
     }
@@ -792,3 +795,79 @@ function setTheme(theme) {
 }
 
 //#endregion
+
+function sortByScore() {
+    var url = "GetIndexVM";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+
+
+            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
+
+                $("#leaderboard").html("")
+
+                if (sortedByScoreDesc) {
+                    var sortByScore = response.leaderboard.sort(compareValues("score"))
+                    PopulatePlayersOnLoad(sortByScore);
+                    sortedByScoreDesc = false;
+                } else {
+                    var sortByScore = response.leaderboard.sort(compareValues("score", "desc"))
+                    PopulatePlayersOnLoad(sortByScore);
+                    sortedByScoreDesc = true;
+                }
+       
+            }
+        }
+    });
+}
+
+function sortByName() {
+    var url = "GetIndexVM";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+
+            var leaderboardList = document.getElementsByClassName("leaderboard-row");
+
+            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
+                $("#leaderboard").html("")
+                if (sortedByNamesDesc) {
+                    var sortOnName = response.leaderboard.sort(compareValues("playerName"))
+                    PopulatePlayersOnLoad(sortOnName);
+                    sortedByNamesDesc = false;
+                } else {
+                    var sortOnName = response.leaderboard.sort(compareValues("playerName","desc"))
+                    PopulatePlayersOnLoad(sortOnName);
+                    sortedByNamesDesc = true;
+                }
+            
+            }
+        }
+    });
+}
+function compareValues(key, order = 'asc') {
+    return function innerSort(a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // property doesn't exist on either object
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+            comparison = 1;
+        } else if (varA < varB) {
+            comparison = -1;
+        }
+        return (
+            (order === 'desc') ? (comparison * -1) : comparison
+        );
+    };
+}

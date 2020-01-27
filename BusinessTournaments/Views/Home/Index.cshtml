@@ -36,9 +36,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th width="10%"></th>
-                            <th width="20%">SCORE</th>
-                            <th width="40%">PLAYER NAME</th>
+                            <th width="20px"></th>
+                            <th id="scoreBtn" class="scoreth" onclick ="sortByScore()">SCORE</th>
+                            <th id="playerNameBtn" class="nameth" onclick="sortByName()">PLAYER NAME</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -96,7 +96,7 @@
         <div class="AddPlayers roundCorners">
 
             <div>
-                <button type="button" class="btn btn-success btn-block" id="addPlayerModalBtn">Add New Player</button>
+                <button type="button" class="btn btn-block" id="addPlayerModalBtn">ADD NEW PLAYERS</button>
             </div>
 
         </div>
@@ -140,6 +140,7 @@
 
         </div>
 
+        <!-- [FOOTER] -->
         <div class="Footer roundCorners wrapper">
 
             <footer>
@@ -150,6 +151,8 @@
     </div>
 </div>
 
+
+<!-- [ADD PLAYER MODAL] -->
 <div id="addPlayerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
