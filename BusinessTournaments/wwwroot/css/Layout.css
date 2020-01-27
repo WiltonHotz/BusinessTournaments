@@ -1,0 +1,64 @@
+﻿:root {
+    /*Index vars*/
+    --body-bgc: #313131;
+    --tableFixHead-bgc: #114a33;
+    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
+    --hX-c: #CADBCF;
+    --footer-bgc: #313131;
+    --copyright-c: #CADBCF;
+    --lessOpacity-c: white;
+    --editIcon-hover-c: yellow;
+    --select-button-c: green;
+    --octicon-arrow-right-c: green;
+    --octicon-arrow-right-hover-c: lightgreen;
+    --octicon-arrow-right-active-c: white;
+    --octicon-arrow-left-c: red;
+    --octicon-arrow-left-hover-c: lightcoral;
+    --octicon-completed-hover-c: #FE512C;
+    --octicon-arrow-left-active-c: white;
+    --octicon-arrow-left-ongoing-c: #FEFEAE;
+    --octicon-arrow-left-ongoing-hover-c: #FFFF6D;
+    --octicon-completed-active-c: white;
+    --octicon-completed-ongoing-c: #FE512C;
+    --octicon-completed-ongoing-hover: #E4221C;
+    --octicon-x-c: red;
+    --octicon-x-hover-c: lightcoral;
+    --octicon-x-active-c: white;
+    --gradient-bgc: #114a33;
+    --gradient-gradient: linear-gradient(#114a33, #176647);
+    --grid-container-ff: "Arial";
+    /* End Index vars*/
+
+}
+
+.redTheme {
+    /*Index vars*/
+    --body-bgc: lightblue;
+    --tableFixHead-bgc: #FE512C;
+    --tableFixHead-gradient: linear-gradient(#FE512C, red);
+    --hX-c: black;
+    --footer-bgc: lightblue;
+    --copyright-c: #CADBCF;
+    --lessOpacity-c: white;
+    --editIcon-hover-c: yellow;
+    --select-button-c: blue;
+    --octicon-arrow-right-c: purple;
+    --octicon-arrow-right-hover-c: brown;
+    --octicon-arrow-right-active-c: white;
+    --octicon-arrow-left-c: red;
+    --octicon-arrow-left-hover-c: #313131;
+    --octicon-completed-hover-c: #FEFEAE;
+    --octicon-arrow-left-active-c: white;
+    --octicon-arrow-left-ongoing-c: lightgreen;
+    --octicon-arrow-left-ongoing-hover-c: #176647;
+    --octicon-completed-active-c: white;
+    --octicon-completed-ongoing-c: #CADBCF;
+    --octicon-completed-ongoing-hover: #00ff21;
+    --octicon-x-c: red;
+    --octicon-x-hover-c: blue;
+    --octicon-x-active-c: white;
+    --gradient-bgc: #FE512C;
+    --gradient-gradient: linear-gradient(#FE512C, red);
+    --grid-container-ff: "Arial";
+    /*End Index vars*/
+}
