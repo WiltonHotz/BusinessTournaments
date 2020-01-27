@@ -121,6 +121,10 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     }
 }
 
+function populateSelectedWithInstructions() {
+
+}
+
 //#endregion
 
 //#region tiny little helpers
@@ -424,7 +428,7 @@ function selectPlayer(playerId, playerName) {
 
             // Activate CREATE TOURNAMENT button
             if (startTournamentInfo.playerIds.length >= 4 && tournamentNameInput.value.length > 1) {
-                $('#startTournament').prop("class", "btn btn-success btn-block");
+                $('#startTournament').prop("class", "btn btn-block");
                 $('#startTournament').prop("disabled", false);
             }
 
@@ -675,7 +679,7 @@ function checkIfTournamentNameIsValidInput(input) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
 
     if (input.value.length > 1 && startTournamentInfo.playerIds.length >= 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
         tournamentNameInput.style.backgroundColor = "lightgreen";
@@ -688,7 +692,7 @@ function checkIfTournamentNameIsValidInput(input) {
     }
 
     if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
         tournamentNameInput.style.backgroundColor = "white";
@@ -769,7 +773,7 @@ function startTournament() {
 function changeStartTournamentButtonToResumeAndActivate() {
 
     $('#startTournament').prop("value", "RESUME TOURNAMENT")
-    $('#startTournament').prop("class", "btn btn-success btn-block");
+    $('#startTournament').prop("class", "btn btn-block");
     $('#startTournament').prop("disabled", false);
 
     $('#clearSelectedBtn').prop("disabled", false);

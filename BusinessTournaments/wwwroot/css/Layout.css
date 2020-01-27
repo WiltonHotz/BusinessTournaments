@@ -42,6 +42,7 @@
     /*Index vars*/
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
+    --body-font-color: #d3d3d3;
     --tableFixHead-bgc: rgb(36, 97, 72);
     --tableFixHead-gradient: linear-gradient(#114a33, #176647);
     --tableFixHead-ff: "Abel-Regular";
@@ -243,6 +244,7 @@ p.copyright {
     font-size: 30px;
     cursor: pointer;
     color: #d3d3d3;
+    border: var(--body-font-color);
 }
 
 /*SidebarStuff*/
