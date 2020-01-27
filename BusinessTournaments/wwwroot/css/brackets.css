@@ -150,11 +150,11 @@ html, body, .grid-container {
         box-shadow: 0 0 10px 10px #FEDB37;
     }
 
-.bracket.empty {
-    background-color: #808080;
-    transition: all ease .5s;
-    cursor: default;
-}
+    .bracket.empty {
+        background-color: rgba(128, 128, 128, 0.8);
+        transition: all ease .5s;
+        cursor: default;
+    }
 
 .upper {
     transition: all ease .5s;
@@ -165,7 +165,7 @@ html, body, .grid-container {
 }
 
 .player-name {
-    font-family: 'Open Sans', sans-serif;
+    font-family: Abel-Regular;
     width: 100%;
     font-size: 1em;
     padding: .2em;
