@@ -38,6 +38,43 @@
 
 }
 
+.samuelsTheme {
+    /*Index vars*/
+    --body-bgc: #000000;
+    --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
+    --tableFixHead-bgc: rgb(36, 97, 72);
+    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
+    --tableFixHead-ff: "Abel-Regular";
+    --hX-c: #CADBCF;
+    --footer-bgc: rgba(0, 0, 0, 0);
+    --copyright-c: #CADBCF;
+    --lessOpacity-c: white;
+    --editIcon-hover-c: yellow;
+    --add-new-player-button: #20895f;
+    --add-new-player-button-hover: #28b27b;
+    --select-button-c: green;
+    --octicon-arrow-right-c: #2ec588;
+    --octicon-arrow-right-hover-c: #3cffb0;
+    --octicon-arrow-right-active-c: white;
+    --octicon-arrow-left-c: red;
+    --octicon-arrow-left-hover-c: lightcoral;
+    --octicon-completed-hover-c: #FE512C;
+    --octicon-arrow-left-active-c: white;
+    --octicon-arrow-left-ongoing-c: #FEFEAE;
+    --octicon-arrow-left-ongoing-hover-c: #FFFF6D;
+    --octicon-completed-active-c: white;
+    --octicon-completed-ongoing-c: #FE512C;
+    --octicon-completed-ongoing-hover: #E4221C;
+    --octicon-x-c: red;
+    --octicon-x-hover-c: lightcoral;
+    --octicon-x-active-c: white;
+    /*--gradient-bgc: #2d2d2d;*/
+    --gradient-bgc: rgba(59, 59, 59, 0.5);
+    --gradient-gradient: linear-gradient(#222524, #176647);
+    --grid-container-ff: "Arial";
+    /* End Index vars*/
+}
+
 .redTheme {
     /*Index vars*/
     --body-bgc: lightblue;
