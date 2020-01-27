@@ -318,7 +318,7 @@ function checkIfBracketLevelsAreLocked() {
 
         let semiUpperWinnersAndLosers = document.getElementById('semis').querySelector('.upper').querySelectorAll('.winner, .loser');
         let semiLowerWinnersAndLosers = document.getElementById('semis').querySelector('.lower').querySelectorAll('.winner, .loser');
-        let finalWinnerAndLoser = document.getElementById('final-16players').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final-8players').querySelectorAll('.winner, .loser');
 
         if (semiUpperWinnersAndLosers.length === 2) {
             let upper = document.getElementById('quarters').querySelectorAll('.upper');
