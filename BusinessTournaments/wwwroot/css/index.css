@@ -191,11 +191,11 @@ svg {
     grid-gap: 15px 15px;
 }
 
-.CompanyName h3 {
+.Hamburger h3 {
     grid-area: CompanyName;
     font-family: Abel-Regular;
     color: #d3d3d3;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .Leaderboard {
