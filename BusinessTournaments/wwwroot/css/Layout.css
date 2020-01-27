@@ -1,8 +1,14 @@
-﻿:root {
+﻿@font-face {
+    font-family: Abel-Regular;
+    src: url('../fonts/Abel-Regular.ttf')
+}
+
+:root {
     /*Index vars*/
     --body-bgc: #313131;
     --tableFixHead-bgc: #114a33;
     --tableFixHead-gradient: linear-gradient(#114a33, #176647);
+    --tableFixHead-ff: "Abel-Regular";
     --hX-c: #CADBCF;
     --footer-bgc: #313131;
     --copyright-c: #CADBCF;
@@ -27,6 +33,7 @@
     --gradient-bgc: #114a33;
     --gradient-gradient: linear-gradient(#114a33, #176647);
     --grid-container-ff: "Arial";
+    
     /* End Index vars*/
 
 }
