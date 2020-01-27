@@ -82,8 +82,12 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
             $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
             if (bracketsInfo.brackets[i].bracketState === 'winner') {
                 $(bracketId).prop("class", winnerBracketClasses)
-            } else if (bracketsInfo.brackets[i].bracketState === 'loser') {
+            }
+            else if (bracketsInfo.brackets[i].bracketState === 'loser') {
                 $(bracketId).prop("class", loserBracketClasses)
+            }
+            else if (bracketsInfo.brackets[i].bracketState === 'totalwinner') {
+                $(bracketId).prop("class", totalWinnerBracketClasses);
             }
         }
         else {
@@ -161,9 +165,6 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
-
-        if (targetBracketId === 'b0')
-            saveScoreAndMarkTourAsCompletedInDB();
     }
 
     // Set to false to be able to click again
@@ -223,6 +224,9 @@ function setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracket
     // Assign new values to targetBracket
     newBracketsJson.brackets[targetBracketIndex].playerName = playerName;
     newBracketsJson.brackets[targetBracketIndex].playerId = parseInt(playerId);
+    if (targetBracketIndex === 0) {
+        newBracketsJson.brackets[targetBracketIndex].bracketState = 'totalwinner';
+    }
 
     // Set state(class) on brackets
     newBracketsJson.brackets[fromBracketIndex].bracketState = 'winner';
@@ -287,6 +291,7 @@ function saveScoreAndMarkTourAsCompletedInDB() {
     let winnerPlayerId = currentBracketsJson.brackets[0].playerId;
     let secondPlayerId = currentBracketsJson.brackets[1].playerId === winnerPlayerId ? currentBracketsJson.brackets[2].playerId : currentBracketsJson.brackets[1].playerId;
 
+    // WINNER SCORES
     if (currentBracketsJson.brackets.length === 7)
         winnerScore = 2;
     else if (currentBracketsJson.brackets.length === 15)
@@ -294,6 +299,7 @@ function saveScoreAndMarkTourAsCompletedInDB() {
     else (currentBracketsJson.brackets.length === 31)
         winnerScore = 4;
 
+    // JSON OBJECT
     let finalizeTournamentJson = {
         winnerPlayerId: winnerPlayerId,
         winnerScore: winnerScore,
@@ -308,8 +314,8 @@ function saveScoreAndMarkTourAsCompletedInDB() {
         contentType: 'application/json',
         data: JSON.stringify(finalizeTournamentJson),
         success: function (data) {
-            console.log(data);
-            window.location.href = "";
+            
+            window.location.href = "/"; // Redirect to home
         },
         error: function () {
             console.log("error");

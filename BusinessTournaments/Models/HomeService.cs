@@ -36,8 +36,8 @@ namespace BusinessTournaments.Models
                 .OrderByDescending(p => p.Score)
                 .ToListAsync();
 
-            var tournaments = await context.Tournaments
-                .Where(c => c.CompanyId == userId)
+            var ongoingTournaments = await context.Tournaments
+                .Where(c => c.CompanyId == userId && !c.IsCompleted)
                 .Select(t => new TournamentVM
                 {
                     TournamentId = t.Id,
@@ -46,11 +46,21 @@ namespace BusinessTournaments.Models
                     IsCompleted = t.IsCompleted
                 }).ToListAsync();
 
+            var completedTournaments = await context.Tournaments
+                .Where(c => c.CompanyId == userId && c.IsCompleted)
+                .Select(t => new TournamentVM
+                {
+                    TournamentId = t.Id,
+                    TournamentName = t.TournamentName,
+                    Date = t.LastModified,
+                    IsCompleted = t.IsCompleted
+                }).ToListAsync();
+
             return new IndexVM
             {
                 Leaderboard = players,
-                OngoingTournaments = tournaments.Where(t => t.IsCompleted == false),
-                CompletedTournaments = tournaments.Where(t => t.IsCompleted == true)
+                OngoingTournaments = ongoingTournaments,
+                CompletedTournaments = completedTournaments,
             };
         }
 

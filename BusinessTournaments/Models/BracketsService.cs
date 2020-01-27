@@ -106,6 +106,7 @@ namespace BusinessTournaments.Models
             if (tournament != null)
             {
                 tournament.BracketsJsonString = currentBracket;
+                tournament.LastModified = DateTime.Now;
                 await context.SaveChangesAsync();
                 return true;
             }
