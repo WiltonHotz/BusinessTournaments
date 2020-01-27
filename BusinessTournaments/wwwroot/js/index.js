@@ -506,6 +506,77 @@ function updateSelectedPlayerCounter(players) {
     }
 }
 
+function sortByScore() {
+    var url = "GetIndexVM";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+
+            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
+
+                $("#leaderboard").html("")
+
+                if (sortedByScoreDesc) {
+                    var sortByScore = response.leaderboard.sort(compareValues("score"))
+                    PopulatePlayersOnLoad(sortByScore);
+                    sortedByScoreDesc = false;
+                } else {
+                    var sortByScore = response.leaderboard.sort(compareValues("score", "desc"))
+                    PopulatePlayersOnLoad(sortByScore);
+                    sortedByScoreDesc = true;
+                }
+
+            }
+        }
+    });
+}
+function sortByName() {
+    var url = "GetIndexVM";
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (response) {
+
+            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
+                $("#leaderboard").html("")
+                if (sortedByNamesDesc) {
+                    var sortOnName = response.leaderboard.sort(compareValues("playerName"))
+                    PopulatePlayersOnLoad(sortOnName);
+                    sortedByNamesDesc = false;
+                } else {
+                    var sortOnName = response.leaderboard.sort(compareValues("playerName", "desc"))
+                    PopulatePlayersOnLoad(sortOnName);
+                    sortedByNamesDesc = true;
+                }
+
+            }
+        }
+    });
+}
+function compareValues(key, order = 'asc') {
+    return function innerSort(a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // property doesn't exist on either object
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+            comparison = 1;
+        } else if (varA < varB) {
+            comparison = -1;
+        }
+        return (
+            (order === 'desc') ? (comparison * -1) : comparison
+        );
+    };
+}
 //#endregion
 
 //#region selected (ongoing)
@@ -796,78 +867,13 @@ function setTheme(theme) {
 
 //#endregion
 
-function sortByScore() {
-    var url = "GetIndexVM";
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (response) {
 
-
-            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
-
-                $("#leaderboard").html("")
-
-                if (sortedByScoreDesc) {
-                    var sortByScore = response.leaderboard.sort(compareValues("score"))
-                    PopulatePlayersOnLoad(sortByScore);
-                    sortedByScoreDesc = false;
-                } else {
-                    var sortByScore = response.leaderboard.sort(compareValues("score", "desc"))
-                    PopulatePlayersOnLoad(sortByScore);
-                    sortedByScoreDesc = true;
-                }
-       
-            }
-        }
-    });
+function openNav() {
+    var sidebar = document.getElementById("mySidenav");
+    sidebar.style.width = "200px";
+    //sidebar.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
-function sortByName() {
-    var url = "GetIndexVM";
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function (response) {
-
-            var leaderboardList = document.getElementsByClassName("leaderboard-row");
-
-            if (canAddMorePlayers && startTournamentInfo.playerIds.length === 0) {
-                $("#leaderboard").html("")
-                if (sortedByNamesDesc) {
-                    var sortOnName = response.leaderboard.sort(compareValues("playerName"))
-                    PopulatePlayersOnLoad(sortOnName);
-                    sortedByNamesDesc = false;
-                } else {
-                    var sortOnName = response.leaderboard.sort(compareValues("playerName","desc"))
-                    PopulatePlayersOnLoad(sortOnName);
-                    sortedByNamesDesc = true;
-                }
-            
-            }
-        }
-    });
-}
-function compareValues(key, order = 'asc') {
-    return function innerSort(a, b) {
-        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-            // property doesn't exist on either object
-            return 0;
-        }
-
-        const varA = (typeof a[key] === 'string')
-            ? a[key].toUpperCase() : a[key];
-        const varB = (typeof b[key] === 'string')
-            ? b[key].toUpperCase() : b[key];
-
-        let comparison = 0;
-        if (varA > varB) {
-            comparison = 1;
-        } else if (varA < varB) {
-            comparison = -1;
-        }
-        return (
-            (order === 'desc') ? (comparison * -1) : comparison
-        );
-    };
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }

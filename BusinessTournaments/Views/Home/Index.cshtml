@@ -10,21 +10,31 @@
 <div class="wrapper">
     <div class="grid-container">
         <div class="Hamburger">
-
-            <div id="nav-icon" onclick="burgerStuff()">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+            @*<div id="nav-icon" onclick="burgerStuff()">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <h3 style="padding-left: 5%;">@User.Identity.Name.ToUpper()</h3>
         </div>
-        @*<div class="CompanyName roundCorners wrapper">
 
-           
-        </div>*@
+    <div class="EmptySpace roundCorners wrapper">
 
-        <!-- [LEADERBOARD] -->
-        <div class="Leaderboard Gradient roundCorners">
+        <!-- [SIDEBAR]-->
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">About</a>
+            <a href="#">Help</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+        </div>
+
+
+    </div>
+
+    <!-- [LEADERBOARD] -->
+    <div class="Leaderboard Gradient roundCorners">
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
@@ -42,107 +52,107 @@
             </div>
         </div>
 
-        <!-- [SELECTED] -->
-        <div class="Selected Gradient roundCorners">
+    <!-- [SELECTED] -->
+    <div class="Selected Gradient roundCorners">
 
-            <div class="lessOpacity tableFixHead" data-simplebar>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>SELECTED PLAYERS</th>
-                            <th id="playerCounter"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="selected">
-                    </tbody>
-                </table>
-            </div>
+        <div class="lessOpacity tableFixHead" data-simplebar>
+            <table>
+                <thead>
+                    <tr>
+                        <th>SELECTED PLAYERS</th>
+                        <th id="playerCounter"></th>
+                    </tr>
+                </thead>
+                <tbody id="selected">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- [TOURNAMENT NAME INPUT] -->
+    <div class="TournamentName roundCorners">
+
+        <div class="roundCorners">
+            <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
         </div>
 
-        <!-- [TOURNAMENT NAME INPUT] -->
-        <div class="TournamentName roundCorners">
+    </div>
 
-            <div class="roundCorners">
-                <input type="text" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
-            </div>
+    <!-- [START TOURNAMENT BUTTON] -->
+    <div class="StartTournament roundCorners">
 
+        <div class="lessOpacity">
+            <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" disabled />
         </div>
 
-        <!-- [START TOURNAMENT BUTTON] -->
-        <div class="StartTournament roundCorners">
+    </div>
 
-            <div class="lessOpacity">
-                <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE TOURNAMENT" disabled />
-            </div>
+    <!-- [CLEAR SELECTED] -->
+    <div class="ClearTournament roundCorners">
 
+        <div class="lessOpacity">
+            <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
         </div>
 
-        <!-- [CLEAR SELECTED] -->
-        <div class="ClearTournament roundCorners">
+    </div>
 
-            <div class="lessOpacity">
-                <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
-            </div>
-
-        </div>
-
-        <!-- [ADD PLAYERS SELECTED] -->
-        <div class="AddPlayers roundCorners">
+    <!-- [ADD PLAYERS SELECTED] -->
+    <div class="AddPlayers roundCorners">
 
             <div>
                 <button type="button" class="btn btn-block" id="addPlayerModalBtn">ADD NEW PLAYERS</button>
             </div>
 
+    </div>
+
+    <!-- [COMPLETED TOURNAMENTS] -->
+    <div class="Completed roundCorners Gradient">
+
+        <div class="lessOpacity tableFixHead" data-simplebar>
+            <table>
+                <thead>
+                    <tr>
+                        <th><b style="color: #FE512C">COMPLETED</b> TOURNAMENTS</th>
+                        <th widht="60%"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="completed">
+                </tbody>
+            </table>
         </div>
 
-        <!-- [COMPLETED TOURNAMENTS] -->
-        <div class="Completed roundCorners Gradient">
+    </div>
 
-            <div class="lessOpacity tableFixHead" data-simplebar>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><b style="color: #FE512C">COMPLETED</b> TOURNAMENTS</th>
-                            <th widht="60%"></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="completed">
-                    </tbody>
-                </table>
-            </div>
+    <!-- [ONGOING TOURNAMENTS] -->
+    <div class="Ongoing Gradient roundCorners">
 
+        <div class="lessOpacity tableFixHead" data-simplebar>
+            <table>
+                <thead>
+                    <tr>
+                        <th><b style="color: #FEFEAE;">ONGOING</b> TOURNAMENTS</th>
+                        <th widht="60%"></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody id="ongoing">
+                </tbody>
+            </table>
         </div>
 
-        <!-- [ONGOING TOURNAMENTS] -->
-        <div class="Ongoing Gradient roundCorners">
-
-            <div class="lessOpacity tableFixHead" data-simplebar>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><b style="color: #FEFEAE;">ONGOING</b> TOURNAMENTS</th>
-                            <th widht="60%"></th>
-                            <th></th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="ongoing">
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+    </div>
 
         <!-- [FOOTER] -->
         <div class="Footer roundCorners wrapper">
 
-            <footer>
-                <p class="copyright">© Business Tournaments 2020</p>
-            </footer>
+        <footer>
+            <p class="copyright">© Business Tournaments 2020</p>
+        </footer>
 
-        </div>
     </div>
+</div>
 </div>
 
 
