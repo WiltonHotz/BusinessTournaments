@@ -22,6 +22,9 @@ function getTournamentBracketJSON(bracketId) {
             // Save brackets Json for later
             currentBracketsJson = response;
 
+            // add tournament name to html
+            $('.TournamentName').html(`${currentBracketsJson.tournamentName}`)
+
             // Check how many players
             let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
             let numOfPlayers = players.filter(unique).length;
@@ -497,3 +500,22 @@ function setBracketState(clickedBracketId, targetBracketId, opponentBracketId, t
         }
     }
 }
+
+//#region burgers and stuff
+
+$(document).ready(function () {
+    $('#nav-icon').click(function () {
+        $(this).toggleClass('open');
+    });
+});
+
+function burgerStuff() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+//#endregion

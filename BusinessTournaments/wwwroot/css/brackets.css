@@ -2,13 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Dosis);
 @import "layout.css";
 
-/*body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-color: #E8E8E8;
-}*/
-
 html, body, .grid-container {
     height: 95vh;
     width: 95vw;
@@ -18,7 +11,7 @@ html, body, .grid-container {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: #313131; 
+    background-color: var(--body-bgc);
 }
 
     .grid-container * {
@@ -39,7 +32,6 @@ html, body, .grid-container {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 0.3fr 3.1fr 0.3fr 0.3fr;
     grid-template-areas: "Hamburger TournamentName TournamentName EmptyUpperRight" "BracketGrid BracketGrid BracketGrid BracketGrid" "EmptyLowerLeft SaveAndClose SaveAndClose EmptyLowerRight" "EmptyLowerLeft Footer Footer EmptyLowerRight";
-    background-color: #313131;
 }
 
 .Hamburger {

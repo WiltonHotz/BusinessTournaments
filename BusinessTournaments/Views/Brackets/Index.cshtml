@@ -7,12 +7,18 @@
 }
 
 <div class="grid-container">
-    <div class="Hamburger">Hamburger</div>
+    <div class="Hamburger">
+
+        <div id="nav-icon" onclick="burgerStuff()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
     <div class="Footer">
-        Footer
-        @*<footer class="FooterStuff">
+
             <p class="copyright">© Business Tournaments 2020</p>
-        </footer>*@
 
     </div>
     <div class="TournamentName">Tournament Name</div>
@@ -87,7 +93,7 @@
 
 
     $(document).ready(function() {
-         getTournamentBracketJSON(bracketId)
+        getTournamentBracketJSON(bracketId)
     });
 
     </script>
