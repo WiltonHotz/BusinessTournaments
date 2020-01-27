@@ -55,20 +55,27 @@ namespace BusinessTournaments.Controllers
         [Route("CreateTournament")]
         public async Task<IActionResult> StartTournament([FromBody]StartTournament startTournament)
         {
-            var userId = accountService.GetUserId();
-            string tournamentId;
-            int newTournament;
-
-            if (startTournament.TournamentId == "")
+            if(startTournament.PlayerIds.Count() > 16)
             {
-                newTournament = await service.CreateTournamentAsync(startTournament, userId);
-                tournamentId = newTournament.ToString();
+                return BadRequest();
             }
             else
             {
-                tournamentId = startTournament.TournamentId;
+                var userId = accountService.GetUserId();
+                string tournamentId;
+                int newTournament;
+
+                if (startTournament.TournamentId == "")
+                {
+                    newTournament = await service.CreateTournamentAsync(startTournament, userId);
+                    tournamentId = newTournament.ToString();
+                }
+                else
+                {
+                    tournamentId = startTournament.TournamentId;
+                }
+                return Json(tournamentId);
             }
-            return Json(tournamentId);
         }
 
         

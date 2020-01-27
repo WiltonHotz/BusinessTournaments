@@ -12,6 +12,26 @@
         <p class="copyright">© Business Tournaments 2020</p>
     </footer>
 
+<!-- [CONFIRM TOTAL WINNER MODAL]-->
+    <div id="confirmWinnerModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm winner</h4>
+                </div>
+                <div class="modal-body" id="winner-message">
+                    Congratulations!
+                </div>
+                <input type="button" value="Confirm" onclick="addPlayers()" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Go back</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 @section scripts {
     <script src="~/js/bracket.js"></script>
     <script type="text/javascript">

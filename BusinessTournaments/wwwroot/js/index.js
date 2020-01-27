@@ -86,10 +86,10 @@ function PopulatePlayersOnLoad(leaderboard) {
 
         $("#leaderboard")
             .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
-                        <td><span class="editIcon" id="editPlayer${i}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
+                        <td><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
                         <td>${leaderboard[i].score}</td>
                         <td id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
-                        <td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>
+                        ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>`}
                         </tr>`);
     }
 }
@@ -395,9 +395,13 @@ function selectPlayer(playerId, playerName) {
             // Change background color and hide green arrow
             let selectedPlayerHtml = document.getElementById('l' + playerId);
             let selectArrow = document.getElementById(`sBtn${playerId}`);
+            var unEditables = document.getElementById(`editPlayer${playerId}`)
+
             let tournamentNameInput = document.getElementById("tournamentNameInput");
             selectArrow.style.visibility = "hidden";
             selectedPlayerHtml.style.opacity = "0.2";
+            unEditables.style.visibility = "hidden";
+
 
             // Activate CLEAR button
             if (startTournamentInfo.playerIds.length == 1) {
@@ -423,6 +427,7 @@ function selectPlayer(playerId, playerName) {
 
             if (startTournamentInfo.playerIds.length >= 16) {
                 hideSelectPlayerArrows();
+                canAddMorePlayers = false;
             }
 
             updateSelectedPlayerCounter()
@@ -511,10 +516,12 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
             .append(`<tr id='selected${players[i].playerId}' style="height: 38px">
                        <td style="text-align: left;" class="remove-button" style="width: 20px">&nbsp&nbsp${players[i].playerName}</td>
                         </tr>`);
-        
+
         // Mark players in Leaderboard selected
         var selectedPlayerHtml = document.getElementById('l' + players[i].playerId);
+        var unEditables = document.getElementById(`editPlayer${players[i].playerId}`)
         selectedPlayerHtml.style.opacity = "0.2"
+        unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
 }
@@ -688,7 +695,12 @@ function clearSelected() {
     // Reset arrows to green
     var arrows = document.getElementsByClassName("octicon-arrow-right");
 
+    var editIcons = document.getElementsByClassName('editIcon')
+
     for (var i = 0; i < arrows.length; i++) {
+        // edit icon added
+        editIcons[i].style.visibility = "visible"
+
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
     }
@@ -727,7 +739,7 @@ function clearSelected() {
 
 //#endregion
 
-//Making Burgers
+//#region Making Burgers
 
 $(document).ready(function () {
     $('#nav-icon').click(function () {
@@ -744,7 +756,6 @@ function burgerStuff() {
     }
 }
 //#endregion
-
 
 //#region themes
 
