@@ -75,6 +75,18 @@ namespace BusinessTournaments.Models
             return brackets;
         }
 
+        internal async Task FinalizeTournamentAsync(FinalizeTournamentVM vm, string userId)
+        {
+            var tournament = await context.Tournaments.Where(t => t.CompanyId == userId).SingleOrDefaultAsync(t => t.Id == vm.TournamentId);
+            tournament.IsCompleted = true;
+            var winner = await context.Players.Where(p => p.CompanyId == userId).SingleOrDefaultAsync(p => p.Id == vm.WinnerPlayerId);
+            winner.Score += vm.WinnerScore;
+            var second = await context.Players.Where(p => p.CompanyId == userId).SingleOrDefaultAsync(p => p.Id == vm.SecondPlayerId);
+            second.Score += vm.SecondScore;
+
+            await context.SaveChangesAsync();
+        }
+
         internal async Task<BracketVM> GetBracketVMAsync(string tournamentId, string userId)
         {
             var tournament = await context.Tournaments.Where(c => c.CompanyId == userId).SingleOrDefaultAsync(x => x.Id == int.Parse(tournamentId));
@@ -94,6 +106,7 @@ namespace BusinessTournaments.Models
             if (tournament != null)
             {
                 tournament.BracketsJsonString = currentBracket;
+                tournament.LastModified = DateTime.Now;
                 await context.SaveChangesAsync();
                 return true;
             }

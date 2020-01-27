@@ -82,8 +82,12 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
             $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
             if (bracketsInfo.brackets[i].bracketState === 'winner') {
                 $(bracketId).prop("class", winnerBracketClasses)
-            } else if (bracketsInfo.brackets[i].bracketState === 'loser') {
+            }
+            else if (bracketsInfo.brackets[i].bracketState === 'loser') {
                 $(bracketId).prop("class", loserBracketClasses)
+            }
+            else if (bracketsInfo.brackets[i].bracketState === 'totalwinner') {
+                $(bracketId).prop("class", totalWinnerBracketClasses);
             }
         }
         else {
@@ -161,10 +165,6 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
-
-        if (targetBracketId === 'b0') {
-            // Öppna modaljäveln.
-        }
     }
 
     // Set to false to be able to click again
@@ -224,6 +224,9 @@ function setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracket
     // Assign new values to targetBracket
     newBracketsJson.brackets[targetBracketIndex].playerName = playerName;
     newBracketsJson.brackets[targetBracketIndex].playerId = parseInt(playerId);
+    if (targetBracketIndex === 0) {
+        newBracketsJson.brackets[targetBracketIndex].bracketState = 'totalwinner';
+    }
 
     // Set state(class) on brackets
     newBracketsJson.brackets[fromBracketIndex].bracketState = 'winner';
@@ -282,16 +285,37 @@ function saveChangesToDB(newBracketsJson) {
 function saveScoreAndMarkTourAsCompletedInDB() {
     let output = true;
 
-    let jsonStr = JSON.stringify(newBracketsJson)
+    let winnerScore = 0;
+    let secondScore = 1;
+
+    let winnerPlayerId = currentBracketsJson.brackets[0].playerId;
+    let secondPlayerId = currentBracketsJson.brackets[1].playerId === winnerPlayerId ? currentBracketsJson.brackets[2].playerId : currentBracketsJson.brackets[1].playerId;
+
+    // WINNER SCORES
+    if (currentBracketsJson.brackets.length === 7)
+        winnerScore = 2;
+    else if (currentBracketsJson.brackets.length === 15)
+        winnerScore = 3;
+    else (currentBracketsJson.brackets.length === 31)
+        winnerScore = 4;
+
+    // JSON OBJECT
+    let finalizeTournamentJson = {
+        winnerPlayerId: winnerPlayerId,
+        winnerScore: winnerScore,
+        secondPlayerId: secondPlayerId,
+        secondScore: secondScore,
+        tournamentId: currentBracketsJson.tournamentId
+    }
 
     $.ajax({
         url: 'finalizetournament',
         type: 'POST',
         contentType: 'application/json',
-        data: jsonStr,
+        data: JSON.stringify(finalizeTournamentJson),
         success: function (data) {
-            //console.log(data)
-
+            
+            window.location.href = "/"; // Redirect to home
         },
         error: function () {
             console.log("error");

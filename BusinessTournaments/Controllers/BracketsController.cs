@@ -49,6 +49,17 @@ namespace BusinessTournaments.Controllers
             return Ok();
         }
 
+        [Route("brackets/finalizetournament")]
+        public async Task<IActionResult> FinalizeTournament([FromBody]FinalizeTournamentVM finalizetournament)
+        {
+            //Get user(company)id
+            var userId = accountService.GetUserId();
+
+            await service.FinalizeTournamentAsync(finalizetournament, userId);
+
+            return Ok();
+        }
+
         [Route("getbracketspartialview/{numOfPlayers}")]
         public async Task<IActionResult> GetBracketsPartialView(int numOfPlayers)
         {

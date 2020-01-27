@@ -14,7 +14,7 @@ namespace BusinessTournaments.Models.ViewModels
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public bool IsCompleted { get; set; }
     }
