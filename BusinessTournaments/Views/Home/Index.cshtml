@@ -8,11 +8,10 @@
 
 <div class="wrapper">
     <div class="grid-container">
+
         <div class="Hamburger">
-            <div class="divspan" onclick="openNav()">
-                &#9776;
-            </div>
-            <h3 style="padding-left: 1%; display: inline;">@User.Identity.Name.ToUpper()</h3>
+            
+        <partial name="_Hamburger" />
 
         </div>
 
@@ -186,14 +185,7 @@
 </div>
 
 
-<!-- [SIDEBAR]-->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Help</a>
-    <a href="#">Settings</a>
-    <a href="#">Logout</a>
-</div>
+
 
 @section scripts {
     <script src="~/js/index.js"></script>
