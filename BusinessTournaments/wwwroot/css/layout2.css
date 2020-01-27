@@ -25,6 +25,7 @@
     --octicon-x-active-c: white;
     --gradient-bgc: #114a33;
     --gradient-gradient: linear-gradient(#114a33, #176647);
+    --grid-container-ff: "Arial";
 }
 
 .redTheme {
@@ -54,6 +55,7 @@
     --octicon-x-active-c: white;
     --gradient-bgc: #FE512C;
     --gradient-gradient: linear-gradient(#FE512C, red);
+    --grid-container-ff: "Arial";
 }
 
 
@@ -84,7 +86,7 @@ p.copyright {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, p {
     color: var(--hX-c);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -233,6 +235,7 @@ svg {
     position: relative;
     margin-top: 2.5vh;
     margin-left: 2.5vw;
+    font-family: var(--grid-container-ff);
 }
 
     .grid-container * {
@@ -250,7 +253,7 @@ svg {
     grid-template-columns: 1.5fr 0.7fr 0.3fr 1.5fr;
     grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr 1.5fr;
     grid-template-areas: "Hamburger CompanyName CompanyName EmptySpace" "Leaderboard Selected Selected Ongoing" "Leaderboard Selected Selected Completed" "Leaderboard TournamentName TournamentName Completed" "AddPlayers StartTournament ClearTournament Completed" "Footer Footer Footer Footer";
-    grid-gap: 1px 10px;
+    grid-gap: 10px 10px;
 }
 
 .CompanyName {
