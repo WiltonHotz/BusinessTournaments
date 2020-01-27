@@ -3,13 +3,26 @@
 @{
     ViewData["Title"] = "Login";
 }
+@section styles {
+    <link href="~/css/login.css" rel="stylesheet" />
+}
 
-<h1>Login</h1>
+<div class="grid-container">
+    <div class="Header">
 
-<h4>AccountLoginVM</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        <h1>Login</h1>
+        <hr style="color: white;"/>
+
+    </div>
+    <div class="Footer">
+
+        <footer>
+            <p class="copyright">© Business Tournaments 2020</p>
+        </footer>
+
+    </div>
+    <div class="Login">
+
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -26,10 +39,10 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
+    <div class="EmptyLeft"></div>
+    <div class="EmptyRight"></div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
