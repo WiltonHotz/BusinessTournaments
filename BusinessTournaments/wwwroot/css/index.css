@@ -180,7 +180,7 @@ svg {
     display: grid;
     grid-template-columns: 1.5fr 0.7fr 0.3fr 1.5fr;
     grid-template-rows: 1.5fr 8.6fr 6fr 0.7fr 1fr 1.5fr;
-    grid-template-areas: "Hamburger CompanyName CompanyName EmptySpace" "Leaderboard Selected Selected Ongoing" "Leaderboard Selected Selected Completed" "Leaderboard TournamentName TournamentName Completed" "AddPlayers StartTournament ClearTournament Completed" "Footer Footer Footer Footer";
+    grid-template-areas: "Hamburger Hamburger Hamburger Hamburger" "Leaderboard Selected Selected Ongoing" "Leaderboard Selected Selected Completed" "Leaderboard TournamentName TournamentName Completed" "AddPlayers StartTournament ClearTournament Completed" "Footer Footer Footer Footer";
     grid-gap: 15px 15px;
 }
 
