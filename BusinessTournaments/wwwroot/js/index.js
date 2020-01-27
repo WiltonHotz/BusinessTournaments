@@ -460,6 +460,11 @@ function removeSelectedPlayer(playerId) {
     //show arrows
     if (startTournamentInfo.playerIds.length <= 16) {
         showSelectPlayerArrows();
+        
+    }
+    if (startTournamentInfo.playerIds.length < 16) {
+        canAddMorePlayers = true;
+
     }
     updateSelectedPlayerCounter()
 }
@@ -468,14 +473,33 @@ function updateSelectedPlayerCounter(players) {
 
     // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
     if (players == null) {
-        if (startTournamentInfo.playerIds.length > 0) {
+        if (startTournamentInfo.playerIds.length > 0 && startTournamentInfo.playerIds.length < 16) {
             $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+            $(`#playerCounter`).css("color", "white")
+
+        } else if (startTournamentInfo.playerIds.length === 16) {
+            $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+            $(`#playerCounter`).css("color", "red")
+
+
+
         } else {
             $(`#playerCounter`).html(``)
         }
     } else {
-        $(`#playerCounter`).html(`${players.length}`)
+        if (players.length > 0 && players.length < 16) {
+            $(`#playerCounter`).html(`${players.length}`)
+            $(`#playerCounter`).css("color", "white")
 
+        } else if (players.length === 16) {
+            $(`#playerCounter`).html(`${players.length}`)
+            $(`#playerCounter`).css("color", "red")
+
+        } else {
+            $(`#playerCounter`).html(``)
+
+
+        }
     }
 }
 
