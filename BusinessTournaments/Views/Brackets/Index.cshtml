@@ -2,35 +2,88 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section styles {
+    <link href="~/css/brackets.css" rel="stylesheet" />
+}
 
-@*This div needs to be empty!*@
-<div class="bracket-container">
+<div class="grid-container">
+    <div class="Hamburger">
+
+        <div id="nav-icon" onclick="burgerStuff()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+    <div class="Footer">
+
+            <p class="copyright">© Business Tournaments 2020</p>
+
+    </div>
+    <div class="TournamentName">Tournament Name</div>
+    <div class="SaveAndClose"><input type="button" class="btn btn-primary" value="SAVE AND CLOSE" onclick="saveScoreAndMarkTourAsCompletedInDB()"/></div>
+    <div class="EmptyUpperRight"></div>
+    <div class="EmptyLowerRight"></div>
+    <div class="EmptyLowerLeft"></div>
+    <div class="BracketGrid">
+    
+    <div class="bracket-container">
+</div></div>
+
+
 </div>
 
+@*<div class="grid-container">
+    <div class="Hamburger">Hamburgarmeny</div>
+    <div class="Footer">
 
-    <footer class="FooterStuff">
-        <p class="copyright">© Business Tournaments 2020</p>
-    </footer>
+        <footer class="FooterStuff">
+            <p class="copyright">© Business Tournaments 2020</p>
+        </footer>
+        Footer
+
+    </div>
+    <div class="SaveAndClose">SAVE AND CLOSE</div>
+    <div class="TournamentName">TOURNAMEN NAME</div>
+    <div class="Empty">Empty</div>
+    <div class="Empty">Empty</div>
+    <div class="Empty">Empty</div>
+    <div class="Empty">Empty</div>
+    <div class="Empty">Empty</div>
+    <div class="BracketGrid"> Brackets
+
+        This div needs to be empty!
+        <div class="bracket-container">
+        </div>
+
+    </div>
+</div>*@
+
+
+
+
+
 
 <!-- [CONFIRM TOTAL WINNER MODAL]-->
-    <div id="confirmWinnerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+<div id="confirmWinnerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Confirm winner</h4>
-                </div>
-                <div class="modal-body" id="winner-message">
-                    Congratulations!
-                </div>
-                <input type="button" value="Confirm" onclick="addPlayers()" />
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Go back</button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm winner</h4>
             </div>
-
+            <div class="modal-body" id="winner-message">
+                Congratulations!
+            </div>
+            <input type="button" value="Confirm" onclick="addPlayers()" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Go back</button>
+            </div>
         </div>
+
     </div>
+</div>
 
 @section scripts {
     <script src="~/js/bracket.js"></script>
@@ -40,7 +93,7 @@
 
 
     $(document).ready(function() {
-         getTournamentBracketJSON(bracketId)
+        getTournamentBracketJSON(bracketId)
     });
 
     </script>

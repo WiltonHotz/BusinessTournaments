@@ -786,9 +786,6 @@ function burgerStuff() {
 
 //#region themes
 
-
-
-
 function setTheme(theme) {
     console.log(theme)
     if (theme != "default") {

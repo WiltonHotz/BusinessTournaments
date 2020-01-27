@@ -1,12 +1,74 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700);
 @import url(https://fonts.googleapis.com/css?family=Dosis);
+@import "layout.css";
 
-html, body {
-    width: 100%;
+html, body, .grid-container {
+    height: 95vh;
+    width: 95vw;
+    position: relative;
+    margin-top: 2.5vh;
+    margin-left: 2.5vw;
     height: 100%;
+    width: 100%;
     margin: 0;
-    background-color: #E8E8E8;
+    background-color: var(--body-bgc);
 }
+
+    .grid-container * {
+        /*border: 1px solid red;*/
+        position: relative;
+    }
+
+        .grid-container *:after {
+            /*content: attr(class);*/
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+.grid-container {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 3.1fr 0.3fr 0.3fr;
+    grid-template-areas: "Hamburger TournamentName TournamentName EmptyUpperRight" "BracketGrid BracketGrid BracketGrid BracketGrid" "EmptyLowerLeft SaveAndClose SaveAndClose EmptyLowerRight" "EmptyLowerLeft Footer Footer EmptyLowerRight";
+}
+
+.Hamburger {
+    grid-area: Hamburger;
+}
+
+.Footer {
+    grid-area: Footer;
+    text-align: center;
+}
+
+.TournamentName {
+    grid-area: TournamentName;
+    text-align: center;
+}
+
+.SaveAndClose {
+    grid-area: SaveAndClose;
+    text-align: center;
+}
+
+.EmptyUpperRight {
+    grid-area: EmptyUpperRight;
+}
+
+.EmptyLowerRight {
+    grid-area: EmptyLowerRight;
+}
+
+.EmptyLowerLeft {
+    grid-area: EmptyLowerLeft;
+}
+
+.BracketGrid {
+    grid-area: BracketGrid;
+}
+
 
 .FooterStuff {
     z-index: 10;
@@ -27,9 +89,9 @@ html, body {
 .bracket-container {
     display: flex;
     flex-direction: row;
-    height: 90%;
+    height: 100%;
     width: 100%;
-    padding-bottom: 50px;
+    /*padding-bottom: 50px;*/
 
 }
 

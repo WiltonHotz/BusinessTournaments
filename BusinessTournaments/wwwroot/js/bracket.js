@@ -22,6 +22,9 @@ function getTournamentBracketJSON(bracketId) {
             // Save brackets Json for later
             currentBracketsJson = response;
 
+            // add tournament name to html
+            $('.TournamentName').html(`${currentBracketsJson.tournamentName}`)
+
             // Check how many players
             let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
             let numOfPlayers = players.filter(unique).length;
@@ -51,7 +54,7 @@ function getBracketsPartialView(bracketsInfo, numOfPlayers) {
         url: url,
         type: "GET",
         success: function (response) {
-            
+
             $(".bracket-container").html(response);
 
             // Populate brackets with names (and classes if empty)
@@ -272,7 +275,7 @@ function saveChangesToDB(newBracketsJson) {
         data: jsonStr,
         success: function (data) {
             //console.log(data)
-    
+
         },
         error: function () {
             console.log("error");
@@ -283,46 +286,51 @@ function saveChangesToDB(newBracketsJson) {
 }
 
 function saveScoreAndMarkTourAsCompletedInDB() {
-    let output = true;
 
-    let winnerScore = 0;
-    let secondScore = 1;
+    console.log(currentBracketsJson)
 
-    let winnerPlayerId = currentBracketsJson.brackets[0].playerId;
-    let secondPlayerId = currentBracketsJson.brackets[1].playerId === winnerPlayerId ? currentBracketsJson.brackets[2].playerId : currentBracketsJson.brackets[1].playerId;
+    if (currentBracketsJson.brackets[0].playerId === 0) {
+        window.location.href = "/"
+    }
+    else {
+        let winnerScore = 0;
+        let secondScore = 1;
 
-    // WINNER SCORES
-    if (currentBracketsJson.brackets.length === 7)
-        winnerScore = 2;
-    else if (currentBracketsJson.brackets.length === 15)
-        winnerScore = 3;
-    else (currentBracketsJson.brackets.length === 31)
+        let winnerPlayerId = currentBracketsJson.brackets[0].playerId;
+        let secondPlayerId = currentBracketsJson.brackets[1].playerId === winnerPlayerId ? currentBracketsJson.brackets[2].playerId : currentBracketsJson.brackets[1].playerId;
+
+        // WINNER SCORES
+        if (currentBracketsJson.brackets.length === 7)
+            winnerScore = 2;
+        else if (currentBracketsJson.brackets.length === 15)
+            winnerScore = 3;
+        else (currentBracketsJson.brackets.length === 31)
         winnerScore = 4;
 
-    // JSON OBJECT
-    let finalizeTournamentJson = {
-        winnerPlayerId: winnerPlayerId,
-        winnerScore: winnerScore,
-        secondPlayerId: secondPlayerId,
-        secondScore: secondScore,
-        tournamentId: currentBracketsJson.tournamentId
-    }
-
-    $.ajax({
-        url: 'finalizetournament',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(finalizeTournamentJson),
-        success: function (data) {
-            
-            window.location.href = "/"; // Redirect to home
-        },
-        error: function () {
-            console.log("error");
-            output = false;
+        // JSON OBJECT
+        let finalizeTournamentJson = {
+            winnerPlayerId: winnerPlayerId,
+            winnerScore: winnerScore,
+            secondPlayerId: secondPlayerId,
+            secondScore: secondScore,
+            tournamentId: currentBracketsJson.tournamentId
         }
-    });
-    return output;
+
+        $.ajax({
+            url: 'finalizetournament',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(finalizeTournamentJson),
+            success: function (data) {
+
+                window.location.href = "/"; // Redirect to home
+            },
+            error: function () {
+                console.log("error");
+                output = false;
+            }
+        });
+    }
 }
 
 function checkIfBracketLevelsAreLocked() {
@@ -420,9 +428,9 @@ function checkIfBracketLevelsAreLocked() {
         }
 
         // Left quarters
-        if (semiLeftWinnersAndLosers.length === 2) 
+        if (semiLeftWinnersAndLosers.length === 2)
             document.getElementById('quarters-left').style.opacity = "0.3";
-        else 
+        else
             document.getElementById('quarters-left').style.opacity = "1";
 
         // Right quarters
@@ -492,3 +500,22 @@ function setBracketState(clickedBracketId, targetBracketId, opponentBracketId, t
         }
     }
 }
+
+//#region burgers and stuff
+
+$(document).ready(function () {
+    $('#nav-icon').click(function () {
+        $(this).toggleClass('open');
+    });
+});
+
+function burgerStuff() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+//#endregion
