@@ -216,11 +216,11 @@ function addPlayers() {
                         if (duplicates.some(x => x == names[i])) {
                             $(`#badpninp${i}`).html('Please entere unique names')
                         }
-                        if (names[i].length > 30) {
-                            $(`#badpninp${i}`).html('Max 30 characters!')
+                        if (names[i].length > 23) {
+                            $(`#badpninp${i}`).html('Max 23 characters!')
                         }
-                    } else if (names[i].length > 30) {
-                        $(`#badpninp${i}`).html('Max 30 characters!')
+                    } else if (names[i].length > 23) {
+                        $(`#badpninp${i}`).html('Max 23 characters!')
 
                     } else {
                         $(`#badpninp${i}`).html('')
@@ -234,8 +234,8 @@ function addPlayers() {
                     if (duplicates.some(x => x == names[i])) {
                         $(`#badpninp${i}`).html('Please give unique names')
                     }
-                    else if (names[i].length > 30) {
-                        $(`#badpninp${i}`).html('Max 30 characters!')
+                    else if (names[i].length > 23) {
+                        $(`#badpninp${i}`).html('Max 23 characters!')
                     }
                     else {
                         $(`#badpninp${i}`).html('')
@@ -322,6 +322,16 @@ function editPlayer(playerNameId, playerId) {
     focusField(`editPlayerName`)
     $("#editPlayerName").val(playerName);
     playerIdToEdit = playerId;
+}
+
+function validateEditPlayerName() {
+    var newName = $("#editPlayerName").val();
+
+    if (newName.length > 23) {
+        alert("Name can't be more than 22 letters");
+    } else {
+        confirmEditPlayer();
+    }
 }
 
 function confirmEditPlayer() {
