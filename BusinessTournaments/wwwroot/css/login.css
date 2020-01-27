@@ -3,7 +3,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    background-color: var(--body-bgc);
+
     margin: 0;
     padding: 0;
 }
@@ -13,14 +13,16 @@ hr {
 }
 
 .grid-container {
-
+    background-image: var(--body-bg-img);
+    font-family: Abel-Regular;
+    background-size: cover;
+    padding-top: 30px;
     margin: 0;
-    background-color: var(--body-bgc);
+
     height: 100vh;
     width: 100vw;
     position: relative;
-    /*margin-top: 2.5vh;
-    margin-left: 2.5vw;*/
+
     color: white;
 }
 

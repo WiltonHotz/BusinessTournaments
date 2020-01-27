@@ -115,7 +115,7 @@ footer {
     position: relative;
     height: 60px;
     width: 100%;
-    background-color: var(--footer-bgc);
+    /*background-color: var(--footer-bgc);*/
 }
 
 p.copyright {
