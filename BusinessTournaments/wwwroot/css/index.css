@@ -15,6 +15,13 @@ h1, h2, h3, p {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.divspan {
+    display: inline;
+    font-size: 30px;
+    cursor: pointer;
+    color: #d3d3d3;
+}
+
 .center {
     text-align: center;
 }
