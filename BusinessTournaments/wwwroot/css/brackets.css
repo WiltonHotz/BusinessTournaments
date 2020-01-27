@@ -132,10 +132,18 @@ html, body {
     visibility: hidden;
 }
 
-#b0 {
+#final-16players #b0 {
     margin-bottom: 40%;
 }
 
-#b2 {
+#final-16players #b2 {
+    margin-bottom: 65%;
+}
+
+#semis-left #b3 {
+    margin-bottom: 50%;
+}
+
+#semis-right #b5 {
     margin-bottom: 50%;
 }

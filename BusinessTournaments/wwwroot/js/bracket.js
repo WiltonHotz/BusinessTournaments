@@ -161,6 +161,10 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
         // Set newBracketsJson to current
         currentBracketsJson = newBracketsJson;
+
+        if (targetBracketId === 'b0') {
+            // Öppna modaljäveln.
+        }
     }
 
     // Set to false to be able to click again
@@ -275,11 +279,33 @@ function saveChangesToDB(newBracketsJson) {
     return output;
 }
 
+function saveScoreAndMarkTourAsCompletedInDB() {
+    let output = true;
+
+    let jsonStr = JSON.stringify(newBracketsJson)
+
+    $.ajax({
+        url: 'finalizetournament',
+        type: 'POST',
+        contentType: 'application/json',
+        data: jsonStr,
+        success: function (data) {
+            //console.log(data)
+
+        },
+        error: function () {
+            console.log("error");
+            output = false;
+        }
+    });
+    return output;
+}
+
 function checkIfBracketLevelsAreLocked() {
 
     if (currentBracketsJson.brackets.length === 7) {
 
-        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final-8players').querySelectorAll('.winner, .loser');
 
         if (finalWinnerAndLoser.length === 2) {
             document.getElementById('semis').style.opacity = "0.3";
@@ -292,7 +318,7 @@ function checkIfBracketLevelsAreLocked() {
 
         let semiUpperWinnersAndLosers = document.getElementById('semis').querySelector('.upper').querySelectorAll('.winner, .loser');
         let semiLowerWinnersAndLosers = document.getElementById('semis').querySelector('.lower').querySelectorAll('.winner, .loser');
-        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final-16players').querySelectorAll('.winner, .loser');
 
         if (semiUpperWinnersAndLosers.length === 2) {
             let upper = document.getElementById('quarters').querySelectorAll('.upper');
@@ -327,7 +353,7 @@ function checkIfBracketLevelsAreLocked() {
         let quartersLowerRightWinnersAndLosers = document.getElementById('quarters-right').querySelector('.lower').querySelectorAll('.winner, .loser');
         let semiLeftWinnersAndLosers = document.getElementById('semis-left').querySelectorAll('.winner, .loser');
         let semiRightWinnersAndLosers = document.getElementById('semis-right').querySelectorAll('.winner, .loser');
-        let finalWinnerAndLoser = document.getElementById('final').querySelectorAll('.winner, .loser');
+        let finalWinnerAndLoser = document.getElementById('final-16players').querySelectorAll('.winner, .loser');
 
         // Upper left eights
         if (quartersUpperLeftWinnersAndLosers.length === 2) {
