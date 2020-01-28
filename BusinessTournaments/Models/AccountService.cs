@@ -43,5 +43,7 @@ namespace BusinessTournaments.Models
             return result;
         }
         internal string GetUserId() => userManager.GetUserId(accessor.HttpContext.User);
+
+        internal async Task LogoutMemberAsync() => await signInManager.SignOutAsync();
     }
 }
