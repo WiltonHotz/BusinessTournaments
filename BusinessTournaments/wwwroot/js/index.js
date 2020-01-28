@@ -60,7 +60,7 @@ $(document).ready(function () {
 //#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
     getIndexVMJSON()
-    setTheme('samuelsTheme');
+
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>
     el.addEventListener("scroll", tableFixHead)
@@ -874,16 +874,5 @@ function burgerStuff() {
 }
 //#endregion
 
-//#region themes
-
-function setTheme(theme) {
-    console.log(theme)
-    if (theme != "default") {
-        $("div").addClass(theme);
-        $("body").addClass(theme);
-    }
-}
-
-//#endregion
 
 

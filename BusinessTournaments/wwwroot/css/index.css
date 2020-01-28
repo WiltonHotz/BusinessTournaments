@@ -220,6 +220,7 @@ svg {
 .Leaderboard {
     grid-area: Leaderboard;
     overflow: auto;
+    
 }
 
 .Selected {

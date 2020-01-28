@@ -2,8 +2,58 @@
     font-family: Abel-Regular;
     src: url('../fonts/Abel-Regular.ttf')
 }
-
+@font-face {
+    font-family: Hind;
+    src: url('../fonts/Hind.ttf')
+}
+@font-face {
+    font-family: Varsity-Regular;
+    src: url('../fonts/varsity_regular.ttf')
+}
+@font-face {
+    font-family: University;
+    src: url('../fonts/University.otf')
+}
 :root {
+    /*Index vars*/
+    --body-bgc: #000000;
+    --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
+    --body-font-color: #d3d3d3;
+    --tableFixHead-bgc: rgb(36, 97, 72);
+    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
+    --tableFixHead-ff: "Abel-Regular";
+    --hX-c: #CADBCF;
+    --footer-bgc: rgba(0, 0, 0, 0);
+    --copyright-c: #CADBCF;
+    --lessOpacity-c: white;
+    --add-new-player-button: #20895f;
+    --add-new-player-button-hover: #145139;
+    --octicon-edit-icon-c: white;
+    --octicon-edit-icon-hover-c: yellow;
+    --select-button-c: green;
+    --octicon-arrow-select-c: #2ec588;
+    --octicon-arrow-select-hover-c: #3cffb0;
+    --octicon-arrow-select-active-c: white;
+    --octicon-arrow-remove-c: red;
+    --octicon-arrow-remove-hover-c: lightcoral;
+    --octicon-arrow-remove-active-c: white;
+    --octicon-arrow-ongoing-c: #FEFEAE;
+    --octicon-arrow-ongoing-hover-c: #FFFF6D;
+    --octicon-arrow-ongoing-active-c: #FFFF6D;
+    --octicon-arrow-completed-c: #FE512C;
+    --octicon-arrow-completed-active-c: white;
+    --octicon-arrow-completed-hover-c: #FE512C;
+    --octicon-x-c: red;
+    --octicon-x-hover-c: lightcoral;
+    --octicon-x-active-c: white;
+    /*--gradient-bgc: #2d2d2d;*/
+    --gradient-bgc: rgba(59, 59, 59, 0.5);
+    --gradient-gradient: linear-gradient(#222524, #176647);
+    --grid-container-ff: "Arial";
+    /* End Index vars*/
+}
+
+.default {
     /*Index vars*/
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');

@@ -48,6 +48,10 @@ html, body, .grid-container {
 .TournamentName {
     grid-area: TournamentName;
     text-align: center;
+    font-family: University;
+    font-size: 2.5vw;
+    text-shadow: 2px 2px darkgrey;
+    padding-top:1vw;
 }
 
 .SaveAndClose {
