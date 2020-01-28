@@ -115,7 +115,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
-                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowCompleted}&nbsp&nbsp${tournaments[i].tournamentName}</td>
+                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowCompleted}&nbsp&nbsp&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         <td style="width: 20px; padding-right: 20px;"></td>
                         </tr>`);
@@ -297,23 +297,6 @@ function addAddPlayerField(btn) {
     document.getElementById(`${id}`).style.visibility = "hidden";
 }
 
-function find_duplicate_in_array(arra1) {
-    var object = {};
-    var result = [];
-
-    arra1.forEach(function (item) {
-        if (!object[item])
-            object[item] = 0;
-        object[item] += 1;
-    })
-
-    for (var prop in object) {
-        if (object[prop] >= 2) {
-            result.push(prop);
-        }
-    }
-    return result;
-}
 //#endregion
 
 //#region edit / delete player modal
@@ -407,7 +390,7 @@ function selectPlayer(playerId, playerName) {
 
             $("#selected")
                 .append(`<tr id='selected${playerId}'>
-                       <td style="text-align: left;" class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')">${octiconArrowRemove}&nbsp&nbsp${playerName}</td>
+                       <td style="text-align: left;" class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')">${octiconArrowRemove}&nbsp&nbsp&nbsp&nbsp${playerName}</td>
                         </tr>`);
 
             // Change background color and hide green arrow
@@ -429,7 +412,7 @@ function selectPlayer(playerId, playerName) {
 
             // Set focus on tour name input
             if (startTournamentInfo.playerIds.length >= 4) {
-                tournamentNameInput.focus();
+                //tournamentNameInput.focus();
 
                 if (tournamentNameInput.value.length > 1)
                     tournamentNameInput.style.backgroundColor = "lightgreen";
@@ -611,8 +594,8 @@ function showOngoingTournament(tournamentId, tournamentName) {
             hideSelectPlayerArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
-            HideDeleteButton(tournamentId);
-
+            hideDeleteButton(tournamentId);
+            makeSelectedOngoingBold(tournamentId)
         }
     });
 }
@@ -644,6 +627,18 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = tournamentName;
     tournamentNameInput.disabled = true;
+}
+
+function makeSelectedOngoingBold(tournamentId) {
+    //Get all tournament tr
+    var c = document.querySelectorAll("#ongoing > tr");
+
+    //Set all to normal
+    for (i = 0; i < c.length; i++) {
+        c[i].style = "font-weight: normal;"
+    }
+    //Set clicked ongoing to bold
+    document.getElementById(`ot${tournamentId}`).style = "font-weight:bold;";
 }
 
 //#endregion
@@ -746,7 +741,7 @@ function deleteSelectedTournament(tournamentId) {
     document.getElementById('ot' + tournamentId).remove();
 }
 
-function HideDeleteButton(tournamentId) {
+function hideDeleteButton(tournamentId) {
 
     document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
 

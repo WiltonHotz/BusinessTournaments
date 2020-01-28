@@ -321,3 +321,19 @@ svg {
         height: 52px;
     }
 }*/
+
+}
+
+.no-border {
+    border-bottom: 0 none;
+    border-top: 0 none;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
