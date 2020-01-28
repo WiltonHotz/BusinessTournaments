@@ -19,7 +19,8 @@
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
     --body-font-color: #d3d3d3;
-    --tableFixHead-bgc: rgb(36, 97, 72);
+    /*--tableFixHead-bgc: rgb(36, 97, 72);*/
+    --tableFixHead-bgc: #20895f;
     --tableFixHead-ff: "Abel-Regular";
     --hX-c: #CADBCF;
     --footer-bgc: rgba(0, 0, 0, 0);
@@ -30,18 +31,18 @@
     --octicon-edit-icon-c: white;
     --octicon-edit-icon-hover-c: yellow;
     --select-button-c: green;
-    --octicon-arrow-select-c: #2ec588;
+    --octicon-arrow-select-c: #2aab77;
     --octicon-arrow-select-hover-c: #3cffb0;
     --octicon-arrow-select-active-c: white;
-    --octicon-arrow-remove-c: red;
-    --octicon-arrow-remove-hover-c: lightcoral;
+    --octicon-arrow-remove-c: #ab2a2a;
+    --octicon-arrow-remove-hover-c: #ff3c3c;
     --octicon-arrow-remove-active-c: white;
-    --octicon-arrow-ongoing-c: #FEFEAE;
-    --octicon-arrow-ongoing-hover-c: #FFFF6D;
+    --octicon-arrow-ongoing-c: #aba82a;
+    --octicon-arrow-ongoing-hover-c: #fffb41;
     --octicon-arrow-ongoing-active-c: #FFFF6D;
-    --octicon-arrow-completed-c: #FE512C;
+    --octicon-arrow-completed-c: #ab662a;
     --octicon-arrow-completed-active-c: white;
-    --octicon-arrow-completed-hover-c: #FE512C;
+    --octicon-arrow-completed-hover-c: #ff973c;
     --octicon-x-c: red;
     --octicon-x-hover-c: lightcoral;
     --octicon-x-active-c: white;

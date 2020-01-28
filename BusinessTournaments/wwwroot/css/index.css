@@ -72,7 +72,7 @@ table {
 
 .lessOpacity {
     color: var(--lessOpacity-c);
-    opacity: 0.8;
+    opacity: 1;
 }
 
 
@@ -285,7 +285,7 @@ svg {
 #startTournament {
     background-color: var(--add-new-player-button);
     color: var(--body-font-color);
-    border: none;
+    /*border: none;*/
 }
 
 

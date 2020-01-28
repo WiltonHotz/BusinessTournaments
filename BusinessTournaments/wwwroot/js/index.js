@@ -785,7 +785,7 @@ function startTournament() {
 
 function changeStartTournamentButtonToResumeAndActivate() {
 
-    $('#startTournament').prop("value", "RESUME TOURNAMENT")
+    $('#startTournament').prop("value", "RESUME")
     $('#startTournament').prop("class", "btn btn-block");
     $('#startTournament').prop("disabled", false);
 
@@ -843,7 +843,7 @@ function clearSelected() {
         deleteButtons[i].style.visibility = "visible"
     }
     // Disable buttons and change text
-    $('#startTournament').prop("value", "CREATE TOURNAMENT")
+    $('#startTournament').prop("value", "CREATE")
     $('#startTournament').prop("class", "btn btn-secondary btn-block");
     $('#startTournament').prop("disabled", true);
 
