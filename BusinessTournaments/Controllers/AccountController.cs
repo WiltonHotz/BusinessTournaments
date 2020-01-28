@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessTournaments.Models;
 using BusinessTournaments.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessTournaments.Controllers
@@ -78,6 +79,15 @@ namespace BusinessTournaments.Controllers
                 ModelState.AddModelError(string.Empty, result.Errors.First().Description);
                 return View();
             }
+
+            return RedirectToAction(nameof(Login));
+        }
+        [Route("Logout")]
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Logout(IFormCollection form)
+        {
+            await service.LogoutMemberAsync();
 
             return RedirectToAction(nameof(Login));
         }
