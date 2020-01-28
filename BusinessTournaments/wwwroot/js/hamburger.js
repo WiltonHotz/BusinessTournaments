@@ -12,15 +12,21 @@ function closeNav() {
 
 //#region themes
 
-let currentTheme = 'default';
+let currentTheme; // add cookie or temp
 
 function setTheme(theme) {
     console.log(theme)
-    $("div").removeClass(currentTheme);
-    $("body").removeClass(currentTheme);
+    if (theme === 'default') {
+        $("div").removeClass(currentTheme);
+        $("body").removeClass(currentTheme);
+    }
+    else {
+        $("div").removeClass(currentTheme);
+        $("body").removeClass(currentTheme);
 
         $("div").addClass(theme);
-    $("body").addClass(theme);
+        $("body").addClass(theme);
+    }
 
     currentTheme = theme;
 
