@@ -44,7 +44,7 @@ namespace BusinessTournaments.Models
                     TournamentName = t.TournamentName,
                     Date = t.Created,
                     IsCompleted = t.IsCompleted
-                }).ToListAsync();
+                }).OrderByDescending(x => x.Date).ToListAsync();
 
             var completedTournaments = await context.Tournaments
                 .Where(c => c.CompanyId == userId && c.IsCompleted)
@@ -54,7 +54,7 @@ namespace BusinessTournaments.Models
                     TournamentName = t.TournamentName,
                     Date = t.LastModified,
                     IsCompleted = t.IsCompleted
-                }).ToListAsync();
+                }).OrderByDescending(x => x.Date).ToListAsync();
 
             return new IndexVM
             {

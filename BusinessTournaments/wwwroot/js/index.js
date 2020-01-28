@@ -217,7 +217,7 @@ function addPlayers() {
                     } else if (duplicates.length > 0) {
 
                         if (duplicates.some(x => x == names[i])) {
-                            $(`#badpninp${i}`).html('Please entere unique names')
+                            $(`#badpninp${i}`).html('Please enter unique names')
                         }
                         if (names[i].length > 23) {
                             $(`#badpninp${i}`).html('Max 23 characters!')
