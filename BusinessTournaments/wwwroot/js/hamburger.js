@@ -1,4 +1,4 @@
-﻿let currentTheme;
+﻿let currentTheme = 'default';
 
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log(currentTheme)
