@@ -306,7 +306,7 @@ svg {
 }
 
 .modal-header {
-    border-bottom: 0 none;
+    border-bottom: 0 none !important;
 
 }
 
