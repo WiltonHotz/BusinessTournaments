@@ -2,7 +2,18 @@
     font-family: Abel-Regular;
     src: url('../fonts/Abel-Regular.ttf')
 }
-
+@font-face {
+    font-family: Hind;
+    src: url('../fonts/Hind.ttf')
+}
+@font-face {
+    font-family: Varsity-Regular;
+    src: url('../fonts/varsity_regular.ttf')
+}
+@font-face {
+    font-family: University;
+    src: url('../fonts/University.otf')
+}
 :root {
     /*Index vars*/
     --body-bgc: #313131;
