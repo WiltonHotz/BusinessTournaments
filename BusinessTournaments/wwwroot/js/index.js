@@ -854,6 +854,14 @@ function clearSelected() {
     tournamentNameInput.value = "";
     tournamentNameInput.disabled = false;
     tournamentNameInput.style.backgroundColor = "white";
+
+    //Get all tournament tr
+    var allOngoingTours = document.querySelectorAll("#ongoing > tr");
+
+    //Set all to normal
+    for (i = 0; i < allOngoingTours.length; i++) {
+        allOngoingTours[i].style = "font-weight: normal;"
+    }
 }
 
 //#endregion
