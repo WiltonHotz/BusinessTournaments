@@ -481,9 +481,17 @@ function updateSelectedPlayerCounter(players) {
 
     // players is used in populateSelectedWithPlayersInOngoingTour() because it doesnt populate startTournamentInfo.playerIds
     if (players == null) {
-        if (startTournamentInfo.playerIds.length > 0 && startTournamentInfo.playerIds.length < 16) {
+        if (startTournamentInfo.playerIds.length > 0 && startTournamentInfo.playerIds.length < 4) {
+            $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
+            $(`#playerCounter`).css("color", "red")
+           
+
+
+        }   else if (startTournamentInfo.playerIds.length > 3 && startTournamentInfo.playerIds.length < 16) {
             $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
             $(`#playerCounter`).css("color", "white")
+          
+
 
         } else if (startTournamentInfo.playerIds.length === 16) {
             $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
@@ -495,7 +503,13 @@ function updateSelectedPlayerCounter(players) {
             $(`#playerCounter`).html(``)
         }
     } else {
-        if (players.length > 0 && players.length < 16) {
+        if (players.length > 0 && players.length < 4) {
+            $(`#playerCounter`).html(`${players.length}`)
+            $(`#playerCounter`).css("color", "red")
+       
+
+        }
+         else if (players.length > 3 && players.length < 16) {
             $(`#playerCounter`).html(`${players.length}`)
             $(`#playerCounter`).css("color", "white")
 
@@ -804,7 +818,7 @@ function clearSelected() {
     startTournamentInfo.tournamentId = "";
     startTournamentInfo.tournamentName = ""
     updateSelectedPlayerCounter()
-
+ 
     canAddMorePlayers = true;
 
     // Reset arrows to green
@@ -885,4 +899,6 @@ function burgerStuff() {
 //#endregion
 
 
-
+//function play_single_sound() {
+//    document.getElementById('audiotag1').play();
+//}

@@ -109,6 +109,7 @@ function clickBracketAction(bracketId) {
     if (!$(`#${bracketId}`).hasClass('empty') && !isWaitingForResponse) {
 
         calculateBrackets(bracketId);
+      
     }
 }
 
@@ -519,3 +520,7 @@ function burgerStuff() {
 }
 
 //#endregion
+
+//function play_single_sound2() {
+//    document.getElementById('audiotag2').play();
+//}
