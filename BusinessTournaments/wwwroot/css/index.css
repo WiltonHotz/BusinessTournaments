@@ -1,5 +1,15 @@
 ﻿@import "layout.css";
 
+
+
+/*@media only screen and (min-width: 2048px) {
+
+    .octicon-arrow-select {
+        width: 20px;
+        height: 35px;
+    }
+}*/
+
 body {
     width: 100%;
     height: 100%;
@@ -73,10 +83,7 @@ table {
     opacity: 0.8;
 }
 
-.editIcon:hover {
-    color: var(--editIcon-hover-c);
-    cursor: pointer;
-}
+
 
 td:last-child {
     text-align: right;
@@ -90,26 +97,36 @@ td:last-child {
     color: var(--select-button-c);
 }
 
-.octicon-arrow-right {
-    color: var(--octicon-arrow-right-c);
+
+/* ARROWS */
+.octicon-arrow-select {
+    color: var(--octicon-arrow-select-c);
+    width: 20px;
+    height: 35px;
 }
 
-    .octicon-arrow-right:hover {
-        color: var(--octicon-arrow-right-hover-c);
+    .octicon-arrow-select:hover {
+        color: var(--octicon-arrow-select-hover-c);
         cursor: pointer;
     }
 
-    .octicon-arrow-right:active {
-        color: var(--octicon-arrow-right-active-c);
+    .octicon-arrow-select:active {
+        color: var(--octicon-arrow-select-active-c);
     }
 
-.octicon-arrow-left {
-    color: var(--octicon-arrow-left-c);
+.octicon-arrow-remove {
+    color: var(--octicon-arrow-remove-c);
+    width: 20px;
+    height: 35px;
 }
 
-    .octicon-arrow-left:hover {
-        color: var(--octicon-arrow-left-hover-c);
+    .octicon-arrow-remove:hover {
+        color: var(--octicon-arrow-remove-hover-c);
         cursor: pointer;
+    }
+
+    .octicon-arrow-remove:active {
+        color: var(--octicon-arrow-remove-active-c);
     }
 
 .octicon-completed:hover {
@@ -117,33 +134,35 @@ td:last-child {
     cursor: pointer;
 }
 
-
-.octicon-arrow-left:active {
-    color: var(--octicon-arrow-left-active-c);
+.octicon-arrow-ongoing {
+    color: var(--octicon-arrow-ongoing-c);
+    width: 20px;
+    height: 35px;
 }
 
-.octicon-arrow-left.ongoing {
-    color: var(--octicon-arrow-left-ongoing-c);
-}
-
-    .octicon-arrow-left.ongoing:hover {
-        color: var(--octicon-arrow-left-ongoing-hover-c);
+    .octicon-arrow-ongoing:hover {
+        color: var(--octicon-arrow-ongoing-hover-c);
     }
 
-.octicon-completed:active {
-    color: var(--octicon-completed-active-c);
+.octicon-arrow-completed {
+    color: var(--octicon-arrow-completed-c);
+    width: 20px;
+    height: 35px;
 }
 
-.octicon-completed.ongoing {
-    color: var(--octicon-completed-ongoing-c);
-}
-
-    .octicon-completed.ongoing:hover {
-        color: var(--octicon-completed-ongoing-hover);
+    .octicon-arrow-completed:hover {
+        color: var(--octicon-arrow-completed-hover-c);
     }
+
+    .octicon-arrow-completed:active {
+        color: var(--octicon-arrow-completed-active-c);
+    }
+
 
 .octicon-x {
     color: var(--octicon-x-c);
+    width: 20px;
+    height: 35px;
 }
 
     .octicon-x:hover {
@@ -153,6 +172,16 @@ td:last-child {
 
     .octicon-x:active {
         color: var(--octicon-x-active-c);
+    }
+
+.octicon-edit-icon {
+    height: 35px;
+    width: 20px;
+}
+
+    .octicon-edit-icon:hover {
+        color: var(--octicon-edit-icon-hover-c);
+        cursor: pointer;
     }
 
 svg {
@@ -258,15 +287,37 @@ svg {
     #addPlayerModalBtn:hover {
         background-color: var(--add-new-player-button-hover);
         color: var(--body-font-color);
-        
     }
 
 #startTournament {
     background-color: var(--add-new-player-button);
-        color: var(--body-font-color);
+    color: var(--body-font-color);
 }
 
 #startTournament {
     background-color: var(--add-new-player-button-hover);
-        color: var(--body-font-color);
+    color: var(--body-font-color);
 }
+
+
+/* IPAD AIR */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+
+    .octicon-arrow-select {
+        width: 27px;
+        height: 47px;
+    }
+
+    .octicon-arrow-left {
+        width: 27px;
+        height: 47px;
+    }
+}
+
+/*@media only screen and (max-width: 1000px) {
+    .octicon-arrow-select {
+        width: 30px;
+        height: 52px;
+    }
+}*/
