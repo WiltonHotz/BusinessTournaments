@@ -59,7 +59,9 @@ $(document).ready(function () {
 
 //#region Event listeners
 document.addEventListener("DOMContentLoaded", function (event) {
+
     getIndexVMJSON()
+    console.log(currentTheme)
 
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>

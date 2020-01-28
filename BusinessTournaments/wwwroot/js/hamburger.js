@@ -1,10 +1,4 @@
-﻿let currentTheme = 'default';
-
-document.addEventListener("DOMContentLoaded", function (event) {
-    console.log(currentTheme)
-    setTheme(currentTheme);
-});
-
+﻿
 function openNav() {
     var sidebar = document.getElementById("mySidenav");
     sidebar.style.width = "200px";
@@ -18,8 +12,12 @@ function closeNav() {
 
 //#region themes
 
+let currentTheme = 'default';
+
 function setTheme(theme) {
     console.log(theme)
+    $("div").removeClass(currentTheme);
+    $("body").removeClass(currentTheme);
 
         $("div").addClass(theme);
     $("body").addClass(theme);
