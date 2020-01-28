@@ -300,31 +300,6 @@ svg {
     color: var(--body-font-color);
 }
 
-
-/* IPAD AIR */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-
-
-    .octicon-arrow-select {
-        width: 27px;
-        height: 47px;
-    }
-
-    .octicon-arrow-left {
-        width: 27px;
-        height: 47px;
-    }
-}
-
-/*@media only screen and (max-width: 1000px) {
-    .octicon-arrow-select {
-        width: 30px;
-        height: 52px;
-    }
-}*/
-
-}
-
 .no-border {
     border-bottom: 0 none;
     border-top: 0 none;
@@ -338,3 +313,21 @@ svg {
 .modal-footer {
     border-top: 0 none;
 }
+
+
+/* IPAD AIR */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+
+    .octicon-arrow-select, .octicon-arrow-ongoing, .octicon-arrow-completed, .octicon-arrow-remove, .octicon-edit-icon {
+        width: 27px;
+        height: 47px;
+    }
+}
+
+/*@media only screen and (max-width: 1000px) {
+    .octicon-arrow-select {
+        width: 30px;
+        height: 52px;
+    }
+}*/
