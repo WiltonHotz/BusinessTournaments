@@ -107,22 +107,76 @@
     /*End Index vars*/
 }
 
+/*Hamburger area*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0);
+}
+
+li {
+    /*float: left;*/
+}
+
+    li a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: left;
+        padding-top: 14px;
+        padding-left: 16px;
+        text-decoration: none;
+    }
+
+        li a:hover, .dropdown:hover .dropbtn {
+            background-image: inherit;
+        }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-image: inherit;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 0px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: left;
+    }
+
+        .dropdown-content a:hover {
+            background-image: inherit;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: inline-block;
+}
+
+
+/*End hamburger area*/
+
 
 /*TestArea*/
 
 
 footer {
-    position: relative;
-    height: 60px;
     width: 100%;
-    /*background-color: var(--footer-bgc);*/
 }
 
 p.copyright {
-    position: absolute;
     width: 100%;
     color: var(--copyright-c);
-    line-height: 40px;
     font-size: 0.7em;
     text-align: center;
     bottom: 0;
@@ -247,20 +301,20 @@ p.copyright {
 
 /*SidebarStuff*/
 .sidenav {
-    height: 100%;
+    height: 80%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgba(0,0,0,0.9);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
     .sidenav a {
-        padding: 8px 8px 8px 32px;
+        padding: 8px 8px 8px 20px;
         text-decoration: none;
         font-size: 25px;
         color: #818181;
@@ -274,10 +328,10 @@ p.copyright {
 
     .sidenav .closebtn {
         position: absolute;
-        top: 0;
-        right: 25px;
+        top: 3px;
+        left: 15px;
         font-size: 36px;
-        margin-left: 50px;
+        /*margin-left: 50px;*/
     }
 
 @media screen and (max-height: 450px) {
