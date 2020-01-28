@@ -23,13 +23,14 @@ let selectedClasses = "selectedClasses";
 let ongoingClasses = "ongoingClasses";
 let completedClasses = "completedClasses";
 
-// Change classes (colors and other things css)
-
-//$(`#${fromBracketId}`).prop("class", winnerBracketClasses);
-//$(`#${targetBracketId}`).prop("class", populatedBracketClasses);
-//$(`#${opponentBracketId}`).prop("class", loserBracketClasses);
-
 //#endregion
+
+let octiconArrowRemove = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-remove"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>`;
+let octiconArrowSelect = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-select"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
+let octiconEditIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-edit-icon" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg>`;
+let octiconX = `<svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
+let octiconArrowOngoing = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>`;
+let octiconArrowCompleted = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-completed"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>`;
 
 //#region scrolling
 function tableFixHead(e) {
@@ -84,27 +85,27 @@ function getIndexVMJSON() {
 
 function PopulatePlayersOnLoad(leaderboard) {
 
+
     for (var i = 0; i < leaderboard.length; i++) {
-        let arrow = `<span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-right"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3z"/></svg>`;
 
         $("#leaderboard")
             .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
-                        <td><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 16" fill="currentColor"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></span></td>
+                        <td><span id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')">${octiconEditIcon}</span></td>
                         <td class="scoretd">${leaderboard[i].score}</td>
                         <td class="nametd" id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
-                        ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${arrow}</td>`}
+                        ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}"><span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')">${octiconArrowSelect}</span></td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${octiconArrowSelect}</td>`}
                         </tr>`);
     }
 }
 
 function PopulateOngoingTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
-        let deleteButton = `<span class="delete-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="confirmDeleteTournament('${tournaments[i].tournamentId}')"><svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>`;
+        
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
-                        <td width="60% class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
+                        <td width="60% class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowOngoing}&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
-                        <td style="width: 20px; padding-right: 20px;">${deleteButton}</td>
+                        <td style="width: 20px; padding-right: 20px;"><span class="delete-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="confirmDeleteTournament('${tournaments[i].tournamentId}')">${octiconX}</span></td>
                         </tr>`);
     }
 }
@@ -114,11 +115,15 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     for (var i = 0; i < tournaments.length; i++) {
         $("#completed")
             .append(`<tr id='ct${tournaments[i].tournamentId}'>
-                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-completed ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${tournaments[i].tournamentName}</td>
+                        <td width="60%" class="resumetour-button" id="completedBtn${tournaments[i].playerId}" onclick="selectPlayersFromCompletedTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowCompleted}&nbsp&nbsp&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         <td style="width: 20px; padding-right: 20px;"></td>
                         </tr>`);
     }
+}
+
+function populateSelectedWithInstructions() {
+
 }
 
 //#endregion
@@ -292,23 +297,6 @@ function addAddPlayerField(btn) {
     document.getElementById(`${id}`).style.visibility = "hidden";
 }
 
-function find_duplicate_in_array(arra1) {
-    var object = {};
-    var result = [];
-
-    arra1.forEach(function (item) {
-        if (!object[item])
-            object[item] = 0;
-        object[item] += 1;
-    })
-
-    for (var prop in object) {
-        if (object[prop] >= 2) {
-            result.push(prop);
-        }
-    }
-    return result;
-}
 //#endregion
 
 //#region edit / delete player modal
@@ -402,7 +390,7 @@ function selectPlayer(playerId, playerName) {
 
             $("#selected")
                 .append(`<tr id='selected${playerId}'>
-                       <td style="text-align: left;" class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')"><svg viewBox="0 0 10 16" width="20" height="35" version="1.1" class="octicon octicon-arrow-left"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>&nbsp&nbsp${playerName}</td>
+                       <td style="text-align: left;" class="remove-button" id="rBtn${playerId}" onclick="removeSelectedPlayer('${playerId}', '${playerName}')">${octiconArrowRemove}&nbsp&nbsp&nbsp&nbsp${playerName}</td>
                         </tr>`);
 
             // Change background color and hide green arrow
@@ -424,7 +412,7 @@ function selectPlayer(playerId, playerName) {
 
             // Set focus on tour name input
             if (startTournamentInfo.playerIds.length >= 4) {
-                tournamentNameInput.focus();
+                //tournamentNameInput.focus();
 
                 if (tournamentNameInput.value.length > 1)
                     tournamentNameInput.style.backgroundColor = "lightgreen";
@@ -434,7 +422,7 @@ function selectPlayer(playerId, playerName) {
 
             // Activate CREATE TOURNAMENT button
             if (startTournamentInfo.playerIds.length >= 4 && tournamentNameInput.value.length > 1) {
-                $('#startTournament').prop("class", "btn btn-success btn-block");
+                $('#startTournament').prop("class", "btn btn-block");
                 $('#startTournament').prop("disabled", false);
             }
 
@@ -473,7 +461,7 @@ function removeSelectedPlayer(playerId) {
     //show arrows
     if (startTournamentInfo.playerIds.length <= 16) {
         showSelectPlayerArrows();
-        
+
     }
     if (startTournamentInfo.playerIds.length < 16) {
         canAddMorePlayers = true;
@@ -606,8 +594,8 @@ function showOngoingTournament(tournamentId, tournamentName) {
             hideSelectPlayerArrows();
             changeStartTournamentButtonToResumeAndActivate();
             canAddMorePlayers = false;
-            HideDeleteButton(tournamentId);
-            
+            hideDeleteButton(tournamentId);
+            makeSelectedOngoingBold(tournamentId)
         }
     });
 }
@@ -639,6 +627,18 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = tournamentName;
     tournamentNameInput.disabled = true;
+}
+
+function makeSelectedOngoingBold(tournamentId) {
+    //Get all tournament tr
+    var c = document.querySelectorAll("#ongoing > tr");
+
+    //Set all to normal
+    for (i = 0; i < c.length; i++) {
+        c[i].style = "font-weight: normal;"
+    }
+    //Set clicked ongoing to bold
+    document.getElementById(`ot${tournamentId}`).style = "font-weight:bold;";
 }
 
 //#endregion
@@ -685,7 +685,7 @@ function checkIfTournamentNameIsValidInput(input) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
 
     if (input.value.length > 1 && startTournamentInfo.playerIds.length >= 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
         tournamentNameInput.style.backgroundColor = "lightgreen";
@@ -698,7 +698,7 @@ function checkIfTournamentNameIsValidInput(input) {
     }
 
     if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
-        $('#startTournament').prop("class", "btn btn-success btn-block");
+        $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
         tournamentNameInput.style.backgroundColor = "white";
@@ -741,7 +741,7 @@ function deleteSelectedTournament(tournamentId) {
     document.getElementById('ot' + tournamentId).remove();
 }
 
-function HideDeleteButton(tournamentId) {
+function hideDeleteButton(tournamentId) {
 
     document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
 
@@ -779,7 +779,7 @@ function startTournament() {
 function changeStartTournamentButtonToResumeAndActivate() {
 
     $('#startTournament').prop("value", "RESUME TOURNAMENT")
-    $('#startTournament').prop("class", "btn btn-success btn-block");
+    $('#startTournament').prop("class", "btn btn-block");
     $('#startTournament').prop("disabled", false);
 
     $('#clearSelectedBtn').prop("disabled", false);

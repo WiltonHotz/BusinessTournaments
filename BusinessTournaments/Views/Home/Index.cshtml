@@ -10,8 +10,8 @@
     <div class="grid-container">
 
         <div class="Hamburger">
-            
-        <partial name="_Hamburger" />
+
+            <partial name="_Hamburger" />
 
         </div>
 
@@ -98,8 +98,8 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><b style="color: #FE512C">COMPLETED</b> TOURNAMENTS</th>
-                            <th widht="60%"></th>
+                            <th colspan="3"><b style="color: #FE512C">COMPLETED</b> TOURNAMENTS</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -117,10 +117,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><b style="color: #FEFEAE;">ONGOING</b> TOURNAMENTS</th>
-                            <th widht="60%"></th>
+                            <th colspan="3"><b style="color: #FEFEAE;">ONGOING</b> TOURNAMENTS</th>
                             <th></th>
-
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="ongoing">
@@ -144,40 +143,46 @@
 
 <!-- [ADD PLAYER MODAL] -->
 <div id="addPlayerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-notify modal-info ">
 
-        <div class="modal-content">
+        <div class="modal-content bg-dark text-white">
             <div class="modal-header">
-                <h4 class="modal-title">Add New Player</h4>
+                <h4 style="font-family: Abel-Regular;" class="heading">Add New Player</h4>
+                <button type="button" id="modalClose" class="close white-text" data-dismiss="modal">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
             </div>
             <div class="modal-body" id="modalPlayerNames">
 
             </div>
-            <input type="button" value="Add Player" onclick="addPlayers()" />
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-footer flex-center no-border">
+            <input style="font-family: Abel-Regular;" type="button" class="btn btn-outline-info waves-effect" value="Add Player" onclick="addPlayers()" />
             </div>
         </div>
 
     </div>
 </div>
 
-<div id="editPlayerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<!-- [EDIT PLAYER MODAL] -->
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Player</h4>
+<div id="editPlayerModal" class="modal fade " role="dialog">
+    <div class="modal-dialog modal-notify modal-info " role="document">
+
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header no-border">
+                <h4 style="font-family: Abel-Regular;" class="heading">Edit Player</h4>
+                <button type="button" id="modalClose" class="close white-text" data-dismiss="modal">
+                <span aria-hidden="true" class="white-text">×</span>
+                </button>
             </div>
             <div class="modal-body" id="modalEditPlayer">
 
                 <input type="text" id="editPlayerName" placeholder="New name here..." />
 
             </div>
-            <input type="button" class="btn btn-primary" value="Edit" id="editPlayerBtn" onclick="validateEditPlayerName()" />
-            <input type="button" class="btn btn-danger" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
-            <div class="modal-footer">
-                <button type="button" id="modalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-footer flex-center no-border">
+            <input style="font-family: Abel-Regular;" type="button" class="btn btn-outline-info waves-effect" value="Edit" id="editPlayerBtn" onclick="validateEditPlayerName()" />
+            <input style="font-family: Abel-Regular;" type="button" class="btn btn-info" value="Delete" id="deletePlayerBtn" onclick="confirmDeletePlayer()" />
             </div>
         </div>
 

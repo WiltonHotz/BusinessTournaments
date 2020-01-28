@@ -5,43 +5,9 @@
 
 :root {
     /*Index vars*/
-    --body-bgc: #313131;
-    --tableFixHead-bgc: #114a33;
-    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
-    --tableFixHead-ff: "Abel-Regular";
-    --hX-c: #CADBCF;
-    --footer-bgc: #313131;
-    --copyright-c: #CADBCF;
-    --lessOpacity-c: white;
-    --editIcon-hover-c: yellow;
-    --select-button-c: green;
-    --octicon-arrow-right-c: green;
-    --octicon-arrow-right-hover-c: lightgreen;
-    --octicon-arrow-right-active-c: white;
-    --octicon-arrow-left-c: red;
-    --octicon-arrow-left-hover-c: lightcoral;
-    --octicon-completed-hover-c: #FE512C;
-    --octicon-arrow-left-active-c: white;
-    --octicon-arrow-left-ongoing-c: #FEFEAE;
-    --octicon-arrow-left-ongoing-hover-c: #FFFF6D;
-    --octicon-completed-active-c: white;
-    --octicon-completed-ongoing-c: #FE512C;
-    --octicon-completed-ongoing-hover: #E4221C;
-    --octicon-x-c: red;
-    --octicon-x-hover-c: lightcoral;
-    --octicon-x-active-c: white;
-    --gradient-bgc: #114a33;
-    --gradient-gradient: linear-gradient(#114a33, #176647);
-    --grid-container-ff: "Arial";
-    
-    /* End Index vars*/
-
-}
-
-.samuelsTheme {
-    /*Index vars*/
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
+    --body-font-color: #d3d3d3;
     --tableFixHead-bgc: rgb(36, 97, 72);
     --tableFixHead-gradient: linear-gradient(#114a33, #176647);
     --tableFixHead-ff: "Abel-Regular";
@@ -49,22 +15,23 @@
     --footer-bgc: rgba(0, 0, 0, 0);
     --copyright-c: #CADBCF;
     --lessOpacity-c: white;
-    --editIcon-hover-c: yellow;
     --add-new-player-button: #20895f;
     --add-new-player-button-hover: #145139;
+    --octicon-edit-icon-c: white;
+    --octicon-edit-icon-hover-c: yellow;
     --select-button-c: green;
-    --octicon-arrow-right-c: #2ec588;
-    --octicon-arrow-right-hover-c: #3cffb0;
-    --octicon-arrow-right-active-c: white;
-    --octicon-arrow-left-c: red;
-    --octicon-arrow-left-hover-c: lightcoral;
-    --octicon-completed-hover-c: #FE512C;
-    --octicon-arrow-left-active-c: white;
-    --octicon-arrow-left-ongoing-c: #FEFEAE;
-    --octicon-arrow-left-ongoing-hover-c: #FFFF6D;
-    --octicon-completed-active-c: white;
-    --octicon-completed-ongoing-c: #FE512C;
-    --octicon-completed-ongoing-hover: #E4221C;
+    --octicon-arrow-select-c: #2ec588;
+    --octicon-arrow-select-hover-c: #3cffb0;
+    --octicon-arrow-select-active-c: white;
+    --octicon-arrow-remove-c: red;
+    --octicon-arrow-remove-hover-c: lightcoral;
+    --octicon-arrow-remove-active-c: white;
+    --octicon-arrow-ongoing-c: #FEFEAE;
+    --octicon-arrow-ongoing-hover-c: #FFFF6D;
+    --octicon-arrow-ongoing-active-c: #FFFF6D;
+    --octicon-arrow-completed-c: #FE512C;
+    --octicon-arrow-completed-active-c: white;
+    --octicon-arrow-completed-hover-c: #FE512C;
     --octicon-x-c: red;
     --octicon-x-hover-c: lightcoral;
     --octicon-x-active-c: white;
@@ -74,6 +41,42 @@
     --grid-container-ff: "Arial";
     /* End Index vars*/
 }
+
+.nineties {
+    /*Index vars*/
+    --body-bgc: #313131;
+    --tableFixHead-bgc: #114a33;
+    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
+    --tableFixHead-ff: "Abel-Regular";
+    --hX-c: #CADBCF;
+    --footer-bgc: #313131;
+    --copyright-c: #CADBCF;
+    --lessOpacity-c: white;
+    --octicon-edit-icon-c: white;
+    --octicon-edit-icon-hover-c: yellow;
+    --select-button-c: green;
+    --octicon-arrow-select-c: green;
+    --octicon-arrow-select-hover-c: lightgreen;
+    --octicon-arrow-select-active-c: white;
+    --octicon-arrow-remove-c: red;
+    --octicon-arrow-remove-hover-c: lightcoral;
+    --octicon-arrow-remove-active-c: white;
+    --octicon-arrow-ongoing-c: #FEFEAE;
+    --octicon-arrow-ongoing-hover-c: #FFFF6D;
+    --octicon-arrow-ongoing-active-c: #FFFF6D;
+    --octicon-arrow-completed-c: #FE512C;
+    --octicon-arrow-completed-active-c: white;
+    --octicon-arrow-completed-hover-c: #FE512C;
+    --octicon-x-c: red;
+    --octicon-x-hover-c: lightcoral;
+    --octicon-x-active-c: white;
+    --gradient-bgc: #114a33;
+    --gradient-gradient: linear-gradient(#114a33, #176647);
+    --grid-container-ff: "Arial";
+    /* End Index vars*/
+}
+
+
 
 .redTheme {
     /*Index vars*/
@@ -86,9 +89,9 @@
     --lessOpacity-c: white;
     --editIcon-hover-c: yellow;
     --select-button-c: blue;
-    --octicon-arrow-right-c: purple;
-    --octicon-arrow-right-hover-c: brown;
-    --octicon-arrow-right-active-c: white;
+    --octicon-arrow-select-c: purple;
+    --octicon-arrow-select-hover-c: brown;
+    --octicon-arrow-select-active-c: white;
     --octicon-arrow-left-c: red;
     --octicon-arrow-left-hover-c: #313131;
     --octicon-completed-hover-c: #FEFEAE;
@@ -297,6 +300,7 @@ p.copyright {
     font-size: 30px;
     cursor: pointer;
     color: #d3d3d3;
+    border: var(--body-font-color);
 }
 
 /*SidebarStuff*/
