@@ -261,7 +261,7 @@ svg {
 
 .Gradient {
     background-color: var(--gradient-bgc);
-    /*background-image: var(--gradient-gradient);*/
+    background-image: var(--gradient-gradient);
 }
 
 .scoretd {
