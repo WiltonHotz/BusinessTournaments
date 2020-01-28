@@ -270,3 +270,17 @@ svg {
     background-color: var(--add-new-player-button-hover);
         color: var(--body-font-color);
 }
+
+.no-border {
+    border-bottom: 0 none;
+    border-top: 0 none;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
