@@ -90,7 +90,7 @@ function PopulatePlayersOnLoad(leaderboard) {
 
         $("#leaderboard")
             .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
-                        <td><span id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')">${octiconEditIcon}</span></td>
+                        <td><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')">${octiconEditIcon}</span></td>
                         <td class="scoretd">${leaderboard[i].score}</td>
                         <td class="nametd" id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
                         ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}"><span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')">${octiconArrowSelect}</span></td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${octiconArrowSelect}</td>`}
@@ -443,10 +443,15 @@ function removeSelectedPlayer(playerId) {
 
     // HTML resetting
     document.getElementById('selected' + playerId).remove();
+
     let selectedPlayerHtml = document.getElementById('l' + playerId);
-    let tournamentNameInput = document.getElementById("tournamentNameInput");
     selectedPlayerHtml.style.opacity = "1";
+
+    let tournamentNameInput = document.getElementById("tournamentNameInput");
     document.getElementById(`sBtn${playerId}`).style.visibility = "visible";
+
+    // Make edit button visible
+    document.getElementById(`editPlayer${playerId}`).style.visibility = "visible";
 
     // Disable create button if less than 4
     if (startTournamentInfo.playerIds.length == 3) {
@@ -801,13 +806,17 @@ function clearSelected() {
     canAddMorePlayers = true;
 
     // Reset arrows to green
-    var arrows = document.getElementsByClassName("octicon-arrow-right");
+    var arrows = document.getElementsByClassName("octicon-arrow-select");
 
     var editIcons = document.getElementsByClassName('editIcon')
 
+ 
+
     for (var i = 0; i < arrows.length; i++) {
         // edit icon added
-        editIcons[i].style.visibility = "visible"
+        editIcons[i].style.visibility = "visible";
+
+        console.log(editIcons[i])
 
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
