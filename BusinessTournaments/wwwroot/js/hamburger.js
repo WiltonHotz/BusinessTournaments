@@ -1,4 +1,8 @@
-﻿
+﻿document.addEventListener("DOMContentLoaded", function (event) {
+    setTheme(currentTheme)
+});
+
+
 function openNav() {
     var sidebar = document.getElementById("mySidenav");
     sidebar.style.width = "200px";
@@ -11,14 +15,17 @@ function closeNav() {
 
 
 //#region themes
-
-let currentTheme; // add cookie or temp
+let currentTheme = document.cookie;
 
 function setTheme(theme) {
     console.log(theme)
+    document.cookie = theme;
+
     if (theme === 'default') {
-        $("div").removeClass(currentTheme);
-        $("body").removeClass(currentTheme);
+
+            $("div").removeClass(currentTheme);
+            $("body").removeClass(currentTheme);
+
     }
     else {
         $("div").removeClass(currentTheme);
