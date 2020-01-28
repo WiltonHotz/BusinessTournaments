@@ -20,7 +20,6 @@
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
     --body-font-color: #d3d3d3;
     --tableFixHead-bgc: rgb(36, 97, 72);
-    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
     --tableFixHead-ff: "Abel-Regular";
     --hX-c: #CADBCF;
     --footer-bgc: rgba(0, 0, 0, 0);
@@ -48,13 +47,13 @@
     --octicon-x-active-c: white;
     /*--gradient-bgc: #2d2d2d;*/
     --gradient-bgc: rgba(59, 59, 59, 0.5);
-    --gradient-gradient: linear-gradient(#222524, #176647);
+    /*--gradient-gradient: linear-gradient(#222524, #176647);*/
     --grid-container-ff: "Arial";
     /* End Index vars*/
 }
 
-.default {
-    /*Index vars*/
+/*.default {
+
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
     --body-font-color: #d3d3d3;
@@ -85,12 +84,14 @@
     --octicon-x-c: red;
     --octicon-x-hover-c: lightcoral;
     --octicon-x-active-c: white;
-    /*--gradient-bgc: #2d2d2d;*/
+
+
     --gradient-bgc: rgba(59, 59, 59, 0.5);
     --gradient-gradient: linear-gradient(#222524, #176647);
     --grid-container-ff: "Arial";
-    /* End Index vars*/
-}
+
+
+}*/
 
 .nineties {
     /*Index vars*/
@@ -121,7 +122,7 @@
     --octicon-x-hover-c: lightcoral;
     --octicon-x-active-c: white;
     --gradient-bgc: #114a33;
-    --gradient-gradient: linear-gradient(#114a33, #176647);
+    --gradient-gradient: linear-gradient(#222524, #176647);
     --grid-container-ff: "Arial";
     /* End Index vars*/
 }
