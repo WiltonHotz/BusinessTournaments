@@ -8,6 +8,6 @@ namespace BusinessTournaments.Models.ViewModels
 {
     public class BracketIdVM
     {
-        public string BracketId { get; set; }
+        public int BracketId { get; set; }
     }
 }

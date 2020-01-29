@@ -63,7 +63,6 @@ $(document).ready(function () {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     getIndexVMJSON()
-    console.log(currentTheme)
 
 });
 document.querySelectorAll(".tableFixHead").forEach(el =>
