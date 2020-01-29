@@ -153,9 +153,8 @@ html, body, .grid-container {
     }
 
     .bracket.totalwinner {
-        background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+        background: linear-gradient(to right, #bf953f, #FCF6BA, #b38728, #fbf5b7, #aa771c);
         font-weight: bold;
-        box-shadow: 0 0 3px 3px #FEDB37;
     }
 
     .bracket.empty {
@@ -184,6 +183,14 @@ html, body, .grid-container {
     color: white;
     text-align: center;
     display: block;
+    /*transition: all ease .5s;*/
+}
+
+.bracket.totalwinner .player-name {
+    color: #44300d;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    /*text-shadow: 3px 3px 3px 3px gray;*/
 }
 
 .player-id {
@@ -219,7 +226,8 @@ html, body, .grid-container {
 }
 
 .SaveAndClose .btn {
-    background-color: #2a9b6d;
+    background-color: rgba(42, 155, 109, 0.3);
+    border: solid 1px rgba(42, 155, 109, 1); 
     color: white;
 }
 
