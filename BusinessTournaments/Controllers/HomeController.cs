@@ -167,7 +167,10 @@ namespace BusinessTournaments.Controllers
         {
             var userId = accountService.GetUserId();
             await service.ClearPlayerScores(userId);
-            return Ok();
+            IndexVM viewModel = await service.GetIndexVMAsync(accountService.GetUserId());
+            var players = viewModel.Leaderboard;
+            return Json(players);
+            
         }
     }
 }
