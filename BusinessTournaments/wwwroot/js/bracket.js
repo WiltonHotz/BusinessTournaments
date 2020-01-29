@@ -7,6 +7,8 @@ let populatedBracketClasses = "bracket rounded";
 let winnerBracketClasses = "bracket winner rounded";
 let totalWinnerBracketClasses = "bracket totalwinner rounded";
 let loserBracketClasses = "bracket loser rounded";
+let saveAndCloseBtnClasses = "btn save";
+let confirmWinnerBtnClasses = "btn confirm";
 
 const unique = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -23,7 +25,7 @@ function getTournamentBracketJSON(bracketId) {
             currentBracketsJson = response;
             console.log(currentBracketsJson)
             // add tournament name to html
-            $('.TournamentName').html(`- ${currentBracketsJson.tournamentName} -`)
+            $('.TournamentName').html(`- ${currentBracketsJson.tournamentName.toUpperCase()} -`)
 
             // Check how many players
             let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerId);
@@ -526,10 +528,17 @@ function setBracketState(clickedBracketId, targetBracketId, opponentBracketId, t
     } else if (clickedBracketId > 0) {
         if (!checkIfBracketIsEmpty(`b${opponentBracketId}`)) {
 
-            if (checkIfBracketIsEmpty(`b${targetBracketId}`) || checkIfTargetBracketHasOpponent(`b${targetBracketId}`, `b${opponentBracketId}`))
+            if (checkIfBracketIsEmpty(`b${targetBracketId}`) || checkIfTargetBracketHasOpponent(`b${targetBracketId}`, `b${opponentBracketId}`)) {
                 setPlayerInBracketAsWinner(`b${clickedBracketId}`, `b${targetBracketId}`, `b${opponentBracketId}`);
-            else
+                $('#savebtn').prop('class', confirmWinnerBtnClasses);
+                $('#savebtn').prop('value', 'CONFIRM WINNER');
+            }
+            else {
                 removePlayerInBracketAsWinner(`b${opponentBracketId}`, `b${targetBracketId}`, `b${clickedBracketId}`);
+                $('#savebtn').prop('class', saveAndCloseBtnClasses);
+                $('#savebtn').prop('value', 'SAVE & CLOSE');
+
+            }
         }
         else {
             console.log(bracketId);
