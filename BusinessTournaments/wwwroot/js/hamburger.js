@@ -14,7 +14,7 @@ function LoadThemes() {
         success: function (response) {
 
             allThemes = response;
-            console.log(allThemes)
+            //console.log(allThemes)
             PopulateMenu(allThemes);
         },
         error: function () {
