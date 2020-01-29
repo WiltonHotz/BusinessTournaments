@@ -32,6 +32,8 @@ let octiconX = `<svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1"
 let octiconArrowOngoing = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-ongoing"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>`;
 let octiconArrowCompleted = `<svg viewBox="0 0 10 16" version="1.1" class="octicon octicon-arrow-completed"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6z"/></svg>`;
 
+let resumeButtonClasses = "btn btn-block resume-btn"
+
 //#region scrolling
 function tableFixHead(e) {
     const el = e.target,
@@ -800,7 +802,7 @@ function startTournament() {
 function changeStartTournamentButtonToResumeAndActivate() {
 
     $('#startTournament').prop("value", "RESUME")
-    $('#startTournament').prop("class", "btn btn-block");
+    $('#startTournament').prop("class", resumeButtonClasses);
     $('#startTournament').prop("disabled", false);
 
     $('#clearSelectedBtn').prop("disabled", false);

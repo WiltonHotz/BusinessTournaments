@@ -246,6 +246,15 @@ td:last-child {
         color: var(--body-font-color);
     }
 
+    #startTournament.resume-btn {
+        background-color: #b4b231;
+        color: white;
+    }
+
+    #startTournament.resume-btn:hover {
+        background-color: #aeac2f;
+    }
+
 .no-border {
     border-bottom: 0 none;
     border-top: 0 none;
