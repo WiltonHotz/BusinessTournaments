@@ -92,7 +92,7 @@ function PopulatePlayersOnLoad(leaderboard) {
 
         $("#leaderboard")
             .append(`<tr style="height: 38px;" id='l${leaderboard[i].playerId}' class="leaderboard-row">
-                        <td><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')">${octiconEditIcon}</span></td>
+                        <td class="edit-icon-td"><span class="editIcon" id="editPlayer${leaderboard[i].playerId}" data-toggle="modal" data-target="#editPlayerModal" onclick="editPlayer('lname${leaderboard[i].playerId}','${leaderboard[i].playerId}')">${octiconEditIcon}</span></td>
                         <td class="scoretd">${leaderboard[i].score}</td>
                         <td class="nametd" id="lname${leaderboard[i].playerId}">${leaderboard[i].playerName}</td>
                         ${canAddMorePlayers ? `<td style="width: 5px; text-align: right; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}"><span class="select-button" id="sBtn${leaderboard[i].playerId}" onclick="selectPlayer('${leaderboard[i].playerId}','${leaderboard[i].playerName}')">${octiconArrowSelect}</span></td>` : `<td style="width: 5px; text-align: right; visibility: hidden; padding-right: 15px;" id="selectarrowtd${leaderboard[i].playerId}">${octiconArrowSelect}</td>`}
@@ -105,7 +105,7 @@ function PopulateOngoingTournamentsOnLoad(tournaments) {
         
         $("#ongoing")
             .append(`<tr id='ot${tournaments[i].tournamentId}'>
-                        <td width="60% class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowOngoing}&nbsp&nbsp${tournaments[i].tournamentName}</td>
+                        <td width="60% class="resumetour-button" id="restourBtn${tournaments[i].playerId}" onclick="showOngoingTournament('${tournaments[i].tournamentId}','${tournaments[i].tournamentName}')">${octiconArrowOngoing}&nbsp&nbsp&nbsp&nbsp${tournaments[i].tournamentName}</td>
                         <td>${ReturnDateFormat(tournaments[i].date)}</td>
                         <td style="width: 20px; padding-right: 20px;"><span class="delete-button" id="deleteBtn${tournaments[i].tournamentId}" onclick="confirmDeleteTournament('${tournaments[i].tournamentId}')">${octiconX}</span></td>
                         </tr>`);

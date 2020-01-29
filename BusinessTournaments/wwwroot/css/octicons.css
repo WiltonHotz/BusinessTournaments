@@ -1,0 +1,84 @@
+﻿.octicon-arrow-select {
+    color: var(--octicon-arrow-select-c);
+    width: 20px;
+    height: 35px;
+}
+
+    .octicon-arrow-select:hover {
+        color: var(--octicon-arrow-select-hover-c);
+        cursor: pointer;
+    }
+
+    .octicon-arrow-select:active {
+        color: var(--octicon-arrow-select-active-c);
+    }
+
+.octicon-arrow-remove {
+    color: var(--octicon-arrow-remove-c);
+    width: 20px;
+    height: 35px;
+}
+
+    .octicon-arrow-remove:hover {
+        color: var(--octicon-arrow-remove-hover-c);
+        cursor: pointer;
+    }
+
+    .octicon-arrow-remove:active {
+        color: var(--octicon-arrow-remove-active-c);
+    }
+
+.octicon-arrow-ongoing {
+    color: var(--octicon-arrow-ongoing-c);
+    width: 20px;
+    height: 35px;
+}
+
+    .octicon-arrow-ongoing:hover {
+        color: var(--octicon-arrow-ongoing-hover-c);
+    }
+
+.octicon-arrow-completed {
+    color: var(--octicon-arrow-completed-c);
+    width: 20px;
+    height: 35px;
+}
+
+    .octicon-arrow-completed:hover {
+        color: var(--octicon-arrow-completed-hover-c);
+    }
+
+    .octicon-arrow-completed:active {
+        color: var(--octicon-arrow-completed-active-c);
+    }
+
+
+.octicon-x {
+    color: var(--octicon-x-c);
+    width: 20px;
+    height: 20px;
+}
+
+    .octicon-x:hover {
+        color: var(--octicon-x-hover-c);
+        cursor: pointer;
+    }
+
+    .octicon-x:active {
+        color: var(--octicon-x-active-c);
+    }
+
+.octicon-edit-icon {
+    height: 26px;
+    width: 15px;
+    color: var(--octicon-edit-icon-c);
+}
+
+    .octicon-edit-icon:hover {
+        color: var(--octicon-edit-icon-hover-c);
+        cursor: pointer;
+    }
+
+svg {
+    fill: currentColor;
+}
