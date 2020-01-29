@@ -23,7 +23,7 @@ function LoadThemes() {
         success: function (response) {
 
             allThemes = response;
-            console.log("themes loaded: " + allThemes)
+            //console.log(allThemes)
             PopulateMenu(allThemes);
         },
         error: function () {

@@ -1,12 +1,14 @@
 ﻿let currentBracketsJson;
 let isWaitingForResponse;
 
-let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span><span class="player-name score"></span>';
+let emptyBracketHtml = '<span class="player-name"></span><span class="score"></span><span class="player-id"></span>';
 let emptyBracketClasses = "bracket empty rounded";
 let populatedBracketClasses = "bracket rounded";
 let winnerBracketClasses = "bracket winner rounded";
 let totalWinnerBracketClasses = "bracket totalwinner rounded";
 let loserBracketClasses = "bracket loser rounded";
+let saveAndCloseBtnClasses = "btn save";
+let confirmWinnerBtnClasses = "btn confirm";
 
 const unique = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -21,9 +23,9 @@ function getTournamentBracketJSON(bracketId) {
         success: function (response) {
             // Save brackets Json for later
             currentBracketsJson = response;
-
+            console.log(currentBracketsJson)
             // add tournament name to html
-            $('.TournamentName').html(`- ${currentBracketsJson.tournamentName} -`)
+            $('.TournamentName').html(`- ${currentBracketsJson.tournamentName.toUpperCase()} -`)
 
             // Check how many players
             let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerId);
@@ -82,7 +84,7 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
 
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
-            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName.toUpperCase()}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span><span class="player-name score"></span>`)
+            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName.toUpperCase()}</span><span class="score"></span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
             if (bracketsInfo.brackets[i].bracketState === 'winner') {
                 $(bracketId).prop("class", winnerBracketClasses)
             }
@@ -179,15 +181,13 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
             else if (currentBracketsJson.brackets.length === 15)
                 winnerScore = 3;
             else if (currentBracketsJson.brackets.length === 31)
-            winnerScore = 4;
+                winnerScore = 4;
 
-            winner.innerHTML = `${winnerScore} p`;
-            secondPlace.innerHTML = " 1p"
+            winner.innerHTML = `+${winnerScore} p`;
+            secondPlace.innerHTML = " +1 p"
             clickedPlayer.innerHTML = ""
  
         }
-
-       
 
         // Make locked bracket-levels darker
         checkIfBracketLevelsAreLocked();
@@ -230,7 +230,6 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
             clickedPlayer.innerHTML = "";
             opponent.innerHTML = "";
-     
         }
        
  
@@ -529,10 +528,17 @@ function setBracketState(clickedBracketId, targetBracketId, opponentBracketId, t
     } else if (clickedBracketId > 0) {
         if (!checkIfBracketIsEmpty(`b${opponentBracketId}`)) {
 
-            if (checkIfBracketIsEmpty(`b${targetBracketId}`) || checkIfTargetBracketHasOpponent(`b${targetBracketId}`, `b${opponentBracketId}`))
+            if (checkIfBracketIsEmpty(`b${targetBracketId}`) || checkIfTargetBracketHasOpponent(`b${targetBracketId}`, `b${opponentBracketId}`)) {
                 setPlayerInBracketAsWinner(`b${clickedBracketId}`, `b${targetBracketId}`, `b${opponentBracketId}`);
-            else
+                $('#savebtn').prop('class', confirmWinnerBtnClasses);
+                $('#savebtn').prop('value', 'CONFIRM WINNER');
+            }
+            else {
                 removePlayerInBracketAsWinner(`b${opponentBracketId}`, `b${targetBracketId}`, `b${clickedBracketId}`);
+                $('#savebtn').prop('class', saveAndCloseBtnClasses);
+                $('#savebtn').prop('value', 'SAVE & CLOSE');
+
+            }
         }
         else {
             console.log(bracketId);

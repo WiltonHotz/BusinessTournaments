@@ -47,7 +47,7 @@ html, body, .grid-container {
 .TournamentName {
     grid-area: TournamentName;
     text-align: center;
-    font-family: Neuropolitical;
+    font-family: Abel-Regular;
     font-size: 2.5em;
     color: var(--company-tournament-header-c);
     padding-top: 0.6vw;
@@ -135,6 +135,8 @@ html, body, .grid-container {
     min-height: 70%;
     cursor: pointer;
     transition: all ease .5s;
+    text-align: center;
+    justify-content: center;
 }
 
     .bracket:hover {
@@ -171,9 +173,9 @@ html, body, .grid-container {
     transition: all ease .5s;
 }
 
-.player-name {
+.player-name, .score {
     font-family: Abel-Regular;
-    width: 100%;
+    /*width: 100%;*/
     font-size: 1em;
     padding: .2em;
     line-height: 1.6em;
@@ -182,11 +184,11 @@ html, body, .grid-container {
     white-space: nowrap;
     color: white;
     text-align: center;
-    display: block;
+    /*display: block;*/
     /*transition: all ease .5s;*/
 }
 
-.bracket.totalwinner .player-name {
+.bracket.totalwinner .player-name, .bracket.totalwinner .score {
     color: #44300d;
     font-size: 1.2em;
     line-height: 1.4em;
@@ -225,13 +227,26 @@ html, body, .grid-container {
     margin-bottom: 50%;
 }
 
-.SaveAndClose .btn {
+.SaveAndClose .save {
     background-color: rgba(42, 155, 109, 0.3);
     border: solid 1px rgba(42, 155, 109, 1); 
     color: white;
 }
 
-    .SaveAndClose .btn:hover {
+    .SaveAndClose .save:hover {
+        background-color: #32b580;
+        color: white;
+    }
+
+.SaveAndClose .confirm {
+    /*background-color: rgba(42, 155, 109, 0.3);*/
+    /*background-color: red;*/
+    background: linear-gradient(to right, #bf953f, #FCF6BA, #b38728, #fbf5b7, #aa771c);
+    /*border: solid 1px rgba(42, 155, 109, 1);*/
+    color: black;
+}
+
+    .SaveAndClose .confirm:hover {
         background-color: #32b580;
         color: white;
     }
