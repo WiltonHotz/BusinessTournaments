@@ -485,7 +485,7 @@ function updateSelectedPlayerCounter(players) {
     if (players == null) {
         if (startTournamentInfo.playerIds.length > 0 && startTournamentInfo.playerIds.length < 4) {
             $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
-            $(`#playerCounter`).css("color", "red")
+            $(`#playerCounter`).css("color", "#ff5d5d");
            
 
 
@@ -497,17 +497,17 @@ function updateSelectedPlayerCounter(players) {
 
         } else if (startTournamentInfo.playerIds.length === 16) {
             $(`#playerCounter`).html(`${startTournamentInfo.playerIds.length}`)
-            $(`#playerCounter`).css("color", "red")
+            $(`#playerCounter`).css("color", "#ff5d5d")
 
 
 
         } else {
-            $(`#playerCounter`).html(``)
+            $(`#playerCounter`).html(`0`)
         }
     } else {
         if (players.length > 0 && players.length < 4) {
             $(`#playerCounter`).html(`${players.length}`)
-            $(`#playerCounter`).css("color", "red")
+            $(`#playerCounter`).css("color", "#ff5d5d")
        
 
         }
@@ -517,10 +517,10 @@ function updateSelectedPlayerCounter(players) {
 
         } else if (players.length === 16) {
             $(`#playerCounter`).html(`${players.length}`)
-            $(`#playerCounter`).css("color", "red")
+            $(`#playerCounter`).css("color", "#ff5d5d")
 
         } else {
-            $(`#playerCounter`).html(``)
+            $(`#playerCounter`).html(`0`)
 
 
         }
@@ -650,6 +650,7 @@ function fillTourNameInputWithOngoingTourName(tournamentName) {
     let tournamentNameInput = document.getElementById("tournamentNameInput");
     tournamentNameInput.value = tournamentName;
     tournamentNameInput.disabled = true;
+    tournamentNameInput.style.backgroundColor = "lightgray";
 }
 
 function makeSelectedOngoingBold(tournamentId) {
