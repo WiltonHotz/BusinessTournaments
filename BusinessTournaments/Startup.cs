@@ -55,6 +55,7 @@ namespace BusinessTournaments
             }
 
             app.UseAuthentication();
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseStaticFiles();
