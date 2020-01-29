@@ -26,7 +26,7 @@ function getTournamentBracketJSON(bracketId) {
             $('.TournamentName').html(`- ${currentBracketsJson.tournamentName} -`)
 
             // Check how many players
-            let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
+            let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerId);
             let numOfPlayers = players.filter(unique).length;
 
             // Get brackets partial view

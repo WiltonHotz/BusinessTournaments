@@ -31,8 +31,10 @@ namespace BusinessTournaments.Controllers
             var selectedTheme = await homeService.GetSelectedTheme(userId);
             ViewData["selectedTheme"] = selectedTheme;
 
+            ViewData["bracketId"] = id;
+
             var viewModel =  new BracketIdVM { BracketId = id };
-            return View(viewModel);
+            return View();
         }
 
         [Route("brackets/b/{id}")]
