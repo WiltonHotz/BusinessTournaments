@@ -40,8 +40,7 @@ table {
         position: -webkit-sticky;
         top: 0;
         z-index: 2;
-        /*background-color: var(--tableFixHead-bgc);*/
-        background-color: rgba(59, 59, 59, 1);
+        background-color: var(--tableFixHead-bgc);
         background-image: var(--tableFixHead-gradient);
         padding-bottom: 5px;
         padding-top: 5px;
@@ -62,7 +61,9 @@ table {
 }
 
 #selectedTableHead th {
-    background-color: #259165;
+    background-color: var(--selectedTableHead-th-bgc);
+    background-image: var(--selectedTableHead-th-img);
+    background-repeat: no-repeat;
     /*background-color: #85881f;*/
 }
 
@@ -80,10 +81,6 @@ table {
 
 .Leaderboard .table-colorized-header {
     color: var(--table-colorized-header-leaderboard-c);
-}
-
-.edit-icon-td {
-    border-right: solid gray 1px;
 }
 
 .wrapper {
@@ -249,6 +246,15 @@ td:last-child {
     #startTournament.btn-secondary:hover {
         background-color: #494949;
         color: var(--body-font-color);
+    }
+
+    #startTournament.resume-btn {
+        background-color: #b4b231;
+        color: white;
+    }
+
+    #startTournament.resume-btn:hover {
+        background-color: #aeac2f;
     }
 
 .no-border {

@@ -23,7 +23,7 @@ function getTournamentBracketJSON(bracketId) {
             currentBracketsJson = response;
 
             // add tournament name to html
-            $('.TournamentName').html(`${currentBracketsJson.tournamentName}`)
+            $('.TournamentName').html(`- ${currentBracketsJson.tournamentName} -`)
 
             // Check how many players
             let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
@@ -82,7 +82,7 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
 
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
-            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span><span class="player-name score"></span>`)
+            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName.toUpperCase()}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span><span class="player-name score"></span>`)
             if (bracketsInfo.brackets[i].bracketState === 'winner') {
                 $(bracketId).prop("class", winnerBracketClasses)
             }

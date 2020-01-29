@@ -15,6 +15,7 @@
     [LockoutEnabled]       BIT                NOT NULL,
     [AccessFailedCount]    INT                NOT NULL,
     [CompanyName]          NVARCHAR (MAX)     NULL,
+    [SelectedTheme] nvarchar(50) null,
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

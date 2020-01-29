@@ -14,19 +14,23 @@ namespace BusinessTournaments.Controllers
     {
         private readonly BracketsService service;
         private readonly AccountService accountService;
+        private readonly HomeService homeService;
 
-
-        public BracketsController(BracketsService service, AccountService accountService)
+        public BracketsController(BracketsService service, AccountService accountService, HomeService homeService)
         {
             this.service = service;
             this.accountService = accountService;
+            this.homeService = homeService;
         }
 
         
         [Route("brackets/{id}")]
-        public IActionResult Index(string id)
+        public async Task<IActionResult> Index(string id)
         {
-           var viewModel =  new BracketIdVM { BracketId = id };
+            var userId = accountService.GetUserId();
+            var selectedTheme = await homeService.GetSelectedTheme(userId);
+            ViewData["selectedTheme"] = selectedTheme;
+            var viewModel =  new BracketIdVM { BracketId = id };
             return View(viewModel);
         }
 
