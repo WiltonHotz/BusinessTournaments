@@ -54,7 +54,7 @@ namespace BusinessTournaments.Models
                     TournamentName = t.TournamentName,
                     Date = t.LastModified,
                     IsCompleted = t.IsCompleted
-                }).OrderByDescending(x => x.Date).ToListAsync();
+                }).OrderByDescending(x => x.Date).Take(15).ToListAsync();
 
             return new IndexVM
             {
