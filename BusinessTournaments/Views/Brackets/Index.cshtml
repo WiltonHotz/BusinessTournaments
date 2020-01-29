@@ -38,7 +38,9 @@
     <script src="~/js/bracket.js"></script>
     <script type="text/javascript">
 
-    var bracketId = @Html.Raw((this.Model.BracketId));
+        @*var bracketId = @Html.Raw((this.Model.BracketId));*@
+
+        var bracketId = @ViewData["bracketId"];
 
 
     $(document).ready(function() {
