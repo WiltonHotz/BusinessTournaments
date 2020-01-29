@@ -15,8 +15,6 @@
 
         </div>
 
-        @*<div class="EmptySpace roundCorners wrapper">*@
-
 
         <!-- [LEADERBOARD] -->
         <div class="Leaderboard Gradient roundCorners">
@@ -27,7 +25,7 @@
                         <tr>
                             <th width="20px"></th>
                             <th id="scoreBtn" class="scoreth" onclick="sortByScore()">SCORE</th>
-                            <th id="playerNameBtn" class="nameth" onclick="sortByName()">PLAYER NAME</th>
+                            <th id="playerNameBtn" class="nameth" onclick="sortByName()"><span class="table-colorized-header">PLAYERS</span></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,11 +40,14 @@
 
             <div class="lessOpacity tableFixHead" data-simplebar>
                 <table>
-                    <thead>
+                    <thead id="selectedTableHead">
                         <tr>
-                            <th>SELECTED PLAYERS</th>
-                            <th id="playerCounter"></th>
+                            <th style="text-align: center;">
+                                <span style="font-size: 1.2em;">SELECTED PLAYERS (<span id="playerCounter">0</span>)</span><br />
+                            </th>
+                            @*<th id="playerCounter"></th>*@
                         </tr>
+
                     </thead>
                     <tbody id="selected">
                     </tbody>
@@ -98,7 +99,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="3"><b style="color: #ff973c">COMPLETED</b> TOURNAMENTS</th>
+                            <th colspan="3"><span class="table-colorized-header">COMPLETED</span> TOURNAMENTS</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -117,7 +118,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="3"><b style="color: #FEFEAE;">ONGOING</b> TOURNAMENTS</th>
+                            <th colspan="3"><span class="table-colorized-header">ONGOING</span> TOURNAMENTS</th>
                             <th></th>
                             <th></th>
                         </tr>
