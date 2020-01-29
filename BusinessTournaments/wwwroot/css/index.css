@@ -62,7 +62,9 @@ table {
 }
 
 #selectedTableHead th {
-    background-color: #259165;
+    background-color: var(--selectedTableHead-th-bgc);
+    background-image: var(--selectedTableHead-th-img);
+    background-repeat: no-repeat;
     /*background-color: #85881f;*/
 }
 

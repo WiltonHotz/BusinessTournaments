@@ -72,5 +72,7 @@
     <Build Include="dbo\Tables\Tournaments.sql" />
     <Build Include="dbo\Tables\T2P.sql" />
     <Build Include="dbo\Tables\Players.sql" />
+    <Build Include="dbo\Tables\Themes.sql" />
+    <Build Include="dbo\Tables\Theme2Company.sql" />
   </ItemGroup>
 </Project>

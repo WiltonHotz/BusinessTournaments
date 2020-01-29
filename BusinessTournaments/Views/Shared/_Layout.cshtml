@@ -33,11 +33,8 @@
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Theme</a>
-                <div class="dropdown-content">
-                    <a href="javascript:void setTheme('default');">Default</a>
-                    <a href="javascript:void setTheme('nineties');">90'ies</a>
-                    <a href="#">iPad</a>
-                    <a href="#">Projector</a>
+                <div class="dropdown-content" id="themes">
+
                 </div>
             </li>
         </ul>
@@ -70,6 +67,10 @@
 
     <!-- [HAMBURGER JAVASCRIPT] -->
     <script src="~/js/hamburger.js"></script>
+
+    <script>
+        let currentTheme = "@ViewData["selectedTheme"]";
+    </script>
 
     @RenderSection("scripts", false)
 

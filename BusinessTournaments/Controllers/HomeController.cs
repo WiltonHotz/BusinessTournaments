@@ -24,8 +24,11 @@ namespace BusinessTournaments.Controllers
         }
 
         [Route("")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var userId = accountService.GetUserId();
+            var selectedTheme = await service.GetSelectedTheme(userId);
+            ViewData["selectedTheme"] = selectedTheme;
             return View();
         }
 
@@ -128,6 +131,35 @@ namespace BusinessTournaments.Controllers
             var result = await service.GetOngoingTournament(id, userId);
 
             return Json(result);
+        }
+
+        [Route("GetThemes")]
+        public async Task<IActionResult> GetThemes()
+        {
+            var userId = accountService.GetUserId();
+            var (themes, isOK) = await service.GetThemes(userId);
+            if (isOK)
+            {
+                return Ok(themes);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [Route("SetTheme")]
+        public async Task<IActionResult> SetTheme([FromBody]string theme)
+        {
+            var userId = accountService.GetUserId();
+            var isOK = await service.SetTheme(userId, theme);
+            if (isOK)
+            {
+                return Ok(theme);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
