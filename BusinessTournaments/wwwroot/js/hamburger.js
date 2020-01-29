@@ -1,12 +1,13 @@
 ﻿let allThemes;
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    console.log("content loaded")
     LoadThemes();
-    setTheme(currentTheme)
+    setTheme(currentTheme);
 });
 
 function LoadThemes() {
-    var url = `GetThemes`;
+    var url = `/GetThemes`;
 
     $.ajax({
         url: url,
@@ -50,7 +51,7 @@ function updateTheme(theme) {
     console.log(theme)
 
     $.ajax({
-        url: 'SetTheme',
+        url: '/SetTheme',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(theme),
@@ -65,7 +66,7 @@ function updateTheme(theme) {
 }
 
 function setTheme(theme) {
-    console.log(theme)
+    console.log("setTheme: " + theme)
 
     if (theme === 'default') {
 

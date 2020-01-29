@@ -18,6 +18,14 @@
     font-family: Octin-Sports;
     src: url('../fonts/octinsportsfree.ttf')
 }
+@font-face {
+    font-family: Neuropolitical;
+    src: url('../fonts/neuropolitical_rg.ttf')
+}
+@font-face {
+    font-family: Pirulen-Regular;
+    src: url('../fonts/pirulen_rg.ttf')
+}
 
 :root {
     /*Index vars*/
@@ -35,7 +43,7 @@
     --footer-bgc: rgba(0, 0, 0, 0);
     --copyright-c: #CADBCF;
     --lessOpacity-c: white;
-    --add-new-player-button: rgba(21, 86, 60, 0.70);
+    --add-new-player-button: rgba(21, 86, 60, 0.3);
     --add-new-player-button-hover: #145139;
     --start-tournament-button-c: #2aab77;
     --start-tournament-button-hover-c: #33cc8e;
@@ -331,7 +339,7 @@ p.copyright {
 #company-name-header {
     font-family: Abel-Regular;
     color: var(--company-tournament-header-c);
-    font-weight: 700;
+    font-weight: 900;
     font-size: 2.2em;
 }
 

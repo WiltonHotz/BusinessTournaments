@@ -25,13 +25,16 @@ namespace BusinessTournaments.Controllers
 
         
         [Route("brackets/{id}")]
-        public async Task<IActionResult> Index(string id)
+        public async Task<IActionResult> Index(int id)
         {
             var userId = accountService.GetUserId();
             var selectedTheme = await homeService.GetSelectedTheme(userId);
             ViewData["selectedTheme"] = selectedTheme;
+
+            ViewData["bracketId"] = id;
+
             var viewModel =  new BracketIdVM { BracketId = id };
-            return View(viewModel);
+            return View();
         }
 
         [Route("brackets/b/{id}")]

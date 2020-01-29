@@ -26,7 +26,7 @@ function getTournamentBracketJSON(bracketId) {
             $('.TournamentName').html(`- ${currentBracketsJson.tournamentName} -`)
 
             // Check how many players
-            let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerName);  //<<CHANGE TO UNIQUE PLAYERS
+            let players = response.brackets.filter(b => b.playerId != 0).map(p => p.playerId);
             let numOfPlayers = players.filter(unique).length;
 
             // Get brackets partial view
@@ -181,8 +181,8 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
             else if (currentBracketsJson.brackets.length === 31)
                 winnerScore = 4;
 
-            winner.innerHTML = `${winnerScore} p`;
-            secondPlace.innerHTML = " 1p"
+            winner.innerHTML = `+${winnerScore} p`;
+            secondPlace.innerHTML = " +1 p"
             clickedPlayer.innerHTML = ""
  
         }
