@@ -1,5 +1,13 @@
 ﻿let allThemes;
 
+$('body').click(function () {
+    closeNav();
+});
+
+$('#mySidenav').click(function (event) {
+    event.stopPropagation(); // remove if you want menu gone after any click
+});
+
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("content loaded")
     LoadThemes();
@@ -33,7 +41,28 @@ function PopulateMenu(allThemes) {
     }
 }
 
+function clearPlayerScores() {
+
+    var r = confirm(`Are you sure you want to clear all player scores?`);
+    if (r == true) {
+
+        var url = `/ClearPlayerScores`;
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                sortByScore() // needs more work!!
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+    }
+}
+
 function openNav() {
+    event.stopPropagation();
     var sidebar = document.getElementById("mySidenav");
     sidebar.style.width = "200px";
     //sidebar.style.backgroundColor = "rgba(0,0,0,0.4)";

@@ -151,6 +151,20 @@ namespace BusinessTournaments.Models
             else { return false; }
         }
 
+        internal async Task ClearPlayerScores(string userId)
+        {
+            var players = await context.Players
+                .Where(p => p.CompanyId == userId)
+                .ToListAsync();
+
+            foreach (var player in players)
+            {
+                player.Score = 0;
+            }
+
+            context.SaveChangesAsync();
+        }
+
         internal async Task<bool> SetTheme(string userId, string theme)
         {
             var user = await context.AspNetUsers

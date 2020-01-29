@@ -361,7 +361,7 @@ p.copyright {
 
 /*SidebarStuff*/
 .sidenav {
-    height: 80%;
+    height: 100%;
     width: 0;
     position: fixed;
     z-index: 2;
@@ -371,6 +371,10 @@ p.copyright {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+}
+
+#mySideNav {
+    height: 100vh;
 }
 
     .sidenav a {

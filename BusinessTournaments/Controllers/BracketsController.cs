@@ -33,7 +33,7 @@ namespace BusinessTournaments.Controllers
 
             ViewData["bracketId"] = id;
 
-            var viewModel =  new BracketIdVM { BracketId = id };
+            //var viewModel =  new BracketIdVM { BracketId = id };
             return View();
         }
 

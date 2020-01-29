@@ -145,7 +145,7 @@ namespace BusinessTournaments.Controllers
             }
             else
             {
-                return BadRequest();
+                return Ok();
             }
         }
         [Route("SetTheme")]
@@ -161,6 +161,13 @@ namespace BusinessTournaments.Controllers
             {
                 return BadRequest();
             }
+        }
+        [Route("ClearPlayerScores")]
+        public async Task<IActionResult> ClearPlayerScores()
+        {
+            var userId = accountService.GetUserId();
+            await service.ClearPlayerScores(userId);
+            return Ok();
         }
     }
 }
