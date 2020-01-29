@@ -135,6 +135,8 @@ html, body, .grid-container {
     min-height: 70%;
     cursor: pointer;
     transition: all ease .5s;
+    text-align: center;
+    justify-content: center;
 }
 
     .bracket:hover {
@@ -173,7 +175,7 @@ html, body, .grid-container {
 
 .player-name {
     font-family: Abel-Regular;
-    width: 100%;
+    /*width: 100%;*/
     font-size: 1em;
     padding: .2em;
     line-height: 1.6em;
@@ -182,7 +184,7 @@ html, body, .grid-container {
     white-space: nowrap;
     color: white;
     text-align: center;
-    display: block;
+    /*display: block;*/
     /*transition: all ease .5s;*/
 }
 
