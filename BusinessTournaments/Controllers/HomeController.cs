@@ -134,6 +134,7 @@ namespace BusinessTournaments.Controllers
         }
 
         [Route("GetThemes")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetThemes()
         {
             var userId = accountService.GetUserId();
