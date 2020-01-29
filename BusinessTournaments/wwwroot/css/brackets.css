@@ -17,7 +17,6 @@ html, body, .grid-container {
 }
 
     .grid-container * {
-        /*border: 1px solid red;*/
         position: relative;
     }
 
@@ -48,10 +47,10 @@ html, body, .grid-container {
 .TournamentName {
     grid-area: TournamentName;
     text-align: center;
-    font-family: University;
-    font-size: 2.5vw;
-    text-shadow: 2px 2px darkgrey;
-    padding-top:1vw;
+    font-family: Octin-Sports;
+    font-size: 2.5em;
+    color: var(--company-tournament-header-c);
+    padding-top: 0.6vw;
 }
 
 .SaveAndClose {
@@ -97,8 +96,6 @@ html, body, .grid-container {
     flex-direction: row;
     height: 100%;
     width: 100%;
-    /*padding-bottom: 50px;*/
-
 }
 
 .bracket-level {
@@ -129,31 +126,36 @@ html, body, .grid-container {
 .bracket {
     height: 100%;
     width: 100%;
-    background-color: #e6e05a;
+    background-color: rgba(255, 252, 92, 0.60);
     box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     display: flex;
     flex-direction: row;
-    transition: all ease .5s;
     margin-bottom: 2%;
     margin-top: 5%;
     min-height: 70%;
     cursor: pointer;
+    transition: all ease .5s;
 }
 
+    .bracket:hover {
+        background-color: rgba(255, 251, 0, 0.8);
+    }
+
     .bracket.winner {
-        background-color: #96e581;
+        background-color: #33c98c;
         font-weight: bold;
-        box-shadow: 0 0 10px 3px #96e581 ;
+        box-shadow: 0 0 7px 1px #33c98c;
     }
 
     .bracket.loser {
-        background-color: #9c5526;
+        /*background-color: rgba(156, 85, 38, 0.70);*/
+        background-color: rgba(175, 89, 89, 0.60);
     }
 
     .bracket.totalwinner {
         background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
         font-weight: bold;
-        box-shadow: 0 0 10px 10px #FEDB37;
+        box-shadow: 0 0 3px 3px #FEDB37;
     }
 
     .bracket.empty {
@@ -175,11 +177,11 @@ html, body, .grid-container {
     width: 100%;
     font-size: 1em;
     padding: .2em;
-    line-height: 1.5em;
+    line-height: 1.6em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #2B2B2B;
+    color: white;
     text-align: center;
     display: block;
 }
@@ -215,3 +217,13 @@ html, body, .grid-container {
 #semis-right #b5 {
     margin-bottom: 50%;
 }
+
+.SaveAndClose .btn {
+    background-color: #2a9b6d;
+    color: white;
+}
+
+    .SaveAndClose .btn:hover {
+        background-color: #32b580;
+        color: white;
+    }

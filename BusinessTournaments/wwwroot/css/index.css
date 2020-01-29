@@ -40,8 +40,7 @@ table {
         position: -webkit-sticky;
         top: 0;
         z-index: 2;
-        /*background-color: var(--tableFixHead-bgc);*/
-        background-color: rgba(59, 59, 59, 1);
+        background-color: var(--tableFixHead-bgc);
         background-image: var(--tableFixHead-gradient);
         padding-bottom: 5px;
         padding-top: 5px;
@@ -80,10 +79,6 @@ table {
 
 .Leaderboard .table-colorized-header {
     color: var(--table-colorized-header-leaderboard-c);
-}
-
-.edit-icon-td {
-    border-right: solid gray 1px;
 }
 
 .wrapper {

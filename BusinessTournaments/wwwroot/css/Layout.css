@@ -14,14 +14,20 @@
     font-family: University;
     src: url('../fonts/University.otf')
 }
+@font-face {
+    font-family: Octin-Sports;
+    src: url('../fonts/octinsportsfree.ttf')
+}
 
 :root {
     /*Index vars*/
     --body-bgc: #000000;
     --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
     --body-font-color: #d3d3d3;
-    --tableFixHead-bgc: #20895f;
+    --tableFixHead-bgc: rgb(59, 59, 59);
     --tableFixHead-ff: "Abel-Regular";
+    /*--tableFixHead-gradient: linear-gradient(rgb(59, 59, 59), rgb(61, 61, 61));*/
+    --company-tournament-header-c: #33c98c;
     --table-colorized-header-leaderboard-c: #2aab77;
     --table-colorized-header-completed-c: #ff973c;
     --table-colorized-header-ongoing-c: #eae73a;
@@ -55,47 +61,6 @@
     /*--tables-gradient: linear-gradient(#222524, #176647);*/
     /* End Index vars*/
 }
-
-/*.default {
-
-    --body-bgc: #000000;
-    --body-bg-img: url('../img/selective-focus-photo-of-table-tennis-ball-and-ping-pong-976873_dark.jpg');
-    --body-font-color: #d3d3d3;
-    --tableFixHead-bgc: rgb(36, 97, 72);
-    --tableFixHead-gradient: linear-gradient(#114a33, #176647);
-    --tableFixHead-ff: "Abel-Regular";
-    --hX-c: #CADBCF;
-    --footer-bgc: rgba(0, 0, 0, 0);
-    --copyright-c: #CADBCF;
-    --lessOpacity-c: white;
-    --add-new-player-button: #20895f;
-    --add-new-player-button-hover: #145139;
-    --octicon-edit-icon-c: white;
-    --octicon-edit-icon-hover-c: yellow;
-    --select-button-c: green;
-    --octicon-arrow-select-c: #2ec588;
-    --octicon-arrow-select-hover-c: #3cffb0;
-    --octicon-arrow-select-active-c: white;
-    --octicon-arrow-remove-c: red;
-    --octicon-arrow-remove-hover-c: lightcoral;
-    --octicon-arrow-remove-active-c: white;
-    --octicon-arrow-ongoing-c: #FEFEAE;
-    --octicon-arrow-ongoing-hover-c: #FFFF6D;
-    --octicon-arrow-ongoing-active-c: #FFFF6D;
-    --octicon-arrow-completed-c: #FE512C;
-    --octicon-arrow-completed-active-c: white;
-    --octicon-arrow-completed-hover-c: #FE512C;
-    --octicon-x-c: red;
-    --octicon-x-hover-c: lightcoral;
-    --octicon-x-active-c: white;
-
-
-    --gradient-bgc: rgba(59, 59, 59, 0.5);
-    --gradient-gradient: linear-gradient(#222524, #176647);
-    --grid-container-ff: "Arial";
-
-
-}*/
 
 .nineties {
     /*Index vars*/
@@ -345,11 +310,26 @@ p.copyright {
         left: 8px;
     }
 
-.Hamburger h3 {
+/*.Hamburger h3 {
     grid-area: CompanyName;
     font-family: Abel-Regular;
     color: #d3d3d3;
     font-size: 2em;
+}*/
+
+#company-name-header {
+    font-family: Octin-Sports;
+    color: var(--company-tournament-header-c);
+    font-weight: 500;
+    font-size: 2.2em;
+}
+
+#hamburger-symbol {
+    color: gray;
+}
+
+#hamburger-symbol:hover {
+    color: white;
 }
 
 .divspan {
