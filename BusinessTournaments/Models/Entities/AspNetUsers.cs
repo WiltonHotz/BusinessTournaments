@@ -8,6 +8,7 @@ namespace BusinessTournaments.Models.Entities
         public AspNetUsers()
         {
             Players = new HashSet<Players>();
+            Theme2Company = new HashSet<Theme2Company>();
             Tournaments = new HashSet<Tournaments>();
         }
 
@@ -27,8 +28,10 @@ namespace BusinessTournaments.Models.Entities
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string CompanyName { get; set; }
+        public string SelectedTheme { get; set; }
 
         public virtual ICollection<Players> Players { get; set; }
+        public virtual ICollection<Theme2Company> Theme2Company { get; set; }
         public virtual ICollection<Tournaments> Tournaments { get; set; }
     }
 }

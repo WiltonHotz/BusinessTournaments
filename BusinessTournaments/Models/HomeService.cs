@@ -64,6 +64,13 @@ namespace BusinessTournaments.Models
             };
         }
 
+        internal async Task<string> GetSelectedTheme(string userId) => 
+            await context.AspNetUsers
+                .Where(c => c.Id == userId)
+                .Select(s => s.SelectedTheme)
+                .SingleOrDefaultAsync();
+
+
         internal async Task<(List<PlayerVM>, bool)> CreatePlayersAsync(List<string> playerNames, string userId)
         {
             var allPlayerNames = await context.Players
@@ -142,6 +149,40 @@ namespace BusinessTournaments.Models
                 return true;
             }
             else { return false; }
+        }
+
+        internal async Task<bool> SetTheme(string userId, string theme)
+        {
+            var user = await context.AspNetUsers
+                .Where(u => u.Id == userId)
+                .SingleOrDefaultAsync();
+            if (user != null)
+            {
+                user.SelectedTheme = theme;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal async Task<(List<string>, bool)> GetThemes(string userId)
+        {
+            var themes = await context.Theme2Company
+                .Where(t => t.CompanyId == userId)
+                .Select(t => t.Theme.ThemeName)
+                .ToListAsync();
+
+            if(themes.Count() != 0)
+            {
+                return (themes, true);
+            }
+            else
+            {
+                return (themes, false);
+            }
         }
 
         internal async Task<bool> EditPlayerById(int playerId, string newName, string userId)

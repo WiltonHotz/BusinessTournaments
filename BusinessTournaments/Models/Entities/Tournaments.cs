@@ -9,6 +9,7 @@ namespace BusinessTournaments.Models.Entities
         {
             T2p = new HashSet<T2p>();
         }
+
         public int Id { get; set; }
         public string TournamentName { get; set; }
         public string BracketsJsonString { get; set; }

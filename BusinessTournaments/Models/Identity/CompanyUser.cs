@@ -9,6 +9,6 @@ namespace BusinessTournaments.Models.Identity
 {
     public class CompanyUser : IdentityUser
     {
-        
+        public string SelectedTheme { get; set; }
     }
 }
