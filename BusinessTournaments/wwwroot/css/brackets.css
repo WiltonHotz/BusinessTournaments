@@ -173,7 +173,7 @@ html, body, .grid-container {
     transition: all ease .5s;
 }
 
-.player-name {
+.player-name, .score {
     font-family: Abel-Regular;
     /*width: 100%;*/
     font-size: 1em;
@@ -188,7 +188,7 @@ html, body, .grid-container {
     /*transition: all ease .5s;*/
 }
 
-.bracket.totalwinner .player-name {
+.bracket.totalwinner .player-name, .bracket.totalwinner .score {
     color: #44300d;
     font-size: 1.2em;
     line-height: 1.4em;
