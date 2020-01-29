@@ -1,7 +1,7 @@
 ﻿let currentBracketsJson;
 let isWaitingForResponse;
 
-let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span>';
+let emptyBracketHtml = '<span class="player-name"></span><span class="player-id"></span><span class="player-name score"></span>';
 let emptyBracketClasses = "bracket empty rounded";
 let populatedBracketClasses = "bracket rounded";
 let winnerBracketClasses = "bracket winner rounded";
@@ -82,7 +82,7 @@ function populateBrackets(bracketsInfo, numOfPlayers) {
 
         // Skriv ut namnet om det finns något, annars tom <span>
         if (bracketsInfo.brackets[i].playerName != null) {
-            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName.toUpperCase()}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span>`)
+            $(bracketId).html(`<span class="player-name">${bracketsInfo.brackets[i].playerName.toUpperCase()}</span><span class="player-id">${bracketsInfo.brackets[i].playerId}</span><span class="player-name score"></span>`)
             if (bracketsInfo.brackets[i].bracketState === 'winner') {
                 $(bracketId).prop("class", winnerBracketClasses)
             }
@@ -127,8 +127,10 @@ function checkIfBracketIsEmpty(bracketId) {
 
 function checkIfTargetBracketHasOpponent(targetBracketId, opponentBracketId) {
 
-    let target = document.getElementById(targetBracketId);
-    let opponent = document.getElementById(opponentBracketId);
+    //let target = document.getElementById(targetBracketId);
+    //let opponent = document.getElementById(opponentBracketId);
+    let target = document.getElementById(`${targetBracketId}`).querySelector('.player-id');
+    let opponent = document.getElementById(`${opponentBracketId}`).querySelector('.player-id');
 
     if (target.innerHTML === opponent.innerHTML) {
         return true;
@@ -155,14 +157,37 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
         // Change classes (colors and other things css)
         $(`#${fromBracketId}`).prop("class", winnerBracketClasses);
         $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
-        if (targetBracketId != 'b0')
+        if (targetBracketId != 'b0') {
             $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
-        else
+        }
+        else {
             $(`#${targetBracketId}`).prop("class", totalWinnerBracketClasses);
+        }
 
 
         // Copy name to next bracket
         document.getElementById(targetBracketId).innerHTML = document.getElementById(fromBracketId).innerHTML;
+     
+        //score
+        if (targetBracketId == 'b0') {
+            let winner = document.getElementById(`${targetBracketId}`).querySelector('.score');
+            let secondPlace = document.getElementById(`${opponentBracketId}`).querySelector('.score');
+            let clickedPlayer = document.getElementById(`${fromBracketId}`).querySelector('.score');
+
+            if (currentBracketsJson.brackets.length === 7)
+                winnerScore = 2;
+            else if (currentBracketsJson.brackets.length === 15)
+                winnerScore = 3;
+            else if (currentBracketsJson.brackets.length === 31)
+            winnerScore = 4;
+
+            winner.innerHTML = `${winnerScore} p`;
+            secondPlace.innerHTML = " 1p"
+            clickedPlayer.innerHTML = ""
+ 
+        }
+
+       
 
         // Make locked bracket-levels darker
         checkIfBracketLevelsAreLocked();
@@ -196,6 +221,19 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
 
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
+
+
+       //  score
+        if (targetBracketId === 'b0') {
+            let clickedPlayer = document.getElementById(`${fromBracketId}`).querySelector('.score');
+            let opponent = document.getElementById(`${opponentBracketId}`).querySelector('.score');
+
+            clickedPlayer.innerHTML = "";
+            opponent.innerHTML = "";
+     
+        }
+       
+ 
 
         // Make locked bracket-levels darker
         checkIfBracketLevelsAreLocked();
@@ -305,7 +343,7 @@ function saveScoreAndMarkTourAsCompletedInDB() {
             winnerScore = 2;
         else if (currentBracketsJson.brackets.length === 15)
             winnerScore = 3;
-        else (currentBracketsJson.brackets.length === 31)
+        else if (currentBracketsJson.brackets.length === 31)
         winnerScore = 4;
 
         // JSON OBJECT
