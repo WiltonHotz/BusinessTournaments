@@ -12,7 +12,7 @@
         <div class="Hamburger">
 
             <partial name="_Hamburger" />
-            <h3 style="padding-left: 1%; display: inline;" id="company-name-header">@User.Identity.Name.ToUpper() TOURNAMENTS</h3>
+            <h3 style="padding-left: 1%; display: inline;" id="company-name-header">@User.Identity.Name.ToUpper() <span style="color: white;">TOURNAMENTS</span></h3>
         </div>
 
 
@@ -29,116 +29,116 @@
                             <th></th>
                         </tr>
                     </thead>
-                <tbody id="leaderboard">
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- [SELECTED] -->
-    <div class="Selected Gradient roundCorners">
-
-        <div class="lessOpacity tableFixHead" data-simplebar>
-            <table>
-                <thead id="selectedTableHead">
-                    <tr>
-                        <th style="text-align: center;">
-                            <span style="font-size: 1.2em;">TOURNAMENT PLAYERS (<span id="playerCounter">0</span>)</span><br />
-                        </th>
-                        @*<th id="playerCounter"></th>*@
-                    </tr>
-
-                </thead>
-                <tbody id="selected">
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- [TOURNAMENT NAME INPUT] -->
-    <div class="TournamentName roundCorners">
-
-        <div class="roundCorners">
-            <input type="text" style="padding-left: 5px;" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
+                    <tbody id="leaderboard">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-    </div>
+        <!-- [SELECTED] -->
+        <div class="Selected Gradient roundCorners">
 
-    <!-- [START TOURNAMENT BUTTON] -->
-    <div class="StartTournament roundCorners">
+            <div class="lessOpacity tableFixHead" data-simplebar>
+                <table>
+                    <thead id="selectedTableHead">
+                        <tr>
+                            <th style="text-align: center;">
+                                <span style="font-size: 1.2em;">TOURNAMENT PLAYERS (<span id="playerCounter">0</span>)</span><br />
+                            </th>
+                            @*<th id="playerCounter"></th>*@
+                        </tr>
 
-        <div class="lessOpacity">
-            <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE" disabled />
+                    </thead>
+                    <tbody id="selected">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-    </div>
+        <!-- [TOURNAMENT NAME INPUT] -->
+        <div class="TournamentName roundCorners">
 
-    <!-- [CLEAR SELECTED] -->
-    <div class="ClearTournament roundCorners">
+            <div class="roundCorners">
+                <input type="text" style="padding-left: 5px;" class="input-group input-group-lg roundCorners" placeholder="Enter tournament name..." id="tournamentNameInput" onkeyup="checkIfTournamentNameIsValidInput(this)" />
+            </div>
 
-        <div class="lessOpacity">
-            <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
         </div>
 
-    </div>
+        <!-- [START TOURNAMENT BUTTON] -->
+        <div class="StartTournament roundCorners">
 
-    <!-- [ADD PLAYERS SELECTED] -->
-    <div class="AddPlayers roundCorners">
+            <div class="lessOpacity">
+                <input type="button" id="startTournament" class="btn btn-secondary btn-block" onclick="startTournament()" value="CREATE" disabled />
+            </div>
 
-        <div>
-            <button type="button" class="btn btn-block" id="addPlayerModalBtn">ADD NEW PLAYERS</button>
         </div>
 
-    </div>
+        <!-- [CLEAR SELECTED] -->
+        <div class="ClearTournament roundCorners">
 
+            <div class="lessOpacity">
+                <input type="button" onclick="clearSelected()" id="clearSelectedBtn" class="btn btn-danger btn-block" value="CLEAR" disabled />
+            </div>
 
-    <!-- [COMPLETED TOURNAMENTS] -->
-    <div class="Completed roundCorners Gradient">
-
-        <div class="lessOpacity tableFixHead" data-simplebar>
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="3"><span class="table-colorized-header">COMPLETED</span> TOURNAMENTS</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="completed">
-                </tbody>
-            </table>
         </div>
 
-    </div>
+        <!-- [ADD PLAYERS SELECTED] -->
+        <div class="AddPlayers roundCorners">
 
-    <!-- [ONGOING TOURNAMENTS] -->
-    <div class="Ongoing Gradient roundCorners">
+            <div>
+                <button type="button" class="btn btn-block" id="addPlayerModalBtn">ADD NEW PLAYERS</button>
+            </div>
 
-        <div class="lessOpacity tableFixHead" data-simplebar>
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="3"><span class="table-colorized-header">ONGOING</span> TOURNAMENTS</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="ongoing">
-                </tbody>
-            </table>
         </div>
 
+
+        <!-- [COMPLETED TOURNAMENTS] -->
+        <div class="Completed roundCorners Gradient">
+
+            <div class="lessOpacity tableFixHead" data-simplebar>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3"><span class="table-colorized-header">COMPLETED</span> TOURNAMENTS</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="completed">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- [ONGOING TOURNAMENTS] -->
+        <div class="Ongoing Gradient roundCorners">
+
+            <div class="lessOpacity tableFixHead" data-simplebar>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3"><span class="table-colorized-header">ONGOING</span> TOURNAMENTS</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="ongoing">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- [FOOTER] -->
+        <div class="Footer roundCorners wrapper">
+
+            <footer>
+                <p class="copyright">© Business Tournaments 2020</p>
+            </footer>
+
+        </div>
     </div>
-
-    <!-- [FOOTER] -->
-    <div class="Footer roundCorners wrapper">
-
-        <footer>
-            <p class="copyright">© Business Tournaments 2020</p>
-        </footer>
-
-    </div>
-</div>
 </div>
 
 
@@ -194,6 +194,16 @@
 
 
 @section scripts {
-    @*<script src="~/js/hamburger.js"></script>*@
+    <!-- [SCROLL SCRIPTS]-->
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.1.0/dist/simplebar.min.js"></script>
+
+    <!-- [HAMBURGER JAVASCRIPT] -->
+    <script src="~/js/hamburger.js"></script>
+
+    <script>
+        let currentTheme = "@ViewData["selectedTheme"]";
+    </script>
+
     <script src="~/js/index.js"></script>
+
 }
