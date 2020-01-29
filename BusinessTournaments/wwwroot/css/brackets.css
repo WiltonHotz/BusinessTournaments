@@ -47,7 +47,7 @@ html, body, .grid-container {
 .TournamentName {
     grid-area: TournamentName;
     text-align: center;
-    font-family: Octin-Sports;
+    font-family: Neuropolitical;
     font-size: 2.5em;
     color: var(--company-tournament-header-c);
     padding-top: 0.6vw;

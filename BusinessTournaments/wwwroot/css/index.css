@@ -217,6 +217,7 @@ td:last-child {
 
 #addPlayerModalBtn {
     background-color: var(--add-new-player-button);
+    border: solid 1px rgb(21, 86, 60);
     color: var(--body-font-color);
 }
 
