@@ -162,7 +162,7 @@ namespace BusinessTournaments.Models
                 player.Score = 0;
             }
 
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         internal async Task<bool> SetTheme(string userId, string theme)

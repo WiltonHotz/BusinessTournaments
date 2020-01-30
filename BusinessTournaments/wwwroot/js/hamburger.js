@@ -46,13 +46,16 @@ function clearPlayerScores() {
     var r = confirm(`Are you sure you want to clear all player scores?`);
     if (r == true) {
 
-        var url = `/ClearPlayerScores`;
+        var url = `ClearPlayerScores`;
 
         $.ajax({
             url: url,
             type: "GET",
             success: function (response) {
-                sortByScore() // needs more work!!
+                // needs more work!!
+                $("#leaderboard").html("")
+                var sortByScore = response.sort(compareValues("score"))
+                PopulatePlayersOnLoad(sortByScore);
             },
             error: function () {
                 console.log("error");

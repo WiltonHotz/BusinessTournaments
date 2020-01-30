@@ -31,9 +31,9 @@
             <li>
                 <a href="#">Help</a>
             </li>
-            @*<li class="dropdown">
-                <a href="javascript:void clearPlayerScores()">Clear Player Scores</a>
-            </li>*@
+            <li class="dropdown">
+                <a href="javascript:void clearPlayerScores()" style="font-size:14px">Clear Player Scores</a>
+            </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Theme</a>
                 <div class="dropdown-content" id="themes">
@@ -51,16 +51,6 @@
     <!-- [BOOTSTRAP SCRIPTS] -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    <!-- [SCROLL SCRIPTS]-->
-    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.1.0/dist/simplebar.min.js"></script>
-
-    <!-- [HAMBURGER JAVASCRIPT] -->
-    <script src="~/js/hamburger.js"></script>
-
-    <script>
-        let currentTheme = "@ViewData["selectedTheme"]";
-    </script>
 
     @RenderSection("scripts", false)
 

@@ -149,10 +149,18 @@ html, body, .grid-container {
         box-shadow: 0 0 7px 1px #33c98c;
     }
 
+        .bracket.winner:hover {
+            background-color: #2db37d;
+        }
+
     .bracket.loser {
         /*background-color: rgba(156, 85, 38, 0.70);*/
         background-color: rgba(175, 89, 89, 0.60);
     }
+
+        .bracket.loser:hover {
+            background-color: rgba(175, 89, 89, 0.80)
+        }
 
     .bracket.totalwinner {
         background: linear-gradient(to right, #bf953f, #FCF6BA, #b38728, #fbf5b7, #aa771c);
