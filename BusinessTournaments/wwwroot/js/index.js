@@ -172,9 +172,9 @@ function showSelectPlayerArrows() {
 function initiateAddPlayerModal() {
 
     $("#modalPlayerNames")
-        .append(`<div id="pndiv0">
+        .append(`<div id="pndiv0" style="margin-bottom: -20px; padding: 0;">
                     <input type="text" id="pninp0" placeholder="Enter player name here..." />
-                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px; padding: 0;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 13px; padding: 0;" class="btn" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id="badpninp0"></span>
                 </div>`);
 
@@ -287,9 +287,9 @@ function addAddPlayerField(btn) {
     let newId = parseInt(numId) + 1;
 
     $("#modalPlayerNames")
-        .append(`<div id="pndiv${newId}">
+        .append(`<div id="pndiv${newId}" style="margin-bottom: -20px; padding: 0;">
                     <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
-                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 13px; padding: 0;" class="btn" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id='badpninp${newId}'></span>
 
                 </div>`);
