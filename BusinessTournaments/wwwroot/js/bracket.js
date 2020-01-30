@@ -183,8 +183,8 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
             else if (currentBracketsJson.brackets.length === 31)
                 winnerScore = 4;
 
-            winner.innerHTML = `+${winnerScore} p`;
-            secondPlace.innerHTML = " +1 p"
+            winner.innerHTML = `+${winnerScore}`;
+            secondPlace.innerHTML = " +1"
             clickedPlayer.innerHTML = ""
  
         }

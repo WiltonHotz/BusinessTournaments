@@ -133,6 +133,8 @@ function populateSelectedWithInstructions() {
     }
 }
 
+//}
+
 //#endregion
 
 //#region tiny little helpers
@@ -437,9 +439,9 @@ function selectPlayer(playerId, playerName) {
                 //tournamentNameInput.focus();
 
                 if (tournamentNameInput.value.length > 1)
-                    tournamentNameInput.style.backgroundColor = "lightgreen";
+                    tournamentNameInput.style.backgroundColor = "#c1e8c9";
                 else
-                    tournamentNameInput.style.backgroundColor = "#ffff8e";
+                    tournamentNameInput.style.backgroundColor = "#f4f4b7";
             }
 
             // Activate CREATE TOURNAMENT button
@@ -454,7 +456,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             updateSelectedPlayerCounter()
-            selectPlayerAudio()
+            //selectPlayerAudio()
         }
     }
 }
@@ -496,7 +498,7 @@ function removeSelectedPlayer(playerId) {
 
     }
     updateSelectedPlayerCounter()
-    removePlayerAudio()
+    //removePlayerAudio()
 }
 
 function updateSelectedPlayerCounter(players) {
@@ -663,7 +665,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
-    clickOngoingAudio()
+    //clickOngoingAudio()
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -717,7 +719,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
     updateSelectedPlayerCounter()
-    clickCompletedAudio()
+    //clickCompletedAudio()
 }
 
 //#endregion
@@ -731,13 +733,13 @@ function checkIfTournamentNameIsValidInput(input) {
         $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
-        tournamentNameInput.style.backgroundColor = "lightgreen";
+        tournamentNameInput.style.backgroundColor = "#c1e8c9";
     }
     else if (input.value.length < 2) {
         $('#startTournament').prop("class", "btn btn-secondary btn-block");
         $('#startTournament').prop("disabled", true);
         //$('#tournamentNameInput').css("background-color", "#ffff8e");
-        tournamentNameInput.style.backgroundColor = "#ffff8e"
+        tournamentNameInput.style.backgroundColor = "#f4f4b7"
     }
 
     if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
@@ -805,7 +807,7 @@ function startTournament() {
         data: jsonStr,
         success: function (data) {
 
-            startTourAudio()
+            //startTourAudio()
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -916,30 +918,30 @@ function burgerStuff() {
 //#endregion
 
 //#region sounds
-function selectPlayerAudio() {
-    document.getElementById('selectPlayerAudio').play();
-    console.log("audio")
-}
+//function selectPlayerAudio() {
+//    document.getElementById('selectPlayerAudio').play();
+//    console.log("audio")
+//}
 
-function removePlayerAudio() {
-    document.getElementById('removePlayerAudio').play();
-    console.log("audio")
+//function removePlayerAudio() {
+//    document.getElementById('removePlayerAudio').play();
+//    console.log("audio")
 
-}
+//}
 
-function clickOngoingAudio() {
-    document.getElementById('clickOngoingAudio').play();
-    console.log("audio")
+//function clickOngoingAudio() {
+//    document.getElementById('clickOngoingAudio').play();
+//    console.log("audio")
 
-}
-function clickCompletedAudio() {
-    document.getElementById('clickCompletedAudio').play();
-    console.log("audio")
+//}
+//function clickCompletedAudio() {
+//    document.getElementById('clickCompletedAudio').play();
+//    console.log("audio")
 
-}
-function startTourAudio() {
-    document.getElementById('startTourAudio').play();
-    console.log("audio")
+//}
+//function startTourAudio() {
+//    document.getElementById('startTourAudio').play();
+//    console.log("audio")
 
-}
+//}
 //#endregion

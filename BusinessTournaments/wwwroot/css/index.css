@@ -131,7 +131,7 @@ td:last-child {
 }
 
     .grid-container * {
-        border: none;
+        /*border: 1px solid red;*/
         position: relative;
     }
 
@@ -196,7 +196,7 @@ td:last-child {
 }
 
 .Hamburger {
-    grid-area: Hamburger;
+    grid-area: Hamburger
 }
 
 .EmptySpace {
@@ -289,6 +289,7 @@ td:last-child {
 #add-players-btn {
     background-color: #32b580;
     color: white;
+    color: #c1e8c9
 }
 
 /* IPAD AIR */
