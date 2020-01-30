@@ -313,10 +313,23 @@ function editPlayer(playerNameId, playerId) {
 
 function validateEditPlayerName() {
     var newName = $("#editPlayerName").val();
+    var ok = true;
+
+    var c = document.querySelectorAll(".nametd");
+    for (var i = 0; i < c.length; i++) {
+        if (newName === c[i].innerHTML) {
+            ok = false;
+        }
+    }
+
 
     if (newName.length > 23) {
         alert("Name can't be more than 22 letters");
-    } else {
+    }
+    else if (!ok) {
+        alert("Name is already in list");
+    }
+    else {
         confirmEditPlayer();
     }
 }
@@ -332,8 +345,8 @@ function confirmEditPlayer() {
             contentType: 'application/json',
             success: function (data) {
                 console.log(data)
-                var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
+
+
                 $(`#lname${playerIdToEdit}`).html(data)
 
                 $('#editPlayerModal').modal('hide');
