@@ -209,13 +209,16 @@ td:last-child {
     background-image: var(--tables-gradient);
 }
 
-.scoretd {
-    text-align: center;
-}
-
 .scoreth {
     text-align: center;
+    width: 150px;
 }
+
+.scoretd {
+    text-align: center;
+    width: 150px;
+}
+
 
 
 

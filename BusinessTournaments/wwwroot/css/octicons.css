@@ -36,6 +36,7 @@
 
     .octicon-arrow-ongoing:hover {
         color: var(--octicon-arrow-ongoing-hover-c);
+        cursor: pointer;
     }
 
 .octicon-arrow-completed {
@@ -46,6 +47,7 @@
 
     .octicon-arrow-completed:hover {
         color: var(--octicon-arrow-completed-hover-c);
+        cursor: pointer;
     }
 
     .octicon-arrow-completed:active {

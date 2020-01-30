@@ -9,7 +9,7 @@ let tournamentNameInput = document.getElementById("tournamentNameInput");
 let canAddMorePlayers = true;
 let playerIdToEdit;
 let sortedByNamesDesc = true;
-let sortedByScoreDesc = false;
+let sortedByScoreDesc = true;
 
 
 //#endregion
@@ -564,10 +564,16 @@ function sortByScore() {
                     var sortByScore = response.leaderboard.sort(compareValues("score"))
                     PopulatePlayersOnLoad(sortByScore);
                     sortedByScoreDesc = false;
+                    $('#score-pointer').html('&#9652;');
+                    $('#score-pointer').css('visibility', 'visible')
+                    $('#players-pointer').css('visibility', 'hidden')
                 } else {
                     var sortByScore = response.leaderboard.sort(compareValues("score", "desc"))
                     PopulatePlayersOnLoad(sortByScore);
                     sortedByScoreDesc = true;
+                    $('#score-pointer').html('&#9662;');
+                    $('#score-pointer').css('visibility', 'visible')
+                    $('#players-pointer').css('visibility', 'hidden')
                 }
 
             }
@@ -587,10 +593,18 @@ function sortByName() {
                     var sortOnName = response.leaderboard.sort(compareValues("playerName"))
                     PopulatePlayersOnLoad(sortOnName);
                     sortedByNamesDesc = false;
+                    //$('#score-pointer').html('');
+                    $('#players-pointer').html('&#9652;');
+                    $('#players-pointer').css('visibility', 'visible')
+                    $('#score-pointer').css('visibility', 'hidden')
+
                 } else {
                     var sortOnName = response.leaderboard.sort(compareValues("playerName", "desc"))
                     PopulatePlayersOnLoad(sortOnName);
                     sortedByNamesDesc = true;
+                    $('#players-pointer').html('&#9662;');
+                    $('#players-pointer').css('visibility', 'visible')
+                    $('#score-pointer').css('visibility', 'hidden')
                 }
 
             }
