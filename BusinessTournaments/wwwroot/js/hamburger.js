@@ -8,6 +8,15 @@ $('#mySidenav').click(function (event) {
     event.stopPropagation(); // remove if you want menu gone after any click
 });
 
+function openHelpModal() {
+
+    $("#helpModal").modal("show");
+}
+
+function openAboutModal() {
+
+    $("#aboutModal").modal("show");
+}
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("content loaded")
     LoadThemes();
