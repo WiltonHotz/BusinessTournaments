@@ -131,7 +131,7 @@ td:last-child {
 }
 
     .grid-container * {
-        border: none;
+        /*border: 1px solid red;*/
         position: relative;
     }
 
@@ -196,7 +196,7 @@ td:last-child {
 }
 
 .Hamburger {
-    grid-area: Hamburger;
+    grid-area: Hamburger
 }
 
 .EmptySpace {
