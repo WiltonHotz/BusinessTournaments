@@ -291,11 +291,6 @@ td:last-child {
     color: white;
 }
 
-.add-player-field-btn {
-    color: red;
-    border: solid 1px red;
-}
-
 /* IPAD AIR */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     .octicon-arrow-select, .octicon-arrow-ongoing, .octicon-arrow-completed, .octicon-arrow-remove, .octicon-edit-icon {
