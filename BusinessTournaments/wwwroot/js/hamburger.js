@@ -8,8 +8,16 @@ $('#mySidenav').click(function (event) {
     event.stopPropagation(); // remove if you want menu gone after any click
 });
 
+function openHelpModal() {
+
+    $("#helpModal").modal("show");
+}
+
+function openAboutModal() {
+
+    $("#aboutModal").modal("show");
+}
 document.addEventListener("DOMContentLoaded", function (event) {
-    console.log("content loaded")
     LoadThemes();
     setTheme(currentTheme);
 });
@@ -23,7 +31,6 @@ function LoadThemes() {
         success: function (response) {
 
             allThemes = response;
-            //console.log(allThemes)
             PopulateMenu(allThemes);
         },
         error: function () {
@@ -33,12 +40,17 @@ function LoadThemes() {
 }
 
 function PopulateMenu(allThemes) {
+    $(`#themes`).append(`<ul>`)
     for (var i = 0; i < allThemes.length; i++) {
         $(`#themes`).append(`
-
-             <a href="javascript:void updateTheme('${allThemes[i]}');">${allThemes[i].toUpperCase()}</a>
-        `)
+    <li>
+             <a href="javascript:void updateTheme('${allThemes[i]}');" style="font-size: 20px;">${allThemes[i].toLowerCase()}</a>
+</li>
+`)
     }
+    $(`#themes`).append(`</ul>`)
+
+    $(`#logoutDiv`).css({ "position": "absolute", "bottom": "50px" });
 }
 
 function clearPlayerScores() {
@@ -67,7 +79,7 @@ function clearPlayerScores() {
 function openNav() {
     event.stopPropagation();
     var sidebar = document.getElementById("mySidenav");
-    sidebar.style.width = "200px";
+    sidebar.style.width = "250px";
     //sidebar.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
@@ -80,15 +92,12 @@ function closeNav() {
 
 function updateTheme(theme) {
 
-    console.log(theme)
-
     $.ajax({
         url: '/SetTheme',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(theme),
         success: function (newTheme) {
-            console.log("success: " + newTheme)
             setTheme(newTheme)
         },
         error: function () {
@@ -98,7 +107,6 @@ function updateTheme(theme) {
 }
 
 function setTheme(theme) {
-    console.log("setTheme: " + theme)
 
     if (theme === 'default') {
 
