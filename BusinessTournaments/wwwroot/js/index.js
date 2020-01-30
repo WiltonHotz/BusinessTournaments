@@ -82,6 +82,7 @@ function getIndexVMJSON() {
             PopulatePlayersOnLoad(response.leaderboard);
             PopulateOngoingTournamentsOnLoad(response.ongoingTournaments)
             PopulateCompletedTournamentsOnLoad(response.completedTournaments)
+            populateSelectedWithInstructions()
         }
     });
 }
@@ -126,7 +127,10 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
 }
 
 function populateSelectedWithInstructions() {
+    if (document.getElementById("textInSelected") != null) {
+        document.getElementById("textInSelected").innerHTML = "Use the arrows to add players to your tournament";
 
+    }
 }
 
 //#endregion
@@ -400,6 +404,11 @@ function selectPlayer(playerId, playerName) {
 
         if (!startTournamentInfo.playerIds.some(x => x == playerId)) {
             startTournamentInfo.playerIds.push(playerId); // Add Player id to array
+
+            if (document.getElementById("textInSelected") != null) {
+
+                document.getElementById("textInSelected").remove();
+            }
 
             $("#selected")
                 .append(`<tr id='selected${playerId}'>
