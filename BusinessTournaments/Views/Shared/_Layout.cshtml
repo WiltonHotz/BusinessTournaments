@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width" initial-scale="1" />
     <title>Business Tournaments - @User.Identity.Name</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+     
 </head>
 <body>
     @*<div>*@
@@ -21,26 +21,75 @@
 
         <ul>
             <li>
-                <form method="post" asp-controller="Account" asp-action="Logout">
-                    <a><input type="submit" value="Logout" class="btn btn-primary" /></a>
-                </form>
+                <a href="#">ABOUT</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="javascript:void openAboutModal()">About</a>
+
             </li>
             <li>
-                <a href="#">Help</a>
+                <a href="javascript:void openHelpModal()">Help</a>
             </li>
             <li class="dropdown">
-                <a href="javascript:void clearPlayerScores()" style="font-size:14px">Clear Player Scores</a>
+                <a href="javascript:void clearPlayerScores()" >CLEAR SCORES</a>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Theme</a>
+                <a href="javascript:void(0)" class="dropbtn">THEME</a>
                 <div class="dropdown-content" id="themes">
 
                 </div>
             </li>
         </ul>
+        <div id="logoutDiv">
+            @*<form method="post" asp-controller="Account" asp-action="Logout"><input type="submit" value="Logout" class="btn btn-primary" />*@
+            <a asp-controller="Account" asp-action="Logout">LOG OUT</a>
+            @*</form>*@
+        </div>
+
+    </div>
+
+    <!-- [HELP MODAL] -->
+    <div id="helpModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-notify modal-info ">
+
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h4 style="font-family: Abel-Regular;" class="heading">Help</h4>
+                    <button type="button" id="modalClose" class="close white-text" data-dismiss="modal">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Ring 112</p>
+                </div>
+                <div class="modal-footer flex-center no-border">
+                    <button type="button" id="modalClose" class="close white-text" data-dismiss="modal"> </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- [ABOUT MODAL] -->
+    <div id="aboutModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-notify modal-info ">
+
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h4 style="font-family: Abel-Regular;" class="heading">Help</h4>
+                    <button type="button" id="modalClose" class="close white-text" data-dismiss="modal">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Hej hej</p>
+                </div>
+                <div class="modal-footer flex-center no-border">
+                    <button type="button" id="modalClose" class="close white-text" data-dismiss="modal"> </button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <!-- [JQUERY & VALIDATE] -->

@@ -23,7 +23,6 @@ function getTournamentBracketJSON(bracketId) {
         success: function (response) {
             // Save brackets Json for later
             currentBracketsJson = response;
-            console.log(currentBracketsJson)
             // add tournament name to html
             $('.TournamentName').html(`- ${currentBracketsJson.tournamentName.toUpperCase()} -`)
 
@@ -149,7 +148,6 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
 
     // Update json object
     let newBracketsJson = setWinnerInBracketsJson(fromBracketId, targetBracketId, opponentBracketId);
-    console.log(opponentBracketId)
     // Save changes on DB
     let success = saveChangesToDB(newBracketsJson);
 
@@ -314,7 +312,6 @@ function saveChangesToDB(newBracketsJson) {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
-            //console.log(data)
 
         },
         error: function () {
@@ -543,7 +540,7 @@ function setBracketState(clickedBracketId, targetBracketId, opponentBracketId, t
             }
         }
         else {
-            console.log(bracketId);
+            //console.log(bracketId);
         }
     }
 }
