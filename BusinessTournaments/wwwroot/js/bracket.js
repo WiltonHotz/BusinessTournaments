@@ -224,6 +224,8 @@ function removePlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentB
         // Empty target bracket
         document.getElementById(targetBracketId).innerHTML = emptyBracketHtml;
 
+        // PLay Sound
+        removeWinnerInBracketAudio();
 
        //  score
         if (targetBracketId === 'b0') {
