@@ -157,7 +157,7 @@ function showSelectPlayerArrows() {
     var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
 
     for (i = 0; i < arrowsInLeaderBoard.length; i++) {
-        console.log(arrowsInLeaderBoard[i].id)
+       
         //check if the player from leaderboard is in selectedPlayers:
         if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
             var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
@@ -448,6 +448,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             updateSelectedPlayerCounter()
+            selectPlayerAudio()
         }
     }
 }
@@ -489,6 +490,7 @@ function removeSelectedPlayer(playerId) {
 
     }
     updateSelectedPlayerCounter()
+    removePlayerAudio()
 }
 
 function updateSelectedPlayerCounter(players) {
@@ -631,6 +633,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             canAddMorePlayers = false;
             hideDeleteButton(tournamentId);
             makeSelectedOngoingBold(tournamentId)
+           
         }
     });
 }
@@ -655,6 +658,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
+    clickOngoingAudio()
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -709,6 +713,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
     updateSelectedPlayerCounter()
+    clickCompletedAudio()
 }
 
 //#endregion
@@ -802,6 +807,7 @@ function startTournament() {
         data: jsonStr,
         success: function (data) {
             console.log(data)
+            startTourAudio()
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -913,7 +919,31 @@ function burgerStuff() {
 }
 //#endregion
 
+//#region sounds
+function selectPlayerAudio() {
+    document.getElementById('selectPlayerAudio').play();
+    console.log("audio")
+}
 
-//function play_single_sound() {
-//    document.getElementById('audiotag1').play();
-//}
+function removePlayerAudio() {
+    document.getElementById('removePlayerAudio').play();
+    console.log("audio")
+
+}
+
+function clickOngoingAudio() {
+    document.getElementById('clickOngoingAudio').play();
+    console.log("audio")
+
+}
+function clickCompletedAudio() {
+    document.getElementById('clickCompletedAudio').play();
+    console.log("audio")
+
+}
+function startTourAudio() {
+    document.getElementById('startTourAudio').play();
+    console.log("audio")
+
+}
+//#endregion
