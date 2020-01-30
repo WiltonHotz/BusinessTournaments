@@ -96,7 +96,7 @@ namespace BusinessTournaments.Models
             }
 
             var newPlayers = new List<EntityEntry<Players>>();
-            foreach (var playerName in playerNamesLower)
+            foreach (var playerName in playerNames)
             {
                 if (playerName != "")
                 {
