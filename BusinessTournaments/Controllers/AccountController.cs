@@ -83,9 +83,9 @@ namespace BusinessTournaments.Controllers
             return RedirectToAction(nameof(Login));
         }
         [Route("Logout")]
-        [HttpPost]
+        //[HttpPost]
         [Authorize]
-        public async Task<IActionResult> Logout(IFormCollection form)
+        public async Task<IActionResult> Logout()
         {
             await service.LogoutMemberAsync();
 

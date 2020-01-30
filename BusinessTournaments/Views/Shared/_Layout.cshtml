@@ -21,26 +21,27 @@
 
         <ul>
             <li>
-                <form method="post" asp-controller="Account" asp-action="Logout">
-                    <a><input type="submit" value="Logout" class="btn btn-primary" /></a>
-                </form>
+                <a href="#">ABOUT</a>
             </li>
             <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Help</a>
+                <a href="#">HELP</a>
             </li>
             <li class="dropdown">
-                <a href="javascript:void clearPlayerScores()" style="font-size:14px">Clear Player Scores</a>
+                <a href="javascript:void clearPlayerScores()" >CLEAR SCORES</a>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Theme</a>
+                <a href="javascript:void(0)" class="dropbtn">THEME</a>
                 <div class="dropdown-content" id="themes">
 
                 </div>
             </li>
         </ul>
+        <div id="logoutDiv">
+            @*<form method="post" asp-controller="Account" asp-action="Logout"><input type="submit" value="Logout" class="btn btn-primary" />*@
+            <a asp-controller="Account" asp-action="Logout">LOG OUT</a>
+            @*</form>*@
+        </div>
+
     </div>
 
     <!-- [JQUERY & VALIDATE] -->

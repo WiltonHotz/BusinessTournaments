@@ -157,7 +157,6 @@ function showSelectPlayerArrows() {
     var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
 
     for (i = 0; i < arrowsInLeaderBoard.length; i++) {
-        console.log(arrowsInLeaderBoard[i].id)
         //check if the player from leaderboard is in selectedPlayers:
         if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
             var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
@@ -197,7 +196,6 @@ function addPlayers() {
         contentType: 'application/json',
         data: JSON.stringify(names),
         success: function (data) {
-            console.log(data)
             PopulatePlayersOnLoad(data);
             $('#addPlayerModal').modal('hide');
             $("#modalPlayerNames").html("");
@@ -344,8 +342,6 @@ function confirmEditPlayer() {
             type: 'POST',
             contentType: 'application/json',
             success: function (data) {
-                console.log(data)
-
 
                 $(`#lname${playerIdToEdit}`).html(data)
 
@@ -373,9 +369,9 @@ function confirmDeletePlayer() {
             type: 'POST',
             contentType: 'application/json',
             success: function (data) {
-                console.log(data)
+
                 var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
+
                 $(`#l${playerIdToEdit}`).remove();
 
                 $('#editPlayerModal').modal('hide');
@@ -623,7 +619,6 @@ function showOngoingTournament(tournamentId, tournamentName) {
         url: url,
         type: "GET",
         success: function (players) {
-            console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
             hideSelectPlayerArrows();
@@ -690,7 +685,6 @@ function selectPlayersFromCompletedTournament(tournamentId) {
         url: url,
         type: "GET",
         success: function (players) {
-            console.log(players)
             populateSelectedWithPlayersFromCompletedTournament(players);
 
             //  hideAllArrows();
@@ -715,8 +709,6 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
 
 //#region tournament name input field
 function checkIfTournamentNameIsValidInput(input) {
-
-    console.log(input.value)
 
     let tournamentNameInput = document.getElementById("tournamentNameInput");
 
@@ -750,7 +742,6 @@ function deleteTournament(tournamentId) {
         type: 'POST',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data)
             deleteSelectedTournament(data);
         },
         error: function () {
@@ -780,8 +771,6 @@ function deleteSelectedTournament(tournamentId) {
 function hideDeleteButton(tournamentId) {
 
     document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
-
-    console.log(`deleteBtn${tournamentId}`)
 }
 
 //#endregion
@@ -791,7 +780,6 @@ function hideDeleteButton(tournamentId) {
 function startTournament() {
 
     startTournamentInfo.tournamentName = tournamentNameInput.value;
-    console.log(startTournamentInfo);
 
     let jsonStr = JSON.stringify(startTournamentInfo)
 
@@ -801,7 +789,6 @@ function startTournament() {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
-            console.log(data)
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -846,8 +833,6 @@ function clearSelected() {
     for (var i = 0; i < arrows.length; i++) {
         // edit icon added
         editIcons[i].style.visibility = "visible";
-
-        console.log(editIcons[i])
 
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
