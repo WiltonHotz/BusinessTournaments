@@ -157,6 +157,7 @@ function showSelectPlayerArrows() {
     var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
 
     for (i = 0; i < arrowsInLeaderBoard.length; i++) {
+       
         //check if the player from leaderboard is in selectedPlayers:
         if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
             var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
@@ -173,7 +174,7 @@ function initiateAddPlayerModal() {
     $("#modalPlayerNames")
         .append(`<div id="pndiv0">
                     <input type="text" id="pninp0" placeholder="Enter player name here..." />
-                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px; padding: 0;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id="badpninp0"></span>
                 </div>`);
 
@@ -288,7 +289,7 @@ function addAddPlayerField(btn) {
     $("#modalPlayerNames")
         .append(`<div id="pndiv${newId}">
                     <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
-                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id='badpninp${newId}'></span>
 
                 </div>`);
@@ -444,6 +445,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             updateSelectedPlayerCounter()
+            selectPlayerAudio()
         }
     }
 }
@@ -485,6 +487,7 @@ function removeSelectedPlayer(playerId) {
 
     }
     updateSelectedPlayerCounter()
+    removePlayerAudio()
 }
 
 function updateSelectedPlayerCounter(players) {
@@ -626,6 +629,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             canAddMorePlayers = false;
             hideDeleteButton(tournamentId);
             makeSelectedOngoingBold(tournamentId)
+           
         }
     });
 }
@@ -650,6 +654,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
+    clickOngoingAudio()
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -703,6 +708,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
     updateSelectedPlayerCounter()
+    clickCompletedAudio()
 }
 
 //#endregion
@@ -789,6 +795,8 @@ function startTournament() {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
+
+            startTourAudio()
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -898,7 +906,31 @@ function burgerStuff() {
 }
 //#endregion
 
+//#region sounds
+function selectPlayerAudio() {
+    document.getElementById('selectPlayerAudio').play();
+    console.log("audio")
+}
 
-//function play_single_sound() {
-//    document.getElementById('audiotag1').play();
-//}
+function removePlayerAudio() {
+    document.getElementById('removePlayerAudio').play();
+    console.log("audio")
+
+}
+
+function clickOngoingAudio() {
+    document.getElementById('clickOngoingAudio').play();
+    console.log("audio")
+
+}
+function clickCompletedAudio() {
+    document.getElementById('clickCompletedAudio').play();
+    console.log("audio")
+
+}
+function startTourAudio() {
+    document.getElementById('startTourAudio').play();
+    console.log("audio")
+
+}
+//#endregion

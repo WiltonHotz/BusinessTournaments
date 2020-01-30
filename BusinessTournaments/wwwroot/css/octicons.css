@@ -68,6 +68,16 @@
         color: var(--octicon-x-active-c);
     }
 
+.close-edit-add .octicon-x {
+    color: lightgray;
+    width: 26px;
+    height: 26px;
+}
+
+.close-edit-add .octicon-x:hover {
+    color: white;
+}
+
 .octicon-edit-icon {
     height: 26px;
     width: 15px;

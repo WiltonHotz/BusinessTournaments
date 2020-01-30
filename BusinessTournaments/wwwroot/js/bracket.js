@@ -159,9 +159,11 @@ function setPlayerInBracketAsWinner(fromBracketId, targetBracketId, opponentBrac
         $(`#${opponentBracketId}`).prop("class", loserBracketClasses);
         if (targetBracketId != 'b0') {
             $(`#${targetBracketId}`).prop("class", populatedBracketClasses);
+            selectWinnerInBracketAudio()
         }
         else {
             $(`#${targetBracketId}`).prop("class", totalWinnerBracketClasses);
+            selectWinnerOfTourAudio()
         }
 
 
@@ -562,6 +564,18 @@ function burgerStuff() {
 
 //#endregion
 
-//function play_single_sound2() {
-//    document.getElementById('audiotag2').play();
-//}
+//#region sounds
+function selectWinnerInBracketAudio() {
+    document.getElementById('selectWinnerInBracketAudio').play();
+}
+
+function removeWinnerInBracketAudio() {
+    document.getElementById('removeWinnerInBracketAudio').play();
+}
+
+function selectWinnerOfTourAudio() {
+    document.getElementById('selectWinnerOfTourAudio').play();
+}
+
+
+//#endregion
