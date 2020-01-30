@@ -129,7 +129,7 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
 function populateSelectedWithInstructions() {
     if (document.getElementById("textInSelected") != null) {
         document.getElementById("textInSelected").innerHTML = "Use the arrows to add players to your tournament";
-        document.getElementById("textInSelected").style = "color: darkgrey; opacity: 0.8; text-align: center; font-size: 14px; padding-top: 10%;"
+        document.getElementById("textInSelected").style = "color: darkgrey; opacity: 0.8; text-align: center; font-size: 14px; padding-top: 10%; border: none; padding-left: 20%; padding-right: 20%;"
     }
 }
 
