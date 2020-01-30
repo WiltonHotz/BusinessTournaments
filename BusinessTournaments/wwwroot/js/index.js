@@ -80,8 +80,9 @@ function getIndexVMJSON() {
         type: "GET",
         success: function (response) {
             PopulatePlayersOnLoad(response.leaderboard);
-            PopulateOngoingTournamentsOnLoad(response.ongoingTournaments)
-            PopulateCompletedTournamentsOnLoad(response.completedTournaments)
+            PopulateOngoingTournamentsOnLoad(response.ongoingTournaments);
+            PopulateCompletedTournamentsOnLoad(response.completedTournaments);
+            //populateSelectedWithInstructions();
         }
     });
 }
@@ -125,9 +126,19 @@ function PopulateCompletedTournamentsOnLoad(tournaments) {
     }
 }
 
-function populateSelectedWithInstructions() {
+//function populateSelectedWithInstructions() {
 
-}
+//    document.getElementById('selected').innerHTML = `<tr>
+//                                                        <td style="text-align: left; padding-top: 10%; color: #2aab77; font-size: 12px; border: none;"><< Press arrows to add player.</td>
+//                                                    </tr>
+//                                                    <tr>
+//                                                        <td style="text-align: right; padding-top: 10%; color: #c8c530; font-size: 12px; border: none;">Resume tournament >></td>
+//                                                    </tr>
+//                                                    <tr>
+//                                                        <td style="text-align: right; padding-top: 40%; color: #e68937; font-size: 12px; border: none;">Replay tournament >></td>
+//                                                    </tr>`;
+
+//}
 
 //#endregion
 
@@ -212,11 +223,11 @@ function addPlayers() {
 
                 for (var i = 0; i < names.length; i++) {
 
-                    if (result.some(x => x.playerName == names[i])) {
+                    if (result.some(x => x.playerName.toLowerCase() == names[i].toLowerCase())) {
                         $(`#badpninp${i}`).html('Name is already in list')
                     } else if (duplicates.length > 0) {
 
-                        if (duplicates.some(x => x == names[i])) {
+                        if (duplicates.some(x => x.toLowerCase() == names[i].toLowerCase())) {
                             $(`#badpninp${i}`).html('Please enter unique names')
                         }
                         if (names[i].length > 23) {
@@ -234,7 +245,7 @@ function addPlayers() {
             else {
                 for (var i = 0; i < names.length; i++) {
 
-                    if (duplicates.some(x => x == names[i])) {
+                    if (duplicates.some(x => x.toLowerCase() == names[i].toLowerCase())) {
                         $(`#badpninp${i}`).html('Please give unique names')
                     }
                     else if (names[i].length > 23) {
@@ -428,9 +439,9 @@ function selectPlayer(playerId, playerName) {
                 //tournamentNameInput.focus();
 
                 if (tournamentNameInput.value.length > 1)
-                    tournamentNameInput.style.backgroundColor = "lightgreen";
+                    tournamentNameInput.style.backgroundColor = "#c1e8c9";
                 else
-                    tournamentNameInput.style.backgroundColor = "#ffff8e";
+                    tournamentNameInput.style.backgroundColor = "#f4f4b7";
             }
 
             // Activate CREATE TOURNAMENT button
@@ -445,7 +456,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             updateSelectedPlayerCounter()
-            selectPlayerAudio()
+            //selectPlayerAudio()
         }
     }
 }
@@ -487,7 +498,7 @@ function removeSelectedPlayer(playerId) {
 
     }
     updateSelectedPlayerCounter()
-    removePlayerAudio()
+    //removePlayerAudio()
 }
 
 function updateSelectedPlayerCounter(players) {
@@ -654,7 +665,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
-    clickOngoingAudio()
+    //clickOngoingAudio()
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -708,7 +719,7 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
     updateSelectedPlayerCounter()
-    clickCompletedAudio()
+    //clickCompletedAudio()
 }
 
 //#endregion
@@ -722,13 +733,13 @@ function checkIfTournamentNameIsValidInput(input) {
         $('#startTournament').prop("class", "btn btn-block");
         $('#startTournament').prop("disabled", false);
         //$('#tournamentNameInput').css("background-color", "lightgreen");
-        tournamentNameInput.style.backgroundColor = "lightgreen";
+        tournamentNameInput.style.backgroundColor = "#c1e8c9";
     }
     else if (input.value.length < 2) {
         $('#startTournament').prop("class", "btn btn-secondary btn-block");
         $('#startTournament').prop("disabled", true);
         //$('#tournamentNameInput').css("background-color", "#ffff8e");
-        tournamentNameInput.style.backgroundColor = "#ffff8e"
+        tournamentNameInput.style.backgroundColor = "#f4f4b7"
     }
 
     if (input.value.length == 0 && startTournamentInfo.playerIds.length < 4) {
@@ -796,7 +807,7 @@ function startTournament() {
         data: jsonStr,
         success: function (data) {
 
-            startTourAudio()
+            //startTourAudio()
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -907,30 +918,30 @@ function burgerStuff() {
 //#endregion
 
 //#region sounds
-function selectPlayerAudio() {
-    document.getElementById('selectPlayerAudio').play();
-    console.log("audio")
-}
+//function selectPlayerAudio() {
+//    document.getElementById('selectPlayerAudio').play();
+//    console.log("audio")
+//}
 
-function removePlayerAudio() {
-    document.getElementById('removePlayerAudio').play();
-    console.log("audio")
+//function removePlayerAudio() {
+//    document.getElementById('removePlayerAudio').play();
+//    console.log("audio")
 
-}
+//}
 
-function clickOngoingAudio() {
-    document.getElementById('clickOngoingAudio').play();
-    console.log("audio")
+//function clickOngoingAudio() {
+//    document.getElementById('clickOngoingAudio').play();
+//    console.log("audio")
 
-}
-function clickCompletedAudio() {
-    document.getElementById('clickCompletedAudio').play();
-    console.log("audio")
+//}
+//function clickCompletedAudio() {
+//    document.getElementById('clickCompletedAudio').play();
+//    console.log("audio")
 
-}
-function startTourAudio() {
-    document.getElementById('startTourAudio').play();
-    console.log("audio")
+//}
+//function startTourAudio() {
+//    document.getElementById('startTourAudio').play();
+//    console.log("audio")
 
-}
+//}
 //#endregion
