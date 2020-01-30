@@ -73,12 +73,14 @@ namespace BusinessTournaments.Models
 
         internal async Task<(List<PlayerVM>, bool)> CreatePlayersAsync(List<string> playerNames, string userId)
         {
+            var playerNamesLower = playerNames.Select(x => x.ToLower()).ToList();
+
             var allPlayerNames = await context.Players
                 .Where(p => p.CompanyId == userId)
-                .Select(p => p.Name)
+                .Select(p => p.Name.ToLower())
                 .ToListAsync();
 
-            var badPlayerNames = allPlayerNames.Intersect(playerNames).ToArray();
+            var badPlayerNames = allPlayerNames.Intersect(playerNamesLower).ToArray();
             var badPlayers = new List<PlayerVM>();
             if (badPlayerNames.Length > 0)
             {
@@ -94,7 +96,7 @@ namespace BusinessTournaments.Models
             }
 
             var newPlayers = new List<EntityEntry<Players>>();
-            foreach (var playerName in playerNames)
+            foreach (var playerName in playerNamesLower)
             {
                 if (playerName != "")
                 {

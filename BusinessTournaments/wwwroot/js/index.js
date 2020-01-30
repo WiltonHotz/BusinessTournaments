@@ -212,11 +212,11 @@ function addPlayers() {
 
                 for (var i = 0; i < names.length; i++) {
 
-                    if (result.some(x => x.playerName == names[i])) {
+                    if (result.some(x => x.playerName.toLowerCase() == names[i].toLowerCase())) {
                         $(`#badpninp${i}`).html('Name is already in list')
                     } else if (duplicates.length > 0) {
 
-                        if (duplicates.some(x => x == names[i])) {
+                        if (duplicates.some(x => x.toLowerCase() == names[i].toLowerCase())) {
                             $(`#badpninp${i}`).html('Please enter unique names')
                         }
                         if (names[i].length > 23) {
@@ -234,7 +234,7 @@ function addPlayers() {
             else {
                 for (var i = 0; i < names.length; i++) {
 
-                    if (duplicates.some(x => x == names[i])) {
+                    if (duplicates.some(x => x.toLowerCase() == names[i].toLowerCase())) {
                         $(`#badpninp${i}`).html('Please give unique names')
                     }
                     else if (names[i].length > 23) {
