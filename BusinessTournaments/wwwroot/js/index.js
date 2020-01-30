@@ -157,7 +157,7 @@ function showSelectPlayerArrows() {
     var arrowIdListSelectedPlayers = startTournamentInfo.playerIds.map(x => `sBtn${x}`)
 
     for (i = 0; i < arrowsInLeaderBoard.length; i++) {
-        console.log(arrowsInLeaderBoard[i].id)
+       
         //check if the player from leaderboard is in selectedPlayers:
         if (!arrowIdListSelectedPlayers.some(x => x == arrowsInLeaderBoard[i].id)) {
             var arrow = document.getElementById(arrowsInLeaderBoard[i].id)
@@ -174,7 +174,7 @@ function initiateAddPlayerModal() {
     $("#modalPlayerNames")
         .append(`<div id="pndiv0">
                     <input type="text" id="pninp0" placeholder="Enter player name here..." />
-                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px; padding: 0;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn0" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id="badpninp0"></span>
                 </div>`);
 
@@ -197,7 +197,6 @@ function addPlayers() {
         contentType: 'application/json',
         data: JSON.stringify(names),
         success: function (data) {
-            console.log(data)
             PopulatePlayersOnLoad(data);
             $('#addPlayerModal').modal('hide');
             $("#modalPlayerNames").html("");
@@ -290,7 +289,7 @@ function addAddPlayerField(btn) {
     $("#modalPlayerNames")
         .append(`<div id="pndiv${newId}">
                     <input type="text" id="pninp${newId}" placeholder="Enter player name here..." />
-                    <input type="button" class="btn btn-default" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
+                    <input type="button" style="color: lightgray; font-size: 30px; margin-bottom: 6px;" class="btn add-player-field-btn" aria-label="Add Another Player" value="+" id="pnbtn${newId}" onclick="addAddPlayerField(this)" />
                     <span style="color: red; text-align: left;" id='badpninp${newId}'></span>
 
                 </div>`);
@@ -313,10 +312,23 @@ function editPlayer(playerNameId, playerId) {
 
 function validateEditPlayerName() {
     var newName = $("#editPlayerName").val();
+    var ok = true;
+
+    var c = document.querySelectorAll(".nametd");
+    for (var i = 0; i < c.length; i++) {
+        if (newName === c[i].innerHTML) {
+            ok = false;
+        }
+    }
+
 
     if (newName.length > 23) {
         alert("Name can't be more than 22 letters");
-    } else {
+    }
+    else if (!ok) {
+        alert("Name is already in list");
+    }
+    else {
         confirmEditPlayer();
     }
 }
@@ -331,9 +343,7 @@ function confirmEditPlayer() {
             type: 'POST',
             contentType: 'application/json',
             success: function (data) {
-                console.log(data)
-                var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
+
                 $(`#lname${playerIdToEdit}`).html(data)
 
                 $('#editPlayerModal').modal('hide');
@@ -360,9 +370,9 @@ function confirmDeletePlayer() {
             type: 'POST',
             contentType: 'application/json',
             success: function (data) {
-                console.log(data)
+
                 var c = document.querySelectorAll("#leaderboard > div");
-                console.log(c)
+
                 $(`#l${playerIdToEdit}`).remove();
 
                 $('#editPlayerModal').modal('hide');
@@ -435,6 +445,7 @@ function selectPlayer(playerId, playerName) {
             }
 
             updateSelectedPlayerCounter()
+            selectPlayerAudio()
         }
     }
 }
@@ -476,6 +487,7 @@ function removeSelectedPlayer(playerId) {
 
     }
     updateSelectedPlayerCounter()
+    removePlayerAudio()
 }
 
 function updateSelectedPlayerCounter(players) {
@@ -610,7 +622,6 @@ function showOngoingTournament(tournamentId, tournamentName) {
         url: url,
         type: "GET",
         success: function (players) {
-            console.log(players)
             populateSelectedWithPlayersInOngoingTour(players, tournamentId);
             fillTourNameInputWithOngoingTourName(tournamentName);
             hideSelectPlayerArrows();
@@ -618,6 +629,7 @@ function showOngoingTournament(tournamentId, tournamentName) {
             canAddMorePlayers = false;
             hideDeleteButton(tournamentId);
             makeSelectedOngoingBold(tournamentId)
+           
         }
     });
 }
@@ -642,6 +654,7 @@ function populateSelectedWithPlayersInOngoingTour(players, tournamentId) {
         unEditables.style.visibility = "hidden";
     }
     updateSelectedPlayerCounter(players)
+    clickOngoingAudio()
 }
 
 function fillTourNameInputWithOngoingTourName(tournamentName) {
@@ -677,7 +690,6 @@ function selectPlayersFromCompletedTournament(tournamentId) {
         url: url,
         type: "GET",
         success: function (players) {
-            console.log(players)
             populateSelectedWithPlayersFromCompletedTournament(players);
 
             //  hideAllArrows();
@@ -696,14 +708,13 @@ function populateSelectedWithPlayersFromCompletedTournament(players) {
         selectPlayer(`${players[i].playerId}`, players[i].playerName)
     }
     updateSelectedPlayerCounter()
+    clickCompletedAudio()
 }
 
 //#endregion
 
 //#region tournament name input field
 function checkIfTournamentNameIsValidInput(input) {
-
-    console.log(input.value)
 
     let tournamentNameInput = document.getElementById("tournamentNameInput");
 
@@ -737,7 +748,6 @@ function deleteTournament(tournamentId) {
         type: 'POST',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data)
             deleteSelectedTournament(data);
         },
         error: function () {
@@ -767,8 +777,6 @@ function deleteSelectedTournament(tournamentId) {
 function hideDeleteButton(tournamentId) {
 
     document.getElementById(`deleteBtn${tournamentId}`).style.visibility = 'hidden';
-
-    console.log(`deleteBtn${tournamentId}`)
 }
 
 //#endregion
@@ -778,7 +786,6 @@ function hideDeleteButton(tournamentId) {
 function startTournament() {
 
     startTournamentInfo.tournamentName = tournamentNameInput.value;
-    console.log(startTournamentInfo);
 
     let jsonStr = JSON.stringify(startTournamentInfo)
 
@@ -788,7 +795,8 @@ function startTournament() {
         contentType: 'application/json',
         data: jsonStr,
         success: function (data) {
-            console.log(data)
+
+            startTourAudio()
             getIndexVMJSON();
             window.location.href = `/brackets/${data}`
         },
@@ -833,8 +841,6 @@ function clearSelected() {
     for (var i = 0; i < arrows.length; i++) {
         // edit icon added
         editIcons[i].style.visibility = "visible";
-
-        console.log(editIcons[i])
 
         arrows[i].style.color = "";
         arrows[i].style.cursor = "pointer";
@@ -900,7 +906,31 @@ function burgerStuff() {
 }
 //#endregion
 
+//#region sounds
+function selectPlayerAudio() {
+    document.getElementById('selectPlayerAudio').play();
+    console.log("audio")
+}
 
-//function play_single_sound() {
-//    document.getElementById('audiotag1').play();
-//}
+function removePlayerAudio() {
+    document.getElementById('removePlayerAudio').play();
+    console.log("audio")
+
+}
+
+function clickOngoingAudio() {
+    document.getElementById('clickOngoingAudio').play();
+    console.log("audio")
+
+}
+function clickCompletedAudio() {
+    document.getElementById('clickCompletedAudio').play();
+    console.log("audio")
+
+}
+function startTourAudio() {
+    document.getElementById('startTourAudio').play();
+    console.log("audio")
+
+}
+//#endregion

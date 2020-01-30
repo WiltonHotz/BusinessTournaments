@@ -258,3 +258,16 @@ html, body, .grid-container {
         background-color: #32b580;
         color: white;
     }
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    .player-name, .score {
+        font-size: 0.8em;
+        line-height: 2.1em;
+    }
+
+    .bracket.totalwinner .player-name, .bracket.totalwinner .score {
+        font-size: 0.8em;
+        line-height: 2.1em;
+    }
+}

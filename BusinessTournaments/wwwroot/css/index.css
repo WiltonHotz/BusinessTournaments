@@ -71,6 +71,10 @@ table {
     color: #808080;
 }
 
+#selected-header-txt {
+    font-size: 1.2em;
+}
+
 .Completed .table-colorized-header {
     color: var(--table-colorized-header-completed-c);
 }
@@ -272,13 +276,34 @@ td:last-child {
     border-top: 0 none;
 }
 
+#editPlayerBtn {
+    background-color: #32b580;
+    color: white;
+}
+
+#deletePlayerBtn {
+    background-color: #ab2a2a;
+    color: white;
+}
+
+#add-players-btn {
+    background-color: #32b580;
+    color: white;
+}
+
+.add-player-field-btn {
+    color: red;
+    border: solid 1px red;
+}
 
 /* IPAD AIR */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-
-
     .octicon-arrow-select, .octicon-arrow-ongoing, .octicon-arrow-completed, .octicon-arrow-remove, .octicon-edit-icon {
         width: 27px;
         height: 47px;
+    }
+
+    #selected-header-txt {
+        font-size: 1em;
     }
 }
