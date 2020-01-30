@@ -80,9 +80,18 @@ namespace BusinessTournaments.Models
             var tournament = await context.Tournaments.Where(t => t.CompanyId == userId).SingleOrDefaultAsync(t => t.Id == vm.TournamentId);
             tournament.IsCompleted = true;
             var winner = await context.Players.Where(p => p.CompanyId == userId).SingleOrDefaultAsync(p => p.Id == vm.WinnerPlayerId);
-            winner.Score += vm.WinnerScore;
+            if (winner != null)
+            {
+                winner.Score += vm.WinnerScore;
+            }
+            
             var second = await context.Players.Where(p => p.CompanyId == userId).SingleOrDefaultAsync(p => p.Id == vm.SecondPlayerId);
-            second.Score += vm.SecondScore;
+
+            if (second != null)
+            {
+                second.Score += vm.SecondScore;
+            }
+           
 
             await context.SaveChangesAsync();
         }
