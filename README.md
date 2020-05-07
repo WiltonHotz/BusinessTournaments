@@ -1,3 +1,3 @@
 # Business Tournaments
 
-![Image of Application](Business%20Tournaments.mp4)
+https://github.com/WiltonHotz/BusinessTournaments/blob/master/Business%20Tournaments.mp4
